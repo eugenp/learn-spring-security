@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<head>
+<title>Profile</title>
+</head>
+<body>
+    <h1 layout:fragment="header">Profile</h1>
+    <div layout:fragment="content" class="container">
+        Current user name: <span sec:authentication="principal.username">Bob</span><br/>
+        Current user name: <span sec:authentication="name">Bob</span>
+		<br/><br/>
+		Current user roles: 
+		<span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span><br/>
+		Current user roles: 
+        <span sec:authentication="authorities">[ROLE_USER, ROLE_ADMIN]</span>
+        <br/><br/>	
+		Current user organization: 
+        <span sec:authentication="principal.organization">organization</span>
+		<br/>
+		<div th:if="${#authentication.principal.username.startsWith('u')}">
+        User name starts with 'u'
+        </div>
+        <hr/>
+        
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+		    Only admins can see this message
+		</div>
+		 
+		<div sec:authorize="hasRole('ROLE_USER')">
+		    Only users can see this message
+		</div>
+		
+		<br/>
+		 
+		<div sec:authorize-url="/user/delete/1">
+		     Only users who can call "/user/delete/1" URL can see this message
+		</div>
+    </div>
+</body>
+</html>

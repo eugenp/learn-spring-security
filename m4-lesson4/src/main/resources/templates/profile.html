@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<head>
+<title>Profile</title>
+</head>
+<body>
+    <h1 layout:fragment="header">Profile</h1>
+    <div layout:fragment="content" class="container">        
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+		    Only admins can see this message
+		</div>
+		 
+		<div sec:authorize="hasRole('ROLE_USER')">
+		    Only users can see this message
+		</div>
+		
+		<br/>
+		 
+		<div sec:authorize-url="/user/delete/1">
+		     Only users who can call "/user/delete/1" URL can see this message
+		</div>
+		
+		<hr/>
+		<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+	        Only admins can see this message
+	    </div>
+    </div>
+</body>
+</html>
