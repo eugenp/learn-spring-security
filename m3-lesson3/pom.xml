@@ -6,7 +6,7 @@ Module  3 - Lesson 3</description>
 	<name>learn-spring-security</name>
 
 	<groupId>com.baeldung.m3</groupId>
-	<artifactId>learn-spring-security.l3</artifactId>
+	<artifactId>learn-spring-security-m3-l3</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
