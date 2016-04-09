@@ -145,11 +145,6 @@ Module  4 - Lesson 1</description>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
 				<dependencies>
 					<dependency>
 						<groupId>org.springframework</groupId>
