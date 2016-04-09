@@ -20,7 +20,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.
             inMemoryAuthentication()
             .withUser("user").password("pass").roles("USER").and()
-            .withUser("user2").password("pass2").roles("USER")
+            .withUser("admin").password("pass").roles("ADMIN")
             ;
     } // @formatter:on
 
@@ -28,18 +28,9 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception { // @formatter:off
         http
         .authorizeRequests()
-            // .antMatchers("/user/delete/**").hasAuthority("ADMIN")
+            
+            // .antMatchers("/secured").access("hasRole('USER')")
         
-            // .antMatchers("/delete/**").access("ADMIN USER")
-            
-            // .antMatchers("/user/delete/**").access("hasRole('ADMIN')")
-            // .antMatchers("/user/delete/**").access("hasAuthority('ADMIN')")
-            // .antMatchers("/user/delete/**").access("hasAnyRole('ADMIN', 'USER')")
-            
-            // .antMatchers("/secured").access("permitAll")
-            
-            // .antMatchers("/secured").access("principal.username=='user2'")
-            
             .anyRequest().authenticated()
         
         .and()

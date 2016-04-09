@@ -59,10 +59,6 @@ public class UserController {
     // the form
 
     @RequestMapping(params = "form", method = RequestMethod.GET)
-    // @PreAuthorize("hasRole('ADMIN')")
-    // @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    // @PreAuthorize("denyAll")
-    // @PreAuthorize("principal.username=='user2'")
     public String createForm(@ModelAttribute User user) {
         return "tl/form";
     }
