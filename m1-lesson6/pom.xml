@@ -6,7 +6,7 @@ Module  1 - Lesson 6</description>
 	<name>learn-spring-security</name>
 
 	<groupId>com.baeldung.m1</groupId>
-	<artifactId>learn-spring-security.l6</artifactId>
+	<artifactId>learn-spring-security-m1-l6</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
