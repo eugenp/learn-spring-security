@@ -175,11 +175,6 @@ Module  3 - Lesson 5</description>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
 				<dependencies>
 					<dependency>
 						<groupId>org.springframework</groupId>
