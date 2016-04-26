@@ -11,6 +11,7 @@ Module  1</description>
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>m1-lesson1</module>
 		<module>m1-lesson2</module>
 		<module>m1-lesson3</module>
 		<module>m1-lesson4</module>
