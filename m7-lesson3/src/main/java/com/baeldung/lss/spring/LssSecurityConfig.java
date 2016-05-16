@@ -63,10 +63,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/user/register",
                         "/registrationConfirm*",
                         "/badUser*",
-                        "/forgotPassword*",
-                        "/user/resetPassword*",
-                        "/user/changePassword*",
-                        "/user/savePassword*",
                         "/js/**").permitAll()
                 .anyRequest().authenticated()
 

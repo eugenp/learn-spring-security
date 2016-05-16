@@ -5,9 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baeldung.lss.model.PasswordResetToken;
 import com.baeldung.lss.model.User;
-import com.baeldung.lss.persistence.PasswordResetTokenRepository;
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.validation.EmailExistsException;
 
@@ -17,9 +15,6 @@ class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private PasswordResetTokenRepository passwordTokenRepository;
 
     //
 
@@ -39,22 +34,6 @@ class UserService implements IUserService {
     @Override
     public User findUserByEmail(final String email) {
         return userRepository.findByEmail(email);
-    }
-
-    @Override
-    public void createPasswordResetTokenForUser(final User user, final String token) {
-        final PasswordResetToken myToken = new PasswordResetToken(token, user);
-        passwordTokenRepository.save(myToken);
-    }
-
-    @Override
-    public PasswordResetToken getPasswordResetToken(final String token) {
-        return passwordTokenRepository.findByToken(token);
-    }
-
-    @Override
-    public void changeUserPassword(final User user, final String password) {
-        userRepository.save(user);
     }
 
     private boolean emailExist(final String email) {
