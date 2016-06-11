@@ -20,7 +20,7 @@ import com.baeldung.lss.model.User;
 
 @Controller
 @RequestMapping("/user")
-class UserController {
+public class UserController {
 
     @Autowired
     private UserRepository userRepository;

@@ -32,7 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-class RegistrationController {
+public class RegistrationController {
 
     @Autowired
     private ApplicationEventPublisher eventPublisher;
