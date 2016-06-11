@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.security.CustomAuthenticationProvider;
 
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -25,9 +24,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private CustomAuthenticationProvider customAuthenticationProvider;
 
     public LssSecurityConfig() {
         super();
