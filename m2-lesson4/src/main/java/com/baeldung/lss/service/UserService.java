@@ -2,13 +2,14 @@ package com.baeldung.lss.service;
 
 import javax.transaction.Transactional;
 
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.persistence.VerificationTokenRepository;
-import com.baeldung.lss.model.VerificationToken;
-import com.baeldung.lss.validation.EmailExistsException;
-import com.baeldung.lss.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.baeldung.lss.model.User;
+import com.baeldung.lss.model.VerificationToken;
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.persistence.VerificationTokenRepository;
+import com.baeldung.lss.validation.EmailExistsException;
 
 @Service
 @Transactional
@@ -19,6 +20,13 @@ class UserService implements IUserService {
 
     @Autowired
     private VerificationTokenRepository verificationTokenRepository;
+
+    //
+
+    @Override
+    public User findUserByEmail(final String email) {
+        return userRepository.findByEmail(email);
+    }
 
     @Override
     public User registerNewUser(final User user) throws EmailExistsException {
@@ -43,6 +51,8 @@ class UserService implements IUserService {
     public void saveRegisteredUser(final User user) {
         userRepository.save(user);
     }
+
+    //
 
     private boolean emailExist(final String email) {
         final User user = userRepository.findByEmail(email);
