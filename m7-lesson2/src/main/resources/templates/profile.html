@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<head>
+<title>Profile</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Profile</h1>
+	<div layout:fragment="content" class="container">
+		Current user authorities: <span sec:authentication="principal.authorities">user</span>
+		<br />
+		<br />
+		<br />
+		<span id="temp"></span>
+		<br />
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	</div>
+</body>
+</html>
