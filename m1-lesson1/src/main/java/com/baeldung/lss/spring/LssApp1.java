@@ -12,7 +12,7 @@ import com.baeldung.lss.web.model.User;
 
 @SpringBootApplication
 @ComponentScan("com.baeldung.lss.web")
-public class LssApp2 {
+public class LssApp1 {
 
     @Bean
     public UserRepository userRepository() {
@@ -30,7 +30,7 @@ public class LssApp2 {
     }
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(LssApp2.class, args);
+        SpringApplication.run(LssApp1.class, args);
     }
 
 }
