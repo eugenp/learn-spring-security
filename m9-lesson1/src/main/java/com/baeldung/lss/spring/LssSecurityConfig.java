@@ -21,8 +21,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { // @formatter:off 
         auth.
             inMemoryAuthentication()
-            .withUser("user").password("pass").roles("USER").and()
-            .withUser("admin").password("pass").roles("ADMIN")
+            .withUser("user").password("pass").authorities("USER").and()
+            .withUser("admin").password("pass").authorities("ADMIN")
             ;
     } // @formatter:on
 
