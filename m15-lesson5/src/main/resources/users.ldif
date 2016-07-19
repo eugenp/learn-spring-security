@@ -1,0 +1,53 @@
+version: 1
+
+dn: dc=springframework,dc=org
+objectclass: top
+objectclass: domain
+dc: springframework
+
+dn: ou=people,dc=springframework,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: people
+
+dn: ou=roles,dc=springframework,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: roles
+
+# Users
+
+dn: cn=Test User1,ou=people,dc=springframework,dc=org
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: Test User1
+sn: user1
+uid: user1
+userPassword: pass
+
+dn: cn=Test User2,ou=people,dc=springframework,dc=org
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: Test User2
+sn: user2
+uid: user2
+userPassword: pass
+
+
+# Roles
+
+dn: cn=USER,ou=roles,dc=springframework,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: USER
+member: cn=Test User1,ou=people,dc=springframework,dc=org
+
+dn: cn=ADMIN,ou=roles,dc=springframework,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: ADMIN
+member: cn=Test User2,ou=people,dc=springframework,dc=org
