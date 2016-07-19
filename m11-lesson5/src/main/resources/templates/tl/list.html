@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<head>
+<title>Users : View all</title>
+</head>
+<body>
+    <h1 layout:fragment="header">Users : View all</h1>
+    <div layout:fragment="content" class="container">
+        <div th:if="${param.message}" th:text="${param.message[0]}" class="alert alert-info">Message</div>
+    
+        <div class="pull-right">
+            <a href="form.html" th:href="@{/user/(form)}">Create User</a>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Email</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td><a href="view.html" th:href="@{'/user/' + ${user.id}}" th:text="${user.email}"> Email </a></td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+        <hr/>
+        <br/>
+        <div>
+           <a href="possession.html" th:href="@{/possessions/(form)}" class="pull-right">Create Possession</a>
+            
+            Find Possession by id <input id="pId" type="text" name="pId"/> <button onclick="getPossession()">Find</button>
+            <br/><div id="result"></div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script type="text/javascript">
+		function getPossession(){
+		    $.get( "/possessions/"+$("#pId").val() , function( data ) {
+		        $("#result").html("Resulting Possession is "+data.name);
+		    }).fail(function(){
+		    	$("#result").html("Not Found");
+		    });
+		}
+</script>
+    </div>
+</body>
+</html>

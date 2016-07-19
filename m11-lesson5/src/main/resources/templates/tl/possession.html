@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<head>
+<title>Possessions</title>
+</head>
+<body>
+    <h1 layout:fragment="header">Possessions</h1>
+    <div layout:fragment="content" class="container">
+        <div class="pull-right">
+            <a th:href="@{/user/}" href="users.html"> Users </a>
+        </div>
+        <form id="pForm" th:action="@{/possessions}" th:object="${possession}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}"/>
+            
+            <div class="form-actions">
+                <input type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
