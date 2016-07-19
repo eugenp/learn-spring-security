@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<head>
+<title>Profile</title>
+</head>
+<body>
+    <h1 layout:fragment="header">Profile</h1>
+    <div layout:fragment="content" class="container">
+        Current user email: <span sec:authentication="principal.email">Bob</span><br/>
+        <br/><br/>
+
+    </div>
+</body>
+</html>
