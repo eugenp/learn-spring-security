@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<title>Home</title>
+
+<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" th:href="@{/}"> Home </a>
+                <ul class="nav">
+                    <li><a th:href="@{/user/}" href="users.html"> Users </a></li>
+                </ul>
+            </div>
+        </div>
+        <h1>Users : View all</h1>
+	    <div class="pull-right">
+	        <a href="form.html" th:href="@{/user/(form)}">Create User</a>
+	    </div>
+	    <div class="container">
+	        <table class="table table-bordered table-striped">
+	            <thead>
+	                <tr>
+                        <td>ID</td>
+                        <td>Email</td>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr th:if="${users.empty}">
+	                    <td colspan="4">No users</td>
+	                </tr>
+	                <tr th:each="user : ${users}">
+                        <td><span th:text="${user.id}"> ID </span></td>
+                        <td><a href="#" th:text="${user.email}"> Email </a></td>
+	                </tr>
+	            </tbody>
+	        </table>
+	    </div>
+    </div>
+</body>
+</html>
