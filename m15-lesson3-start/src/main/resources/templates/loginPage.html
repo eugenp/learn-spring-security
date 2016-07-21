@@ -12,20 +12,20 @@
 	<div class="container">
 		<h1>Login page</h1>
 
-		<div th:if="${param.error}" class="alert alert-danger">Invalid username and password.</div>
-		<div th:if="${param.logout}" class="alert alert-danger">You have been logged out.</div>
+		<div th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}" class="alert alert-danger">Login Error</div>
+		<div th:if="${message}" th:text="${message}" class="alert alert-success">Message</div>
+		<div th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-danger">Error Message</div>
+		<div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
 
 		<form th:action="@{/doLogin}" method="post" class="form-horizontal">
 			<div class="form-group">
-				<label class="control-label col-xs-2" for="username"> User Name: </label>
-
+				<label class="control-label col-xs-2" for="username"> Email:</label>
 				<div class="col-xs-10">
 					<input id="username" type="text" name="username" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-xs-2" for="password"> Password: </label>
-
 				<div class="col-xs-10">
 					<input id="password" type="password" name="password" />
 				</div>
