@@ -36,23 +36,15 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { // @formatter:off
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {// @formatter:off
         auth.authenticationProvider(customAuthenticationProvider);
     } // @formatter:on
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception { // @formatter:off
+    protected void configure(HttpSecurity http) throws Exception {// @formatter:off
         http
         .authorizeRequests()
-                .antMatchers("/signup",
-                        "/user/register",
-                        "/registrationConfirm*",
-                        "/badUser*",
-                        "/forgotPassword*",
-                        "/user/resetPassword*",
-                        "/user/changePassword*",
-                        "/user/savePassword*",
-                        "/js/**").permitAll()
+                .antMatchers("/badUser*","/js/**").permitAll()
                 .anyRequest().authenticated()
 
         .and()
