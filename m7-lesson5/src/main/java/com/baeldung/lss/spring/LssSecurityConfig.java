@@ -52,11 +52,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         .addFilterBefore(lssLoggingFilter, AnonymousAuthenticationFilter.class)
         .authorizeRequests()
-                .antMatchers("/signup",
-                        "/user/register",
-                        "/registrationConfirm*",
-                        "/badUser*",
-                        "/js/**").permitAll()
+                .antMatchers("/badUser*","/js/**").permitAll()
                 .anyRequest().authenticated()
 
         .and()
