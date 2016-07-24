@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <description>The &quot;Learn Spring Security&quot; Module
+Module 15</description>
+    <name>learn-spring-security</name>
+
+    <groupId>com.baeldung.m15</groupId>
+    <artifactId>learn-spring-security-m15</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>m15-lesson1-start</module>
+        <module>m15-lesson1</module>
+        <module>m15-lesson2-star</module>
+        <module>m15-lesson2</module>
+        <module>m15-lesson3-start</module>
+        <module>m15-lesson3</module>
+        <module>m15-lesson4-start</module>
+        <module>m15-lesson4</module>
+        <module>m15-lesson5-start</module>
+        <module>m15-lesson5</module>
+    </modules>
+
+</project>
