@@ -60,7 +60,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         public MethodSecurityMetadataSource customMethodSecurityMetadataSource() {
             final Map<String, List<ConfigAttribute>> methodMap = new HashMap<>();
-            methodMap.put("com.baeldung.lss.web.controller.UserController.delete*", SecurityConfig.createList("ROLE_ADMIN"));
+            methodMap.put("com.baeldung.lss.web.controller.UserController.delete*", SecurityConfig.createList("WRITE_PRIVILEGE"));
             return new MapBasedMethodSecurityMetadataSource(methodMap);
         }
 
