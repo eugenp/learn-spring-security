@@ -17,21 +17,21 @@ public class LiveTest {
 
     @Test
     public void givenOwnerUser_whenGetPossession_thenOK() {
-        final Response response = givenAuth("bill@email.com", "pass").get(APP_ROOT + "/possessions/2");
+        final Response response = givenAuth("eugen@email.com", "pass").get(APP_ROOT + "/possessions/2");
         assertEquals(200, response.getStatusCode());
         assertTrue(response.asString().contains("id"));
     }
 
     @Test
     public void givenUserWithReadPermission_whenGetPossession_thenOK() {
-        final Response response = givenAuth("john@email.com", "123").get(APP_ROOT + "/possessions/2");
+        final Response response = givenAuth("eric@email.com", "123").get(APP_ROOT + "/possessions/2");
         assertEquals(200, response.getStatusCode());
         assertTrue(response.asString().contains("id"));
     }
 
     @Test
     public void givenUserWithNoPermission_whenGetPossession_thenForbidden() {
-        final Response response = givenAuth("bill@email.com", "pass").get(APP_ROOT + "/possessions/3");
+        final Response response = givenAuth("eugen@email.com", "pass").get(APP_ROOT + "/possessions/3");
         assertEquals(403, response.getStatusCode());
     }
 
