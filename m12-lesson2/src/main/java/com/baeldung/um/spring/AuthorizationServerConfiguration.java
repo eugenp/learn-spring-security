@@ -37,10 +37,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // @formatter:off
         clients.inMemory()
         .withClient("live-test")
-        .secret("bGl2ZS10ZXN0")
+        .secret("bGl2ZS10ZXN0")                 
         .authorizedGrantTypes("password")
         .scopes("um-webapp")
-        .autoApprove("um-webapp")
+        //.autoApprove("um-webapp")
         .accessTokenValiditySeconds(3600);
         // @formatter:on
     }

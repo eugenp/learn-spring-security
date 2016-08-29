@@ -68,7 +68,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         .authorizedGrantTypes("password", "refresh_token")
         .refreshTokenValiditySeconds(3600 * 24)
         .scopes("um-webapp")
-        .autoApprove("um-webapp")
+        //.autoApprove("um-webapp")
         .accessTokenValiditySeconds(3600);
         // @formatter:on
     }

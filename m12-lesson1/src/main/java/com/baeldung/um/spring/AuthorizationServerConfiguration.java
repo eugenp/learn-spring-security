@@ -40,7 +40,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         .secret("bGl2ZS10ZXN0")
         .authorizedGrantTypes("password")
         .scopes("um-webapp")
-        .autoApprove("um-webapp")
+        //.autoApprove("um-webapp")
         .accessTokenValiditySeconds(3600);
         // @formatter:on
     }
