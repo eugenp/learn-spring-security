@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("com.baeldung.um")
 @EnableJpaRepositories("com.baeldung.um")
 @EntityScan("com.baeldung.um.web.model")
-public class LssApp2 {
+public class LssApp3 {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(new Class[] { LssApp2.class, UmSecurityConfig.class }, args);
+        SpringApplication.run(new Class[] { LssApp3.class, UmSecurityConfig.class }, args);
     }
 
 }
