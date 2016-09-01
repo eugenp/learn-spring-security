@@ -118,7 +118,6 @@ Module  15 - Lesson 3</description>
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session</artifactId>
-			<version>1.2.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -150,6 +149,18 @@ Module  15 - Lesson 3</description>
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>            
+            <scope>test</scope>            
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>   
+            <scope>test</scope>
+        </dependency>
+        
     </dependencies>
 
     <build>
@@ -198,9 +209,9 @@ Module  15 - Lesson 3</description>
 
         <slf4j.version>1.7.13</slf4j.version>
 
-        <spring.version>4.2.5.RELEASE</spring.version>
+        <!-- <spring.version>4.2.5.RELEASE</spring.version>
         <spring-security.version>4.0.4.RELEASE</spring-security.version>
-
+ -->
         <!-- Spring related -->
         <aspectjweaver.version>1.8.7</aspectjweaver.version>
 
