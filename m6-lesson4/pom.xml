@@ -98,13 +98,11 @@ Module  6 - Lesson 4</description>
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>javax.mail-api</artifactId>
-            <version>${javax.mail-api.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>${javax.mail.version}</version>
         </dependency>
 
         <!-- common utilities -->
@@ -166,6 +164,18 @@ Module  6 - Lesson 4</description>
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>            
+            <scope>test</scope>            
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>   
+            <scope>test</scope>
+        </dependency>        
 
         <dependency>
             <groupId>org.scala-lang</groupId>
