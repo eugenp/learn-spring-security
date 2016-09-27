@@ -1,7 +1,5 @@
 package com.baeldung.lss.spring;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
-import com.baeldung.lss.web.model.User;
 
 @Configuration
 @ComponentScan({ "org.baeldung.lss.security" })
@@ -25,9 +21,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomWebAuthenticationDetailsSource authenticationDetailsSource;
-
-    @Autowired
-    private UserRepository userRepository;
 
     public LssSecurityConfig() {
         super();
@@ -61,14 +54,4 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     } // @formatter:on
 
-    //
-
-    @PostConstruct
-    private void saveTestUser() {
-        final User user = new User();
-        user.setEmail("user@example.com");
-        user.setPassword("pass");
-        user.setPasswordConfirmation("pass");
-        userRepository.save(user);
-    }
 }

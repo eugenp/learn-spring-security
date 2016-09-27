@@ -33,10 +33,11 @@ class RegistrationController {
         }
         try {
             userService.registerNewUser(user);
-        } catch (EmailExistsException e) {
+        } catch (final EmailExistsException e) {
             result.addError(new FieldError("user", "email", e.getMessage()));
             return new ModelAndView("registrationPage", "user", user);
         }
+
         return new ModelAndView("redirect:/login");
     }
 

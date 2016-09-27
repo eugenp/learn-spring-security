@@ -16,6 +16,7 @@
         <div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
 
         <form th:action="@{/doLogin}" method="post" class="form-horizontal">
+            
             <div class="form-group">
                 <label class="control-label col-xs-2" for="username"> Username:</label>
                 <div class="col-xs-10">
@@ -31,6 +32,8 @@
             <div class="form-actions col-xs-offset-2 col-xs-10">
                 <input type="submit" class="btn btn-primary" value="Sign In" />
             </div>
+            <br/><br/><br/><br/>
+            <a class="btn btn-default" href="/signup">Sign Up</a>
         </form>
     </div>
 
