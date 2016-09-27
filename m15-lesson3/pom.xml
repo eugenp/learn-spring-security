@@ -114,7 +114,8 @@ Module  15 - Lesson 3</description>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
-        <!-- spring Session -->	    
+        
+        <!-- Spring Session -->	    
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session</artifactId>
