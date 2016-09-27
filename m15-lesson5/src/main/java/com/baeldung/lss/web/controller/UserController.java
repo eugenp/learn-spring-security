@@ -32,7 +32,7 @@ class UserController {
 
     @RequestMapping
     public ModelAndView list() {
-        Iterable<User> users = this.userRepository.findAll();
+        final Iterable<User> users = this.userRepository.findAll();
         return new ModelAndView("tl/list", "users", users);
     }
 
@@ -48,7 +48,7 @@ class UserController {
         }
         try {
             userService.registerNewUser(user);
-        } catch (EmailExistsException e) {
+        } catch (final EmailExistsException e) {
             result.addError(new FieldError("user", "email", e.getMessage()));
             return new ModelAndView("tl/form", "user", user);
         }
