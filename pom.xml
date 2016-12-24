@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
 Module 2</description>
-    <name>learn-spring-security</name>
+    <name>learn-spring-security-parent</name>
 
     <groupId>com.baeldung.m2</groupId>
     <artifactId>learn-spring-security-m2</artifactId>
