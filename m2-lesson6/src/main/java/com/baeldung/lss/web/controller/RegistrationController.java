@@ -1,23 +1,13 @@
 package com.baeldung.lss.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.baeldung.lss.model.PasswordResetToken;
-import com.baeldung.lss.model.SecurityQuestion;
-import com.baeldung.lss.model.SecurityQuestionDefinition;
-import com.baeldung.lss.model.User;
-import com.baeldung.lss.model.VerificationToken;
-import com.baeldung.lss.persistence.SecurityQuestionDefinitionRepository;
-import com.baeldung.lss.persistence.SecurityQuestionRepository;
-import com.baeldung.lss.registration.OnRegistrationCompleteEvent;
-import com.baeldung.lss.service.IUserService;
-import com.baeldung.lss.validation.EmailExistsException;
-import com.google.common.collect.ImmutableMap;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
@@ -36,6 +26,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.baeldung.lss.model.PasswordResetToken;
+import com.baeldung.lss.model.SecurityQuestion;
+import com.baeldung.lss.model.SecurityQuestionDefinition;
+import com.baeldung.lss.model.User;
+import com.baeldung.lss.model.VerificationToken;
+import com.baeldung.lss.persistence.SecurityQuestionDefinitionRepository;
+import com.baeldung.lss.persistence.SecurityQuestionRepository;
+import com.baeldung.lss.registration.OnRegistrationCompleteEvent;
+import com.baeldung.lss.service.IUserService;
+import com.baeldung.lss.validation.EmailExistsException;
+import com.google.common.collect.ImmutableMap;
 
 @Controller
 class RegistrationController {
@@ -72,8 +74,7 @@ class RegistrationController {
     }
 
     @RequestMapping(value = "user/register")
-    public ModelAndView registerUser(@Valid final User user, final @RequestParam Long questionId, @RequestParam final String answer,
-                                     final BindingResult result, final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    public ModelAndView registerUser(@Valid final User user, final @RequestParam Long questionId, @RequestParam final String answer, final BindingResult result, final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return new ModelAndView("registrationPage", "user", user);
         }
@@ -159,8 +160,8 @@ class RegistrationController {
 
     @RequestMapping(value = "/user/savePassword", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("passwordConfirmation") final String passwordConfirmation,
-                                     @RequestParam final Long questionId, @RequestParam final String answer, final RedirectAttributes redirectAttributes) {
+    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("passwordConfirmation") final String passwordConfirmation, @RequestParam final Long questionId, @RequestParam final String answer,
+            final RedirectAttributes redirectAttributes) {
         if (!password.equals(passwordConfirmation)) {
             final Map<String, Object> model = new HashMap<>();
             model.put("errorMessage", "Passwords do not match");
