@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
 Module  4 - Lesson 2</description>
-    <name>learn-spring-security</name>
+    <name>learn-spring-security-l2</name>
 
     <groupId>com.baeldung.m4</groupId>
     <artifactId>learn-spring-security-m4-l2</artifactId>
@@ -13,7 +13,7 @@ Module  4 - Lesson 2</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.3.3.RELEASE</version>
+        <version>1.3.8.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -189,7 +189,7 @@ Module  4 - Lesson 2</description>
 
         <!-- overriding Spring Boot -->
         <spring-hateoas.version>0.19.0.RELEASE</spring-hateoas.version>
-        <spring-boot.version>1.3.3.RELEASE</spring-boot.version>
+        <spring-boot.version>1.3.8.RELEASE</spring-boot.version>
 
         <commons-collections.version>3.2.1</commons-collections.version>
         <hibernate.version>5.1.0.Final</hibernate.version>
