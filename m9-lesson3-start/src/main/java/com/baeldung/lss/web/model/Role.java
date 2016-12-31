@@ -1,15 +1,12 @@
 package com.baeldung.lss.web.model;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
-public class Privilege {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,14 +14,11 @@ public class Privilege {
 
     private String name;
 
-    @ManyToMany(mappedBy = "privileges")
-    private Collection<Role> roles;
-
-    public Privilege() {
+    public Role() {
         super();
     }
 
-    public Privilege(final String name) {
+    public Role(final String name) {
         super();
         this.name = name;
     }
@@ -47,14 +41,6 @@ public class Privilege {
         this.name = name;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(final Collection<Role> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -74,8 +60,8 @@ public class Privilege {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Privilege privilege = (Privilege) obj;
-        if (!privilege.equals(privilege.name)) {
+        final Role role = (Role) obj;
+        if (!role.equals(role.name)) {
             return false;
         }
         return true;
@@ -84,7 +70,7 @@ public class Privilege {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Privilege [name=").append(name).append("]").append("[id=").append(id).append("]");
+        builder.append("Role [name=").append(name).append("]").append("[id=").append(id).append("]");
         return builder.toString();
     }
 }
