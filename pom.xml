@@ -12,6 +12,7 @@ Module  9</description>
 
     <modules>
         <module>m9-lesson1</module>
+        <module>m9-lesson3-start</module>
         <module>m9-lesson3</module>
         <module>m9-lesson4</module>
         <module>m9-lesson5</module>
