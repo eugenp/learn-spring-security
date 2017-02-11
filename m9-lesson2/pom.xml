@@ -2,11 +2,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
-Module 9 - Lesson 4</description>
-    <name>learn-spring-security-l4</name>
+Module 9 - Lesson 2</description>
+    <name>learn-spring-security-l2</name>
 
     <groupId>com.baeldung.m9</groupId>
-    <artifactId>learn-spring-security-m9-l4</artifactId>
+    <artifactId>learn-spring-security-m9-l2</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -140,25 +140,6 @@ Module 9 - Lesson 4</description>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.jayway.restassured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>${rest-assured.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>            
-            <scope>test</scope>            
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>   
-            <scope>test</scope>
-        </dependency>
-        
     </dependencies>
 
     <build>
@@ -180,10 +161,6 @@ Module 9 - Lesson 4</description>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <excludes>
-                        <exclude>**/*IntegrationTest.java</exclude>
-                        <exclude>**/*LiveTest.java</exclude>
-                    </excludes>
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
             </plugin>
