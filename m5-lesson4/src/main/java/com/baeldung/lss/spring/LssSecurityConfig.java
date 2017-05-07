@@ -20,7 +20,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.
             inMemoryAuthentication()
             .withUser("user").password("pass").roles("USER").and()
-            .withUser("user2").password("pass2").roles("USER")
+            .withUser("admin").password("pass").roles("ADMIN")
             ;
     } // @formatter:on
 
@@ -31,12 +31,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().permitAll()
         .and()
         
-        .formLogin().
-            loginPage("/login").permitAll().
-            loginProcessingUrl("/doLogin")
-
-        .and()
-        .logout().permitAll().logoutUrl("/logout")
+        .httpBasic()
         
         .and()
         .csrf().disable()
