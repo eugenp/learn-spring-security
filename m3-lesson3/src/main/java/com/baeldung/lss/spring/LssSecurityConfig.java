@@ -1,17 +1,25 @@
 package com.baeldung.lss.spring;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    
+    @Autowired
+    private DataSource dataSource;
 
     public LssSecurityConfig() {
         super();
@@ -45,9 +53,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
             loginProcessingUrl("/doLogin")
 
         .and()
-        .rememberMe()
-            .key("lssAppKey")
-            .tokenValiditySeconds(604800) // 1 week = 604800
+        .rememberMe().tokenRepository(persistentTokenRepository())
+            
 
         .and()
         .logout().permitAll().logoutUrl("/logout")
@@ -56,5 +63,12 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         ;
     } // @formatter:on
+    
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+        return jdbcTokenRepository;
+    }
 
 }

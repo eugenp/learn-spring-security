@@ -12,8 +12,10 @@ Module  3</description>
 
     <modules>
         <module>m3-lesson1</module>
-        <module>m3-lesson2</module>
-        <module>m3-lesson3</module>
+        <module>m3-lesson2-start</module>
+		<module>m3-lesson2</module>
+        <module>m3-lesson3-start</module>
+		<module>m3-lesson3</module>
         <module>m3-lesson4</module>
         <module>m3-lesson5</module>
     </modules>
