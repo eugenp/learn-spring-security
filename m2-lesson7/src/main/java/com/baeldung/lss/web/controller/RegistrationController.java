@@ -72,8 +72,7 @@ class RegistrationController {
     }
 
     @RequestMapping(value = "user/register")
-    public ModelAndView registerUser(@Valid final User user, final @RequestParam Long questionId, @RequestParam final String answer,
-                                     final BindingResult result, final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    public ModelAndView registerUser(@Valid final User user, final @RequestParam Long questionId, @RequestParam final String answer, final BindingResult result, final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return new ModelAndView("registrationPage", "user", user);
         }
@@ -159,8 +158,8 @@ class RegistrationController {
 
     @RequestMapping(value = "/user/savePassword", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("passwordConfirmation") final String passwordConfirmation,
-                                     @RequestParam final Long questionId, @RequestParam final String answer, final RedirectAttributes redirectAttributes) {
+    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("passwordConfirmation") final String passwordConfirmation, @RequestParam final Long questionId, @RequestParam final String answer,
+            final RedirectAttributes redirectAttributes) {
         if (!password.equals(passwordConfirmation)) {
             final Map<String, Object> model = new HashMap<>();
             model.put("errorMessage", "Passwords do not match");

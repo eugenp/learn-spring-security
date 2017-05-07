@@ -16,7 +16,7 @@ Module 2</description>
         <module>m2-lesson4</module>
         <module>m2-lesson5</module>
         <module>m2-lesson6</module>
-        <!-- <module>m2-lesson7</module> -->
+        <module>m2-lesson7</module>
     </modules>
 
 </project>
