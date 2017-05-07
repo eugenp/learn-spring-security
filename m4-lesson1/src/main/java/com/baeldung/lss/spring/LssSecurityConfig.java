@@ -28,7 +28,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         .authorizeRequests()
                 .antMatchers("/signup", "/user/register").permitAll()
-                .antMatchers("/user/delete/*").hasRole("ADMIN")
+                .antMatchers("/user/delete/*").hasRole("USER")
                 .anyRequest().authenticated()
 
         .and()
