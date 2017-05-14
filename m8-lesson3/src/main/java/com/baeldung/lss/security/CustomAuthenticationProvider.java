@@ -36,11 +36,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     //
 
     private boolean doAuthenticationAgainstThirdPartySystem() {
-        return false;
+        return true;
     }
 
     private boolean supportsAuthentication(Authentication authentication) {
-        return false;
+        return true;
     }
 
 }

@@ -3,6 +3,7 @@ package com.baeldung.lss.spring;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.security.CustomAuthenticationProvider;
+import com.google.common.collect.Lists;
 
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -41,13 +43,16 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // final DaoAuthenticationProvider daoAuthProvider = new DaoAuthenticationProvider();
-        // daoAuthProvider.setUserDetailsService(userDetailsService);
-        // auth.authenticationProvider(daoAuthProvider).authenticationProvider(customAuthenticationProvider);
+         /*final DaoAuthenticationProvider daoAuthProvider = new DaoAuthenticationProvider();
+         daoAuthProvider.setUserDetailsService(userDetailsService);
+         auth.authenticationProvider(daoAuthProvider).authenticationProvider(customAuthenticationProvider);*/
 
         // auth.parentAuthenticationManager(new ProviderManager(Lists.newArrayList(customAuthenticationProvider)));
-
-        auth.eraseCredentials(false).userDetailsService(userDetailsService);
+        
+        ProviderManager authenticationManager = new ProviderManager(Lists.newArrayList(customAuthenticationProvider));
+        authenticationManager.setEraseCredentialsAfterAuthentication(false);
+        auth.parentAuthenticationManager(authenticationManager);
+        //auth.eraseCredentials(false).userDetailsService(userDetailsService);
     }
 
     @Override
