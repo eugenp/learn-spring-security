@@ -15,8 +15,18 @@ class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private AsyncBean asyncBean;
 
     // read
+    
+    @Override
+    public Iterable<User> findAll() { 
+        asyncBean.asyncCall();
+        
+        return userRepository.findAll();
+    }
 
     @Override
     public User findUserByEmail(final String email) {

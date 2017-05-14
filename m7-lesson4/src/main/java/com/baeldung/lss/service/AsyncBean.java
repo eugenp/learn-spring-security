@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class AsyncBean {
 
     @Async
-    public void asyncMethod() {
+    public void asyncCall() {
         System.out.println();
     }
 

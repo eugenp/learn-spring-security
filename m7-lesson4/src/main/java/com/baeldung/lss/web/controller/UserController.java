@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.service.AsyncBean;
 import com.baeldung.lss.service.IUserService;
 import com.baeldung.lss.validation.EmailExistsException;
 
@@ -29,17 +28,12 @@ class UserController {
     @Autowired
     private IUserService userService;
 
-    @Autowired
-    private AsyncBean asyncBean;
 
     //
 
     @RequestMapping
     public ModelAndView list() {
-        final Iterable<User> users = this.userRepository.findAll();
-
-        asyncBean.asyncMethod();
-
+        final Iterable<User> users = this.userService.findAll();
         return new ModelAndView("tl/list", "users", users);
     }
 
