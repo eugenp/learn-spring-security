@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.elasticsearch.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.acls.domain.AccessControlEntryImpl;
 import org.springframework.security.acls.domain.AclAuthorizationStrategy;
@@ -44,6 +43,7 @@ import com.baeldung.lss.persistence.acl.AclClassRepository;
 import com.baeldung.lss.persistence.acl.AclEntryRepository;
 import com.baeldung.lss.persistence.acl.AclObjectIdentityRepository;
 import com.baeldung.lss.persistence.acl.AclSidRepository;
+import com.google.common.collect.Lists;
 
 public class LssElasticSearchAclService implements AclService {
     @Autowired
