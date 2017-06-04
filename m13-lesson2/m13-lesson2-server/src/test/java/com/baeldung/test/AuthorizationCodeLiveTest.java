@@ -18,7 +18,7 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-public class AuthorizationCodeTest {
+public class AuthorizationCodeLiveTest {
 
     @Test
     public void givenAuthorizationCodeGrant_whenObtainAccessToken_thenSuccess() throws JsonParseException, JsonMappingException, IOException, URISyntaxException {

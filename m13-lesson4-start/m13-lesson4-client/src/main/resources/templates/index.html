@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module13 Lesson4 Client</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+</head>
+<body ng-app="myApp" ng-controller="mainCtrl">
+
+<div th:include="header"></div>
+
+<div class="container">
+<div class="alert alert-danger" ng-show="message">{{message}}</div>
+
+<h1>Users  <a class="btn btn-default" href="#" ng-click="getUsers()">View All</a></h1>
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Email</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-hide="users.length">
+                <td colspan="4">No users</td>
+            </tr>
+            <tr ng-repeat="user in users">
+                <td><span> {{user.id}} </span></td>
+                <td><a href="#" > {{user.email}} </a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>
+</body>
+</html>

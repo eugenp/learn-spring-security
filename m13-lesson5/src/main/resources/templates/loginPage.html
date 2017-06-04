@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Login Page</title>
+
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="container">
+    <h1>Login page</h1>
+
+    <form action="/signin/facebook" method="POST">
+        <input type="hidden" name="scope" value="public_profile" />
+        <input type="submit" value="Login using Facebook" class="btn btn-primary" />
+    </form>
+</div>
+
+</body>
+</html>
