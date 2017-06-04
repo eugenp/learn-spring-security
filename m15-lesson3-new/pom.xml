@@ -2,18 +2,18 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
-Module 15 - Lesson 3 - Start</description>
+Module  15 - Lesson 3 New</description>
     <name>learn-spring-security</name>
 
-    <groupId>com.baeldung.m15</groupId>
-    <artifactId>learn-spring-security-m15-l3-start</artifactId>
+    <groupId>com.baeldung.m2</groupId>
+    <artifactId>learn-spring-security-m15-l3-new</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.6.RELEASE</version>
+        <version>1.5.3.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -28,13 +28,12 @@ Module 15 - Lesson 3 - Start</description>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -47,11 +46,6 @@ Module 15 - Lesson 3 - Start</description>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
         </dependency>
 
         <!-- security -->
@@ -68,13 +62,6 @@ Module 15 - Lesson 3 - Start</description>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-        <!-- Password Validation -->
-        <dependency>
-            <groupId>org.passay</groupId>
-            <artifactId>passay</artifactId>
-            <version>${passay.version}</version>
-        </dependency>
-
         <!-- persistence -->
 
         <dependency>
@@ -87,23 +74,11 @@ Module 15 - Lesson 3 - Start</description>
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-<!--         <dependency> -->
-<!--             <groupId>mysql</groupId> -->
-<!--             <artifactId>mysql-connector-java</artifactId> -->
-<!--         </dependency> -->
-
-        <!-- mail -->
-
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>            
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>            
-        </dependency>
+        <!-- <dependency> -->
+        <!-- <groupId>mysql</groupId> -->
+        <!-- <artifactId>mysql-connector-java</artifactId> -->
+        <!-- <version>${mysql.version}</version> -->
+        <!-- </dependency> -->
 
         <!-- common utilities -->
 
@@ -139,7 +114,23 @@ Module 15 - Lesson 3 - Start</description>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
-
+        
+        <!-- Spring Session -->	    
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session</artifactId>
+		</dependency>
+		
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency> -->
+		<!-- spring-boot-starter-redis renamed to spring-boot-starter-data-redis as of boot 1.4 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+        
         <!-- test scoped -->
 
         <dependency>
@@ -165,15 +156,22 @@ Module 15 - Lesson 3 - Start</description>
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>            
+            <scope>test</scope>            
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>   
+            <scope>test</scope>
+        </dependency>
+        
     </dependencies>
 
     <build>
         <plugins>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>

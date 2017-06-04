@@ -13,7 +13,7 @@ Module 15 - Lesson 2 - start</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.3.6.RELEASE</version>
+        <version>1.5.3.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -97,14 +97,12 @@ Module 15 - Lesson 2 - start</description>
 
         <dependency>
             <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>
-            <version>${javax.mail-api.version}</version>
+            <artifactId>javax.mail-api</artifactId>            
         </dependency>
 
         <dependency>
             <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>${javax.mail.version}</version>
+            <artifactId>javax.mail</artifactId>           
         </dependency>
 
         <!-- common utilities -->
@@ -205,80 +203,27 @@ Module 15 - Lesson 2 - start</description>
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-
-        <!-- overriding Spring Boot -->
-        <spring-hateoas.version>0.19.0.RELEASE</spring-hateoas.version>
-        <spring-boot.version>1.3.6.RELEASE</spring-boot.version>
-
-        <commons-collections.version>3.2.1</commons-collections.version>
-        <hibernate.version>5.1.0.Final</hibernate.version>
-        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-        <httpclient.version>4.5.1</httpclient.version>
-        <jackson.version>2.7.1</jackson.version>
-        <javassist.version>3.20.0-GA</javassist.version>
-        <mysql.version>5.1.38</mysql.version>
-
-        <slf4j.version>1.7.13</slf4j.version>
-
-        <spring.version>4.2.5.RELEASE</spring.version>
-        <spring-security.version>4.0.4.RELEASE</spring-security.version>
-
-        <!-- Spring related -->
-        <aspectjweaver.version>1.8.7</aspectjweaver.version>
-
-        <!-- web -->
-        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-
-        <!-- marshalling -->
-        <jaxb-api.version>2.2.12</jaxb-api.version>
-
-        <!-- mail -->
-        <javax.mail-api.version>1.5.5</javax.mail-api.version>
-        <javax.mail.version>1.5.5</javax.mail.version>
-
+        
         <!-- commons and utils -->
-        <commons-lang3.version>3.4</commons-lang3.version>
-        <guava.version>19.0</guava.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
+        <guava.version>21.0</guava.version>
 
-        <!-- UNSORTED -->
-        <commons-codec.version>1.10</commons-codec.version>
-
-        <!-- password validation -->
-        <passay.version>1.0</passay.version>
-
-        <!-- persistence -->
-        <hibernate-jpamodelgen.version>5.1.0.Final</hibernate-jpamodelgen.version>
-        <querydsl.version>4.0.8</querydsl.version>
-        <spring-data-jpa.version>1.9.4.RELEASE</spring-data-jpa.version>
-
-        <h2.version>1.4.190</h2.version>
-        <hsqldb.version>2.3.3</hsqldb.version>
-
+		<!-- password validation -->
+        <passay.version>1.0</passay.version>		
+        
+        <!-- persistence -->       
         <validation-api.version>1.1.0.Final</validation-api.version>
-
-        <!-- ops related -->
-        <tomcat.version>8.0.32</tomcat.version>
-
-        <!-- logging -->
-        <logback.version>1.1.3</logback.version>
-
-        <!-- testing -->
-        <org.hamcrest.version>1.3</org.hamcrest.version>
-        <junit.version>4.12</junit.version>
-        <mockito.version>1.10.19</mockito.version>
-
-        <httpcore.version>4.4.4</httpcore.version>
-        <rest-assured.version>2.8.0</rest-assured.version>
-
+  
+        <rest-assured.version>2.9.0</rest-assured.version>
+		
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>2.7</maven-resources-plugin.version>
-        <cargo-maven2-plugin.version>1.4.18</cargo-maven2-plugin.version>
-        <maven-war-plugin.version>2.6</maven-war-plugin.version>
-
+		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+		<cargo-maven2-plugin.version>1.6.2</cargo-maven2-plugin.version>
+		
     </properties>
-
+    
     <developers>
         <developer>
             <email>eugen@baeldung.com</email>

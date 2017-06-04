@@ -2,16 +2,14 @@ package com.baeldung.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.baeldung.lss.spring.LssApp4;
+import com.baeldung.lss.spring.LssApp3;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(LssApp4.class)
-@IntegrationTest
-public class Lss4IntegrationTest {
+@SpringBootTest(classes= LssApp3.class)
+public class Lss3IntegrationTest {
 
     @Test
     public void whenLoadApplication_thenSuccess() {
