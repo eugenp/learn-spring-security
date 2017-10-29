@@ -13,6 +13,7 @@ Module 13</description>
     <modules>
         <module>m13-lesson2-start</module>
         <module>m13-lesson2</module>
+		<module>m13-lesson2-new</module>
         <module>m13-lesson3-start</module>
         <module>m13-lesson3</module>        
         <module>m13-lesson4-start</module>
