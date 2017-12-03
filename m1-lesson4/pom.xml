@@ -8,7 +8,7 @@ Module  1 - Lesson 4</description>
     <groupId>com.baeldung.m1</groupId>
     <artifactId>learn-spring-security-m1-l4</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -180,8 +180,7 @@ Module  1 - Lesson 4</description>
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
-		<cargo-maven2-plugin.version>1.6.2</cargo-maven2-plugin.version>
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
 
     </properties>
 
