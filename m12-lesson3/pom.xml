@@ -8,7 +8,7 @@ Module  12 - Lesson 3</description>
     <groupId>com.baeldung.m12</groupId>
     <artifactId>learn-spring-security-m12-l3</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <parent>
 		<groupId>org.springframework.boot</groupId>
@@ -191,83 +191,9 @@ Module  12 - Lesson 3</description>
 				</configuration>
 
 			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>${cargo-maven2-plugin.version}</version>
-				<configuration>
-					<wait>false</wait>
-					<container>
-						<containerId>tomcat8x</containerId>
-						<type>embedded</type>
-						<systemProperties>
-							<envTarget>local</envTarget>
-							<persistenceTarget>cargo</persistenceTarget>
-						</systemProperties>
-					</container>
-					<configuration>
-						<properties>
-							<cargo.servlet.port>8082</cargo.servlet.port>
-						</properties>
-					</configuration>
-				</configuration>
-			</plugin>
+			
 		</plugins>
-	</build>
-	<profiles>
-		<profile>
-			<id>liveTest</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.cargo</groupId>
-						<artifactId>cargo-maven2-plugin</artifactId>
-						<configuration>
-							<wait>false</wait>
-						</configuration>
-						<executions>
-							<execution>
-								<id>start-server</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>start</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>stop-server</id>
-								<phase>post-integration-test</phase>
-								<goals>
-									<goal>stop</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<excludes>
-										<exclude>none</exclude>
-									</excludes>
-									<includes>
-										<include>**/*AuthorizationLiveTest.java</include>
-									</includes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-
-			</build>
-		</profile>
-	</profiles>
+	</build>	
 	
 	<properties>
 
@@ -287,8 +213,7 @@ Module  12 - Lesson 3</description>
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
-		<cargo-maven2-plugin.version>1.6.2</cargo-maven2-plugin.version>
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
 		
     </properties>
     
