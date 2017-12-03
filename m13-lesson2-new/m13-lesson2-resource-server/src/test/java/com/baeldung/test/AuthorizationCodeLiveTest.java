@@ -22,14 +22,15 @@ public class AuthorizationCodeLiveTest {
 
     @Test
     public void givenAuthorizationCodeGrant_whenObtainAccessToken_thenSuccess() throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
-        final String port = "8081";
+    	final String resourceServerport = "8081";
+        final String authServerport = "8083";
         final String redirectUrl = "http://www.example.com";
-        final String authorizeUrl = "http://localhost:" + port + "/um-webapp/oauth/authorize?response_type=code&client_id=lssClient&redirect_uri=" + redirectUrl;
-        final String tokenUrl = "http://localhost:" + port + "/um-webapp/oauth/token";
-        final String resourceUrl = "http://localhost:" + port + "/um-webapp/api/users";
+        final String authorizeUrl = "http://localhost:" + authServerport + "/um-webapp-auth-server/oauth/authorize?response_type=code&client_id=lssClient&redirect_uri=" + redirectUrl;
+        final String tokenUrl = "http://localhost:" + authServerport + "/um-webapp-auth-server/oauth/token";
+        final String resourceUrl = "http://localhost:" + resourceServerport + "/um-webapp-resource-server/api/users";
 
         // user login
-        Response response = RestAssured.given().formParams("username", "john@test.com", "password", "123").post("http://localhost:" + port + "/um-webapp/login");
+        Response response = RestAssured.given().formParams("username", "john@test.com", "password", "123").post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
         final String cookieValue = response.getCookie("JSESSIONID");
 
         // get authorization code
