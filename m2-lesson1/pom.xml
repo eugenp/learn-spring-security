@@ -28,6 +28,7 @@ Module  2 - Lesson 1</description>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
@@ -186,8 +187,7 @@ Module  2 - Lesson 1</description>
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
-		<cargo-maven2-plugin.version>1.6.2</cargo-maven2-plugin.version>
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
 
     </properties>
 
