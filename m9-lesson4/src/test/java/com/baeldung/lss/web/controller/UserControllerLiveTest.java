@@ -2,28 +2,22 @@ package com.baeldung.lss.web.controller;
 
 import static com.jayway.restassured.RestAssured.given;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Test;
+
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.authentication.FormAuthConfig;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Test;
 
 public class UserControllerLiveTest {
 
     static {
         RestAssured.baseURI = "http://localhost:8081";
-    }
+    }    
 
     @Test
-    public void givenUserAuthenticated_whenDeletingUser_thenForbidden() {
-        givenAuthenticated("user", "pass")
-                .when().get("/user/delete/" + RandomStringUtils.randomNumeric(5))
-                .then().statusCode(403);
-    }
-
-    @Test
-    public void givenAdminAuthenticated_whenDeletingUser_thenUserDeleted() {
+    public void givenAuthenticated_whenDeletingUser_thenUserDeleted() {
         final Response response = givenAuthenticated("admin", "pass").formParam("username", randomUsername()).formParam("email", randomEmail())
                 .when().post("/user/?form")
                 .then().statusCode(302)
