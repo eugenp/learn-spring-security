@@ -181,7 +181,8 @@ Module 9 - Lesson 4</description>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>**/*IntegrationTest.java</exclude>                        
+                        <exclude>**/*IntegrationTest.java</exclude>  
+                        <exclude>**/*LiveTest.java</exclude>                      
                     </excludes>
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
