@@ -28,7 +28,6 @@ Module  13 - Lesson 2 Server New</description>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
