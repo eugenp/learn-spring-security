@@ -28,7 +28,6 @@ Module  12 - Lesson 3</description>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
