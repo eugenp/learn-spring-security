@@ -5,7 +5,7 @@ before_install:
 
 install: true
 
-script: mvn -B clean install -pl '!m15-lesson3,!m15-lesson3-new'
+script: mvn -B clean install -Pintegration -pl !m15-lesson3,!m15-lesson3-new
 
 sudo: required
 
