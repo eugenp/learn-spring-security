@@ -235,9 +235,9 @@ Module  11 - Lesson 4</description>
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
                     <excludes>
-						   <exclude>**/*LiveTest.java</exclude>
-						   <exclude>**/*Lss4IntegrationTest.java</exclude>						  
-						</excludes>
+						<exclude>**/*IntegrationTest.java</exclude>
+						<exclude>**/*LiveTest.java</exclude>
+					</excludes>
                 </configuration>
             </plugin>                        
 
