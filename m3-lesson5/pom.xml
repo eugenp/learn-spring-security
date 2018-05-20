@@ -212,8 +212,9 @@ Module  3 - Lesson 5</description>
                     <useSystemClassLoader>false</useSystemClassLoader>
                     <testFailureIgnore>true</testFailureIgnore>
                     <excludes>
-                        <exclude>**/*IntegrationTest.java</exclude>
-                    </excludes>
+						<exclude>**/*IntegrationTest.java</exclude>
+						<exclude>**/*LiveTest.java</exclude>
+					</excludes>
                 </configuration>
             </plugin>
 
