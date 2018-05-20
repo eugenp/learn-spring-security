@@ -187,10 +187,10 @@ Module  5 - Lesson 5</description>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>						
-						<excludes>
-						   <exclude>**/*LiveTest.java</exclude>
-						   <exclude>**/*Lss5IntegrationTest.java</exclude>						  
-						</excludes>						                
+					<excludes>
+						<exclude>**/*IntegrationTest.java</exclude>
+						<exclude>**/*LiveTest.java</exclude>
+					</excludes>						                
                 </configuration>
             </plugin>                        
 
