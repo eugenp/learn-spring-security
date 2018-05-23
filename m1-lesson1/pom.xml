@@ -141,7 +141,7 @@ Module  1 - Lesson 1</description>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
-					<excludes>
+                    <excludes>
 						<exclude>**/*IntegrationTest.java</exclude>
 						<exclude>**/*LiveTest.java</exclude>
 					</excludes>
@@ -150,7 +150,7 @@ Module  1 - Lesson 1</description>
 
         </plugins>
     </build>
-	
+
 	<profiles>
 		<profile>
 			<id>integration</id>
@@ -179,7 +179,6 @@ Module  1 - Lesson 1</description>
 							</execution>
 						</executions>
 					</plugin>
-
 				</plugins>
 			</build>
 		</profile>
