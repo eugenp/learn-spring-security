@@ -192,10 +192,10 @@ Module  8 - Lesson 1</description>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
-					<excludes>
-						<exclude>**/*IntegrationTest.java</exclude>
-						<exclude>**/*LiveTest.java</exclude>
-					</excludes>
+                    <excludes>
+                        <exclude>**/*IntegrationTest.java</exclude>
+                        <exclude>**/*LiveTest.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
 
@@ -211,54 +211,54 @@ Module  8 - Lesson 1</description>
         <!-- commons and utils -->
         <commons-lang3.version>3.5</commons-lang3.version>
         <guava.version>21.0</guava.version>
-		
-		<!-- password validation -->
+        
+        <!-- password validation -->
         <passay.version>1.0</passay.version>
         
         <!-- persistence -->       
         <validation-api.version>1.1.0.Final</validation-api.version>
   
         <rest-assured.version>2.9.0</rest-assured.version>
-		
+        
         <!-- maven plugins -->
-		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
-		
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>        
+        
     </properties>
-	
-	<profiles>
-		<profile>
-			<id>integration</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<excludes>
-										<exclude>none</exclude>
-									</excludes>
-									<includes>
-										<include>**/*IntegrationTest.java</include>
-									</includes>
-									<systemPropertyVariables>
-										<persistenceTarget>test</persistenceTarget>
-									</systemPropertyVariables>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+    
+    <profiles>
+        <profile>
+            <id>integration</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <excludes>
+                                        <exclude>none</exclude>
+                                    </excludes>
+                                    <includes>
+                                        <include>**/*IntegrationTest.java</include>
+                                    </includes>
+                                    <systemPropertyVariables>
+                                        <persistenceTarget>test</persistenceTarget>
+                                    </systemPropertyVariables>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <developers>
         <developer>
