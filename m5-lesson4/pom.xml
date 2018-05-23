@@ -180,19 +180,19 @@ Module  5 - Lesson 4</description>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
-					<excludes>
-						<exclude>**/*IntegrationTest.java</exclude>
-						<exclude>**/*LiveTest.java</exclude>
-					</excludes>					                
+                    <excludes>
+                        <exclude>**/*IntegrationTest.java</exclude>
+                        <exclude>**/*LiveTest.java</exclude>
+                    </excludes>                                    
                 </configuration>
             </plugin>
                        
         </plugins>
     </build>
 
-	<profiles>
-	
-	   <profile>
+    <profiles>
+    
+       <profile>
             <id>integration</id>
             <build>
                 <plugins>
@@ -211,7 +211,7 @@ Module  5 - Lesson 4</description>
                                         <exclude>none</exclude>
                                     </excludes>
                                     <includes>
-                                        <include>**/*Lss4IntegrationTest.java</include>
+                                        <include>**/*IntegrationTest.java</include>
                                     </includes>                                   
                                 </configuration>
                             </execution>
