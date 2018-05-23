@@ -211,7 +211,7 @@ Module 9 - Lesson 4</description>
                                         <exclude>none</exclude>
                                     </excludes>
                                     <includes>
-                                        <include>**/*Lss4IntegrationTest.java</include>
+                                        <include>**/*IntegrationTest.java</include>
                                     </includes>                                   
                                 </configuration>
                             </execution>
