@@ -186,20 +186,20 @@ Module  5 - Lesson 5</description>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>						
-						<excludes>
-						   <exclude>**/*LiveTest.java</exclude>
-						   <exclude>**/*Lss5IntegrationTest.java</exclude>						  
-						</excludes>						                
+                    <useSystemClassLoader>false</useSystemClassLoader>                        
+                    <excludes>
+                        <exclude>**/*IntegrationTest.java</exclude>
+                        <exclude>**/*LiveTest.java</exclude>
+                    </excludes>                                        
                 </configuration>
             </plugin>                        
 
         </plugins>
     </build>
 
-	<profiles>
-	
-	   <profile>
+    <profiles>
+    
+       <profile>
             <id>integration</id>
             <build>
                 <plugins>
@@ -218,7 +218,7 @@ Module  5 - Lesson 5</description>
                                         <exclude>none</exclude>
                                     </excludes>
                                     <includes>
-                                        <include>**/*Lss5IntegrationTest.java</include>
+                                        <include>**/*IntegrationTest.java</include>
                                     </includes>
                                     <systemPropertyVariables>
                                         <persistenceTarget>test</persistenceTarget>
@@ -231,8 +231,8 @@ Module  5 - Lesson 5</description>
                 </plugins>
             </build>
         </profile>
-        		
-	</profiles>
+                
+    </profiles>
 
     <properties>
 
