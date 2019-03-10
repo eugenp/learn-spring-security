@@ -1,3 +1,3 @@
-# Learn Spring Security
+# Module 18 - OAuth2 Beyond the Basics
 
-Note that the code for each module is on the branch corresponding to that module
+This is the codebase for Module 18 of [Learn Spring Security](http://bit.ly/github-lss)
