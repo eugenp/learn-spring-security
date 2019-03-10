@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<title>Home</title>
+
+<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" th:href="@{/}"> Home </a>
+                <ul class="nav">
+                    <li><a th:href="@{/user/}" href="users.html"> Users </a></li>
+                </ul>
+            </div>
+        </div>
+        <h1>Users : Create</h1>
+        <div class="container">
+             <form id="userForm" th:action="@{/user/(form)}" th:object="${user}" action="#" method="post">
+                <label for="email">Email</label>
+                <input type="email" th:field="*{email}" required="required"/>
+                <label for="password">Password</label>
+                <input type="password" th:field="*{password}" required="required" />
+		        <div class="form-actions">
+		            <input type="submit" value="Save" />
+		        </div>
+		    </form>
+        </div>
+ </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+spring:
+  thymeleaf:
+    cache: false
+    
+server: 
+  port: 8082
+  servlet: 
+    context-path: /um-webapp-client
+    
+logging: 
+  level:
+    org.org.springframework: INFO
