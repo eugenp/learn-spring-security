@@ -3,6 +3,7 @@ package com.baeldung.lss.spring;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +14,7 @@ import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
 
 @EnableWebSecurity
+@Configuration
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     // @Autowired
