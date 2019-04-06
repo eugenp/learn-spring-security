@@ -58,7 +58,7 @@ class UserController {
 
     @RequestMapping(value = "delete/{id}")
     public ModelAndView delete(@PathVariable("id") final Long id) {
-        this.userRepository.delete(id);
+        this.userRepository.deleteById(id);
         return new ModelAndView("redirect:/");
     }
 
