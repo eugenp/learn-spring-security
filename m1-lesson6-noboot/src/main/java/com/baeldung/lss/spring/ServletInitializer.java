@@ -11,7 +11,7 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {  LssSecurityConfig.class, LssWebMvcConfiguration.class };
+        return new Class[] {  };
     }
 
     @Override
