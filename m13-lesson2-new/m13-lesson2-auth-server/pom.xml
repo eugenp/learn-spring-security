@@ -13,7 +13,7 @@ Module  13 - Lesson 2 Server New</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.3.RELEASE</version>
+		<version>1.5.17.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -52,13 +52,6 @@ Module  13 - Lesson 2 Server New</description>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-		<!-- marshalling -->
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-
 		<!-- persistence -->
 
 		<dependency>
@@ -78,18 +71,8 @@ Module  13 - Lesson 2 Server New</description>
 			<version>${guava.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons-lang3.version}</version>
-		</dependency>
-
 		<!-- logging -->
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -105,12 +88,6 @@ Module  13 - Lesson 2 Server New</description>
 		</dependency>
 
 		<!-- test -->
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -131,11 +108,6 @@ Module  13 - Lesson 2 Server New</description>
 		<finalName>um-webapp</finalName>
 
 		<plugins>
-
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
 
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -204,19 +176,12 @@ Module  13 - Lesson 2 Server New</description>
 		<java.version>1.8</java.version>
 
 		<!-- commons and utils -->
-		<commons-lang3.version>3.5</commons-lang3.version>
 		<guava.version>21.0</guava.version>
-
-		<!-- persistence -->
-		<validation-api.version>1.1.0.Final</validation-api.version>
 
 		<rest-assured.version>3.0.1</rest-assured.version>
 
 		<!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
-		<cargo-maven2-plugin.version>1.6.2</cargo-maven2-plugin.version>
 
 	</properties>
 

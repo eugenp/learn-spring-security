@@ -52,13 +52,6 @@ Module  13 - Lesson 2 Server - Start</description>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- marshalling -->
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
         <!-- persistence -->
 
         <dependency>
@@ -78,18 +71,8 @@ Module  13 - Lesson 2 Server - Start</description>
             <version>${guava.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
-        </dependency>
-
         <!-- logging -->
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -183,18 +166,12 @@ Module  13 - Lesson 2 Server - Start</description>
         <java.version>1.8</java.version>
         
         <!-- commons and utils -->
-        <commons-lang3.version>3.5</commons-lang3.version>
         <guava.version>21.0</guava.version>			
         
-        <!-- persistence -->       
-        <validation-api.version>1.1.0.Final</validation-api.version>
-  
         <rest-assured.version>2.9.0</rest-assured.version>
 		
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
 		
     </properties>
     
