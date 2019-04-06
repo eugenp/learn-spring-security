@@ -3,6 +3,7 @@ package com.baeldung.lss.web.controller;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,9 +81,9 @@ class RegistrationController {
         }
         try {
             final User registered = userService.registerNewUser(user);
-
-            final SecurityQuestionDefinition questionDefinition = securityQuestionDefinitionRepository.findOne(questionId);
-            securityQuestionRepository.save(new SecurityQuestion(user, questionDefinition, answer));
+            
+			securityQuestionDefinitionRepository.findById(questionId).ifPresent(questionDefinition -> securityQuestionRepository.
+					save(new SecurityQuestion(user, questionDefinition, answer)));
 
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
