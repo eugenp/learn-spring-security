@@ -14,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.persistence.model.User;
 import com.baeldung.lss.service.IUserService;
 import com.baeldung.lss.validation.EmailExistsException;
-import com.baeldung.lss.web.model.User;
 
 @Controller
 @RequestMapping("/user")
@@ -58,7 +58,7 @@ class UserController {
 
     @RequestMapping(value = "delete/{id}")
     public ModelAndView delete(@PathVariable("id") final Long id) {
-        this.userRepository.delete(id);
+        this.userRepository.deleteById(id);
         return new ModelAndView("redirect:/");
     }
 

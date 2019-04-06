@@ -22,56 +22,56 @@ import com.baeldung.lss.web.model.User;
 @RequestMapping("/user")
 class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Autowired
-    private IUserService userService;
+	@Autowired
+	private IUserService userService;
 
-    //
+	//
 
-    @RequestMapping
-    public ModelAndView list() {
-        final Iterable<User> users = this.userRepository.findAll();
-        return new ModelAndView("tl/list", "users", users);
-    }
+	@RequestMapping
+	public ModelAndView list() {
+		final Iterable<User> users = this.userRepository.findAll();
+		return new ModelAndView("tl/list", "users", users);
+	}
 
-    @RequestMapping("{id}")
-    public ModelAndView view(@PathVariable("id") User user) {
-        return new ModelAndView("tl/view", "user", user);
-    }
+	@RequestMapping("{id}")
+	public ModelAndView view(@PathVariable("id") User user) {
+		return new ModelAndView("tl/view", "user", user);
+	}
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView create(@Valid final User user, final BindingResult result, final RedirectAttributes redirect) {
-        if (result.hasErrors()) {
-            return new ModelAndView("tl/form", "formErrors", result.getAllErrors());
-        }
-        try {
-            userService.registerNewUser(user);
-        } catch (final EmailExistsException e) {
-            result.addError(new FieldError("user", "email", e.getMessage()));
-            return new ModelAndView("tl/form", "user", user);
-        }
-        redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
-        return new ModelAndView("redirect:/user/{user.id}", "user.id", user.getId());
-    }
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView create(@Valid final User user, final BindingResult result, final RedirectAttributes redirect) {
+		if (result.hasErrors()) {
+			return new ModelAndView("tl/form", "formErrors", result.getAllErrors());
+		}
+		try {
+			userService.registerNewUser(user);
+		} catch (final EmailExistsException e) {
+			result.addError(new FieldError("user", "email", e.getMessage()));
+			return new ModelAndView("tl/form", "user", user);
+		}
+		redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
+		return new ModelAndView("redirect:/user/{user.id}", "user.id", user.getId());
+	}
 
-    @RequestMapping(value = "delete/{id}")
-    public ModelAndView delete(@PathVariable("id") final Long id) {
-        this.userRepository.delete(id);
-        return new ModelAndView("redirect:/");
-    }
+	@RequestMapping(value = "delete/{id}")
+	public ModelAndView delete(@PathVariable("id") final Long id) {
+		this.userRepository.deleteById(id);
+		return new ModelAndView("redirect:/");
+	}
 
-    @RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
-    public ModelAndView modifyForm(@PathVariable("id") final User user) {
-        return new ModelAndView("tl/form", "user", user);
-    }
+	@RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
+	public ModelAndView modifyForm(@PathVariable("id") final User user) {
+		return new ModelAndView("tl/form", "user", user);
+	}
 
-    // the form
+	// the form
 
-    @RequestMapping(params = "form", method = RequestMethod.GET)
-    public String createForm(@ModelAttribute final User user) {
-        return "tl/form";
-    }
+	@RequestMapping(params = "form", method = RequestMethod.GET)
+	public String createForm(@ModelAttribute final User user) {
+		return "tl/form";
+	}
 
 }

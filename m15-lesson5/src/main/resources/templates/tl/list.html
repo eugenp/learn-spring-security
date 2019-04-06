@@ -6,9 +6,9 @@
 <body>
 <h1 layout:fragment="header">Users : View all</h1>
 <div layout:fragment="content" class="container">
-    <div class="pull-right">
-        <a href="form.html" th:href="@{/user/(form)}">Create User</a>
-    </div>
+    <a href="form.html" th:href="@{/user/(form)}" class="btn btn-primary float-right">Create User</a>
+    <br/>
+    <br/>
     <table class="table table-bordered table-striped">
         <thead>
         <tr>

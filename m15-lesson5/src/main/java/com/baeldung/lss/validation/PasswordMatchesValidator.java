@@ -3,7 +3,8 @@ package com.baeldung.lss.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.baeldung.lss.web.model.User;
+import com.baeldung.lss.persistence.model.User;
+
 
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 

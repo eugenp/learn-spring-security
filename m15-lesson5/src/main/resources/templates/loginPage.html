@@ -5,19 +5,17 @@
 
 <head>
     <title>Login Page</title>
-
-    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
 <body>
 <div class="container">
     <h1>Login page</h1>
-    <a href="/user" class="btn btn-primary">Login using SSO Circle account</a>
+    <a href="/saml/sp/discovery?idp=https://idp.ssocircle.com" class="btn btn-primary">Login using SSO Circle account</a>
     <br/><br/>
     <p> To login You need to</p>
     <ol>
     <li> Create new <a href="http://www.ssocircle.com/">SSO Circle</a> account. </li>
-    <li> Add <a href="/saml/metadata">this</a> new Service Provider information <em>com:baeldung:spring:ls</em> to your account "Manage Metadata -> Add new Service Provider"</li>
+    <li> Add <a href="/saml/sp/metadata">this</a> new Service Provider information <em>saml.lss</em> to your account "Manage Metadata -> Add new Service Provider"</li>
     </ol> 
     
     

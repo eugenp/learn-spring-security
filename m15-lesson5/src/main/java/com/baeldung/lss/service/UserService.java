@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.persistence.model.User;
 import com.baeldung.lss.validation.EmailExistsException;
-import com.baeldung.lss.web.model.User;
 
 @Service
 @Transactional

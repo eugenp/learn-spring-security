@@ -8,12 +8,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan("com.baeldung.lss")
-@EnableJpaRepositories("com.baeldung.lss")
-@EntityScan("com.baeldung.lss.web.model")
+@EnableJpaRepositories("com.baeldung.lss.persistence")
+@EntityScan("com.baeldung.lss.persistence.model")
 public class LssApp5 {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(new Class[] { LssApp5.class, LssSecurityConfig.class, LssWebMvcConfiguration.class }, args);
+        SpringApplication.run(new Class[] { LssApp5.class, 
+                SecurityConfig.class, 
+                WebMvcConfig.class }, args);
     }
 
 }
