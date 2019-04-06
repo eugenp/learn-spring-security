@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.access.method.MapBasedMethodSecurityMetadataSource;
@@ -21,6 +22,7 @@ import com.baeldung.lss.security.MyUserDetailsService;
 
 @EnableWebSecurity
 @ComponentScan({ "org.baeldung.lss.security" })
+@Configuration
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
