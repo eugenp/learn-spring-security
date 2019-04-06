@@ -37,32 +37,8 @@ Module 16 - Lesson Start </description>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- marshalling -->
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
-        <!-- common utilities -->
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
         <!-- logging -->
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -77,35 +53,6 @@ Module 16 - Lesson Start </description>
         </dependency>
 
         <!-- test scoped -->
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -141,18 +88,8 @@ Module 16 - Lesson Start </description>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
 
-        <!-- commons and utils -->
-        <guava.version>21.0</guava.version>
-
-        <!-- persistence -->
-        <validation-api.version>1.1.0.Final</validation-api.version>
-
-        <rest-assured.version>2.9.0</rest-assured.version>
-
         <!-- maven plugins -->
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
 
     </properties>
 
