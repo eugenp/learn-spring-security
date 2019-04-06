@@ -1,5 +1,7 @@
 package com.baeldung.lss.web.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -21,8 +23,8 @@ public class OrganizationController {
     @RequestMapping(method = RequestMethod.GET, value = "/organizations/{id}")
     @ResponseBody
     public Organization findOrgById(@PathVariable final long id) {
-        return organizationRepository.findOne(id);
-    }
+        return organizationRepository.findById(id).orElse(null);
+   	}
 
     //
     //
