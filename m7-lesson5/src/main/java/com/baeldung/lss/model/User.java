@@ -8,8 +8,8 @@ import javax.persistence.Transient;
 
 import com.baeldung.lss.validation.PasswordMatches;
 import com.baeldung.lss.validation.ValidPassword;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @PasswordMatches

@@ -1,5 +1,7 @@
 package com.baeldung.lss.web.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +61,7 @@ class UserController {
 
     @RequestMapping(value = "delete/{id}")
     public ModelAndView delete(@PathVariable("id") final Long id) {
-        this.userRepository.delete(id);
+    	this.userRepository.findById(id).ifPresent(user -> this.userRepository.delete(user));
         return new ModelAndView("redirect:/");
     }
 
