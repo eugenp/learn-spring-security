@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -37,7 +39,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // @formatter:off
         clients.inMemory()
         .withClient("live-test")
-        .secret("bGl2ZS10ZXN0")                 
+        .secret(passwordEncoder().encode("bGl2ZS10ZXN0"))                 
         .authorizedGrantTypes("password")
         .scopes("um-webapp")
         //.autoApprove("um-webapp")
@@ -53,4 +55,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
     }// @formatter:on
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+    	return new BCryptPasswordEncoder();
+    } 
+    
 }

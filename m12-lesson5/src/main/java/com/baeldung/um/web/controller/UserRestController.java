@@ -56,7 +56,7 @@ class UserRestController {
     @RequestMapping(value = "delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") final Long id) {
-        userRepository.delete(id);
+    	this.userRepository.findById(id).ifPresent(user -> this.userRepository.delete(user));
     }
 
 }

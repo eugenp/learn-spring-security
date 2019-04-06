@@ -13,7 +13,7 @@ import com.jayway.restassured.response.Response;
 
 public class AuthorizationLiveTest {
 
-    private String appURL = "http://localhost:8082/um-webapp";
+    private String appURL = "http://localhost:8081/um-webapp";
 
     private Response obtainAccessToken(String clientId, String username, String password) {
         final Map<String, String> params = new HashMap<String, String>();

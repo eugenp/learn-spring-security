@@ -1,10 +1,10 @@
 package com.baeldung.um.spring;
 
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebMvc
-public class UmWebMvcConfiguration extends WebMvcConfigurerAdapter {
+public class UmWebMvcConfiguration implements WebMvcConfigurer {
 
     //
 
