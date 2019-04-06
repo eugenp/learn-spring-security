@@ -25,7 +25,7 @@ public class Oauth2ClientLiveTest {
     @Test
     public void givenAuthorizationCodeGrant_whenLoginUsingOauth_thenSuccess() throws UnsupportedEncodingException  {
         // authorization server login
-        Response response = RestAssured.given().formParams("username", "john@test.com", "password", "123").post(authServerLoginUri);
+        Response response = RestAssured.given().formParams("username", "user", "password", "pass").post(authServerLoginUri);
         final String authServerSessionId = response.getCookie("JSESSIONID");
         
        

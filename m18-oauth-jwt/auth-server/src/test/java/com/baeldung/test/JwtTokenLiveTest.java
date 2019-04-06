@@ -25,8 +25,8 @@ public class JwtTokenLiveTest {
     
     @Test
     public void whenObtainJwtAccessToken_thenSuccess() throws JsonParseException, JsonMappingException, IOException {
-        String username = "john@test.com";
-        String password = "123";
+        String username = "user";
+        String password = "pass";
         String accessToken = obtainAccessToken(username,password);
         assertNotNull(accessToken);
         Jwt jwt = JwtHelper.decode(accessToken);

@@ -33,7 +33,7 @@ public class ResourceServerLiveTest {
     }
     
     private String obtainAccessToken() {
-        Response response = RestAssured.given().formParams("username", "john@test.com", "password", "123").post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
+        Response response = RestAssured.given().formParams("username", "user", "password", "pass").post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
         final String cookieValue = response.getCookie("JSESSIONID");
         RestAssured.given().cookie("JSESSIONID", cookieValue).get(authorizeUrl); 
         response = RestAssured.given().cookie("JSESSIONID", cookieValue).post(authorizeUrl);

@@ -28,8 +28,8 @@ public class RefreshTokenLiveTest {
 
     @Test
     public void givenRefreshToken_whenObtainAccessToken_thenSuccess() throws JsonParseException, JsonMappingException, IOException {
-        String username = "john@test.com";
-        String password = "123";
+        String username = "user";
+        String password = "pass";
         OAuth2AccessToken accessToken = obtainAccessTokenUsingAuthCode(username,password);
         assertNotNull(accessToken.getRefreshToken());
         

@@ -26,7 +26,7 @@ public class AuthorizationCodeLiveTest {
 
     @Test
     public void givenAuthorizationCodeGrant_whenObtainAccessToken_thenSuccess() {
-        Response response = RestAssured.given().formParams("username", "john@test.com", "password", "123").post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
+        Response response = RestAssured.given().formParams("username", "user", "password", "pass").post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
         String cookieValue = response.getCookie("JSESSIONID");
         String code = obtainAuthorizationCode(cookieValue);
         String accessToken = obtainAccessToken(code);
