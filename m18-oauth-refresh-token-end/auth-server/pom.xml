@@ -6,7 +6,7 @@
  - Authorization Server</description>
 
 	<groupId>com.baeldung.lss</groupId>
-	<artifactId>lss-refresh-token-lesson--auth-server</artifactId>
+	<artifactId>lss-refresh-token-lesson-end--auth-server</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
