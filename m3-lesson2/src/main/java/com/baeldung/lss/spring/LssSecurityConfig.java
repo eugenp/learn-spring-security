@@ -55,8 +55,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         .key("lssAppKey")
         //.useSecureCookie(true)
         .rememberMeCookieName("sticky-cookie")
-        .rememberMeParameter("remember")
-
+        .rememberMeParameter("remember")        
+        
         .and()
         .logout().permitAll().logoutUrl("/logout")
 
