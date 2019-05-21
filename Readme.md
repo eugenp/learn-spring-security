@@ -8,4 +8,4 @@ If you're not a student, you can get access to the course here: http://bit.ly/gi
  
  ## Relevant articles:
 
-- [Validating Input With Finite Automata in Java](http://www.baeldung.com/java-finite-automata)
+- [Spring Security – Run-As Authentication](https://www.baeldung.com/spring-security-run-as-auth)
