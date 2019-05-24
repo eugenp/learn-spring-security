@@ -6,3 +6,6 @@ If you're already a student of the course - you can start exploring this through
 If you're not a student, you can get access to the course here: http://bit.ly/github-lss <br/>
  <br/> <br/>
 
+## Relevant articles:
+
+- [Spring Security – Run-As Authentication](https://www.baeldung.com/spring-security-run-as-auth)
