@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <description>The &quot;Learn Spring Security&quot; Course
+Module  13 - Lesson 4</description>
+    <name>learn-spring-security-m13-l4</name>
+
+    <groupId>com.baeldung.m13</groupId>
+    <artifactId>learn-spring-security-m13-l4</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>m13-lesson4-client</module>
+        <module>m13-lesson4-server</module>
+    </modules>
+
+</project>

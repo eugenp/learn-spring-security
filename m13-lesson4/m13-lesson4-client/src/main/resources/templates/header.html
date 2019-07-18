@@ -1,0 +1,74 @@
+<div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" th:href="@{/}">Module13 Lesson4 Client</a>
+    </div>
+    
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+<oauth
+  site="http://localhost:8081/um-webapp"
+  client-id="lssClient"
+  redirect-uri="http://localhost:8082/um-webapp-client"
+  scope="read write"
+  template="oauthTemp">
+</oauth>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.9/ngStorage.min.js"></script>
+
+
+<script th:src="@{/resources/oauth-ng.js}"></script>
+<script>
+/*<![CDATA[*/
+var app = angular.module('myApp', ["ngResource","ngRoute","oauth"]);
+app.config(function($locationProvider) {
+  $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    }).hashPrefix('!');
+});
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push(function ($q,$rootScope) {
+        return {
+            'responseError': function (responseError) {
+                $rootScope.message = responseError.data.error_description;
+                console.log("error occurred");
+                console.log(responseError);
+                console.log($rootScope.message);
+                return $q.reject(responseError);
+            }
+        };
+    });
+}]);
+app.controller('mainCtrl', function($scope,$resource,$http,$rootScope) {
+    
+    $scope.$on('oauth:login', function(event, token) {
+        $http.defaults.headers.common.Authorization= 'Bearer ' + token.access_token;
+        console.log('Authorized third party app with token', token.access_token);
+    });
+    
+    $scope.$on('oauth:logout', function(event) {
+        $http.defaults.headers.common.Authorization= '';    	
+    	console.log('The user has signed out');
+    });
+    
+    $scope.users = {};
+    
+    $scope.getUsers = function(){
+        $http.get("http://localhost:8081/um-webapp/api/users")
+        .then(function(response) {
+            console.log(response);
+            $scope.users = response.data;
+        });
+    }
+    
+});
+/*]]>*/
+</script>
+</div>
