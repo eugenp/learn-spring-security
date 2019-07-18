@@ -24,10 +24,10 @@
             <form:input path="email" value="" />
             
             <label for="password">Password</label>
-            <form:input path="password" value="" />
+            <form:input type="password" path="password" value="" />
             
             <label for="passwordConfirmation">Password Confirmation</label>
-            <form:input path="passwordConfirmation" value="" />
+            <form:input type="password" path="passwordConfirmation" value="" />
             
             <div class="form-actions">
                 <input type="submit" value="Save" />
