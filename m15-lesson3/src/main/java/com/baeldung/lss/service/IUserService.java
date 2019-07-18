@@ -7,4 +7,6 @@ public interface IUserService {
 
     User registerNewUser(User user) throws EmailExistsException;
 
+    User updateExistingUser(User user) throws EmailExistsException;
+
 }
