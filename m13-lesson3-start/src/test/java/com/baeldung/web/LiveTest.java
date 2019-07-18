@@ -1,4 +1,4 @@
-package org.baeldung.web;
+package com.baeldung.web;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

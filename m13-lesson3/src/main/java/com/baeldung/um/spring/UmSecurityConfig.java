@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@ComponentScan({ "org.baeldung.lss.security" })
+@ComponentScan({ "com.baeldung.lss.security" })
 @EnableWebSecurity
 public class UmSecurityConfig extends WebSecurityConfigurerAdapter {
 

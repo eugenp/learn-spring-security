@@ -1,4 +1,4 @@
-package org.baeldung.web;
+package com.baeldung.web;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.junit.Assert.assertEquals;
