@@ -56,7 +56,13 @@ class UserController {
             return new ModelAndView("tl/form", "formErrors", result.getAllErrors());
         }
         try {
-            userService.registerNewUser(user);
+            if (user.getId() == null) {
+                userService.registerNewUser(user);
+                redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
+            } else {
+                userService.updateExistingUser(user);
+                redirect.addFlashAttribute("globalMessage", "Successfully updated the user");
+            }
         } catch (EmailExistsException e) {
             result.addError(new FieldError("user", "email", e.getMessage()));
             return new ModelAndView("tl/form", "user", user);
