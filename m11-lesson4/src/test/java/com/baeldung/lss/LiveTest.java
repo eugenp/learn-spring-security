@@ -1,7 +1,7 @@
-package org.baeldung.lss;
+package com.baeldung.lss;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -19,14 +19,14 @@ public class LiveTest {
     public void givenOwnerUser_whenGetPossession_thenOK() {
         final Response response = givenAuth("eugen@email.com", "pass").get(APP_ROOT + "/possessions/2");
         assertEquals(200, response.getStatusCode());
-        assertTrue(response.asString().contains("id"));
+        assertThat(response.body().jsonPath().getLong("id")).isEqualTo(2L);
     }
 
     @Test
     public void givenUserWithReadPermission_whenGetPossession_thenOK() {
         final Response response = givenAuth("eric@email.com", "123").get(APP_ROOT + "/possessions/2");
         assertEquals(200, response.getStatusCode());
-        assertTrue(response.asString().contains("id"));
+        assertThat(response.body().jsonPath().getLong("id")).isEqualTo(2L);
     }
 
     @Test

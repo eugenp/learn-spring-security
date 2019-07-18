@@ -43,8 +43,8 @@
 -- MySQL Schema
 USE lss114;
 
-DROP TABLE IF EXISTS Possession;
-DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS possession;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS acl_entry;
 DROP TABLE IF EXISTS acl_object_identity; 
 DROP TABLE IF EXISTS acl_class;   
@@ -93,16 +93,16 @@ CREATE TABLE acl_entry (
 
 --
 
-CREATE TABLE User (
+CREATE TABLE users (
   id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   email varchar(255) DEFAULT NULL,
   password varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE Possession (
+CREATE TABLE possession (
   id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name varchar(255) DEFAULT NULL,
   owner_id bigint(20) NOT NULL,
-  CONSTRAINT fk_possession_owner FOREIGN KEY (owner_id) REFERENCES User (id)
+  CONSTRAINT fk_possession_owner FOREIGN KEY (owner_id) REFERENCES users (id)
 ) ENGINE=InnoDB;
 
