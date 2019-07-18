@@ -1,7 +1,5 @@
 package com.baeldung.lss.web.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.service.IUserService;
 import com.baeldung.lss.validation.EmailExistsException;
-import com.baeldung.lss.model.User;
 
 @Controller
 @RequestMapping("/user")
@@ -49,18 +47,24 @@ class UserController {
             return new ModelAndView("tl/form", "formErrors", result.getAllErrors());
         }
         try {
-            userService.registerNewUser(user);
+            if (user.getId() == null) {
+                userService.registerNewUser(user);
+                redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
+            } else {
+                userService.updateExistingUser(user);
+                redirect.addFlashAttribute("globalMessage", "Successfully updated the user");
+            }
         } catch (EmailExistsException e) {
             result.addError(new FieldError("user", "email", e.getMessage()));
             return new ModelAndView("tl/form", "user", user);
         }
-        redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
         return new ModelAndView("redirect:/user/{user.id}", "user.id", user.getId());
     }
 
     @RequestMapping(value = "delete/{id}")
     public ModelAndView delete(@PathVariable("id") final Long id) {
-    	this.userRepository.findById(id).ifPresent(user -> this.userRepository.delete(user));
+        this.userRepository.findById(id)
+            .ifPresent(user -> this.userRepository.delete(user));
         return new ModelAndView("redirect:/");
     }
 

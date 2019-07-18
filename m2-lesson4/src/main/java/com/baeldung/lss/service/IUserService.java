@@ -10,6 +10,8 @@ public interface IUserService {
 
     User registerNewUser(User user) throws EmailExistsException;
 
+    User updateExistingUser(User user) throws EmailExistsException;
+
     void createVerificationTokenForUser(User user, String token);
 
     VerificationToken getVerificationToken(String token);

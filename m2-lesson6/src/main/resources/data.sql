@@ -5,6 +5,6 @@ insert into security_question_definition (id, text) values (4, 'When you were yo
 insert into security_question_definition (id, text) values (5, 'Where were you New Year''s 2000?');
 insert into security_question_definition (id, text) values (6, 'Who was your childhood hero?');
 
--- Test User
-insert into user (id, email, password, enabled, created) values (1, 'test@email.com', 'pass', true, '2008-08-08 00:00:00');
+-- test@email.com/pass
+insert into user (id, email, password, enabled, created) values (1, 'test@email.com', '$2a$04$kqRvgmJBlWZQQ2c9NT9IH.ZhxFY07Y2xE73vmLHxBq2hNTvGvUc5m', true, '2008-08-08 00:00:00');
 insert into security_question(id, user_id, security_question_definition_id, answer) values (1, 1, 4, 'Spring Security Expert');
