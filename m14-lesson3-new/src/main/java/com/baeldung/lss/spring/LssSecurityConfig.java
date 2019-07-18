@@ -20,7 +20,7 @@ import com.baeldung.lss.web.model.User;
 import com.twilio.Twilio;
 
 @Configuration
-@ComponentScan({ "org.baeldung.lss.security" })
+@ComponentScan({ "com.baeldung.lss.security" })
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 

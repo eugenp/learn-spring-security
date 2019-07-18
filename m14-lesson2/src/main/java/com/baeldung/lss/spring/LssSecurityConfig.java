@@ -12,7 +12,7 @@ import com.baeldung.lss.security.CustomAuthenticationProvider;
 import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
 
 @Configuration
-@ComponentScan({ "org.baeldung.lss.security" })
+@ComponentScan({ "com.baeldung.lss.security" })
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 

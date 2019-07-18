@@ -21,7 +21,7 @@ import com.baeldung.lss.web.model.User;
 import com.twilio.sdk.TwilioRestClient;
 
 @Configuration
-@ComponentScan({ "org.baeldung.lss.security" })
+@ComponentScan({ "com.baeldung.lss.security" })
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 

@@ -19,7 +19,7 @@ import com.baeldung.lss.web.model.User;
 import com.yubico.client.v2.YubicoClient;
 
 @Configuration
-@ComponentScan({ "org.baeldung.lss.security" })
+@ComponentScan({ "com.baeldung.lss.security" })
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
