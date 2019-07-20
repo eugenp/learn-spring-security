@@ -61,6 +61,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         .formLogin().
             loginPage("/login").permitAll().
             loginProcessingUrl("/doLogin")
+            .defaultSuccessUrl("/user")
             .authenticationDetailsSource(authenticationDetailsSource)
         .and()
         .logout().permitAll().logoutUrl("/logout")
