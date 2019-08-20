@@ -11,9 +11,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -86,7 +83,10 @@ class RegistrationController {
 
         final User user = verificationToken.getUser();
         final Calendar cal = Calendar.getInstance();
-        if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+        if ((verificationToken.getExpiryDate()
+            .getTime()
+            - cal.getTime()
+                .getTime()) <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Your registration token has expired. Please register again.");
             return new ModelAndView("redirect:/login");
         }
@@ -104,7 +104,8 @@ class RegistrationController {
     public ModelAndView resetPassword(final HttpServletRequest request, @RequestParam("email") final String userEmail, final RedirectAttributes redirectAttributes) {
         final User user = userService.findUserByEmail(userEmail);
         if (user != null) {
-            final String token = UUID.randomUUID().toString();
+            final String token = UUID.randomUUID()
+                .toString();
             userService.createPasswordResetTokenForUser(user, token);
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             final SimpleMailMessage email = constructResetTokenEmail(appUrl, token, user);
@@ -129,26 +130,38 @@ class RegistrationController {
         }
 
         final Calendar cal = Calendar.getInstance();
-        if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+        if ((passToken.getExpiryDate()
+            .getTime()
+            - cal.getTime()
+                .getTime()) <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Your password reset token has expired");
             return new ModelAndView("redirect:/login");
         }
 
-        final Authentication auth = new UsernamePasswordAuthenticationToken(user, null, userDetailsService.loadUserByUsername(user.getEmail()).getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
-        return new ModelAndView("resetPassword");
+        final ModelAndView view = new ModelAndView("resetPassword");
+        view.addObject("token", token);
+        return view;
     }
 
     @RequestMapping(value = "/user/savePassword", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("passwordConfirmation") final String passwordConfirmation, final RedirectAttributes redirectAttributes) {
+    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("passwordConfirmation") final String passwordConfirmation, @RequestParam("token") final String token, final RedirectAttributes redirectAttributes) {
+
         if (!password.equals(passwordConfirmation)) {
             return new ModelAndView("resetPassword", ImmutableMap.of("errorMessage", "Passwords do not match"));
         }
-        final User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        userService.changeUserPassword(user, password);
-        redirectAttributes.addFlashAttribute("message", "Password reset successfully");
+        final PasswordResetToken p = userService.getPasswordResetToken(token);
+        if (p == null) {
+            redirectAttributes.addFlashAttribute("message", "Invalid token");
+        } else {
+            final User user = p.getUser();
+            if (user == null) {
+                redirectAttributes.addFlashAttribute("message", "Unknown user");
+            } else {
+                userService.changeUserPassword(user, password);
+                redirectAttributes.addFlashAttribute("message", "Password reset successfully");
+            }
+        }
         return new ModelAndView("redirect:/login");
     }
 

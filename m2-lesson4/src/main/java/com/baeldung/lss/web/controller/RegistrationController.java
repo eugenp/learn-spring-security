@@ -63,7 +63,10 @@ class RegistrationController {
 
         final User user = verificationToken.getUser();
         final Calendar cal = Calendar.getInstance();
-        if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+        if ((verificationToken.getExpiryDate()
+            .getTime()
+            - cal.getTime()
+                .getTime()) <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Your registration token has expired. Please register again.");
             return new ModelAndView("redirect:/login");
         }

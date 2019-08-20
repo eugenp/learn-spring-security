@@ -23,30 +23,30 @@ import com.baeldung.lss.spring.LssApp2;
 @SpringBootTest(classes = LssApp2.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class Lss2IntegrationTest {
 
-	private MockMvc mockMvc;
-	
-	@Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
     private WebApplicationContext context;
 
     @Autowired
     private Filter springSecurityFilterChain;
-	
-	@Before
+
+    @Before
     public void setup() {
-		mockMvc = MockMvcBuilders
-                .webAppContextSetup(context)
-                .addFilters(springSecurityFilterChain)
-                .build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(context)
+            .addFilters(springSecurityFilterChain)
+            .build();
     }
-	
+
     @Test
     public void whenLoadApplication_thenSuccess() {
 
     }
-    
+
     @Test
-    public void testUserLoginSuccess() throws Exception  {
-		ResultActions resultActions = mockMvc.perform(formLogin("/doLogin").user("user").password("pass"));
-		resultActions.andExpect(authenticated());
+    public void testUserLoginSuccess() throws Exception {
+        ResultActions resultActions = mockMvc.perform(formLogin("/doLogin").user("user")
+            .password("pass"));
+        resultActions.andExpect(authenticated());
     }
 }

@@ -13,20 +13,20 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.baeldung.lss")
 @EntityScan("com.baeldung.lss.web.model")
 public class LssApp1 extends SpringBootServletInitializer {
-	
-	private final static Class<?>[] CONFIGS = { // @formatter:off
+
+    private final static Class<?>[] CONFIGS = { // @formatter:off
 			LssSecurityConfig.class,
 			LssWebMvcConfiguration.class,           
 			LssApp1.class            
     }; // // @formatter:on
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(CONFIGS);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(CONFIGS);
+    }
 
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(CONFIGS,args);
-	}
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(CONFIGS, args);
+    }
 
 }

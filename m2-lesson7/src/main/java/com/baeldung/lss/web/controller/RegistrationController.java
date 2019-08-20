@@ -73,15 +73,15 @@ class RegistrationController {
     }
 
     @RequestMapping(value = "user/register")
-    public ModelAndView registerUser(@Valid final User user, final @RequestParam Long questionId, @RequestParam final String answer, final BindingResult result, final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    public ModelAndView registerUser(@Valid final User user, final BindingResult result, final @RequestParam Long questionId, @RequestParam final String answer, final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return new ModelAndView("registrationPage", "user", user);
         }
         try {
             final User registered = userService.registerNewUser(user);
 
-            securityQuestionDefinitionRepository.findById(questionId).ifPresent(questionDefinition -> securityQuestionRepository.
-					save(new SecurityQuestion(user, questionDefinition, answer)));
+            securityQuestionDefinitionRepository.findById(questionId)
+                .ifPresent(questionDefinition -> securityQuestionRepository.save(new SecurityQuestion(user, questionDefinition, answer)));
 
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
@@ -103,7 +103,10 @@ class RegistrationController {
 
         final User user = verificationToken.getUser();
         final Calendar cal = Calendar.getInstance();
-        if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+        if ((verificationToken.getExpiryDate()
+            .getTime()
+            - cal.getTime()
+                .getTime()) <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Your registration token has expired. Please register again.");
             return new ModelAndView("redirect:/login");
         }
@@ -121,7 +124,8 @@ class RegistrationController {
     public ModelAndView resetPassword(final HttpServletRequest request, @RequestParam("email") final String userEmail, final RedirectAttributes redirectAttributes) {
         final User user = userService.findUserByEmail(userEmail);
         if (user != null) {
-            final String token = UUID.randomUUID().toString();
+            final String token = UUID.randomUUID()
+                .toString();
             userService.createPasswordResetTokenForUser(user, token);
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             final SimpleMailMessage email = constructResetTokenEmail(appUrl, token, user);
@@ -146,36 +150,47 @@ class RegistrationController {
         }
 
         final Calendar cal = Calendar.getInstance();
-        if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+        if ((passToken.getExpiryDate()
+            .getTime()
+            - cal.getTime()
+                .getTime()) <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Your password reset token has expired");
             return new ModelAndView("redirect:/login");
         }
 
-        final Authentication auth = new UsernamePasswordAuthenticationToken(user, null, userDetailsService.loadUserByUsername(user.getEmail()).getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
-        return new ModelAndView("resetPassword", ImmutableMap.of("questions", securityQuestionDefinitionRepository.findAll()));
+        return new ModelAndView("resetPassword", ImmutableMap.of("questions", securityQuestionDefinitionRepository.findAll(), "token", token));
     }
 
     @RequestMapping(value = "/user/savePassword", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("passwordConfirmation") final String passwordConfirmation, @RequestParam final Long questionId, @RequestParam final String answer,
-            final RedirectAttributes redirectAttributes) {
+    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("passwordConfirmation") final String passwordConfirmation, @RequestParam("token") final String token, @RequestParam final Long questionId,
+        @RequestParam final String answer, final RedirectAttributes redirectAttributes) {
         if (!password.equals(passwordConfirmation)) {
             final Map<String, Object> model = new HashMap<>();
             model.put("errorMessage", "Passwords do not match");
             model.put("questions", securityQuestionDefinitionRepository.findAll());
             return new ModelAndView("resetPassword", model);
         }
-        final User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (securityQuestionRepository.findByQuestionDefinitionIdAndUserIdAndAnswer(questionId, user.getId(), answer) == null) {
-            final Map<String, Object> model = new HashMap<>();
-            model.put("errorMessage", "Answer to security question is incorrect");
-            model.put("questions", securityQuestionDefinitionRepository.findAll());
-            return new ModelAndView("resetPassword", model);
+
+        final PasswordResetToken p = userService.getPasswordResetToken(token);
+        if (p == null) {
+            redirectAttributes.addFlashAttribute("message", "Invalid token");
+        } else {
+            final User user = p.getUser();
+            if (user == null) {
+                redirectAttributes.addFlashAttribute("message", "Unknown user");
+            } else {
+                if (securityQuestionRepository.findByQuestionDefinitionIdAndUserIdAndAnswer(questionId, user.getId(), answer) == null) {
+                    final Map<String, Object> model = new HashMap<>();
+                    model.put("errorMessage", "Answer to security question is incorrect");
+                    model.put("questions", securityQuestionDefinitionRepository.findAll());
+                    return new ModelAndView("resetPassword", model);
+                }
+                userService.changeUserPassword(user, password);
+                redirectAttributes.addFlashAttribute("message", "Password reset successfully");
+            }
         }
-        userService.changeUserPassword(user, password);
-        redirectAttributes.addFlashAttribute("message", "Password reset successfully");
+
         return new ModelAndView("redirect:/login");
     }
 
