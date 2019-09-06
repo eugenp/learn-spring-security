@@ -15,7 +15,6 @@ import com.baeldung.lss.validation.EmailExistsException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
-
 public class UserServiceIntegrationTest extends AbstractBaseIntegrationTest {
 
     @Override
@@ -54,7 +53,6 @@ public class UserServiceIntegrationTest extends AbstractBaseIntegrationTest {
         registerNewUser(existingUser.getEmail());
     }
 
-
     // findUserByEmail
 
     @Test
@@ -89,7 +87,8 @@ public class UserServiceIntegrationTest extends AbstractBaseIntegrationTest {
 
         final PasswordResetToken retrievedPasswordResetToken = userService.getPasswordResetToken(token);
         assertThat(retrievedPasswordResetToken.getToken(), equalTo(token));
-        assertThat(retrievedPasswordResetToken.getUser().getId(), equalTo(existingUser.getId()));
+        assertThat(retrievedPasswordResetToken.getUser()
+            .getId(), equalTo(existingUser.getId()));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -107,7 +106,8 @@ public class UserServiceIntegrationTest extends AbstractBaseIntegrationTest {
         final PasswordResetToken passwordResetToken = userService.getPasswordResetToken(token);
         assertThat(passwordResetToken.getToken(), equalTo(token));
         assertThat(passwordResetToken.getExpiryDate(), notNullValue());
-        assertThat(passwordResetToken.getUser().getId(), equalTo(existingUser.getId()));
+        assertThat(passwordResetToken.getUser()
+            .getId(), equalTo(existingUser.getId()));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -178,7 +178,8 @@ public class UserServiceIntegrationTest extends AbstractBaseIntegrationTest {
         assertThat(retrievedToken, notNullValue());
         assertThat(retrievedToken.getToken(), equalTo(token));
         assertThat(retrievedToken.getExpiryDate(), notNullValue());
-        assertThat(retrievedToken.getUser().getId(), equalTo(existingUser.getId()));
+        assertThat(retrievedToken.getUser()
+            .getId(), equalTo(existingUser.getId()));
     }
 
     @Test(expected = IllegalArgumentException.class)

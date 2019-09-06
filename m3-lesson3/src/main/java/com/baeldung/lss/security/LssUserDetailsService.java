@@ -22,7 +22,7 @@ public class LssUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-   
+
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
         final User user = userRepository.findByEmail(email);
         if (user == null) {

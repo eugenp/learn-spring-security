@@ -25,7 +25,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@SpringBootTest(classes= {LssApp5.class})
+@SpringBootTest(classes = { LssApp5.class })
 @TestPropertySource(locations = "classpath:test.properties")
 public abstract class AbstractBaseIntegrationTest {
 

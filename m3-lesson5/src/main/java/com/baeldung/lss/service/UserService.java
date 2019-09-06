@@ -103,13 +103,13 @@ class UserService implements IUserService {
     // Private Helper Methods
 
     private User getGetUserById(final Long id) {
-        return userRepository.findById(id).
-        		orElseThrow(() -> new IllegalArgumentException(String.format("user with id=\"%s\" does not exist", id)));
+        return userRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException(String.format("user with id=\"%s\" does not exist", id)));
     }
 
     private User getGetUserByEmail(final String email) {
         return Optional.ofNullable(userRepository.findByEmail(email))
-                .orElseThrow(() -> new IllegalArgumentException(String.format("user with email=\"%s\" does not exist", email)));
+            .orElseThrow(() -> new IllegalArgumentException(String.format("user with email=\"%s\" does not exist", email)));
     }
 
     private boolean emailExist(final String email) {

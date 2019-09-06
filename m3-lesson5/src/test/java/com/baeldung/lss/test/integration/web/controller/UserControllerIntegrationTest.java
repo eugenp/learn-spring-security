@@ -34,9 +34,9 @@ public class UserControllerIntegrationTest extends AbstractBaseControllerIntegra
     @Test
     public void givenNoUsersExist_whenListingAllUsers_thenEmptyListIsShows() throws Exception {
         mockMvc.perform(get("/user"))
-                .andExpect(status().isOk())
-                .andExpect(view().name(equalTo("tl/list")))
-                .andExpect(model().attribute("users", empty()));
+            .andExpect(status().isOk())
+            .andExpect(view().name(equalTo("tl/list")))
+            .andExpect(model().attribute("users", empty()));
     }
 
     @Test
@@ -46,15 +46,25 @@ public class UserControllerIntegrationTest extends AbstractBaseControllerIntegra
         registerNewUser(email2);
 
         final ModelAndView modelAndView = mockMvc.perform(get("/user"))
-                .andExpect(status().isOk())
-                .andExpect(view().name(equalTo("tl/list")))
-                .andReturn().getModelAndView();
+            .andExpect(status().isOk())
+            .andExpect(view().name(equalTo("tl/list")))
+            .andReturn()
+            .getModelAndView();
 
-        final List<User> users = (List<User>) modelAndView.getModel().get("users");
+        final List<User> users = (List<User>) modelAndView.getModel()
+            .get("users");
         assertThat(users, hasSize(2));
-        final User persistedUser1 = users.stream().filter(user -> user.getEmail().equals(VALUE_DEFAULT_USER_EMAIL)).findFirst().get();
+        final User persistedUser1 = users.stream()
+            .filter(user -> user.getEmail()
+                .equals(VALUE_DEFAULT_USER_EMAIL))
+            .findFirst()
+            .get();
         checkUser(persistedUser1, VALUE_DEFAULT_USER_EMAIL);
-        final User persistedUser2 = users.stream().filter(user -> user.getEmail().equals(email2)).findFirst().get();
+        final User persistedUser2 = users.stream()
+            .filter(user -> user.getEmail()
+                .equals(email2))
+            .findFirst()
+            .get();
         checkUser(persistedUser2, email2);
     }
 
@@ -66,31 +76,32 @@ public class UserControllerIntegrationTest extends AbstractBaseControllerIntegra
         registerNewUser("2" + VALUE_DEFAULT_USER_EMAIL);
 
         final ModelAndView modelAndView = mockMvc.perform(get("/user/" + user.getId()))
-                .andExpect(status().isOk())
-                .andExpect(view().name(equalTo("tl/view")))
-                .andReturn().getModelAndView();
+            .andExpect(status().isOk())
+            .andExpect(view().name(equalTo("tl/view")))
+            .andReturn()
+            .getModelAndView();
 
-        final User persistedUser = (User) modelAndView.getModel().get("user");
+        final User persistedUser = (User) modelAndView.getModel()
+            .get("user");
         checkUser(persistedUser, VALUE_DEFAULT_USER_EMAIL);
     }
 
     @Test
     public void givenUsersNotExist_whenViewingUser_then404() throws EmailExistsException, Exception {
         mockMvc.perform(get("/user/" + RandomStringUtils.random(5)))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
 
     // create: POST /user
 
     @Test
     public void whenCreatingUser_thenUserIsCreated() throws Exception {
-        mockMvc.perform(post("/user")
-                .param("email", VALUE_DEFAULT_USER_EMAIL)
-                .param("password", VALUE_DEFAULT_USER_PASSWORD)
-                .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
-                .andExpect(status().isFound())
-                .andExpect(view().name(startsWith("redirect:/user/")))
-                .andExpect(model().attributeExists("user.id"));
+        mockMvc.perform(post("/user").param("email", VALUE_DEFAULT_USER_EMAIL)
+            .param("password", VALUE_DEFAULT_USER_PASSWORD)
+            .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
+            .andExpect(status().isFound())
+            .andExpect(view().name(startsWith("redirect:/user/")))
+            .andExpect(model().attributeExists("user.id"));
 
         final User persistedUser = userService.findUserByEmail(VALUE_DEFAULT_USER_EMAIL);
         checkUser(persistedUser, VALUE_DEFAULT_USER_EMAIL);
@@ -98,63 +109,58 @@ public class UserControllerIntegrationTest extends AbstractBaseControllerIntegra
 
     @Test
     public void whenCreatingUserProvidingNoEmail_thenErrorIsShown() throws Exception {
-        mockMvc.perform(post("/user")
-                .param("password", VALUE_DEFAULT_USER_PASSWORD)
-                .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
-                .andExpect(status().isOk())
-                .andExpect(view().name(equalTo("tl/form")))
-                .andExpect(model().attributeExists("formErrors"));
+        mockMvc.perform(post("/user").param("password", VALUE_DEFAULT_USER_PASSWORD)
+            .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
+            .andExpect(status().isOk())
+            .andExpect(view().name(equalTo("tl/form")))
+            .andExpect(model().attributeExists("formErrors"));
 
         assertThat(userRepository.count(), equalTo(0L));
     }
 
     @Test
     public void whenCreatingUserProvidingNoPassword_thenErrorIsShown() throws Exception {
-        mockMvc.perform(post("/user")
-                .param("email", VALUE_DEFAULT_USER_EMAIL)
-                .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
-                .andExpect(status().isOk())
-                .andExpect(view().name(equalTo("tl/form")))
-                .andExpect(model().attributeExists("formErrors"));
+        mockMvc.perform(post("/user").param("email", VALUE_DEFAULT_USER_EMAIL)
+            .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
+            .andExpect(status().isOk())
+            .andExpect(view().name(equalTo("tl/form")))
+            .andExpect(model().attributeExists("formErrors"));
 
         assertThat(userRepository.count(), equalTo(0L));
     }
 
     @Test
     public void whenCreatingUserProvidingInvalidEmail_thenErrorIsShown() throws Exception {
-        mockMvc.perform(post("/user")
-                .param("email", "not a email")
-                .param("password", VALUE_DEFAULT_USER_PASSWORD)
-                .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
-                .andExpect(status().isOk())
-                .andExpect(view().name(equalTo("tl/form")))
-                .andExpect(model().attributeExists("formErrors"));
+        mockMvc.perform(post("/user").param("email", "not a email")
+            .param("password", VALUE_DEFAULT_USER_PASSWORD)
+            .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
+            .andExpect(status().isOk())
+            .andExpect(view().name(equalTo("tl/form")))
+            .andExpect(model().attributeExists("formErrors"));
 
         assertThat(userRepository.count(), equalTo(0L));
     }
 
     @Test
     public void whenCreatingUserProvidingInvalidPassword_thenErrorIsShown() throws Exception {
-        mockMvc.perform(post("/user")
-                .param("email", VALUE_DEFAULT_USER_EMAIL)
-                .param("password", "invalid password")
-                .param("passwordConfirmation", "invalid password"))
-                .andExpect(status().isOk())
-                .andExpect(view().name(equalTo("tl/form")))
-                .andExpect(model().attributeExists("formErrors"));
+        mockMvc.perform(post("/user").param("email", VALUE_DEFAULT_USER_EMAIL)
+            .param("password", "invalid password")
+            .param("passwordConfirmation", "invalid password"))
+            .andExpect(status().isOk())
+            .andExpect(view().name(equalTo("tl/form")))
+            .andExpect(model().attributeExists("formErrors"));
 
         assertThat(userRepository.count(), equalTo(0L));
     }
 
     @Test
     public void whenCreatingUserProvidingNotMatchingPasswords_thenErrorIsShown() throws Exception {
-        mockMvc.perform(post("/user")
-                .param("email", VALUE_DEFAULT_USER_EMAIL)
-                .param("password", VALUE_DEFAULT_USER_PASSWORD)
-                .param("passwordConfirmation", "not matching password"))
-                .andExpect(status().isOk())
-                .andExpect(view().name(equalTo("tl/form")))
-                .andExpect(model().attributeExists("formErrors"));
+        mockMvc.perform(post("/user").param("email", VALUE_DEFAULT_USER_EMAIL)
+            .param("password", VALUE_DEFAULT_USER_PASSWORD)
+            .param("passwordConfirmation", "not matching password"))
+            .andExpect(status().isOk())
+            .andExpect(view().name(equalTo("tl/form")))
+            .andExpect(model().attributeExists("formErrors"));
 
         assertThat(userRepository.count(), equalTo(0L));
     }
@@ -163,13 +169,12 @@ public class UserControllerIntegrationTest extends AbstractBaseControllerIntegra
     public void givenUserExists_whenCreatingUserWithEmailDuplicate_thenErrorIsShown() throws Exception, EmailExistsException {
         registerNewUser();
 
-        mockMvc.perform(post("/user")
-                .param("email", VALUE_DEFAULT_USER_EMAIL)
-                .param("password", VALUE_DEFAULT_USER_PASSWORD)
-                .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
-                .andExpect(status().isOk())
-                .andExpect(view().name(equalTo("tl/form")))
-                .andExpect(model().attributeHasFieldErrors("user", "email"));
+        mockMvc.perform(post("/user").param("email", VALUE_DEFAULT_USER_EMAIL)
+            .param("password", VALUE_DEFAULT_USER_PASSWORD)
+            .param("passwordConfirmation", VALUE_DEFAULT_USER_PASSWORD))
+            .andExpect(status().isOk())
+            .andExpect(view().name(equalTo("tl/form")))
+            .andExpect(model().attributeHasFieldErrors("user", "email"));
 
         assertThat(userRepository.count(), equalTo(1L));
     }
@@ -181,8 +186,8 @@ public class UserControllerIntegrationTest extends AbstractBaseControllerIntegra
         final User user = registerNewUser();
 
         mockMvc.perform(get("/user/delete/" + user.getId()))
-                .andExpect(status().isFound())
-                .andExpect(view().name(equalTo("redirect:/")));
+            .andExpect(status().isFound())
+            .andExpect(view().name(equalTo("redirect:/")));
 
         assertThat(userRepository.count(), equalTo(0L));
     }
@@ -190,7 +195,7 @@ public class UserControllerIntegrationTest extends AbstractBaseControllerIntegra
     @Test
     public void givenNoUsersExist_whenDeletingUser_then404() throws Exception {
         mockMvc.perform(get("/user/delete/" + RandomStringUtils.random(5)))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
 
     // Private Helper Methods

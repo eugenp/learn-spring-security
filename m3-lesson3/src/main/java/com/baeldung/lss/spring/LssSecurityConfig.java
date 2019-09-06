@@ -21,7 +21,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
-    
+
     @Autowired
     private DataSource dataSource;
 
@@ -67,7 +67,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         ;
     } // @formatter:on
-    
+
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();

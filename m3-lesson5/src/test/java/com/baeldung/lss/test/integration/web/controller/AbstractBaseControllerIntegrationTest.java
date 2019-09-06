@@ -1,6 +1,5 @@
 package com.baeldung.lss.test.integration.web.controller;
 
-
 import com.baeldung.lss.test.integration.AbstractBaseIntegrationTest;
 import com.baeldung.lss.web.controller.RegistrationController;
 import com.baeldung.lss.web.controller.UserController;
@@ -25,7 +24,8 @@ public abstract class AbstractBaseControllerIntegrationTest extends AbstractBase
     @Override
     public void setup() {
         super.setup();
-        mockMvc = MockMvcBuilders.standaloneSetup(userController, registrationController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(userController, registrationController)
+            .build();
     }
 
 }

@@ -18,7 +18,8 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
         if (user.getPassword() == null) {
             return false;
         }
-        return user.getPassword().equals(user.getPasswordConfirmation());
+        return user.getPassword()
+            .equals(user.getPasswordConfirmation());
     }
 
 }
