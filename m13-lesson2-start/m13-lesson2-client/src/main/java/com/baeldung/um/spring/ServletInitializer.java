@@ -36,7 +36,8 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
     void registerProxyFilter(ServletContext servletContext, String name) {
         final DelegatingFilterProxy filter = new DelegatingFilterProxy(name);
         filter.setContextAttribute("org.springframework.web.servlet.FrameworkServlet.CONTEXT.dispatcher");
-        servletContext.addFilter(name, filter).addMappingForUrlPatterns(null, false, "/*");
+        servletContext.addFilter(name, filter)
+            .addMappingForUrlPatterns(null, false, "/*");
     }
 
 }

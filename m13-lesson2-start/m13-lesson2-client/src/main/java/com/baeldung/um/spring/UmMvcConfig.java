@@ -19,7 +19,8 @@ public class UmMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("loginPage");
+        registry.addViewController("/")
+            .setViewName("loginPage");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
@@ -46,7 +47,7 @@ public class UmMvcConfig implements WebMvcConfigurer {
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
     }
-    
+
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();

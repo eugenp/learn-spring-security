@@ -31,16 +31,23 @@ public class AuthorizationCodeLiveTest {
         final String resourceUrl = "http://localhost:" + resourceServerport + "/um-webapp-resource-server/api/users";
 
         // user login
-        Response response = RestAssured.given().formParams("username", "john@test.com", "password", "123").post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
+        Response response = RestAssured.given()
+            .formParams("username", "john@test.com", "password", "123")
+            .post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
         final String cookieValue = response.getCookie("JSESSIONID");
 
         // get authorization code
-        RestAssured.given().cookie("JSESSIONID", cookieValue).get(authorizeUrl);
+        RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .get(authorizeUrl);
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_oauth_approval", "true");
         params.put("authorize", "Authorize");
         params.put("scope.read", "true");
-        response = RestAssured.given().cookie("JSESSIONID", cookieValue).formParams(params).post(authorizeUrl);
+        response = RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .formParams(params)
+            .post(authorizeUrl);
         assertEquals(HttpStatus.FOUND.value(), response.getStatusCode());
         final String location = response.getHeader(HttpHeaders.LOCATION);
         assertTrue(location.contains(redirectUrl));
@@ -55,14 +62,22 @@ public class AuthorizationCodeLiveTest {
         params.put("client_id", "lssClient");
         params.put("redirect_uri", redirectUrl);
 
-        response = RestAssured.given().auth().basic("lssClient", "lssSecret").formParams(params).post(tokenUrl);
+        response = RestAssured.given()
+            .auth()
+            .basic("lssClient", "lssSecret")
+            .formParams(params)
+            .post(tokenUrl);
         System.out.println(response.asString());
-        final String accessToken = response.jsonPath().getString("access_token");
+        final String accessToken = response.jsonPath()
+            .getString("access_token");
 
         // Access resources using access token
-        response = RestAssured.given().header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken).get(resourceUrl);
+        response = RestAssured.given()
+            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+            .get(resourceUrl);
         System.out.println(response.asString());
-        assertTrue(response.as(List.class).size() > 0);
+        assertTrue(response.as(List.class)
+            .size() > 0);
     }
 
 }

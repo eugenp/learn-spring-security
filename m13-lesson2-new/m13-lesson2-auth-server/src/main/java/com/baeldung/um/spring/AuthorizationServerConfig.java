@@ -12,11 +12,11 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    //		
+    //
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {// @formatter:off
             clients.inMemory()
@@ -27,11 +27,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                    .redirectUris("http://www.example.com/");
             // @formatter:on
     }
-    
-    @Override 
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception { 
-        oauthServer.checkTokenAccess("permitAll()"); 
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+        oauthServer.checkTokenAccess("permitAll()");
     }
-        
 
 }

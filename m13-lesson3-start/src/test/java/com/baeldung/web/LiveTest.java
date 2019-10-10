@@ -14,10 +14,17 @@ public class LiveTest {
 
     @Test
     public void whenObtainAccessToken_thenOK() {
-        final Response response = RestAssured.given().auth().preemptive().basic("lssClient", "lssSecret").with().formParam("grant_type", "client_credentials").post(APP_ROOT + "/oauth/token");
+        final Response response = RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic("lssClient", "lssSecret")
+            .with()
+            .formParam("grant_type", "client_credentials")
+            .post(APP_ROOT + "/oauth/token");
 
         assertEquals(200, response.getStatusCode());
-        assertNotNull(response.jsonPath().getString("access_token"));
+        assertNotNull(response.jsonPath()
+            .getString("access_token"));
     }
 
     // == utility

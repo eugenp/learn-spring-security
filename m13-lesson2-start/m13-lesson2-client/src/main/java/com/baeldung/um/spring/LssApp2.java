@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class LssApp2 {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(new Class[] { LssApp2.class, ResourceServerConfig.class, }, args);
+        SpringApplication.run(new Class[] { LssApp2.class }, args);
     }
 
 }

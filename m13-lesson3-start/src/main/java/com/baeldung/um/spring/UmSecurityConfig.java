@@ -24,7 +24,10 @@ public class UmSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("pass")).roles("USER");
+        auth.inMemoryAuthentication()
+            .withUser("user")
+            .password(passwordEncoder().encode("pass"))
+            .roles("USER");
     }
 
     @Override

@@ -23,14 +23,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         .antMatchers(HttpMethod.POST,"/api/users/**").access("#oauth2.hasScope('write')")
         .antMatchers(HttpMethod.DELETE,"/api/users/**").access("#oauth2.hasScope('write')");
     }// @formatter:on       
-        
 
     @Bean
     public ResourceServerTokenServices tokenService() {
-       RemoteTokenServices tokenServices = new RemoteTokenServices();
-       tokenServices.setClientId("lssClient");
-       tokenServices.setClientSecret("lssSecret");       
-       tokenServices.setCheckTokenEndpointUrl("http://localhost:8083/um-webapp-auth-server/oauth/check_token");
-       return tokenServices;
+        RemoteTokenServices tokenServices = new RemoteTokenServices();
+        tokenServices.setClientId("lssClient");
+        tokenServices.setClientSecret("lssSecret");
+        tokenServices.setCheckTokenEndpointUrl("http://localhost:8083/um-webapp-auth-server/oauth/check_token");
+        return tokenServices;
     }
 }

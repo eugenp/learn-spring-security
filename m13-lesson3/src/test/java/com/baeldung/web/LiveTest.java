@@ -18,50 +18,79 @@ public class LiveTest {
 
     @Test
     public void whenObtainAccessToken_thenOK() {
-        final Response response = RestAssured.given().auth().preemptive().basic("lssClient", "lssSecret").with().formParam("grant_type", "client_credentials").post(APP_ROOT + "/oauth/token");
+        final Response response = RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic("lssClient", "lssSecret")
+            .with()
+            .formParam("grant_type", "client_credentials")
+            .post(APP_ROOT + "/oauth/token");
 
         assertEquals(200, response.getStatusCode());
-        assertNotNull(response.jsonPath().getString("access_token"));
+        assertNotNull(response.jsonPath()
+            .getString("access_token"));
     }
 
     @Test
     public void givenReadAndWriteScope_whenAccessUsers_thenOK() {
         final String token = obtainAccessToken("lssClient", "lssSecret");
-        final Response readResponse = RestAssured.given().header("Authorization", "Bearer " + token).get(APP_ROOT + "/api/user");
+        final Response readResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + token)
+            .get(APP_ROOT + "/api/user");
         assertEquals(200, readResponse.getStatusCode());
 
         final Map<String, String> params = createRandomUser();
-        final Response writeResponse = RestAssured.given().header("Authorization", "Bearer " + token).formParameters(params).post(APP_ROOT + "/api/user");
+        final Response writeResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + token)
+            .formParameters(params)
+            .post(APP_ROOT + "/api/user");
         assertEquals(201, writeResponse.getStatusCode());
     }
 
     @Test
     public void givenReadScope_whenAccessUsers_thenCanReadOnly() {
         final String token = obtainAccessToken("lssReadOnly", "lssReadSecret");
-        final Response readResponse = RestAssured.given().header("Authorization", "Bearer " + token).get(APP_ROOT + "/api/user");
+        final Response readResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + token)
+            .get(APP_ROOT + "/api/user");
         assertEquals(200, readResponse.getStatusCode());
 
         final Map<String, String> params = createRandomUser();
-        final Response writeResponse = RestAssured.given().header("Authorization", "Bearer " + token).formParameters(params).post(APP_ROOT + "/api/user");
+        final Response writeResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + token)
+            .formParameters(params)
+            .post(APP_ROOT + "/api/user");
         assertEquals(403, writeResponse.getStatusCode());
     }
 
     @Test
     public void givenWriteScope_whenAccessUsers_thenCanWriteOnly() {
         final String token = obtainAccessToken("lssWriteOnly", "lssWriteSecret");
-        final Response readResponse = RestAssured.given().header("Authorization", "Bearer " + token).get(APP_ROOT + "/api/user");
+        final Response readResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + token)
+            .get(APP_ROOT + "/api/user");
         assertEquals(403, readResponse.getStatusCode());
 
         final Map<String, String> params = createRandomUser();
-        final Response writeResponse = RestAssured.given().header("Authorization", "Bearer " + token).formParameters(params).post(APP_ROOT + "/api/user");
+        final Response writeResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + token)
+            .formParameters(params)
+            .post(APP_ROOT + "/api/user");
         assertEquals(201, writeResponse.getStatusCode());
     }
 
     // == utility
 
     private String obtainAccessToken(String clientId, String secret) {
-        final Response response = RestAssured.given().auth().preemptive().basic(clientId, secret).with().formParam("grant_type", "client_credentials").post(APP_ROOT + "/oauth/token");
-        return response.jsonPath().getString("access_token");
+        final Response response = RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(clientId, secret)
+            .with()
+            .formParam("grant_type", "client_credentials")
+            .post(APP_ROOT + "/oauth/token");
+        return response.jsonPath()
+            .getString("access_token");
     }
 
     private Map<String, String> createRandomUser() {
