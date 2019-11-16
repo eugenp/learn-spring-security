@@ -23,12 +23,15 @@ public class SecurityIntegrationTest {
 
     @Test
     public void whenDeleting_thenAccessDenied() {
-        StepVerifier.create(this.userApi.delete(1l)).expectError(AccessDeniedException.class).verify();
+        StepVerifier.create(this.userApi.delete(1l))
+            .expectError(AccessDeniedException.class)
+            .verify();
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
     public void givenAdminUser_whenDeleting_thenAccessDenied() {
-        StepVerifier.create(this.userApi.delete(1l)).verifyComplete();
+        StepVerifier.create(this.userApi.delete(1l))
+            .verifyComplete();
     }
 }

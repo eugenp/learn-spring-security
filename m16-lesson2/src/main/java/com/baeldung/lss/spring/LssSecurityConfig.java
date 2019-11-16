@@ -18,8 +18,16 @@ public class LssSecurityConfig {
     @SuppressWarnings("deprecation")
     @Bean
     public MapReactiveUserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder().username("user").password("pass").roles("USER").build();
-        UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("pass").roles("ADMIN").build();
+        UserDetails user = User.withDefaultPasswordEncoder()
+            .username("user")
+            .password("pass")
+            .roles("USER")
+            .build();
+        UserDetails admin = User.withDefaultPasswordEncoder()
+            .username("admin")
+            .password("pass")
+            .roles("ADMIN")
+            .build();
 
         return new MapReactiveUserDetailsService(user, admin);
     }

@@ -66,7 +66,8 @@ public class UserController {
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> getAllUsers(final Model model) {
 
-        return Flux.zip(Flux.interval(Duration.ofMillis(1000)), Flux.fromStream(Stream.generate(() -> "New Notification" + new Date()))).map(Tuple2::getT2);
+        return Flux.zip(Flux.interval(Duration.ofMillis(1000)), Flux.fromStream(Stream.generate(() -> "New Notification" + new Date())))
+            .map(Tuple2::getT2);
 
     }
 

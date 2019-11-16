@@ -41,7 +41,7 @@ public class Lss4SecurityTest {
     }
 
     //
-    
+
     @Test
     public void givenWithoutAuthentication_whenTheUsersCollectionEndpointIsHit_then401UnAthorized() throws Exception {
         // @formatter:off
