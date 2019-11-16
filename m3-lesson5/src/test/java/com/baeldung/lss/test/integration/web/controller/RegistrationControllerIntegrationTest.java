@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
@@ -13,15 +14,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Date;
 
-import com.baeldung.lss.model.PasswordResetToken;
-import com.baeldung.lss.model.User;
-import com.baeldung.lss.model.VerificationToken;
-import com.baeldung.lss.validation.EmailExistsException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.baeldung.lss.model.PasswordResetToken;
+import com.baeldung.lss.model.User;
+import com.baeldung.lss.model.VerificationToken;
+import com.baeldung.lss.validation.EmailExistsException;
 
 public class RegistrationControllerIntegrationTest extends AbstractBaseControllerIntegrationTest {
 
@@ -47,7 +49,7 @@ public class RegistrationControllerIntegrationTest extends AbstractBaseControlle
         assertThat(persistedUser.getId(), notNullValue());
         assertThat(persistedUser.getCreated(), notNullValue());
         assertThat(persistedUser.getEnabled(), equalTo(false));
-        assertThat(persistedUser.getPassword(), equalTo(VALUE_DEFAULT_USER_PASSWORD));
+        assertTrue(passwordEncoder.matches(VALUE_DEFAULT_USER_PASSWORD, persistedUser.getPassword()));
         assertThat(persistedUser.getPasswordConfirmation(), nullValue());
 
         assertThat(getEmailsCount(), equalTo(1));
@@ -261,7 +263,7 @@ public class RegistrationControllerIntegrationTest extends AbstractBaseControlle
                 .andExpect(flash().attributeExists("message"));
 
             final User persistedUser = userService.findUserByEmail(VALUE_DEFAULT_USER_EMAIL);
-            assertThat(persistedUser.getPassword(), equalTo(newPassword));
+            assertTrue(passwordEncoder.matches(newPassword, persistedUser.getPassword()));
             assertThat(persistedUser.getPasswordConfirmation(), nullValue());
         } finally {
             SecurityContextHolder.getContext()

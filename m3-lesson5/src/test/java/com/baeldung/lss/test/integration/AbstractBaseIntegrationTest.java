@@ -1,7 +1,19 @@
 package com.baeldung.lss.test.integration;
 
-import javax.mail.internet.MimeMessage;
 import java.security.Security;
+
+import javax.mail.internet.MimeMessage;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.PasswordResetTokenRepository;
@@ -13,15 +25,6 @@ import com.baeldung.lss.validation.EmailExistsException;
 import com.icegreen.greenmail.util.DummySSLSocketFactory;
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetupTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -36,6 +39,9 @@ public abstract class AbstractBaseIntegrationTest {
 
     @Autowired
     protected IUserService userService;
+
+    @Autowired
+    protected PasswordEncoder passwordEncoder;
 
     // Repositories
 

@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Random;
 
@@ -37,7 +38,7 @@ public class UserServiceIntegrationTest extends AbstractBaseIntegrationTest {
         assertThat(retrievedUser.getCreated(), equalTo(registeredUser.getCreated()));
         assertThat(retrievedUser.getEmail(), equalTo(VALUE_DEFAULT_USER_EMAIL));
         assertThat(retrievedUser.getEnabled(), equalTo(false));
-        assertThat(retrievedUser.getPassword(), equalTo(VALUE_DEFAULT_USER_PASSWORD));
+        assertThat(registeredUser.getPassword(), equalTo(retrievedUser.getPassword()));
         assertThat(retrievedUser.getPasswordConfirmation(), nullValue());
     }
 
@@ -144,7 +145,7 @@ public class UserServiceIntegrationTest extends AbstractBaseIntegrationTest {
         userService.changeUserPassword(user, "Aa1~aaaa");
 
         final User userWithUpdatedPassword = userService.findUserByEmail(user.getEmail());
-        assertThat(userWithUpdatedPassword.getPassword(), equalTo("Aa1~aaaa"));
+        assertTrue(passwordEncoder.matches("Aa1~aaaa", userWithUpdatedPassword.getPassword()));
         assertThat(userWithUpdatedPassword.getPasswordConfirmation(), nullValue());
     }
 
@@ -233,13 +234,14 @@ public class UserServiceIntegrationTest extends AbstractBaseIntegrationTest {
 
         final User changedUser = createNewUser("integration.test.updated@email.com");
         changedUser.setId(existingUser.getId());
+        changedUser.setPassword(passwordEncoder.encode(changedUser.getPassword()));
         userService.saveRegisteredUser(changedUser);
 
         final User retrievedUser = userService.findUserByEmail("integration.test.updated@email.com");
         assertThat(retrievedUser.getId(), equalTo(existingUser.getId()));
         assertThat(retrievedUser.getCreated(), equalTo(existingUser.getCreated()));
         assertThat(retrievedUser.getEmail(), equalTo("integration.test.updated@email.com"));
-        assertThat(retrievedUser.getPassword(), equalTo(VALUE_DEFAULT_USER_PASSWORD));
+        assertTrue(passwordEncoder.matches(VALUE_DEFAULT_USER_PASSWORD, retrievedUser.getPassword()));
         assertThat(retrievedUser.getEnabled(), equalTo(false));
         assertThat(userService.findUserByEmail(existingUser.getEmail()), nullValue());
     }
