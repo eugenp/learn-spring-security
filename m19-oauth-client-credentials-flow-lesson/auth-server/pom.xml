@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>The &quot;Learn Spring Security&quot; Course - oauth-password-flow-lesson - Auth Server</description>
-    <name>lss-oauth-password-flow-lesson--auth-server</name>
+    <description>The &quot;Learn Spring Security&quot; Course - oauth-client_credentials-flow-lesson - Auth Server</description>
+    <name>lss-oauth-client_credentials-flow-lesson--auth-server</name>
 
     <groupId>com.baeldung.lss</groupId>
-    <artifactId>lss-oauth-password-flow-lesson--auth-server</artifactId>
+    <artifactId>lss-oauth-client_credentials-flow-lesson--auth-server</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -67,10 +67,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
 

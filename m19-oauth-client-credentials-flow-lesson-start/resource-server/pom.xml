@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>The &quot;Learn Spring Security&quot; Course - oauth-password-flow-lesson - Auth Server</description>
-    <name>lss-oauth-password-flow-lesson--auth-server</name>
-
+    <description>The &quot;Learn Spring Security&quot; Course - oauth-client-credentials-flow-lesson-start - Resource Server</description>
+    <name>lss-oauth-client-credentials-flow-lesson--resource-server</name>
+    
     <groupId>com.baeldung.lss</groupId>
-    <artifactId>lss-oauth-password-flow-lesson--auth-server</artifactId>
+    <artifactId>lss-oauth-client-credentials-flow-lesson-start--resource-server</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -27,29 +27,6 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>${spring-oauth2-version}</version>
-        </dependency>
-
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-oauth2-jose</artifactId>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-jwt</artifactId>
-		    <version>${spring-jwt.version}</version>
-		</dependency>
-		
-		
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
@@ -60,11 +37,34 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+        </dependency>
+        
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+
         <!-- test -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -73,11 +73,11 @@
             <artifactId>rest-assured</artifactId>
         </dependency>
 
-
     </dependencies>
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -131,8 +131,8 @@
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-		<spring-oauth2-version>2.3.4.RELEASE</spring-oauth2-version>
-		<spring-jwt.version>1.0.9.RELEASE</spring-jwt.version>
+
+        <spring-oauth2-version>2.3.4.RELEASE</spring-oauth2-version>
     </properties>
 
     <developers>

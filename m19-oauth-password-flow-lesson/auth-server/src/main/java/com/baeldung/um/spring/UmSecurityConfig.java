@@ -22,7 +22,7 @@ public class UmSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     //
-    
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -33,7 +33,7 @@ public class UmSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService)
             .passwordEncoder(passwordEncoder());
     }
-    
+
     @Override
     protected void configure(final HttpSecurity http) throws Exception { // @formatter:off
         http.cors()

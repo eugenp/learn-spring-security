@@ -21,7 +21,7 @@ import io.restassured.response.Response;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { LssApp2.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class AuthorizationServerLiveTest {
-    
+
     @Autowired
     Environment environment;
 
@@ -36,9 +36,14 @@ public class AuthorizationServerLiveTest {
         params.put("username", "user");
         params.put("password", "pass");
 
-        Response response = RestAssured.given().auth().basic("lssClient", "lssSecret").formParams(params).post(tokenUrl);
+        Response response = RestAssured.given()
+            .auth()
+            .basic("lssClient", "lssSecret")
+            .formParams(params)
+            .post(tokenUrl);
         System.out.println(response.asString());
-        assertTrue(response.asString().contains("access_token"));
+        assertTrue(response.asString()
+            .contains("access_token"));
     }
 
 }

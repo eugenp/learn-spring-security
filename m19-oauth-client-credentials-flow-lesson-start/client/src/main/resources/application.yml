@@ -1,0 +1,13 @@
+server: 
+  port: 8080
+  servlet: 
+    context-path: /um-webapp-client
+    
+logging: 
+  level:
+    root: INFO
+    reactor.netty.channel.ChannelOperationsHandler: DEBUG
+    org.springframework.web.reactive.function.client.ExchangeFunctions: TRACE
+    
+baeldung:
+  resource-uri: http://localhost:8081/um-webapp-resource-server/api/foos/1
