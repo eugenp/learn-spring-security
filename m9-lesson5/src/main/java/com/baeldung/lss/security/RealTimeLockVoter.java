@@ -26,5 +26,5 @@ public class RealTimeLockVoter implements AccessDecisionVoter<Object> {
 
         return ACCESS_GRANTED;
     }
-    
+
 }
