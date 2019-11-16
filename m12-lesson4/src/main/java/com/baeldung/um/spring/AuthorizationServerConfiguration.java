@@ -90,10 +90,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         security.checkTokenAccess("permitAll()");
         super.configure(security);
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
-    	return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 
 }

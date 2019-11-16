@@ -21,7 +21,15 @@ public class AuthorizationLiveTest {
         params.put("client_id", clientId);
         params.put("username", username);
         params.put("password", password);
-        return RestAssured.given().auth().preemptive().basic(clientId, "bGl2ZS10ZXN0").and().with().params(params).when().post(appURL + "/oauth/token");
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(clientId, "bGl2ZS10ZXN0")
+            .and()
+            .with()
+            .params(params)
+            .when()
+            .post(appURL + "/oauth/token");
     }
 
     @Test
@@ -29,10 +37,14 @@ public class AuthorizationLiveTest {
         final Response response = obtainAccessToken("live-test", "admin@fake.com", "adminpass");
         assertEquals(200, response.getStatusCode());
 
-        final String accessToken = response.jsonPath().getString("access_token");
-        final Response userListResponse = RestAssured.given().header("Authorization", "Bearer " + accessToken).get(appURL + "/api/user");
+        final String accessToken = response.jsonPath()
+            .getString("access_token");
+        final Response userListResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + accessToken)
+            .get(appURL + "/api/user");
         assertEquals(200, userListResponse.getStatusCode());
-        assertNotNull(userListResponse.jsonPath().get("email"));
+        assertNotNull(userListResponse.jsonPath()
+            .get("email"));
     }
 
     @Test
@@ -40,19 +52,28 @@ public class AuthorizationLiveTest {
         Response response = obtainAccessToken("live-test", "admin@fake.com", "adminpass");
         assertEquals(200, response.getStatusCode());
 
-        String accessToken = response.jsonPath().getString("access_token");
-        final String refreshToken = response.jsonPath().getString("refresh_token");
-        Response userListResponse = RestAssured.given().header("Authorization", "Bearer " + accessToken).get(appURL + "/api/user");
+        String accessToken = response.jsonPath()
+            .getString("access_token");
+        final String refreshToken = response.jsonPath()
+            .getString("refresh_token");
+        Response userListResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + accessToken)
+            .get(appURL + "/api/user");
         assertEquals(200, userListResponse.getStatusCode());
-        assertNotNull(userListResponse.jsonPath().get("email"));
+        assertNotNull(userListResponse.jsonPath()
+            .get("email"));
 
         response = refreshAccessToken("live-test", "bGl2ZS10ZXN0", refreshToken);
         assertEquals(200, response.getStatusCode());
 
-        accessToken = response.jsonPath().getString("access_token");
-        userListResponse = RestAssured.given().header("Authorization", "Bearer " + accessToken).get(appURL + "/api/user");
+        accessToken = response.jsonPath()
+            .getString("access_token");
+        userListResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + accessToken)
+            .get(appURL + "/api/user");
         assertEquals(200, userListResponse.getStatusCode());
-        assertNotNull(userListResponse.jsonPath().get("email"));
+        assertNotNull(userListResponse.jsonPath()
+            .get("email"));
     }
 
     private Response refreshAccessToken(String clientId, String clientSecret, String refreshToken) {
@@ -61,7 +82,15 @@ public class AuthorizationLiveTest {
         params.put("refresh_token", refreshToken);
         params.put("client_id", clientId);
         params.put("client_secret", clientSecret);
-        return RestAssured.given().auth().preemptive().basic(clientId, clientSecret).and().with().params(params).when().post(appURL + "/oauth/token");
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(clientId, clientSecret)
+            .and()
+            .with()
+            .params(params)
+            .when()
+            .post(appURL + "/oauth/token");
 
     }
 }

@@ -21,7 +21,15 @@ public class AuthorizationLiveTest {
         params.put("client_id", clientId);
         params.put("username", username);
         params.put("password", password);
-        return RestAssured.given().auth().preemptive().basic(clientId, "bGl2ZS10ZXN0").and().with().params(params).when().post(appURL + "/oauth/token");
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(clientId, "bGl2ZS10ZXN0")
+            .and()
+            .with()
+            .params(params)
+            .when()
+            .post(appURL + "/oauth/token");
     }
 
     @Test
@@ -29,10 +37,14 @@ public class AuthorizationLiveTest {
         final Response response = obtainAccessToken("live-test", "admin@fake.com", "adminpass");
         assertEquals(200, response.getStatusCode());
 
-        final String accessToken = response.jsonPath().getString("access_token");
-        final Response userListResponse = RestAssured.given().header("Authorization", "Bearer " + accessToken).get(appURL + "/api/user");
+        final String accessToken = response.jsonPath()
+            .getString("access_token");
+        final Response userListResponse = RestAssured.given()
+            .header("Authorization", "Bearer " + accessToken)
+            .get(appURL + "/api/user");
         assertEquals(200, userListResponse.getStatusCode());
-        assertNotNull(userListResponse.jsonPath().get("email"));
+        assertNotNull(userListResponse.jsonPath()
+            .get("email"));
 
     }
 

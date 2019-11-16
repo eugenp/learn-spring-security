@@ -3,7 +3,6 @@ package com.baeldung.um.security;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.baeldung.um.service.IUserService;
@@ -16,14 +15,11 @@ public class SetupBean {
     @Autowired
     private IUserService userService;
     
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     //
 
     @PostConstruct
     public void setupUser() throws EmailExistsException {
-        final User user = new User("admin@fake.com", passwordEncoder.encode("adminpass"));
+        final User user = new User("admin@fake.com", "adminpass");
         userService.registerNewUser(user);
     }
 

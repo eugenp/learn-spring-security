@@ -13,18 +13,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @ComponentScan("com.baeldung.um")
 @EnableJpaRepositories("com.baeldung.um")
 @EntityScan("com.baeldung.um.web.model")
-public class LssApp2 {    
-    
+public class LssApp2 {
+
     public static void main(String[] args) throws Exception {
         SpringApplication.run(new Class[] { LssApp2.class, AuthorizationServerConfiguration.class, ResourceServerConfiguration.class, UmWebMvcConfiguration.class }, args);
     }
 
     public static class AuthenticationMananagerProvider extends WebSecurityConfigurerAdapter {
-    	
-    	@Bean
-    	@Override
-    	public AuthenticationManager authenticationManagerBean() throws Exception {
-    		return super.authenticationManagerBean();
-    	}
+
+        @Bean
+        @Override
+        public AuthenticationManager authenticationManagerBean() throws Exception {
+            return super.authenticationManagerBean();
+        }
     }
 }

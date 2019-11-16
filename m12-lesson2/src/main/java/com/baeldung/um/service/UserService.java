@@ -3,6 +3,7 @@ package com.baeldung.um.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.baeldung.um.persistence.UserRepository;
@@ -16,6 +17,9 @@ class UserService implements IUserService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     // write
 
     @Override
@@ -23,6 +27,9 @@ class UserService implements IUserService {
         if (emailExist(user.getEmail())) {
             throw new EmailExistsException("There is an account with that email address: " + user.getEmail());
         }
+        final String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        user.setPasswordConfirmation(encodedPassword);
         return repository.save(user);
     }
 

@@ -67,10 +67,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST).
         accessTokenConverter(accessTokenConverter());
     }// @formatter:on
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
-    	return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 
 }
