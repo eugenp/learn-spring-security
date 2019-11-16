@@ -47,6 +47,10 @@ class UserService implements IUserService {
         if (emailOwner != null && !id.equals(emailOwner.getId())) {
             throw new EmailExistsException("Email not available.");
         }
+        final String password = user.getPassword();
+        if (password != null) {
+            user.setPassword(passwordEncoder.encode(password));
+        }
         return userRepository.save(user);
     }
 }
