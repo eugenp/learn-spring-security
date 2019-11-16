@@ -19,14 +19,18 @@ public class LiveTest {
     public void givenOwnerUser_whenGetPossession_thenOK() {
         final Response response = givenAuth("eugen@email.com", "pass").get(APP_ROOT + "/possessions/2");
         assertEquals(200, response.getStatusCode());
-        assertThat(response.body().jsonPath().getLong("id")).isEqualTo(2L);
+        assertThat(response.body()
+            .jsonPath()
+            .getLong("id")).isEqualTo(2L);
     }
 
     @Test
     public void givenUserWithReadPermission_whenGetPossession_thenOK() {
         final Response response = givenAuth("eric@email.com", "123").get(APP_ROOT + "/possessions/2");
         assertEquals(200, response.getStatusCode());
-        assertThat(response.body().jsonPath().getLong("id")).isEqualTo(2L);
+        assertThat(response.body()
+            .jsonPath()
+            .getLong("id")).isEqualTo(2L);
     }
 
     @Test
@@ -37,6 +41,8 @@ public class LiveTest {
 
     //
     private RequestSpecification givenAuth(String username, String password) {
-        return RestAssured.given().auth().form(username, password, formAuthConfig);
+        return RestAssured.given()
+            .auth()
+            .form(username, password, formAuthConfig);
     }
 }

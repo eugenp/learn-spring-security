@@ -101,7 +101,13 @@ public class Possession implements IEntity {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Possession [id=").append(id).append(", name=").append(name).append(", owner=").append(owner).append("]");
+        builder.append("Possession [id=")
+            .append(id)
+            .append(", name=")
+            .append(name)
+            .append(", owner=")
+            .append(owner)
+            .append("]");
         return builder.toString();
     }
 

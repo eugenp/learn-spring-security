@@ -54,7 +54,8 @@ public class LssPermissionService {
                     acl = aclService.createAcl(oi);
                 }
 
-                acl.insertAce(acl.getEntries().size(), permission, sid, true);
+                acl.insertAce(acl.getEntries()
+                    .size(), permission, sid, true);
                 aclService.updateAcl(acl);
             }
         });

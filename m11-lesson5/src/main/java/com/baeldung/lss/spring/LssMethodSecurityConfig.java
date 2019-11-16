@@ -52,7 +52,8 @@ public class LssMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
         final EhCacheFactoryBean factoryBean = new EhCacheFactoryBean();
         final EhCacheManagerFactoryBean cacheManager = new EhCacheManagerFactoryBean();
         cacheManager.setAcceptExisting(true);
-        cacheManager.setCacheManagerName(CacheManager.getInstance().getName());
+        cacheManager.setCacheManagerName(CacheManager.getInstance()
+            .getName());
         cacheManager.afterPropertiesSet();
 
         factoryBean.setName("aclCache");
