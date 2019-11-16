@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.baeldung.lss.spring.LssApp2;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes= {LssApp2.class})
+@SpringBootTest(classes = { LssApp2.class })
 public class Lss2IntegrationTest {
 
     private MockMvc mockMvc;
@@ -32,15 +32,18 @@ public class Lss2IntegrationTest {
 
     @Before
     public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(context).addFilters(springSecurityFilterChain).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(context)
+            .addFilters(springSecurityFilterChain)
+            .build();
     }
 
     @Test
     public void testUserLoginSuccess() throws Exception {
-        ResultActions resultActions = mockMvc.perform(formLogin("/doLogin").user("test@email.com").password("pass"));
+        ResultActions resultActions = mockMvc.perform(formLogin("/doLogin").user("test@email.com")
+            .password("pass"));
         resultActions.andExpect(authenticated());
     }
-    
+
     @Test
     public void whenLoadApplication_thenSuccess() {
 
