@@ -22,7 +22,8 @@ public class MySecurityExpressionRoot extends SecurityExpressionRoot implements 
             return false;
         }
         User principal = (User) getPrincipal();
-        return principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        return principal.getAuthorities()
+            .contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
     //

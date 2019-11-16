@@ -22,7 +22,10 @@ public class LiveTest {
     //
 
     private final RequestSpecification givenAuth(String username, String password) {
-        return RestAssured.given().auth().preemptive().basic(username, password);
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(username, password);
     }
 
 }

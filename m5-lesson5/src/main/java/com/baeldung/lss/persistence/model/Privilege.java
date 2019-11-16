@@ -50,7 +50,11 @@ public class Privilege {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Privilege [id=").append(id).append(", name=").append(name).append("]");
+        builder.append("Privilege [id=")
+            .append(id)
+            .append(", name=")
+            .append(name)
+            .append("]");
         return builder.toString();
     }
 

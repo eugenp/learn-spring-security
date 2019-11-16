@@ -127,7 +127,17 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("User [id=").append(id).append(", username=").append(username).append(", password=").append(password).append(", privileges=").append(privileges).append(", organization=").append(organization).append("]");
+        builder.append("User [id=")
+            .append(id)
+            .append(", username=")
+            .append(username)
+            .append(", password=")
+            .append(password)
+            .append(", privileges=")
+            .append(privileges)
+            .append(", organization=")
+            .append(organization)
+            .append("]");
         return builder.toString();
     }
 

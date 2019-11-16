@@ -23,8 +23,9 @@ public class OrganizationController {
     @RequestMapping(method = RequestMethod.GET, value = "/organizations/{id}")
     @ResponseBody
     public Organization findOrgById(@PathVariable final long id) {
-        return organizationRepository.findById(id).orElse(null);
-   	}
+        return organizationRepository.findById(id)
+            .orElse(null);
+    }
 
     //
     //
