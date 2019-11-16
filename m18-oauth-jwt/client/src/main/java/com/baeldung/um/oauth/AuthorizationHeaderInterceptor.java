@@ -22,14 +22,18 @@ public class AuthorizationHeaderInterceptor implements ClientHttpRequestIntercep
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] bytes, ClientHttpRequestExecution execution) throws IOException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext()
+            .getAuthentication();
         String accessToken = null;
-        if (authentication != null && authentication.getClass().isAssignableFrom(OAuth2AuthenticationToken.class)) {
+        if (authentication != null && authentication.getClass()
+            .isAssignableFrom(OAuth2AuthenticationToken.class)) {
             OAuth2AuthenticationToken auth = (OAuth2AuthenticationToken) authentication;
             String clientRegistrationId = auth.getAuthorizedClientRegistrationId();
             OAuth2AuthorizedClient client = clientService.loadAuthorizedClient(clientRegistrationId, auth.getName());
-            accessToken = client.getAccessToken().getTokenValue();
-            request.getHeaders().add("Authorization", "Bearer " + accessToken);
+            accessToken = client.getAccessToken()
+                .getTokenValue();
+            request.getHeaders()
+                .add("Authorization", "Bearer " + accessToken);
         }
         return execution.execute(request, bytes);
     }

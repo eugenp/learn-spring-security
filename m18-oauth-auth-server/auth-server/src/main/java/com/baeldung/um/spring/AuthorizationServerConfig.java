@@ -10,7 +10,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    
+
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {// @formatter:off
         clients.inMemory()

@@ -25,7 +25,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    
+
     private AuthenticationManager authenticationManager;
 
     public AuthorizationServerConfig(AuthenticationConfiguration authenticationConfiguration) throws Exception {

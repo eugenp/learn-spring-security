@@ -21,16 +21,16 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    
+
     private AuthenticationManager authenticationManager;
 
     public AuthorizationServerConfig(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         this.authenticationManager = authenticationConfiguration.getAuthenticationManager();
     }
-    
+
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {// @formatter:off
         clients.inMemory()
@@ -49,7 +49,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .accessTokenConverter(accessTokenConverter())
             .tokenStore(tokenStore());
     }
-    
+
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());

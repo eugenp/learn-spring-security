@@ -25,7 +25,8 @@ public class UmMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("loginPage");
+        registry.addViewController("/")
+            .setViewName("loginPage");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
@@ -65,7 +66,7 @@ public class UmMvcConfig extends WebMvcConfigurerAdapter {
             details.setClientSecret("lssSecret");
             details.setAccessTokenUri("http://localhost:8083/um-webapp-auth-server/oauth/token");
             details.setUserAuthorizationUri("http://localhost:8083/um-webapp-auth-server/oauth/authorize");
-            details.setScope(Arrays.asList("read", "write","user"));
+            details.setScope(Arrays.asList("read", "write", "user"));
             details.setGrantType("authorization_code");
             details.setUseCurrentUri(true);
             return details;

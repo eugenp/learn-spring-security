@@ -30,16 +30,25 @@ public class ResourceServerLiveTest {
         String accessToken = obtainAccessToken();
 
         // Access resources using access token
-        Response response = RestAssured.given().header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken).get(resourceUrl);
+        Response response = RestAssured.given()
+            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+            .get(resourceUrl);
         System.out.println(response.asString());
-        assertTrue(response.as(List.class).size() > 0);
+        assertTrue(response.as(List.class)
+            .size() > 0);
     }
 
     private String obtainAccessToken() {
-        Response response = RestAssured.given().formParams("username", "user", "password", "pass").post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
+        Response response = RestAssured.given()
+            .formParams("username", "user", "password", "pass")
+            .post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
         final String cookieValue = response.getCookie("JSESSIONID");
-        RestAssured.given().cookie("JSESSIONID", cookieValue).get(authorizeUrl);
-        response = RestAssured.given().cookie("JSESSIONID", cookieValue).post(authorizeUrl);
+        RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .get(authorizeUrl);
+        response = RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .post(authorizeUrl);
         final String location = response.getHeader(HttpHeaders.LOCATION);
         final String code = location.substring(location.indexOf("code=") + 5);
 
@@ -49,8 +58,13 @@ public class ResourceServerLiveTest {
         params.put("code", code);
         params.put("client_id", "lssClient");
         params.put("redirect_uri", redirectUrl);
-        response = RestAssured.given().auth().basic("lssClient", "lssSecret").formParams(params).post(tokenUrl);
-        return response.jsonPath().getString("access_token");
+        response = RestAssured.given()
+            .auth()
+            .basic("lssClient", "lssSecret")
+            .formParams(params)
+            .post(tokenUrl);
+        return response.jsonPath()
+            .getString("access_token");
     }
 
 }

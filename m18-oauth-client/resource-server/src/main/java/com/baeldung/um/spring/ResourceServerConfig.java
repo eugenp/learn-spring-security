@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
@@ -24,7 +26,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         .antMatchers(HttpMethod.POST,"/api/users/**").access("#oauth2.hasScope('write')");
     }// @formatter:on       
 
-
     @Primary
     @Bean
     public RemoteTokenServices tokenServices() {
@@ -33,5 +34,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         tokenService.setClientId("lssClient");
         tokenService.setClientSecret("lssSecret");
         return tokenService;
+    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
     }
 }

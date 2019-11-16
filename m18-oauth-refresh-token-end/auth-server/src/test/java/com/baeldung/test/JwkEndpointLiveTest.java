@@ -12,7 +12,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 public class JwkEndpointLiveTest {
-    
+
     @Test
     public void whenAcessJwkEndpoint_thenSuccess() {
         final String authServerport = "8083";
@@ -21,7 +21,8 @@ public class JwkEndpointLiveTest {
         Response response = RestAssured.get(endpointUrl);
         System.out.println(response.asString());
         assertEquals(HttpStatus.OK.value(), response.statusCode());
-        List keys = response.jsonPath().getList("keys");
+        List keys = response.jsonPath()
+            .getList("keys");
         assertTrue(keys.size() > 0);
     }
 

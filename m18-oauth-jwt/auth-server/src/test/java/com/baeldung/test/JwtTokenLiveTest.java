@@ -22,12 +22,12 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 public class JwtTokenLiveTest {
-    
+
     @Test
     public void whenObtainJwtAccessToken_thenSuccess() throws JsonParseException, JsonMappingException, IOException {
         String username = "user";
         String password = "pass";
-        String accessToken = obtainAccessToken(username,password);
+        String accessToken = obtainAccessToken(username, password);
         assertNotNull(accessToken);
         Jwt jwt = JwtHelper.decode(accessToken);
         System.out.println(jwt.getClaims());
@@ -35,7 +35,7 @@ public class JwtTokenLiveTest {
         assertTrue(claims.containsKey("user_name"));
         assertEquals(claims.get("user_name"), username);
     }
-    
+
     private String obtainAccessToken(String username, String password) {
         final String authServerport = "8083";
         final String redirectUrl = "http://www.example.com/";
@@ -43,12 +43,18 @@ public class JwtTokenLiveTest {
         final String tokenUrl = "http://localhost:" + authServerport + "/um-webapp-auth-server/oauth/token";
 
         // user login
-        Response response = RestAssured.given().formParams("username", username, "password", password).post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
+        Response response = RestAssured.given()
+            .formParams("username", username, "password", password)
+            .post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
         final String cookieValue = response.getCookie("JSESSIONID");
 
         // get authorization code
-        RestAssured.given().cookie("JSESSIONID", cookieValue).get(authorizeUrl); 
-        response = RestAssured.given().cookie("JSESSIONID", cookieValue).post(authorizeUrl);
+        RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .get(authorizeUrl);
+        response = RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .post(authorizeUrl);
         assertEquals(HttpStatus.FOUND.value(), response.getStatusCode());
         final String location = response.getHeader(HttpHeaders.LOCATION);
         final String code = location.substring(location.indexOf("code=") + 5);
@@ -60,8 +66,13 @@ public class JwtTokenLiveTest {
         params.put("client_id", "lssClient");
         params.put("redirect_uri", redirectUrl);
 
-        response = RestAssured.given().auth().basic("lssClient", "lssSecret").formParams(params).post(tokenUrl);
-        return response.jsonPath().getString("access_token");
+        response = RestAssured.given()
+            .auth()
+            .basic("lssClient", "lssSecret")
+            .formParams(params)
+            .post(tokenUrl);
+        return response.jsonPath()
+            .getString("access_token");
     }
 
 }

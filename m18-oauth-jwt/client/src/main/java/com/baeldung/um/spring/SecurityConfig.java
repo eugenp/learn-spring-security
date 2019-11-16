@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             interceptors = new ArrayList<>();
         }
         interceptors.add(new AuthorizationHeaderInterceptor(clientService));
-        restTemplate.setInterceptors(interceptors);        
+        restTemplate.setInterceptors(interceptors);
         return restTemplate;
     }
 

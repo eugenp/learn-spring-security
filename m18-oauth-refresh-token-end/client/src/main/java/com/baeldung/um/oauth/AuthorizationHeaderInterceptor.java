@@ -36,7 +36,8 @@ public class AuthorizationHeaderInterceptor implements ClientHttpRequestIntercep
     public ClientHttpResponse intercept(HttpRequest request, byte[] bytes, ClientHttpRequestExecution execution) throws IOException {
         String accessToken = getAccessToken();
         if (accessToken != null) {
-            request.getHeaders().add("Authorization", "Bearer " + accessToken);
+            request.getHeaders()
+                .add("Authorization", "Bearer " + accessToken);
         }
         return execution.execute(request, bytes);
     }
@@ -52,7 +53,8 @@ public class AuthorizationHeaderInterceptor implements ClientHttpRequestIntercep
         String clientRegistrationId = auth.getAuthorizedClientRegistrationId();
         OAuth2AuthorizedClient client = clientService.loadAuthorizedClient(clientRegistrationId, auth.getName());
         OAuth2AccessToken accessToken = client.getAccessToken();
-        if (accessToken.getExpiresAt().isBefore(Instant.now())) {
+        if (accessToken.getExpiresAt()
+            .isBefore(Instant.now())) {
             System.out.println("Refreshing .... ");
             accessToken = refreshAccessToken(client, authentication);
             OAuth2AuthorizedClient newClient = new OAuth2AuthorizedClient(client.getClientRegistration(), authentication.getName(), accessToken, client.getRefreshToken());
@@ -67,10 +69,12 @@ public class AuthorizationHeaderInterceptor implements ClientHttpRequestIntercep
         headers.setBasicAuth(clientRegistration.getClientId(), clientRegistration.getClientSecret());
         MultiValueMap<String, String> formParameters = new LinkedMultiValueMap<>();
         formParameters.add("grant_type", "refresh_token");
-        formParameters.add("refresh_token", client.getRefreshToken().getTokenValue());
+        formParameters.add("refresh_token", client.getRefreshToken()
+            .getTokenValue());
         HttpEntity entity = new HttpEntity(formParameters, headers);
-        String tokenUri = clientRegistration.getProviderDetails().getTokenUri();
-        RestTemplate restTemplate = new RestTemplate(Arrays.asList(new FormHttpMessageConverter(), new OAuth2AccessTokenResponseHttpMessageConverter()));        
+        String tokenUri = clientRegistration.getProviderDetails()
+            .getTokenUri();
+        RestTemplate restTemplate = new RestTemplate(Arrays.asList(new FormHttpMessageConverter(), new OAuth2AccessTokenResponseHttpMessageConverter()));
         OAuth2AccessTokenResponse response = restTemplate.postForObject(tokenUri, entity, OAuth2AccessTokenResponse.class);
         return response.getAccessToken();
     }

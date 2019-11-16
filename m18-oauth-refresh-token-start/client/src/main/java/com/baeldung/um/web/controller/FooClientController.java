@@ -18,20 +18,22 @@ public class FooClientController {
 
     @Autowired
     private RestTemplate restTemplate;
-    
+
     @Value("${oauth.resourceServerBase}")
     private String resourceServerBase;
 
     @GetMapping("/{id}")
     public String getFooResource(@PathVariable long id, Model model) {
-        Foo foo = restTemplate.getForEntity(resourceServerBase + "/api/foos/" + id, Foo.class).getBody();
+        Foo foo = restTemplate.getForEntity(resourceServerBase + "/api/foos/" + id, Foo.class)
+            .getBody();
         model.addAttribute("foo", foo);
         return "foo";
     }
-    
+
     @PostMapping
     public String addNewFoo(Foo foo, Model model) {
-        Foo created = restTemplate.postForEntity(resourceServerBase + "/api/foos/", foo, Foo.class).getBody();
+        Foo created = restTemplate.postForEntity(resourceServerBase + "/api/foos/", foo, Foo.class)
+            .getBody();
         model.addAttribute("foo", created);
         return "foo";
     }

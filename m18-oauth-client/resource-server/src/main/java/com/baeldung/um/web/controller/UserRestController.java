@@ -64,7 +64,8 @@ class UserRestController {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Map<String, String> handleException(Exception ex) {
-        return Collections.singletonMap(ex.getClass().getSimpleName(), ex.getLocalizedMessage());
+        return Collections.singletonMap(ex.getClass()
+            .getSimpleName(), ex.getLocalizedMessage());
     }
 
 }

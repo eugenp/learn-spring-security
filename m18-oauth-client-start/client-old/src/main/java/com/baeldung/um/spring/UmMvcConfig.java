@@ -25,7 +25,8 @@ public class UmMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("loginPage");
+        registry.addViewController("/")
+            .setViewName("loginPage");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 

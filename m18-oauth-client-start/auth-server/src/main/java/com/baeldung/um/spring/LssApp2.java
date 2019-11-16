@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 public class LssApp2 {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(new Class[] { LssApp2.class, UmSecurityConfig.class}, args);
+        SpringApplication.run(new Class[] { LssApp2.class, UmSecurityConfig.class }, args);
     }
 
 }

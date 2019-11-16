@@ -12,7 +12,7 @@ Module  13 - Lesson 2 Client old</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.17.RELEASE</version>
+        <version>1.5.22.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -123,16 +123,7 @@ Module  13 - Lesson 2 Client old</description>
 
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        
-        <!-- persistence -->       
-        <validation-api.version>1.1.0.Final</validation-api.version>
-  
-        <rest-assured.version>2.9.0</rest-assured.version>
-		
-        <!-- maven plugins -->
-		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-		
+        <java.version>1.8</java.version>		
     </properties>
 
     <developers>

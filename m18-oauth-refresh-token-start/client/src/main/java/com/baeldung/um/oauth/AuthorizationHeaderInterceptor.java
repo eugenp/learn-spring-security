@@ -20,7 +20,7 @@ public class AuthorizationHeaderInterceptor implements ClientHttpRequestIntercep
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] bytes, ClientHttpRequestExecution execution) throws IOException {
-        
+
         return execution.execute(request, bytes);
     }
 

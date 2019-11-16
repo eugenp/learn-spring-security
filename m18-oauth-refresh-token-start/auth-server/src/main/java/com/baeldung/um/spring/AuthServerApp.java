@@ -10,9 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class AuthServerApp {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(new Class[] { AuthServerApp.class,
-                AuthorizationServerConfig.class, 
-                UmSecurityConfig.class }, args);
+        SpringApplication.run(new Class[] { AuthServerApp.class, AuthorizationServerConfig.class, UmSecurityConfig.class }, args);
     }
 
 }

@@ -40,12 +40,18 @@ public class AuthorizationServerLiveTest {
         final String tokenUrl = "http://localhost:" + authServerport + "/um-webapp-auth-server/oauth/token";
 
         // user login
-        Response response = RestAssured.given().formParams("username", "user", "password", "pass").post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
+        Response response = RestAssured.given()
+            .formParams("username", "user", "password", "pass")
+            .post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
         final String cookieValue = response.getCookie("JSESSIONID");
 
         // get authorization code
-        RestAssured.given().cookie("JSESSIONID", cookieValue).get(authorizeUrl);
-        response = RestAssured.given().cookie("JSESSIONID", cookieValue).post(authorizeUrl);
+        RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .get(authorizeUrl);
+        response = RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .post(authorizeUrl);
         assertEquals(HttpStatus.FOUND.value(), response.getStatusCode());
         final String location = response.getHeader(HttpHeaders.LOCATION);
         assertTrue(location.contains(redirectUrl));
@@ -60,9 +66,14 @@ public class AuthorizationServerLiveTest {
         params.put("client_id", "lssClient");
         params.put("redirect_uri", redirectUrl);
 
-        response = RestAssured.given().auth().basic("lssClient", "lssSecret").formParams(params).post(tokenUrl);
+        response = RestAssured.given()
+            .auth()
+            .basic("lssClient", "lssSecret")
+            .formParams(params)
+            .post(tokenUrl);
         System.out.println(response.asString());
-        assertTrue(response.asString().contains("access_token"));
+        assertTrue(response.asString()
+            .contains("access_token"));
     }
 
 }

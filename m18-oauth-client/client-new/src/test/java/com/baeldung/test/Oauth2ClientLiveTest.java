@@ -31,11 +31,16 @@ public class Oauth2ClientLiveTest {
     @Test
     public void givenAuthorizationCodeGrant_whenLoginUsingOauth_thenSuccess() throws UnsupportedEncodingException {
         // authorization server login
-        Response response = RestAssured.given().formParams("username", "user", "password", "pass").post(authServerLoginUri);
+        Response response = RestAssured.given()
+            .formParams("username", "user", "password", "pass")
+            .post(authServerLoginUri);
         final String authServerSessionId = response.getCookie("JSESSIONID");
 
         // invoke authorization request on client to obtain state and session-id
-        response = RestAssured.given().redirects().follow(false).get(clientAuthorizationUri);
+        response = RestAssured.given()
+            .redirects()
+            .follow(false)
+            .get(clientAuthorizationUri);
         assertEquals(HttpStatus.FOUND.value(), response.getStatusCode());
         String fullAuthorizeUrl = response.getHeader(HttpHeaders.LOCATION);
         assertTrue(fullAuthorizeUrl.contains("state"));
@@ -49,8 +54,16 @@ public class Oauth2ClientLiveTest {
         String clientSessionId = response.getCookie("JSESSIONID");
 
         // obtain authorization code
-        RestAssured.given().redirects().follow(false).cookie("JSESSIONID", authServerSessionId).get(authorizeUrl + "&state=" + state);
-        response = RestAssured.given().redirects().follow(false).cookie("JSESSIONID", authServerSessionId).post(authorizeUrl + "&state=" + state);
+        RestAssured.given()
+            .redirects()
+            .follow(false)
+            .cookie("JSESSIONID", authServerSessionId)
+            .get(authorizeUrl + "&state=" + state);
+        response = RestAssured.given()
+            .redirects()
+            .follow(false)
+            .cookie("JSESSIONID", authServerSessionId)
+            .post(authorizeUrl + "&state=" + state);
         assertEquals(HttpStatus.FOUND.value(), response.getStatusCode());
 
         // extract authorization code
@@ -59,14 +72,21 @@ public class Oauth2ClientLiveTest {
         String code = location.substring(codeStart, location.indexOf("&"));
 
         // mimic oauth2login
-        response = RestAssured.given().redirects().follow(false).cookie("JSESSIONID", clientSessionId).get(redirectUrl + "?code=" + code + "&state=" + state);
+        response = RestAssured.given()
+            .redirects()
+            .follow(false)
+            .cookie("JSESSIONID", clientSessionId)
+            .get(redirectUrl + "?code=" + code + "&state=" + state);
         assertEquals(HttpStatus.FOUND.value(), response.getStatusCode());
 
         // extract new client session-id after authentication
         String newClientSessionId = response.getCookie("JSESSIONID");
-        response = RestAssured.given().cookie("JSESSIONID", newClientSessionId).get(resourceUrl);
+        response = RestAssured.given()
+            .cookie("JSESSIONID", newClientSessionId)
+            .get(resourceUrl);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertTrue(response.asString().contains("Users : View all"));
+        assertTrue(response.asString()
+            .contains("Users : View all"));
         System.out.println(response.asString());
     }
 

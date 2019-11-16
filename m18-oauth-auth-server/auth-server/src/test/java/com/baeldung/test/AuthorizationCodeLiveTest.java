@@ -26,7 +26,9 @@ public class AuthorizationCodeLiveTest {
 
     @Test
     public void givenAuthorizationCodeGrant_whenObtainAccessToken_thenSuccess() {
-        Response response = RestAssured.given().formParams("username", "user", "password", "pass").post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
+        Response response = RestAssured.given()
+            .formParams("username", "user", "password", "pass")
+            .post("http://localhost:" + authServerport + "/um-webapp-auth-server/login");
         String cookieValue = response.getCookie("JSESSIONID");
         String code = obtainAuthorizationCode(cookieValue);
         String accessToken = obtainAccessToken(code);
@@ -34,8 +36,12 @@ public class AuthorizationCodeLiveTest {
     }
 
     private String obtainAuthorizationCode(String cookieValue) {
-        RestAssured.given().cookie("JSESSIONID", cookieValue).get(authorizeUrl);
-        Response response = RestAssured.given().cookie("JSESSIONID", cookieValue).post(authorizeUrl);
+        RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .get(authorizeUrl);
+        Response response = RestAssured.given()
+            .cookie("JSESSIONID", cookieValue)
+            .post(authorizeUrl);
         String location = response.getHeader(HttpHeaders.LOCATION);
 
         assertEquals(HttpStatus.FOUND.value(), response.getStatusCode());
@@ -56,7 +62,8 @@ public class AuthorizationCodeLiveTest {
             .post(tokenUrl);// @formatter:on
 
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        return response.jsonPath().getString("access_token");
+        return response.jsonPath()
+            .getString("access_token");
     }
 
 }
