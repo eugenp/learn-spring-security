@@ -9,7 +9,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.baeldung.lss.spring.ServletInitializer;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = { ServletInitializer.class})
+@ContextConfiguration(classes = { ServletInitializer.class })
 @WebAppConfiguration
 public class Lss6IntegrationTest {
 

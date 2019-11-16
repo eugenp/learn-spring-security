@@ -15,26 +15,27 @@ import com.baeldung.lss.web.model.User;
 @EnableWebMvc
 @Configuration
 public class LssWebMvcConfiguration extends WebMvcConfigurerAdapter {
-    
+
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("loginPage");
+        registry.addViewController("/login")
+            .setViewName("loginPage");
 
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-    }       
-    
+    }
+
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new  Converter<String, User>() {
+        registry.addConverter(new Converter<String, User>() {
             @Override
             public User convert(String id) {
                 return userRepository.findUser(Long.valueOf(id));
             }
         });
-       
+
     }
 
 }

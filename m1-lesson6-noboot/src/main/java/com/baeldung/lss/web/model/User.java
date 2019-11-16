@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 public class User {
 
     private Long id;

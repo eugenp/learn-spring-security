@@ -16,7 +16,6 @@ import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.web.model.User;
 import javax.validation.Valid;
 
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
