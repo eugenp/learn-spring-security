@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.baeldung.lss.spring.LssApp3;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes= LssApp3.class)
+@SpringBootTest(classes = LssApp3.class)
 public class Lss3IntegrationTest {
 
     @Test

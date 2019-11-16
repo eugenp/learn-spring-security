@@ -3,6 +3,7 @@ package com.baeldung.lss.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.baeldung.lss.persistence.UserRepository;
@@ -21,6 +22,9 @@ class UserService implements IUserService {
     private UserRepository repository;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private YubicoClient yubicoClient;
 
     @Override
@@ -35,6 +39,9 @@ class UserService implements IUserService {
                 user.setYubicoPublicId(yubikeyId);
             }
         }
+        final String passwordEncoded = passwordEncoder.encode(user.getPassword());
+        user.setPassword(passwordEncoded);
+        user.setPasswordConfirmation(passwordEncoded);
         return repository.save(user);
     }
 

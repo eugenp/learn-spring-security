@@ -40,7 +40,8 @@ class RegistrationController {
             result.addError(new FieldError("user", "email", e.getMessage()));
             return new ModelAndView("registrationPage", "user", user);
         } catch (final Exception e) {
-            result.addError(new ObjectError(e.getClass().getSimpleName(), e.getMessage()));
+            result.addError(new ObjectError(e.getClass()
+                .getSimpleName(), e.getMessage()));
             return new ModelAndView("registrationPage", "user", user);
         }
         return new ModelAndView("redirect:/login");

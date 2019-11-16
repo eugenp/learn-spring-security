@@ -39,7 +39,8 @@ public class VerificationCodeController {
 
         System.out.println("messageBody:" + messageBody);
 
-        final Message message = Message.creator(new PhoneNumber(user.getPhone()), new PhoneNumber(senderNumber), messageBody).create();
+        final Message message = Message.creator(new PhoneNumber(user.getPhone()), new PhoneNumber(senderNumber), messageBody)
+            .create();
         System.out.println(message.getSid());
 
     }

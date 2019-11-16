@@ -51,7 +51,8 @@ public class VerificationCodeController {
         params.add(new BasicNameValuePair("From", senderNumber));
         System.out.println(params);
 
-        final MessageFactory messageFactory = twilioRestClient.getAccount().getMessageFactory();
+        final MessageFactory messageFactory = twilioRestClient.getAccount()
+            .getMessageFactory();
         final Message message = messageFactory.create(params);
         System.out.println(message.getSid());
     }

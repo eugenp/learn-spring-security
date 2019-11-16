@@ -28,11 +28,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication auth) throws AuthenticationException {
         final String username = auth.getName();
-        final String password = auth.getCredentials().toString();
+        final String password = auth.getCredentials()
+            .toString();
         final String otp = ((CustomWebAuthenticationDetails) auth.getDetails()).getVerificationCode();
         final User user = userRepository.findByEmail(username);
 
-        if ((user == null) || !user.getPassword().equals(password)) {
+        if ((user == null) || !user.getPassword()
+            .equals(password)) {
             throw new BadCredentialsException("Invalid username or password");
         }
 
@@ -42,7 +44,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 throw new BadCredentialsException("Invalid Yubico key");
             }
             final String yubicoPublicId = YubicoClient.getPublicId(otp);
-            if (!user.getYubicoPublicId().equals(yubicoPublicId)) {
+            if (!user.getYubicoPublicId()
+                .equals(yubicoPublicId)) {
                 throw new BadCredentialsException("Invalid Yubico ID");
             }
 

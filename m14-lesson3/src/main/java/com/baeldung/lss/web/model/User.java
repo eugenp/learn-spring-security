@@ -103,8 +103,21 @@ public class User {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("User [id=").append(id).append(", email=").append(email).append(", password=").append(password).append(", passwordConfirmation=").append(passwordConfirmation).append(", created=").append(created).append(", secret=").append(secret)
-                .append(", phone=").append(phone).append("]");
+        builder.append("User [id=")
+            .append(id)
+            .append(", email=")
+            .append(email)
+            .append(", password=")
+            .append(password)
+            .append(", passwordConfirmation=")
+            .append(passwordConfirmation)
+            .append(", created=")
+            .append(created)
+            .append(", secret=")
+            .append(secret)
+            .append(", phone=")
+            .append(phone)
+            .append("]");
         return builder.toString();
     }
 
