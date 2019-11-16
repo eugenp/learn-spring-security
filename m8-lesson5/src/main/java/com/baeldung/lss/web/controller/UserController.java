@@ -39,7 +39,10 @@ class UserController {
 
     @RequestMapping
     public ModelAndView list() {
-        final List<User> users = activeUserService.getActiveUsers().stream().map(s -> new User(s)).collect(Collectors.toList());
+        final List<User> users = activeUserService.getActiveUsers()
+            .stream()
+            .map(s -> new User(s))
+            .collect(Collectors.toList());
         // final Iterable<User> users = this.userRepository.findAll();
 
         return new ModelAndView("tl/list", "users", users);

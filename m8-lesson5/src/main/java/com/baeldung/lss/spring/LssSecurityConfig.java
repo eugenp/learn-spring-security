@@ -73,9 +73,9 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
-    
+
     @Bean
-    public static ServletListenerRegistrationBean httpSessionEventPublisher() {	
+    public static ServletListenerRegistrationBean httpSessionEventPublisher() {
         return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
     }
 }

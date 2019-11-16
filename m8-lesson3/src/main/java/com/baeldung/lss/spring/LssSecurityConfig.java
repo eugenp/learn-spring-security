@@ -45,16 +45,16 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-         /*final DaoAuthenticationProvider daoAuthProvider = new DaoAuthenticationProvider();
-         daoAuthProvider.setUserDetailsService(userDetailsService);
-         auth.authenticationProvider(daoAuthProvider).authenticationProvider(customAuthenticationProvider);*/
+        /*final DaoAuthenticationProvider daoAuthProvider = new DaoAuthenticationProvider();
+        daoAuthProvider.setUserDetailsService(userDetailsService);
+        auth.authenticationProvider(daoAuthProvider).authenticationProvider(customAuthenticationProvider);*/
 
         // auth.parentAuthenticationManager(new ProviderManager(Lists.newArrayList(customAuthenticationProvider)));
-        
+
         ProviderManager authenticationManager = new ProviderManager(Lists.newArrayList(customAuthenticationProvider));
         authenticationManager.setEraseCredentialsAfterAuthentication(false);
         auth.parentAuthenticationManager(authenticationManager);
-        //auth.eraseCredentials(false).userDetailsService(userDetailsService);
+        // auth.eraseCredentials(false).userDetailsService(userDetailsService);
     }
 
     @Override
