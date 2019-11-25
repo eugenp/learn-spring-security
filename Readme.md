@@ -1,3 +1,4 @@
+UPDATE: The price of LSSO will permanently change on the 11th of December, along with the upcoming OAuth2 material.
 
 # About this repo
 
