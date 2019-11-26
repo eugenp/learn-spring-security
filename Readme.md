@@ -1,4 +1,4 @@
-UPDATE: The price of LSSO will permanently change on the 11th of December, along with the upcoming OAuth2 material.
+UPDATE: The price of Learn Spring Security OAuth will permanently change on the 11th of December, along with the upcoming OAuth2 material: https://courses.baeldung.com/p/learn-spring-security-oauth-the-master-class/
 
 # About this repo
 
