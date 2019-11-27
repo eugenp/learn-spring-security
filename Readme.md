@@ -1,4 +1,5 @@
-**UPDATE**: The price of Learn Spring Security OAuth will permanently change on the 11th of December, along with the upcoming OAuth2 material: http://bit.ly/github-lss
+**UPDATE**: The price of "Learn Spring Security OAuth" will permanently change on the 11th of December, along with the upcoming OAuth2 material: http://bit.ly/github-lss
+
 
 # About this repo
 
