@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <description>The &quot;Learn Spring Security OAuth&quot; Course: The Basics of OAuth2 (New Stack)</description>
+    <name>lsso--basics-of-oauth2</name>
+
+    <groupId>com.baeldung</groupId>
+    <artifactId>lsso--basics-of-oauth2</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>resource-server-start</module>
+        <module>resource-server-end</module>
+        <module>authorization-server-start</module>
+        <module>authorization-server-end</module>
+        <module>oauth-client-start</module>
+        <module>oauth-client-end</module>
+        <module>refresh-token-start</module>
+        <module>refresh-token-end</module>
+        <module>tokens-jwt-end</module>
+        <module>tokens-jwt-start</module>
+    </modules>
+
+</project>

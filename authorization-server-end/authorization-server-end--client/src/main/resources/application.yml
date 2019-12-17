@@ -1,0 +1,30 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          custom:
+            client-id: lssoClient
+            client-secret: lssoSecret
+            scope: read,write
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8082/um-webapp-client/login/oauth2/code/custom
+        provider:
+          custom:
+            authorization-uri: http://localhost:8083/um-webapp-auth-server/oauth/authorize
+            token-uri: http://localhost:8083/um-webapp-auth-server/oauth/token
+            user-info-uri: http://localhost:8081/um-webapp-resource-server/users/info
+            user-name-attribute: user_name
+  thymeleaf:
+    cache: false
+    
+server: 
+  port: 8082
+  servlet: 
+    context-path: /um-webapp-client
+    
+logging: 
+  level: 
+    org.springframework: INFO
+    org.springframework.web.client.RestTemplate: DEBUG
+        
