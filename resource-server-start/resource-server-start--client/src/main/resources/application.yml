@@ -8,24 +8,22 @@ spring:
             client-secret: lssoSecret
             scope: read,write
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8082/um-webapp-client/login/oauth2/code/custom
+            redirect-uri: http://localhost:8082/lsso-client/login/oauth2/code/custom
         provider:
           custom:
-            authorization-uri: http://localhost:8083/um-webapp-auth-server/oauth/authorize
-            token-uri: http://localhost:8083/um-webapp-auth-server/oauth/token
-            user-info-uri: http://localhost:8081/um-webapp-resource-server/user/info
-            user-name-attribute: user_name
+            authorization-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth
+            token-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token
+            user-info-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
   thymeleaf:
     cache: false
     
 server: 
   port: 8082
   servlet: 
-    context-path: /um-webapp-client
+    context-path: /lsso-client
     
 logging: 
-  level:
-    org.org.springframework: INFO
-
-oauth:
-  resourceServerBase: http://localhost:8081/um-webapp-resource-server    
+  level: 
+    org.springframework: INFO
+        

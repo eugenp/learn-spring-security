@@ -30,7 +30,7 @@ public class ProjectClientController {
     @PostMapping("/projects")
     public String saveProject(Project project, Model model) {
         try {
-            // TODO: send request to save Project...
+            
             return "redirect:/projects";
         } catch (final HttpServerErrorException e) {
             model.addAttribute("msg", e.getResponseBodyAsString());

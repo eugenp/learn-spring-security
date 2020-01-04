@@ -13,8 +13,8 @@
     <modules>
         <module>resource-server-start</module>
         <module>resource-server-end</module>
-        <module>authorization-server-start</module>
-        <module>authorization-server-end</module>
+        <module>authorization-server-keycloak-start</module>
+        <module>authorization-server-keycloak-end</module>
         <module>oauth-client-start</module>
         <module>oauth-client-end</module>
         <module>refresh-token-start</module>

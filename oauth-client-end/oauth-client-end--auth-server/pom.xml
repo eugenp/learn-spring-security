@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.0.RELEASE</version>
+        <version>2.2.2.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -83,6 +83,12 @@
                     <groupId>org.jboss.spec.javax.servlet</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.modules</groupId>
+            <artifactId>jboss-modules</artifactId>
+            <version>${jboss.modules}</version>
         </dependency>
 
         <dependency>
@@ -182,6 +188,7 @@
 
         <keycloak.version>8.0.0</keycloak.version>
         <resteasy.version>3.9.0.Final</resteasy.version>
+        <jboss.modules>1.9.2.Final</jboss.modules>
     </properties>
 
 </project>

@@ -32,7 +32,7 @@
                 </tr>
                 <tr th:each="project : ${projects}">
                     <td><span th:text="${project.id}"> ID </span></td>
-                    <td><a href="#" th:text="${project.name}"> Name </a></td>
+                    <td><span th:text="${project.name}"> Name </span></td>
                     <td><span th:text="*{project.dateCreated}"> Creation Date </span></td>
                 </tr>
             </tbody>

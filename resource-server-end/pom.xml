@@ -10,8 +10,7 @@
 
     <modules>
         <module>resource-server-end--auth-server</module>
-        <module>resource-server-end--resource-server-old</module>
-        <module>resource-server-end--resource-server-new</module>
+        <module>resource-server-end--resource-server</module>
         <module>resource-server-end--client</module>
     </modules>
 
