@@ -1,6 +1,3 @@
-# About this repo
+# Learn Spring Security OAuth - OAuth2 Beyond the Basics - The Resource Server (New Stack)
 
-This is the codebase of the Learn Spring Security course. <br/><br/>
-If you're already a student of the course - you can start exploring this through the lesson notes in the course. <br/>
-If you're not a student, you can get access to the course here: http://bit.ly/github-lss <br/>
- <br/> <br/>
+This is the codebase for Module 'OAuth2 Beyond the Basics - The Resource Server (New Stack)' of [Learn Spring Security OAuth](http://bit.ly/github-lsso)
