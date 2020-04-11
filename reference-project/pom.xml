@@ -1,11 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
-Module  14 - Lesson 3 - New</description>
+        Reference Project M1-M9 &quot; M12</description>
     <name>learn-spring-security</name>
 
-    <groupId>com.baeldung.m14</groupId>
-    <artifactId>learn-spring-security-m14-l3-new</artifactId>
+    <groupId>com.baeldung.lss</groupId>
+    <artifactId>learn-spring-security-reference</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -13,8 +14,8 @@ Module  14 - Lesson 3 - New</description>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.4.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
     </parent>
+
 
     <dependencies>
 
@@ -24,23 +25,20 @@ Module  14 - Lesson 3 - New</description>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
         </dependency>
 
         <dependency>
@@ -55,11 +53,6 @@ Module  14 - Lesson 3 - New</description>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-        </dependency>
-
         <!-- persistence -->
 
         <dependency>
@@ -68,15 +61,23 @@ Module  14 - Lesson 3 - New</description>
         </dependency>
 
         <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <scope>runtime</scope>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!-- <dependency> -->
-        <!-- <groupId>mysql</groupId> -->
-        <!-- <artifactId>mysql-connector-java</artifactId> -->
-        <!-- <version>${mysql.version}</version> -->
-        <!-- </dependency> -->
+
+        <!-- mail -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <!-- Password Validation -->
+        <dependency>
+            <groupId>org.passay</groupId>
+            <artifactId>passay</artifactId>
+            <version>${passay.version}</version>
+        </dependency>
 
         <!-- common utilities -->
 
@@ -87,35 +88,9 @@ Module  14 - Lesson 3 - New</description>
         </dependency>
 
         <!-- logging -->
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <!-- <scope>runtime</scope> -->
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <!-- <scope>runtime</scope> --> <!-- some spring dependencies need to compile against jcl -->
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-        </dependency>
-
-        <!-- <dependency> <groupId>com.warrenstrange</groupId> <artifactId>googleauth</artifactId> <version>0.5.0</version> </dependency> -->
-
-        <dependency>
-            <groupId>com.twilio.sdk</groupId>
-            <artifactId>twilio</artifactId>
-            <version>7.17.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.aerogear</groupId>
-            <artifactId>aerogear-otp-java</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
+                <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
 
         <!-- test scoped -->
@@ -126,6 +101,32 @@ Module  14 - Lesson 3 - New</description>
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.aerogear</groupId>
+            <artifactId>aerogear-otp-java</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -134,13 +135,11 @@ Module  14 - Lesson 3 - New</description>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${spring-loaded.version}</version>
-                    </dependency>
-                </dependencies>
+                <configuration>
+                    <arguments>
+                        <argument>--google.auth.enabled=${google.auth.enabled}</argument>
+                    </arguments>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -156,6 +155,8 @@ Module  14 - Lesson 3 - New</description>
 
     <properties>
 
+        <google.auth.enabled>false</google.auth.enabled>
+        <rest-assured.version>2.8.0</rest-assured.version>
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
@@ -163,12 +164,11 @@ Module  14 - Lesson 3 - New</description>
         <!-- commons and utils -->
         <guava.version>21.0</guava.version>
 
-		<!-- spring -->
-		<spring-loaded.version>1.2.8.RELEASE</spring-loaded.version>
-		
         <!-- maven plugins -->
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 
+        <!-- password validation -->
+        <passay.version>1.0</passay.version>
     </properties>
 
     <developers>
@@ -179,5 +179,6 @@ Module  14 - Lesson 3 - New</description>
             <id>eugenp</id>
         </developer>
     </developers>
+
 
 </project>
