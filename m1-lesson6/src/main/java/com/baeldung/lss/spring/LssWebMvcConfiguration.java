@@ -5,14 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.web.model.User;
 
-@EnableWebMvc
 @Configuration
 public class LssWebMvcConfiguration extends WebMvcConfigurerAdapter {
 
