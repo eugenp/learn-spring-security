@@ -1,0 +1,20 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: c29bd63c1501c38e503e
+            client-secret: 2c44ac021a73835dfa48d82069aafc34a553ee55
+  thymeleaf:
+    cache: false
+    
+server: 
+  port: 8082
+  servlet: 
+    context-path: /lsso-client
+    
+logging: 
+  level: 
+    org.springframework: INFO
+        
