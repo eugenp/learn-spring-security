@@ -16,6 +16,7 @@ Module 14</description>
         <module>m14-lesson3</module>
 		<module>m14-lesson3-new</module>
         <module>m14-lesson4</module>
+        <module>reference-project</module>
     </modules>
 
 </project>

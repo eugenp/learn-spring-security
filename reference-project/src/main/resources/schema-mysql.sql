@@ -2,11 +2,11 @@ SET foreign_key_checks = 0;
 drop table if exists security_question_definition;
 drop table if exists security_question;
 drop table if exists users_roles;
-drop table if exists users;
 drop table if exists role;
 drop table if exists verification_token;
 drop table if exists password_reset_token;
 drop table if exists persistent_logins;
+drop table if exists user;
 
 CREATE TABLE `security_question_definition` (
   `id` bigint NOT NULL AUTO_INCREMENT,

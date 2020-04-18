@@ -1,6 +1,5 @@
 package com.baeldung.lss.spring;
 
-import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.security.CustomAuthenticationProvider;
 import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
 import com.baeldung.lss.security.LssLoggingFilter;
@@ -47,9 +46,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomWebAuthenticationDetailsSource authenticationDetailsSource;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Value("${google.auth.enabled}")
     private boolean isGoogleAuthEnabled;
 
@@ -59,7 +55,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { // @formatter:off
-        if(isGoogleAuthEnabled) {
+        if (isGoogleAuthEnabled) {
             auth.authenticationProvider(customAuthenticationProvider);
         } else {
             auth.authenticationProvider(daoAuthenticationProvider());
