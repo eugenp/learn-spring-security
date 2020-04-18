@@ -20,9 +20,12 @@ import io.restassured.response.Response;
  */
 public class Oauth2ClientLiveTest {
 
-    private final String redirectUrl = "http://localhost:8082/lsso-client/login/oauth2/code/custom";
-    private final String resourceUrl = "http://localhost:8082/lsso-client/projects";
-    private final String clientAuthorizationUri = "http://localhost:8082/lsso-client/oauth2/authorization/custom";
+    private static final String USERNAME = "john@test.com";
+    private static final String PASSWORD = "123";
+    private static final String CLIENT_BASE_URL = "http://localhost:8082";
+    private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/login/oauth2/code/custom";
+    private static final String RESOURCE_URL = CLIENT_BASE_URL + "/lsso-client/projects";
+    private static final String CLIENT_AUTHORIZATION_URI = CLIENT_BASE_URL + "/lsso-client/oauth2/authorization/custom";
 
     @Test
     public void givenAuthorizationCodeGrant_whenLoginUsingOauth_thenSuccess() throws UnsupportedEncodingException {
@@ -30,9 +33,10 @@ public class Oauth2ClientLiveTest {
         Response response = RestAssured.given()
             .redirects()
             .follow(false)
-            .get(clientAuthorizationUri);
+            .get(CLIENT_AUTHORIZATION_URI);
         assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
-        String fullAuthorizeUrl = response.getHeader(HttpHeaders.LOCATION).replace("%20", " ");
+        String fullAuthorizeUrl = response.getHeader(HttpHeaders.LOCATION)
+            .replace("%20", " ");
         assertThat(fullAuthorizeUrl).contains("state");
 
         // extract state from redirect uri
@@ -53,7 +57,7 @@ public class Oauth2ClientLiveTest {
             .redirects()
             .follow(false)
             .cookie("AUTH_SESSION_ID", authSessionId)
-            .formParams("username", "john@test.com", "password", "123", "credentialId", "")
+            .formParams("username", USERNAME, "password", PASSWORD, "credentialId", "")
             .post(kcPostAuthenticationUrl);
         assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
 
@@ -66,14 +70,14 @@ public class Oauth2ClientLiveTest {
             .redirects()
             .follow(false)
             .cookie("JSESSIONID", clientSessionId)
-            .get(redirectUrl + "?code=" + code + "&state=" + state);
+            .get(REDIRECT_URL + "?code=" + code + "&state=" + state);
         assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
 
         // extract new client session-id after authentication
         String newClientSessionId = response.getCookie("JSESSIONID");
         response = RestAssured.given()
             .cookie("JSESSIONID", newClientSessionId)
-            .get(resourceUrl);
+            .get(RESOURCE_URL);
         assertThat(HttpStatus.OK.value()).isEqualTo(response.getStatusCode());
         assertThat(response.asString()).contains("Projects : View all");
         System.out.println(response.asString());

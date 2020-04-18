@@ -5,17 +5,17 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-public class Project {
+public class ProjectModel {
     private Long id;
     private String name;
 
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dateCreated;
 
-    public Project() {
+    public ProjectModel() {
     }
 
-    public Project(Long id, String name, LocalDate dateCreated) {
+    public ProjectModel(Long id, String name, LocalDate dateCreated) {
         super();
         this.id = id;
         this.name = name;
@@ -64,7 +64,7 @@ public class Project {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Project other = (Project) obj;
+        ProjectModel other = (ProjectModel) obj;
         if (dateCreated == null) {
             if (other.dateCreated != null)
                 return false;

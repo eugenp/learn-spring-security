@@ -7,7 +7,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = { LssoResourceServerApp.class })
-public class ContextIntegrationTest {
+public class ResourceContextIntegrationTest {
 
     @Test
     public void whenLoadApplication_thenSuccess() {

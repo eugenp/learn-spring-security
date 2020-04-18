@@ -25,11 +25,20 @@ import io.restassured.response.Response;
  */
 public class ResourceServerLiveTest {
 
-    private final String redirectUrl = "http://localhost:8082/lsso-client/login/oauth2/code/custom";
-    private final String authorizeUrlPattern = "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" + redirectUrl;
-    private final String tokenUrl = "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token";
-    private final String resourceUrl = "http://localhost:8081/lsso-resource-server/api/projects";
-    private final String userInfoResourceUrl = "http://localhost:8081/lsso-resource-server/user/info";
+    private static final String CLIENT_ID = "lssoClient";
+    private static final String CLIENT_SECRET = "lssoSecret";
+
+    private static final String USERNAME = "john@test.com";
+    private static final String PASSWORD = "123";
+
+    private static final String CLIENT_BASE_URL = "http://localhost:8082";
+    private static final String AUTH_SERVER_BASE_URL = "http://localhost:8083";
+    private static final String RESOURCE_SERVER_BASE_URL = "http://localhost:8081";
+
+    private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/login/oauth2/code/custom";
+    private static final String AUTHORIZE_URL_PATTERN = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" + REDIRECT_URL;
+    private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/token";
+    private static final String RESOURCE_URL = RESOURCE_SERVER_BASE_URL + "/lsso-resource-server/api/projects";
 
     @SuppressWarnings("unchecked")
     @Test
@@ -40,7 +49,7 @@ public class ResourceServerLiveTest {
         // Access resources using access token
         Response response = RestAssured.given()
             .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-            .get(resourceUrl);
+            .get(RESOURCE_URL);
         System.out.println(response.asString());
         assertThat(response.as(List.class)).hasSizeGreaterThan(0);
     }
@@ -53,23 +62,9 @@ public class ResourceServerLiveTest {
         // Access resources using access token
         Response response = RestAssured.given()
             .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-            .get(resourceUrl);
+            .get(RESOURCE_URL);
         System.out.println(response.asString());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    public void givenUserWithReadScope_whenGetUserInformationResource_thenSuccess() {
-        String accessToken = obtainAccessToken("read");
-        System.out.println("ACCESS TOKEN: " + accessToken);
-
-        // Access resources using access token
-        Response response = RestAssured.given()
-            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-            .get(userInfoResourceUrl);
-        System.out.println(response.asString());
-        assertThat(response.as(Map.class)).containsEntry("user_name", "john@test.com");
     }
 
     @Test
@@ -81,7 +76,7 @@ public class ResourceServerLiveTest {
         Response response = RestAssured.given()
             .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
             .body(newProject)
-            .post(resourceUrl);
+            .post(RESOURCE_URL);
         System.out.println(response.asString());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
     }
@@ -98,7 +93,7 @@ public class ResourceServerLiveTest {
             .body(newProject)
             .log()
             .all()
-            .post(resourceUrl);
+            .post(RESOURCE_URL);
         System.out.println(response.asString());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
@@ -108,7 +103,7 @@ public class ResourceServerLiveTest {
         Response response = RestAssured.given()
             .redirects()
             .follow(false)
-            .get(String.format(authorizeUrlPattern, scopes));
+            .get(String.format(AUTHORIZE_URL_PATTERN, scopes));
         String authSessionId = response.getCookie("AUTH_SESSION_ID");
         String kcPostAuthenticationUrl = response.asString()
             .split("action=\"")[1].split("\"")[0].replace("&amp;", "&");
@@ -118,7 +113,7 @@ public class ResourceServerLiveTest {
             .redirects()
             .follow(false)
             .cookie("AUTH_SESSION_ID", authSessionId)
-            .formParams("username", "john@test.com", "password", "123", "credentialId", "")
+            .formParams("username", USERNAME, "password", PASSWORD, "credentialId", "")
             .post(kcPostAuthenticationUrl);
         assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
 
@@ -130,12 +125,12 @@ public class ResourceServerLiveTest {
         Map<String, String> params = new HashMap<String, String>();
         params.put("grant_type", "authorization_code");
         params.put("code", code);
-        params.put("client_id", "lssoClient");
-        params.put("redirect_uri", redirectUrl);
-        params.put("client_secret", "lssoSecret");
+        params.put("client_id", CLIENT_ID);
+        params.put("redirect_uri", REDIRECT_URL);
+        params.put("client_secret", CLIENT_SECRET);
         response = RestAssured.given()
             .formParams(params)
-            .post(tokenUrl);
+            .post(TOKEN_URL);
         return response.jsonPath()
             .getString("access_token");
     }
