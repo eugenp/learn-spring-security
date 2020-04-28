@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <description>The &quot;Learn Spring Security OAuth&quot; Course: Basic Authorization with OAuth2 - End</description>
+
+    <groupId>com.baeldung</groupId>
+    <artifactId>basic-authorization-end</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>basic-authorization-end--auth-server</module>
+        <module>basic-authorization-end--resource-server</module>
+        <module>basic-authorization-end--client</module>
+    </modules>
+
+</project>

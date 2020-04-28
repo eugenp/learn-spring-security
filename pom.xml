@@ -12,6 +12,10 @@
 
     <modules>
         <module>verify-validate-claims-jwt</module>
+        <module>accessing-token-authentication-attributes-start</module>
+        <module>accessing-token-authentication-attributes-end</module>
+        <module>basic-authorization-start</module>
+        <module>basic-authorization-end</module>
     </modules>
 
 </project>
