@@ -36,7 +36,8 @@ public class Oauth2ClientLiveTest {
             .follow(false)
             .get(clientAuthorizationUri);
         assertEquals(HttpStatus.FOUND.value(), response.getStatusCode());
-        String fullAuthorizeUrl = response.getHeader(HttpHeaders.LOCATION);
+        String fullAuthorizeUrl = response.getHeader(HttpHeaders.LOCATION)
+            .replace("%20", " ");
         assertTrue(fullAuthorizeUrl.contains("state"));
 
         // extract state from redirect uri

@@ -19,8 +19,7 @@
         <module>oauth-client-end</module>
         <module>refresh-token-start</module>
         <module>refresh-token-end</module>
-        <module>tokens-jwt-end</module>
-        <module>tokens-jwt-start</module>
+        <module>tokens-jwt</module>
     </modules>
 
 </project>

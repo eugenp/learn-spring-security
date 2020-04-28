@@ -16,7 +16,7 @@ class UserService implements IUserService {
 
     @Autowired
     private UserRepository repository;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 

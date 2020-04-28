@@ -20,8 +20,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class EmbeddedKeycloakConfig {
-    
-    
 
     @Bean
     ServletRegistrationBean<HttpServlet30Dispatcher> keycloakJaxRsApplication(KeycloakServerProperties keycloakServerProperties, DataSource dataSource) throws Exception {

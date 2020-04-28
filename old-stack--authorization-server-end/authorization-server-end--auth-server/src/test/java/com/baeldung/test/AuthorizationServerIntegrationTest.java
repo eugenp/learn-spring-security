@@ -40,9 +40,11 @@ public class AuthorizationServerIntegrationTest {
         final String cookieValue = response.getCookie("JSESSIONID");
 
         response = RestAssured.given()
+            .redirects()
+            .follow(false)
             .cookie("JSESSIONID", cookieValue)
             .post(authorizeUrl);
-        assertEquals(HttpStatus.FOUND.value(), response.getStatusCode());
+        assertEquals(HttpStatus.SEE_OTHER.value(), response.getStatusCode());
         final String location = response.getHeader(HttpHeaders.LOCATION);
         assertTrue(location.contains(redirectUrl));
         System.out.println(location);
