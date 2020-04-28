@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <description>﻿﻿﻿﻿﻿The &quot;Learn Spring Security OAuth&quot; Course: OAuth2 Beyond the Basics - Deep-Dives (New Stack)</description>
+    <name>lsso--oauth2-beyond-the-basics-deep-dives</name>
+
+    <groupId>com.baeldung</groupId>
+    <artifactId>lsso--oauth2-beyond-the-basics-deep-dives</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>testing-with-restassured-end</module>
+        <module>testing-with-restassured-start</module>
+        <module>oauth2-and-openid-connect-start</module>
+        <module>oauth2-and-openid-connect-end</module>
+        <module>client-credentials-flow-start</module>
+        <module>client-credentials-flow-end</module>
+    </modules>
+</project>

@@ -1,0 +1,30 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          customClientCredentials:
+            authorization-grant-type: client_credentials
+            client-id: lssoClient
+            client-secret: lssoSecret
+            scope: write, read
+        provider:
+          customClientCredentials:
+            token-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token
+
+server: 
+  port: 8082
+  servlet: 
+    context-path: /lsso-client
+    
+logging: 
+  level:
+    org.springframework.web.client: DEBUG
+    org.springframework.web.reactive.function.client: DEBUG
+    org.springframework: INFO
+
+resourceserver:
+  api:
+    project:
+      url: http://localhost:8081/lsso-resource-server/api/projects/
+        
