@@ -1,17 +1,19 @@
 package com.baeldung.lsso;
 
-import com.baeldung.lsso.web.dto.ProjectDto;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.junit.Test;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+
+import com.baeldung.lsso.web.dto.ProjectDto;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 public class TokenIntegrationTest {
     private static final String AUTH_SERVICE_BASE_URL = "http://localhost:8083/auth/realms/baeldung";
@@ -22,25 +24,8 @@ public class TokenIntegrationTest {
 
     @Test
     public void givenAuthorizationCodeGrant_whenUseToken_thenSuccess() {
-        Response response = RestAssured.get(AUTH_SERVICE_AUTHORIZE_URL);
+        Response response = getTokenInformation();
 
-        response = authenticateInAuthorizationServer(response);
-
-        assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
-
-        String location = response.getHeader(HttpHeaders.LOCATION);
-        String code = location.split("code=")[1].split("&")[0];
-
-        Map<String, String> params = new HashMap<>();
-        params.put("grant_type", "authorization_code");
-        params.put("code", code);
-        params.put("client_id", "lssoClient");
-        params.put("redirect_uri", REDIRECT_URL);
-        params.put("client_secret", "lssoSecret");
-
-        response = RestAssured.given()
-            .formParams(params)
-            .post(CONNECT_TOKEN);
         String accessToken = response.jsonPath()
             .getString("access_token");
 
@@ -73,14 +58,8 @@ public class TokenIntegrationTest {
 
     private Response getTokenInformation() {
         Response response = RestAssured.get(AUTH_SERVICE_AUTHORIZE_URL);
-        String authSessionId = response.getCookie("AUTH_SESSION_ID");
-        String kcPostAuthenticationUrl = response.asString()
-            .split("action=\"")[1].split("\"")[0].replace("&amp;", "&");
 
-        response = RestAssured.given()
-            .cookie("AUTH_SESSION_ID", authSessionId)
-            .formParams("username", "john@test.com", "password", "123")
-            .post(kcPostAuthenticationUrl);
+        response = authenticateInAuthorizationServer(response);
 
         String location = response.getHeader(HttpHeaders.LOCATION);
         String code = location.split("code=")[1].split("&")[0];
