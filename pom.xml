@@ -12,6 +12,8 @@ Module  5</description>
 
     <modules>
         <module>m5-lesson1</module>
+        <module>m5-on-method-auth-expressions-start</module>
+        <module>m5-on-method-auth-expressions-end</module>
         <module>m5-lesson4</module>
         <module>m5-lesson5</module>
     </modules>

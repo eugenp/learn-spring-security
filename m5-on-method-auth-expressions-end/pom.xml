@@ -2,11 +2,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
-Module  5 - Lesson 5</description>
+Module  5 - On Method Auth Expressions End</description>
     <name>learn-spring-security</name>
 
     <groupId>com.baeldung.m5</groupId>
-    <artifactId>learn-spring-security-m5-l5</artifactId>
+    <artifactId>m5-on-method-auth-expressions-end</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -42,7 +42,7 @@ Module  5 - Lesson 5</description>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-		<dependency>
+        <dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
@@ -71,33 +71,20 @@ Module  5 - Lesson 5</description>
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
         </dependency>
-  
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
-        
         <!-- <dependency> -->
         <!-- <groupId>mysql</groupId> -->
         <!-- <artifactId>mysql-connector-java</artifactId> -->
         <!-- <version>${mysql.version}</version> -->
         <!-- </dependency> -->
 
-        <!-- test scoped -->
+        <!-- common utilities -->
 
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>${rest-assured.version}</version>
-            <scope>test</scope>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
-        
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>   
-            <scope>test</scope>
-        </dependency>
-        
+
     </dependencies>
 
     <build>
@@ -112,12 +99,9 @@ Module  5 - Lesson 5</description>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>						
-						<excludes>
-						   <exclude>**/*LiveTest.java</exclude>
-						</excludes>						                
+                    <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
-            </plugin>                        
+            </plugin>
 
         </plugins>
     </build>
@@ -128,8 +112,9 @@ Module  5 - Lesson 5</description>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         
-        <rest-assured.version>2.9.0</rest-assured.version>
-		
+        <!-- commons and utils -->
+        <guava.version>21.0</guava.version>
+        
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		
