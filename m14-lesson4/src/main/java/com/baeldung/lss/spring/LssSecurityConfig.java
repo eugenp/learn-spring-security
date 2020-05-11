@@ -1,7 +1,9 @@
 package com.baeldung.lss.spring;
 
-import javax.annotation.PostConstruct;
-
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
+import com.baeldung.lss.web.model.User;
+import com.yubico.client.v2.YubicoClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,13 +17,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
-import com.baeldung.lss.web.model.User;
-import com.yubico.client.v2.YubicoClient;
+import javax.annotation.PostConstruct;
 
 @Configuration
-@ComponentScan({ "com.baeldung.lss.security" })
+@ComponentScan({"com.baeldung.lss.security"})
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -59,21 +58,21 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {// @formatter:off
         http
-        .authorizeRequests()
-                .antMatchers("/signup", "/user/register","/code*","/isUsing2FA*").permitAll()
+                .authorizeRequests()
+                .antMatchers("/signup", "/user/register", "/code*", "/isUsing2FA*").permitAll()
                 .anyRequest().authenticated()
 
-        .and()
-        .formLogin().
-            loginPage("/login").permitAll().
-            loginProcessingUrl("/doLogin")
-            .authenticationDetailsSource(authenticationDetailsSource)
+                .and()
+                .formLogin().
+                loginPage("/login").permitAll().
+                loginProcessingUrl("/doLogin")
+                .authenticationDetailsSource(authenticationDetailsSource)
 
-        .and()
-        .logout().permitAll().logoutUrl("/logout")
+                .and()
+                .logout().permitAll().logoutUrl("/logout")
 
-        .and()
-        .csrf().disable()
+                .and()
+                .csrf().disable()
         ;
     } // @formatter:on
 
@@ -87,9 +86,10 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @PostConstruct
     private void saveTestUser() {
         final User user = new User();
+        String encodedPassword = this.passwordEncoder().encode("pass");
         user.setEmail("user@example.com");
-        user.setPassword("pass");
-        user.setPasswordConfirmation("pass");
+        user.setPassword(encodedPassword);
+        user.setPasswordConfirmation(encodedPassword);
         userRepository.save(user);
     }
 
