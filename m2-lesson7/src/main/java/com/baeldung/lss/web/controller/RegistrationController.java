@@ -1,16 +1,7 @@
 package com.baeldung.lss.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
-
 import com.baeldung.lss.model.PasswordResetToken;
 import com.baeldung.lss.model.SecurityQuestion;
-import com.baeldung.lss.model.SecurityQuestionDefinition;
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.model.VerificationToken;
 import com.baeldung.lss.persistence.SecurityQuestionDefinitionRepository;
@@ -24,9 +15,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -37,6 +25,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 class RegistrationController {
@@ -75,19 +70,25 @@ class RegistrationController {
     @RequestMapping(value = "user/register")
     public ModelAndView registerUser(@Valid final User user, final BindingResult result, final @RequestParam Long questionId, @RequestParam final String answer, final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return new ModelAndView("registrationPage", "user", user);
+            return new ModelAndView("registrationPage", "user", user)
+                    .addObject("questions", securityQuestionDefinitionRepository.findAll())
+                    .addObject("questionId", questionId)
+                    .addObject("answer", answer);
         }
         try {
             final User registered = userService.registerNewUser(user);
 
             securityQuestionDefinitionRepository.findById(questionId)
-                .ifPresent(questionDefinition -> securityQuestionRepository.save(new SecurityQuestion(user, questionDefinition, answer)));
+                    .ifPresent(questionDefinition -> securityQuestionRepository.save(new SecurityQuestion(user, questionDefinition, answer)));
 
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
         } catch (EmailExistsException e) {
             result.addError(new FieldError("user", "email", e.getMessage()));
-            return new ModelAndView("registrationPage", "user", user);
+            return new ModelAndView("registrationPage", "user", user)
+                    .addObject("questions", securityQuestionDefinitionRepository.findAll())
+                    .addObject("questionId", questionId)
+                    .addObject("answer", answer);
         }
         redirectAttributes.addFlashAttribute("message", "You should receive a confirmation email shortly");
         return new ModelAndView("redirect:/login");
@@ -104,8 +105,8 @@ class RegistrationController {
         final User user = verificationToken.getUser();
         final Calendar cal = Calendar.getInstance();
         if ((verificationToken.getExpiryDate()
-            .getTime()
-            - cal.getTime()
+                .getTime()
+                - cal.getTime()
                 .getTime()) <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Your registration token has expired. Please register again.");
             return new ModelAndView("redirect:/login");
@@ -125,7 +126,7 @@ class RegistrationController {
         final User user = userService.findUserByEmail(userEmail);
         if (user != null) {
             final String token = UUID.randomUUID()
-                .toString();
+                    .toString();
             userService.createPasswordResetTokenForUser(user, token);
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             final SimpleMailMessage email = constructResetTokenEmail(appUrl, token, user);
@@ -151,8 +152,8 @@ class RegistrationController {
 
         final Calendar cal = Calendar.getInstance();
         if ((passToken.getExpiryDate()
-            .getTime()
-            - cal.getTime()
+                .getTime()
+                - cal.getTime()
                 .getTime()) <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Your password reset token has expired");
             return new ModelAndView("redirect:/login");
@@ -164,7 +165,7 @@ class RegistrationController {
     @RequestMapping(value = "/user/savePassword", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("passwordConfirmation") final String passwordConfirmation, @RequestParam("token") final String token, @RequestParam final Long questionId,
-        @RequestParam final String answer, final RedirectAttributes redirectAttributes) {
+                                     @RequestParam final String answer, final RedirectAttributes redirectAttributes) {
         if (!password.equals(passwordConfirmation)) {
             final Map<String, Object> model = new HashMap<>();
             model.put("errorMessage", "Passwords do not match");

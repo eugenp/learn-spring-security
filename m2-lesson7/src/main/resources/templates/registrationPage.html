@@ -42,14 +42,14 @@
                 <label class="control-label col-xs-2" for="question">Security Question:</label>
                 <div class="col-xs-10">
                     <select id="question" name="questionId">
-                        <option th:each="question : ${questions}" th:value="${question.id}" th:text="${question.text}">Question</option>
+                        <option th:each="question : ${questions}" th:value="${question.id}" th:text="${question.text}" th:selected="${question.id == questionId}">Question</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-xs-2" for="answer">Answer</label>
                 <div class="col-xs-10">
-                    <input id="answer" type="text" name="answer" />
+                    <input id="answer" type="text" name="answer" th:value="${answer}"/>
                 </div>
             </div>
             <div class="form-actions col-xs-offset-2 col-xs-10">
