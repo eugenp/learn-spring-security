@@ -7,25 +7,28 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @EnableWebFluxSecurity
 @Configuration
 public class LssSecurityConfig {
 
-    @SuppressWarnings("deprecation")
     @Bean
     public MapReactiveUserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-            .username("user")
-            .password("pass")
-            .roles("USER")
-            .build();
-        UserDetails admin = User.withDefaultPasswordEncoder()
-            .username("admin")
-            .password("pass")
-            .roles("ADMIN")
-            .build();
+        UserDetails user = User.builder()
+                .passwordEncoder(passwordEncoder()::encode)
+                .username("user")
+                .password("pass")
+                .roles("USER")
+                .build();
+        UserDetails admin = User.builder()
+                .passwordEncoder(passwordEncoder()::encode)
+                .username("admin")
+                .password("pass")
+                .roles("ADMIN")
+                .build();
 
         return new MapReactiveUserDetailsService(user, admin);
 
@@ -40,7 +43,7 @@ public class LssSecurityConfig {
             .anyExchange()
             .authenticated()
                 .and()
-            .httpBasic()                    
+            .httpBasic()
                 .and()
             .csrf()
             .disable()
@@ -48,4 +51,8 @@ public class LssSecurityConfig {
          // @formatter:on
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
+    }
 }

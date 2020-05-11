@@ -8,6 +8,8 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @EnableWebFluxSecurity
@@ -15,15 +17,16 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @Configuration
 public class LssSecurityConfig {
 
-    @SuppressWarnings("deprecation")
     @Bean
     public MapReactiveUserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
+        UserDetails user = User.builder()
+            .passwordEncoder(passwordEncoder()::encode)
             .username("user")
             .password("pass")
             .roles("USER")
             .build();
-        UserDetails admin = User.withDefaultPasswordEncoder()
+        UserDetails admin = User.builder()
+            .passwordEncoder(passwordEncoder()::encode)
             .username("admin")
             .password("pass")
             .roles("ADMIN")
@@ -46,4 +49,8 @@ public class LssSecurityConfig {
                 .build();
     } // @formatter:on
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
+    }
 }
