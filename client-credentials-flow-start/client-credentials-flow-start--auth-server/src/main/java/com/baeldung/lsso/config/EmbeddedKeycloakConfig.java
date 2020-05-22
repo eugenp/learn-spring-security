@@ -11,17 +11,13 @@ import javax.sql.DataSource;
 import org.jboss.resteasy.plugins.server.servlet.HttpServlet30Dispatcher;
 import org.jboss.resteasy.plugins.server.servlet.ResteasyContextParameters;
 import org.keycloak.services.filters.KeycloakSessionServletFilter;
-import org.keycloak.services.listeners.KeycloakSessionDestroyListener;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class EmbeddedKeycloakConfig {
-    
-    
 
     @Bean
     ServletRegistrationBean<HttpServlet30Dispatcher> keycloakJaxRsApplication(KeycloakServerProperties keycloakServerProperties, DataSource dataSource) throws Exception {
@@ -38,11 +34,6 @@ public class EmbeddedKeycloakConfig {
         servlet.setAsyncSupported(true);
 
         return servlet;
-    }
-
-    @Bean
-    ServletListenerRegistrationBean<KeycloakSessionDestroyListener> keycloakSessionDestroyListener() {
-        return new ServletListenerRegistrationBean<>(new KeycloakSessionDestroyListener());
     }
 
     @Bean

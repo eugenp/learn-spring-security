@@ -31,7 +31,6 @@ public class AuthorizationServerLiveTest {
     private static final String AUTHORIZE_URL = AUTH_SERVER_BASE_URL + "/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=read&redirect_uri=" + REDIRECT_URL;
     private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/protocol/openid-connect/token";
 
-
     @Test
     public void givenAuthorizationCodeGrant_whenObtainAccessToken_thenSuccess() {
         String accessToken = obtainAccessToken();

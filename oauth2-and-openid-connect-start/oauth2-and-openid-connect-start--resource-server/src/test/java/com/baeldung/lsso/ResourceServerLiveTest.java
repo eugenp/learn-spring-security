@@ -56,7 +56,7 @@ public class ResourceServerLiveTest {
 
     @Test
     public void givenUserWithOtherScope_whenGetProjectResource_thenForbidden() {
-        String accessToken = obtainAccessToken("other");
+        String accessToken = obtainAccessToken("email");
         System.out.println("ACCESS TOKEN: " + accessToken);
 
         // Access resources using access token
@@ -65,6 +65,18 @@ public class ResourceServerLiveTest {
             .get(RESOURCE_URL);
         System.out.println(response.asString());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
+    }
+
+    @Test
+    public void givenUserWithNonSupportedScope_whenObtainingAuthorizationCode_thenRedirectedWithErrorCode() {
+        Response response = RestAssured.given()
+            .redirects()
+            .follow(false)
+            .get(String.format(AUTHORIZE_URL_PATTERN, "notSupported"));
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND.value());
+        assertThat(response.getHeader(HttpHeaders.LOCATION)).contains("error=invalid_request")
+            .contains("error_description=Invalid+scopes%3A+notSupported");
     }
 
     @Test

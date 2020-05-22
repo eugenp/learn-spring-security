@@ -17,5 +17,7 @@
         <module>oauth2-and-openid-connect-end</module>
         <module>client-credentials-flow-start</module>
         <module>client-credentials-flow-end</module>
+        <module>exploring-jws-with-oauth2-start</module>
+        <module>exploring-jws-with-oauth2-end</module>
     </modules>
 </project>
