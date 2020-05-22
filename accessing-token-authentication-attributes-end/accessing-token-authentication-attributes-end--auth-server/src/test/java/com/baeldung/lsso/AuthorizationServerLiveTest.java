@@ -18,6 +18,19 @@ import io.restassured.response.Response;
  */
 public class AuthorizationServerLiveTest {
 
+    private static final String USERNAME = "john@test.com";
+    private static final String PASSWORD = "123";
+
+    private static final String CLIENT_ID = "lssoClient";
+    private static final String CLIENT_SECRET = "lssoSecret";
+
+    private static final String AUTH_SERVER_BASE_URL = "http://localhost:8083/auth/realms/baeldung";
+    private static final String CLIENT_BASE_URL = "http://localhost:8082";
+
+    private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/login/oauth2/code/custom";
+    private static final String AUTHORIZE_URL = AUTH_SERVER_BASE_URL + "/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=read&redirect_uri=" + REDIRECT_URL;
+    private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/protocol/openid-connect/token";
+
     @Test
     public void givenAuthorizationCodeGrant_whenObtainAccessToken_thenSuccess() {
         String accessToken = obtainAccessToken();
@@ -27,7 +40,7 @@ public class AuthorizationServerLiveTest {
 
     @Test
     public void whenServiceStartsAndLoadsRealmConfigurations_thenOidcDiscoveryEndpointIsAvailable() {
-        final String oidcDiscoveryUrl = "http://localhost:8083/auth/realms/baeldung/.well-known/openid-configuration";
+        final String oidcDiscoveryUrl = AUTH_SERVER_BASE_URL + "/.well-known/openid-configuration";
 
         Response response = RestAssured.given()
             .redirects()
@@ -41,14 +54,11 @@ public class AuthorizationServerLiveTest {
     }
 
     private String obtainAccessToken() {
-        final String redirectUrl = "http://localhost:8082/lsso-client/login/oauth2/code/custom";
-        final String authorizeUrl = "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=read&redirect_uri=" + redirectUrl;
-        final String tokenUrl = "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token";
         // obtain authentication url with custom codes
         Response response = RestAssured.given()
             .redirects()
             .follow(false)
-            .get(authorizeUrl);
+            .get(AUTHORIZE_URL);
         String authSessionId = response.getCookie("AUTH_SESSION_ID");
         String kcPostAuthenticationUrl = response.asString()
             .split("action=\"")[1].split("\"")[0].replace("&amp;", "&");
@@ -58,7 +68,7 @@ public class AuthorizationServerLiveTest {
             .redirects()
             .follow(false)
             .cookie("AUTH_SESSION_ID", authSessionId)
-            .formParams("username", "john@test.com", "password", "123", "credentialId", "")
+            .formParams("username", USERNAME, "password", PASSWORD, "credentialId", "")
             .post(kcPostAuthenticationUrl);
         assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
 
@@ -70,12 +80,12 @@ public class AuthorizationServerLiveTest {
         Map<String, String> params = new HashMap<String, String>();
         params.put("grant_type", "authorization_code");
         params.put("code", code);
-        params.put("client_id", "lssoClient");
-        params.put("redirect_uri", redirectUrl);
-        params.put("client_secret", "lssoSecret");
+        params.put("client_id", CLIENT_ID);
+        params.put("redirect_uri", REDIRECT_URL);
+        params.put("client_secret", CLIENT_SECRET);
         response = RestAssured.given()
             .formParams(params)
-            .post(tokenUrl);
+            .post(TOKEN_URL);
         return response.jsonPath()
             .getString("access_token");
     }

@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import com.baeldung.lsso.config.KeycloakServerProperties;
 
 @SpringBootApplication(exclude = LiquibaseAutoConfiguration.class)
-@EnableConfigurationProperties(KeycloakServerProperties.class)
+@EnableConfigurationProperties({ KeycloakServerProperties.class })
 public class LssoAuthorizationServerApp {
 
     private static final Logger LOG = LoggerFactory.getLogger(LssoAuthorizationServerApp.class);
