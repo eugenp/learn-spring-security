@@ -54,7 +54,7 @@ public class ResourceServerLiveTest {
         Response response = RestAssured.given()
             .redirects()
             .follow(false)
-            .get(AUTHORIZE_URL_PATTERN);
+            .get(String.format(AUTHORIZE_URL_PATTERN, "read"));
         String authSessionId = response.getCookie("AUTH_SESSION_ID");
         String kcPostAuthenticationUrl = response.asString()
             .split("action=\"")[1].split("\"")[0].replace("&amp;", "&");

@@ -12,8 +12,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.2.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <version>2.2.6.RELEASE</version>
+        <relativePath />
     </parent>
 
     <dependencies>
@@ -28,11 +28,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
         <!-- persistence -->
@@ -52,73 +47,8 @@
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>${resteasy.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jackson2-provider</artifactId>
             <version>${resteasy.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-model-infinispan</artifactId>
-            <version>${keycloak.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-services</artifactId>
-            <version>${keycloak.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jboss-servlet-api_3.0_spec</artifactId>
-                    <groupId>org.jboss.spec.javax.servlet</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.modules</groupId>
-            <artifactId>jboss-modules</artifactId>
-            <version>${jboss.modules}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-model-jpa</artifactId>
-            <version>${keycloak.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-js-adapter</artifactId>
-            <version>${keycloak.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-themes</artifactId>
-            <version>${keycloak.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-saml-core</artifactId>
-            <version>${keycloak.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-authz-policy-common</artifactId>
-            <version>${keycloak.version}</version>
         </dependency>
 
         <dependency>
@@ -128,8 +58,10 @@
         </dependency>
 
         <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-dependencies-server-all</artifactId>
+            <version>${keycloak.version}</version>
+            <type>pom</type>
         </dependency>
 
         <!-- config properties processor -->
@@ -186,9 +118,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>13</java.version>
 
-        <keycloak.version>8.0.0</keycloak.version>
-        <resteasy.version>3.9.0.Final</resteasy.version>
-        <jboss.modules>1.9.2.Final</jboss.modules>
+        <keycloak.version>10.0.1</keycloak.version>
+        <resteasy.version>3.11.2.Final</resteasy.version>
     </properties>
 
 </project>
