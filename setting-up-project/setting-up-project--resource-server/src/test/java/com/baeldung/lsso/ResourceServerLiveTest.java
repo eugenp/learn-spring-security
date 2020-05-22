@@ -25,6 +25,12 @@ import io.restassured.response.Response;
  */
 public class ResourceServerLiveTest {
 
+    private static final String CLIENT_ID = "lssoClient";
+    private static final String CLIENT_SECRET = "lssoSecret";
+
+    private static final String USERNAME = "john@test.com";
+    private static final String PASSWORD = "123";
+
     private static final String CLIENT_BASE_URL = "http://localhost:8082";
     private static final String AUTH_SERVER_BASE_URL = "http://localhost:8083";
     private static final String RESOURCE_SERVER_BASE_URL = "http://localhost:8081";
@@ -33,11 +39,6 @@ public class ResourceServerLiveTest {
     private static final String AUTHORIZE_URL_PATTERN = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" + REDIRECT_URL;
     private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/token";
     private static final String RESOURCE_URL = RESOURCE_SERVER_BASE_URL + "/lsso-resource-server/api/projects";
-
-    private static final String CLIENT_ID = "lssoClient";
-    private static final String CLIENT_SECRET = "lssoSecret";
-    private static final String USERNAME = "john@test.com";
-    private static final String PASSWORD = "123";
 
     @SuppressWarnings("unchecked")
     @Test
@@ -55,7 +56,7 @@ public class ResourceServerLiveTest {
 
     @Test
     public void givenUserWithOtherScope_whenGetProjectResource_thenForbidden() {
-        String accessToken = obtainAccessToken("other");
+        String accessToken = obtainAccessToken("email");
         System.out.println("ACCESS TOKEN: " + accessToken);
 
         // Access resources using access token
@@ -64,6 +65,18 @@ public class ResourceServerLiveTest {
             .get(RESOURCE_URL);
         System.out.println(response.asString());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
+    }
+
+    @Test
+    public void givenUserWithNonSupportedScope_whenObtainingAuthorizationCode_thenRedirectedWithErrorCode() {
+        Response response = RestAssured.given()
+            .redirects()
+            .follow(false)
+            .get(String.format(AUTHORIZE_URL_PATTERN, "notSupported"));
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND.value());
+        assertThat(response.getHeader(HttpHeaders.LOCATION)).contains("error=invalid_request")
+            .contains("error_description=Invalid+scopes%3A+notSupported");
     }
 
     @Test
