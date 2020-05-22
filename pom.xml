@@ -15,6 +15,8 @@
         <module>oauth2-client-thirdparty-authserver-start</module>
         <module>oauth2-client-thirdparty-authserver-end</module>
         <module>refresh-token</module>
+        <module>testing-oauth2-clients-start</module>
+        <module>testing-oauth2-clients-end</module>
     </modules>
 
 </project>
