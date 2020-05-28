@@ -17,8 +17,6 @@
         <module>authorization-server-keycloak-end</module>
         <module>oauth-client-start</module>
         <module>oauth-client-end</module>
-        <module>refresh-token-start</module>
-        <module>refresh-token-end</module>
         <module>tokens-jwt</module>
     </modules>
 
