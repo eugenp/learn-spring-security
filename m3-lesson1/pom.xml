@@ -93,8 +93,8 @@ Module  3 - Lesson 1</description>
         <!-- mail -->
 
         <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>            
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
         <!-- common utilities -->
