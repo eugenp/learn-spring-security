@@ -30,7 +30,7 @@ public class SecurityIntegrationTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    public void givenAdminUser_whenDeleting_thenAccessDenied() {
+    public void givenAdminUser_whenDeleting_thenSuccess() {
         StepVerifier.create(this.userApi.delete(1l))
             .verifyComplete();
     }

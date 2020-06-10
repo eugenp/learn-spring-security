@@ -40,7 +40,6 @@ public class LssSecurityConfig {
         // @formatter:off
         return httpSecurity
             .authorizeExchange()
-            .pathMatchers("/user/delete/*").hasRole("ADMIN")
             .anyExchange()
             .authenticated()
                 .and()
