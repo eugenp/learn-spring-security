@@ -2,7 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>The &quot;Learn Spring Security OAuth&quot; Course: OAuth2 Beyond the Basics - The Resource Server (New Stack)</description>
+    <description>The &quot;Learn Spring Security OAuth&quot; Course: OAuth2 Beyond the Basics - The Resource Server</description>
     <name>lsso--beyond-the-basics--resource-server</name>
 
     <groupId>com.baeldung</groupId>
@@ -14,6 +14,8 @@
         <module>verify-validate-claims-jwt</module>
         <module>accessing-token-authentication-attributes-start</module>
         <module>accessing-token-authentication-attributes-end</module>
+        <module>accessing-token-authentication-attributes-spel-start</module>
+        <module>accessing-token-authentication-attributes-spel-end</module>
         <module>basic-authorization-start</module>
         <module>basic-authorization-end</module>
     </modules>
