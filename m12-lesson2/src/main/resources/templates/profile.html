@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout">
+<head>
+<title>Profile</title>
+</head>
+<body>
+    <h1 layout:fragment="header">Profile</h1>
+    <div layout:fragment="content" class="container">
+        Current user email: <span id="username" sec:authentication="principal.email">Bob</span><br/>
+        <br/><br/>
+         
+        <div>
+        <div id="qr">
+            <p>Scan this Barcode using Google Authenticator app on your phone 
+                   <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">Android</a> and 
+                   <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605">iPhone</a>
+            </p>
+        </div>
+        </div>
+        
+       
+        
+    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+	getQRCode();
+	console.log("here");
+});
+
+function getQRCode(){
+    $.get("/code?username="+$("#username").html(),function(data) {
+        console.log(data);
+        $("#qr").append('<img src="'+data.url+'" />');
+    });
+}
+
+</script>
+</div>
+</body>
+</html>
