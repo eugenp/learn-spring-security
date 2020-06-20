@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Registration Page</title>
+
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="container">
+    <h1>Registration page</h1>
+    <form id="userForm" th:action="@{/user/register}" th:object="${user}" action="#" method="post" class="form-horizontal">
+        <div th:if="${#fields.hasErrors('global')}" th:errors="*{global}" class="alert alert-danger">Incorrect password confirmation</div>
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="email">Email</label>
+            <div class="col-xs-10">
+                <input id="email" type="email" title="email" th:field="*{email}"/>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="help-block">Email Error</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="password">Password</label>
+            <div class="col-xs-10">
+                <input id="password" type="password" title="password" th:field="*{password}"/>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="help-block">Password Error</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('passwordConfirmation')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="passwordConfirmation">Password Confirmation</label>
+            <div class="col-xs-10">
+                <input id="passwordConfirmation" type="password" title="passwordConfirmation" th:field="*{passwordConfirmation}"/>
+                <span th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}" class="help-block">Password Confirmation Error</span>
+            </div>
+        </div>
+        <div class="form-actions col-xs-offset-2 col-xs-10">
+            <input type="submit" class="btn btn-primary" value="Register"/>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
