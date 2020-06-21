@@ -63,6 +63,11 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @EnableGlobalMethodSecurity(prePostEnabled = true)
     public static class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
@@ -73,11 +78,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
             return new MapBasedMethodSecurityMetadataSource(methodMap);
         }
 
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }

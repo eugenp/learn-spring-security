@@ -5,6 +5,7 @@ import java.util.Arrays;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +30,9 @@ public class UserController {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     //
 
     @RequestMapping
@@ -49,6 +53,7 @@ public class UserController {
         }
         final Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(Arrays.asList(userRole));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = this.userRepository.save(user);
         redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
         return new ModelAndView("redirect:/user/{user.id}", "user.id", user.getId());
@@ -56,7 +61,8 @@ public class UserController {
 
     @RequestMapping(value = "delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
-        this.userRepository.delete(id);
+        this.userRepository.findById(id)
+            .ifPresent(user -> this.userRepository.delete(user));
         return new ModelAndView("redirect:/user/");
     }
 
