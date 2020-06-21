@@ -3,6 +3,7 @@ package com.baeldung.lss.spring;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
@@ -39,7 +42,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     private void saveTestUser() {
         final User user = new User();
         user.setEmail("test@email.com");
-        user.setPassword("pass");
+        user.setPassword(passwordEncoder().encode("pass"));
         userRepository.save(user);
     }
 
@@ -77,4 +80,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     } // @formatter:on
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
