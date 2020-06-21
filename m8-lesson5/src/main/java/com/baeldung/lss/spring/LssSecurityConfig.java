@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import com.baeldung.lss.model.User;
@@ -36,7 +38,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {// @formatter:off
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }// @formatter:on
 
     @Override
@@ -65,7 +67,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     private void saveTestUser() {
         final User user = new User();
         user.setEmail("test@email.com");
-        user.setPassword("pass");
+        user.setPassword(passwordEncoder().encode("pass"));
         userRepository.save(user);
     }
 
@@ -75,7 +77,12 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public static ServletListenerRegistrationBean httpSessionEventPublisher() {
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public static ServletListenerRegistrationBean httpSessionEventPublisher() { // (5)
         return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
     }
 }
