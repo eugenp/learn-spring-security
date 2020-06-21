@@ -13,7 +13,7 @@ Module 9 - Lesson 3</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.17.RELEASE</version>
+        <version>2.2.4.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -42,6 +42,10 @@ Module 9 - Lesson 3</description>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -81,6 +85,12 @@ Module 9 - Lesson 3</description>
             <scope>test</scope>
         </dependency>
         
+        <dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+        
     </dependencies>
 
     <build>
@@ -89,13 +99,6 @@ Module 9 - Lesson 3</description>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${spring-loaded.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>
