@@ -1,8 +1,13 @@
 package com.baeldung.lss.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
+=======
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+>>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -52,5 +57,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8
 }

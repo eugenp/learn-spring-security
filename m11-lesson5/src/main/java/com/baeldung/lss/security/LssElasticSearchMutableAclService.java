@@ -83,7 +83,7 @@ public class LssElasticSearchMutableAclService extends LssElasticSearchAclServic
 
         final String objIdPrimaryKey = retrieveObjectIdentityPrimaryKey(objectIdentity);
         aclEntryRepository.deleteByObjectIdentityId(objIdPrimaryKey);
-        aclObjIdRepository.delete(objIdPrimaryKey);
+        this.aclObjIdRepository.findById(objIdPrimaryKey).ifPresent(aclObj -> this.aclObjIdRepository.delete(aclObj));
         aclCache.evictFromCache(objectIdentity);
     }
 
@@ -190,8 +190,12 @@ public class LssElasticSearchMutableAclService extends LssElasticSearchAclServic
         Assert.notNull(acl.getOwner(), "Owner is required in this implementation");
 
         final String ownerSid = createOrRetrieveSidPrimaryKey(acl.getOwner(), true);
+<<<<<<< HEAD
         final AclObjectIdentity aclObjId = aclObjIdRepository.findOne(acl.getId()
             .toString());
+=======
+        final AclObjectIdentity aclObjId = aclObjIdRepository.findById(acl.getId().toString()).orElse(null);
+>>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8
         if (aclObjId == null) {
             throw new NotFoundException("Unable to locate ACL to update");
         }

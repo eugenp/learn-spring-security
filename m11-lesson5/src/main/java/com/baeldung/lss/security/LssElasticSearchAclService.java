@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -272,8 +273,16 @@ public class LssElasticSearchAclService implements AclService {
         final String id = objectIdentity.getId();
         Acl acl = acls.get(id);
         if (acl == null) {
+<<<<<<< HEAD
             final String objectClassName = aclClassRepository.findOne(objectIdentity.getObjectIdClass())
                 .getClassName();
+=======
+            Optional<AclClass> aclClass = aclClassRepository.findById(objectIdentity.getObjectIdClass());
+            String objectClassName = null;
+            if(aclClass.isPresent()) {
+                objectClassName = aclClass.get().getClassName();
+            }
+>>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8
             final ObjectIdentity springOid = new ObjectIdentityImpl(objectClassName, objectIdentity.getObjectIdIdentity());
             Acl parentAcl = null;
             if (objectIdentity.getParentObjectId() != null) {
@@ -281,7 +290,7 @@ public class LssElasticSearchAclService implements AclService {
             }
 
             Sid owner;
-            final AclSid aclSid = aclSidRepository.findOne(objectIdentity.getOwnerId());
+            final AclSid aclSid = aclSidRepository.findById(objectIdentity.getOwnerId()).orElse(null);
             if (aclSid.isPrincipal()) {
                 owner = new PrincipalSid(aclSid.getSid());
             } else {
@@ -329,7 +338,7 @@ public class LssElasticSearchAclService implements AclService {
 
     private Sid createSidFromMongoId(String id) {
         Sid sid;
-        AclSid aclSid = aclSidRepository.findOne(id);
+        AclSid aclSid = aclSidRepository.findById(id).orElse(null);
         if (aclSid.isPrincipal()) {
             sid = new PrincipalSid(aclSid.getSid());
         } else {
@@ -356,7 +365,7 @@ public class LssElasticSearchAclService implements AclService {
     }
 
     private void lookUpParentAcls(Map<Serializable, Acl> acls, Set<String> parentAclIds, List<Sid> sids) {
-        final List<AclObjectIdentity> aoiList = Lists.newArrayList(aclObjIdRepository.findAll(parentAclIds));
+        final List<AclObjectIdentity> aoiList = Lists.newArrayList(aclObjIdRepository.findAllById((parentAclIds)));
         final Set<String> parentIdsToLookup = getParentIdsToLookup(acls, aoiList, sids);
         if ((parentIdsToLookup != null) && (parentIdsToLookup.size() > 0)) {
             lookUpParentAcls(acls, parentIdsToLookup, sids);

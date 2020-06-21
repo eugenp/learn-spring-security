@@ -1,15 +1,30 @@
 package com.baeldung.lss;
+<<<<<<< HEAD:m11-lesson4/src/test/java/com/baeldung/lss/LiveTest.java
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+=======
+>>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8:m11-lesson4/src/test/java/com/baeldung/lss/LiveTest.java
 
+import com.baeldung.lss.spring.LssApp4;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.authentication.FormAuthConfig;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+
+/**
+ * This Test class relies on HSQL DB and all integration tests in this class are run against
+ * in-memory HSQL DB instead of MySQL DB.
+ */
+@SpringBootTest(classes = LssApp4.class,
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class LiveTest {
 
     private static String APP_ROOT = "http://localhost:8081";
