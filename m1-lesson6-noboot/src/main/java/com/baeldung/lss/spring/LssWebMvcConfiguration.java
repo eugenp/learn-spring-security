@@ -22,7 +22,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan({ "com.baeldung.lss.web", "com.baeldung.lss.spring" })
+@ComponentScan("com.baeldung.lss.web")
 public class LssWebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
