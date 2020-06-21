@@ -105,10 +105,6 @@ public class LssMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
-<<<<<<< HEAD
-        return DataSourceBuilder.create()
-            .build();
-=======
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUrl(dataSourceURL);
@@ -116,6 +112,5 @@ public class LssMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
         dataSource.setPassword(dataSourcePassword);
 
         return dataSource;
->>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8
     }
 }

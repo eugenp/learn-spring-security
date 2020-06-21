@@ -1,12 +1,4 @@
 package com.baeldung.lss;
-<<<<<<< HEAD:m11-lesson4/src/test/java/com/baeldung/lss/LiveTest.java
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-=======
->>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8:m11-lesson4/src/test/java/com/baeldung/lss/LiveTest.java
 
 import com.baeldung.lss.spring.LssApp4;
 import com.jayway.restassured.RestAssured;

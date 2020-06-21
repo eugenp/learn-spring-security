@@ -62,9 +62,4 @@ CREATE TABLE possession (
   name varchar(255) DEFAULT NULL,
   owner_id bigint(20) NOT NULL,
   CONSTRAINT fk_possession_owner FOREIGN KEY (owner_id) REFERENCES users (id)
-<<<<<<< HEAD:m11-lesson4/src/main/resources/schema.sql
 ) ENGINE=InnoDB;
-
-=======
-) ENGINE=InnoDB;
->>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8:m11-lesson4/src/main/resources/schema-mysql.sql
