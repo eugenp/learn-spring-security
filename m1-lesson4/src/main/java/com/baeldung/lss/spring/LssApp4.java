@@ -11,7 +11,7 @@ import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.web.model.User;
 
 @SpringBootApplication
-@ComponentScan({ "com.baeldung.lss.web", "com.baeldung.lss.spring" })
+@ComponentScan("com.baeldung.lss.web")
 public class LssApp4 {
 
     @Bean
@@ -30,7 +30,7 @@ public class LssApp4 {
     }
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(new Class[] { LssApp4.class }, args);
+        SpringApplication.run(new Class[] { LssApp4.class, LssSecurityConfig.class }, args);
     }
 
 }

@@ -49,6 +49,11 @@ Module  1 - Lesson 6 no-Boot</description>
 		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf</artifactId>
+			<version>${thymeleaf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring4</artifactId>
 			<version>${thymeleaf.version}</version>
 		</dependency>
@@ -60,6 +65,7 @@ Module  1 - Lesson 6 no-Boot</description>
 
 
 		<!-- validation -->
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -118,6 +124,12 @@ Module  1 - Lesson 6 no-Boot</description>
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito-core.version}</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -166,8 +178,8 @@ Module  1 - Lesson 6 no-Boot</description>
 		<!-- non-dependencies -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<org.springframework-version>4.3.20.RELEASE</org.springframework-version>
-		<spring-security.version>4.2.9.RELEASE</spring-security.version>
+		<org.springframework-version>4.3.9.RELEASE</org.springframework-version>
+		<spring-security.version>4.2.3.RELEASE</spring-security.version>
 
 		<!-- web -->
 		<thymeleaf.version>3.0.6.RELEASE</thymeleaf.version>
@@ -188,6 +200,7 @@ Module  1 - Lesson 6 no-Boot</description>
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 
 		<!-- test -->
+		<mockito-core.version>1.10.19</mockito-core.version>
 		<junit.version>4.12</junit.version>
 
 		<!-- maven plugins -->

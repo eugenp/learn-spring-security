@@ -9,7 +9,7 @@ import com.baeldung.lss.persistence.InMemoryUserRepository;
 import com.baeldung.lss.persistence.UserRepository;
 
 @SpringBootApplication
-@ComponentScan({ "com.baeldung.lss.web", "com.baeldung.lss.spring" })
+@ComponentScan("com.baeldung.lss.web")
 public class LssApp6 {
 
     @Bean
@@ -18,7 +18,7 @@ public class LssApp6 {
     }
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(new Class[] { LssApp6.class }, args);
+        SpringApplication.run(new Class[] { LssApp6.class, LssSecurityConfig.class, LssWebMvcConfiguration.class }, args);
     }
 
 }
