@@ -1,15 +1,22 @@
 package com.baeldung.lss;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
+import com.baeldung.lss.spring.LssApp4;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.authentication.FormAuthConfig;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+
+/**
+ * This Test class relies on HSQL DB and all integration tests in this class are run against
+ * in-memory HSQL DB instead of MySQL DB.
+ */
+@SpringBootTest(classes = LssApp4.class,
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class LiveTest {
 
     private static String APP_ROOT = "http://localhost:8081";

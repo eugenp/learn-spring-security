@@ -1,7 +1,7 @@
 package com.baeldung.lss.model;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -124,11 +124,7 @@ public class User {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("User [id=")
-            .append(id)
-            .append(", email=")
-            .append(email)
-            .append("]");
+        builder.append("User [id=").append(id).append(", email=").append(email).append("]");
         return builder.toString();
     }
 

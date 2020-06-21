@@ -56,8 +56,7 @@ public class LssElasticSearchMutableAclService extends LssElasticSearchAclServic
         if (retrieveObjectIdentityPrimaryKey(objectIdentity) != null) {
             throw new AlreadyExistsException("Object identity '" + objectIdentity + "' already exists");
         }
-        final Authentication auth = SecurityContextHolder.getContext()
-            .getAuthentication();
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         final PrincipalSid sid = new PrincipalSid(auth);
         createObjectIdentity(objectIdentity, sid);
         final Acl acl = readAclById(objectIdentity);
@@ -83,7 +82,7 @@ public class LssElasticSearchMutableAclService extends LssElasticSearchAclServic
 
         final String objIdPrimaryKey = retrieveObjectIdentityPrimaryKey(objectIdentity);
         aclEntryRepository.deleteByObjectIdentityId(objIdPrimaryKey);
-        aclObjIdRepository.delete(objIdPrimaryKey);
+        this.aclObjIdRepository.findById(objIdPrimaryKey).ifPresent(aclObj -> this.aclObjIdRepository.delete(aclObj));
         aclCache.evictFromCache(objectIdentity);
     }
 
@@ -104,8 +103,7 @@ public class LssElasticSearchMutableAclService extends LssElasticSearchAclServic
         final String classId = createOrRetrieveClassPrimaryKey(objectIdentity.getType(), true);
         final AclObjectIdentity aclObjId = new AclObjectIdentity();
         aclObjId.setObjectIdClass(classId);
-        aclObjId.setObjectIdIdentity(objectIdentity.getIdentifier()
-            .toString());
+        aclObjId.setObjectIdIdentity(objectIdentity.getIdentifier().toString());
         aclObjId.setOwnerId(sidId);
         aclObjId.setEntriesInheriting(true);
         aclObjIdRepository.save(aclObjId);
@@ -140,22 +138,19 @@ public class LssElasticSearchMutableAclService extends LssElasticSearchAclServic
 
         final List<AclSid> sids = aclSidRepository.findBySidAndPrincipal(sidName, sidIsPrincipal);
         if (!sids.isEmpty()) {
-            return sids.get(0)
-                .getId();
+            return sids.get(0).getId();
         }
         if (allowCreate) {
             final AclSid newSid = new AclSid();
             newSid.setPrincipal(sidIsPrincipal);
             newSid.setSid(sidName);
-            return aclSidRepository.save(newSid)
-                .getId();
+            return aclSidRepository.save(newSid).getId();
         }
         return null;
     }
 
     private void createEntries(MutableAcl acl) {
-        if (acl.getEntries()
-            .isEmpty()) {
+        if (acl.getEntries().isEmpty()) {
             return;
         }
         int order = 0;
@@ -163,12 +158,10 @@ public class LssElasticSearchMutableAclService extends LssElasticSearchAclServic
             Assert.isTrue(entry_ instanceof AccessControlEntryImpl, "Unknown ACE class");
             final AccessControlEntryImpl entry = (AccessControlEntryImpl) entry_;
             final AclEntry aclEntry = new AclEntry();
-            aclEntry.setObjectIdentityId(acl.getId()
-                .toString());
+            aclEntry.setObjectIdentityId(acl.getId().toString());
             aclEntry.setSid(createOrRetrieveSidPrimaryKey(entry.getSid(), true));
             aclEntry.setOrder(order++);
-            aclEntry.setMask(entry.getPermission()
-                .getMask());
+            aclEntry.setMask(entry.getPermission().getMask());
             aclEntry.setGranting(entry.isGranting());
             aclEntry.setAuditSuccess(entry.isAuditSuccess());
             aclEntry.setAuditFailure(entry.isAuditFailure());
@@ -180,18 +173,15 @@ public class LssElasticSearchMutableAclService extends LssElasticSearchAclServic
     private void updateObjectIdentity(MutableAcl acl) {
         String parentId = null;
         if (acl.getParentAcl() != null) {
-            Assert.isInstanceOf(ObjectIdentityImpl.class, acl.getParentAcl()
-                .getObjectIdentity(), "Implementation only supports ObjectIdentityImpl");
-            final ObjectIdentityImpl oii = (ObjectIdentityImpl) acl.getParentAcl()
-                .getObjectIdentity();
+            Assert.isInstanceOf(ObjectIdentityImpl.class, acl.getParentAcl().getObjectIdentity(), "Implementation only supports ObjectIdentityImpl");
+            final ObjectIdentityImpl oii = (ObjectIdentityImpl) acl.getParentAcl().getObjectIdentity();
             parentId = retrieveObjectIdentityPrimaryKey(oii);
         }
 
         Assert.notNull(acl.getOwner(), "Owner is required in this implementation");
 
         final String ownerSid = createOrRetrieveSidPrimaryKey(acl.getOwner(), true);
-        final AclObjectIdentity aclObjId = aclObjIdRepository.findOne(acl.getId()
-            .toString());
+        final AclObjectIdentity aclObjId = aclObjIdRepository.findById(acl.getId().toString()).orElse(null);
         if (aclObjId == null) {
             throw new NotFoundException("Unable to locate ACL to update");
         }

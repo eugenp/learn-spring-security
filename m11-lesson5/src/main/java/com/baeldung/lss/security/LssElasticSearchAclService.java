@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,8 +126,7 @@ public class LssElasticSearchAclService implements AclService {
     protected String retrieveObjectIdentityPrimaryKey(ObjectIdentity objectIdentity) {
         final AclClass aclClass = aclClassRepository.findOneByClassName(objectIdentity.getType());
         if (aclClass != null) {
-            final AclObjectIdentity aoi = aclObjIdRepository.findOneByObjectIdIdentityAndObjectIdClass(objectIdentity.getIdentifier()
-                .toString(), aclClass.getId());
+            final AclObjectIdentity aoi = aclObjIdRepository.findOneByObjectIdIdentityAndObjectIdClass(objectIdentity.getIdentifier().toString(), aclClass.getId());
             if (aoi != null) {
                 return aoi.getId();
             }
@@ -174,8 +174,7 @@ public class LssElasticSearchAclService implements AclService {
         for (final ObjectIdentity objectIdentity : objectIdentities) {
             final AclClass aclClass = aclClassRepository.findOneByClassName(objectIdentity.getType());
             if (aclClass != null) {
-                AclObjectIdentity aclObjId = aclObjIdRepository.findOneByObjectIdIdentityAndObjectIdClass(objectIdentity.getIdentifier()
-                    .toString(), aclClass.getId());
+                AclObjectIdentity aclObjId = aclObjIdRepository.findOneByObjectIdIdentityAndObjectIdClass(objectIdentity.getIdentifier().toString(), aclClass.getId());
                 if (aclObjId != null) {
                     aoiList.add(aclObjId);
                 }
@@ -191,8 +190,7 @@ public class LssElasticSearchAclService implements AclService {
             Assert.isInstanceOf(AclImpl.class, inputAcl, "Map should have contained an AclImpl");
             Assert.isInstanceOf(String.class, ((AclImpl) inputAcl).getId(), "Acl.getId() must be String");
 
-            final Acl result = convert(acls, ((AclImpl) inputAcl).getId()
-                .toString());
+            final Acl result = convert(acls, ((AclImpl) inputAcl).getId().toString());
             resultMap.put(result.getObjectIdentity(), result);
         }
         return resultMap;
@@ -272,8 +270,11 @@ public class LssElasticSearchAclService implements AclService {
         final String id = objectIdentity.getId();
         Acl acl = acls.get(id);
         if (acl == null) {
-            final String objectClassName = aclClassRepository.findOne(objectIdentity.getObjectIdClass())
-                .getClassName();
+            Optional<AclClass> aclClass = aclClassRepository.findById(objectIdentity.getObjectIdClass());
+            String objectClassName = null;
+            if(aclClass.isPresent()) {
+                objectClassName = aclClass.get().getClassName();
+            }
             final ObjectIdentity springOid = new ObjectIdentityImpl(objectClassName, objectIdentity.getObjectIdIdentity());
             Acl parentAcl = null;
             if (objectIdentity.getParentObjectId() != null) {
@@ -281,7 +282,7 @@ public class LssElasticSearchAclService implements AclService {
             }
 
             Sid owner;
-            final AclSid aclSid = aclSidRepository.findOne(objectIdentity.getOwnerId());
+            final AclSid aclSid = aclSidRepository.findById(objectIdentity.getOwnerId()).orElse(null);
             if (aclSid.isPrincipal()) {
                 owner = new PrincipalSid(aclSid.getSid());
             } else {
@@ -329,7 +330,7 @@ public class LssElasticSearchAclService implements AclService {
 
     private Sid createSidFromMongoId(String id) {
         Sid sid;
-        AclSid aclSid = aclSidRepository.findOne(id);
+        AclSid aclSid = aclSidRepository.findById(id).orElse(null);
         if (aclSid.isPrincipal()) {
             sid = new PrincipalSid(aclSid.getSid());
         } else {
@@ -341,8 +342,7 @@ public class LssElasticSearchAclService implements AclService {
     private List<AclEntry> findAclEntryOfObjectIdentity(AclObjectIdentity objectIdentity, List<AclEntry> aclEntries) {
         final List<AclEntry> result = new ArrayList<AclEntry>();
         for (final AclEntry entry : aclEntries) {
-            if (entry.getObjectIdentityId()
-                .equals(objectIdentity.getId())) {
+            if (entry.getObjectIdentityId().equals(objectIdentity.getId())) {
                 result.add(entry);
             }
         }
@@ -356,7 +356,7 @@ public class LssElasticSearchAclService implements AclService {
     }
 
     private void lookUpParentAcls(Map<Serializable, Acl> acls, Set<String> parentAclIds, List<Sid> sids) {
-        final List<AclObjectIdentity> aoiList = Lists.newArrayList(aclObjIdRepository.findAll(parentAclIds));
+        final List<AclObjectIdentity> aoiList = Lists.newArrayList(aclObjIdRepository.findAllById((parentAclIds)));
         final Set<String> parentIdsToLookup = getParentIdsToLookup(acls, aoiList, sids);
         if ((parentIdsToLookup != null) && (parentIdsToLookup.size() > 0)) {
             lookUpParentAcls(acls, parentIdsToLookup, sids);

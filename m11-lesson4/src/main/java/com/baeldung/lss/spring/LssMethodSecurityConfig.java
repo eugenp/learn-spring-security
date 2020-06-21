@@ -2,14 +2,13 @@ package com.baeldung.lss.spring;
 
 import javax.sql.DataSource;
 
-import net.sf.ehcache.CacheManager;
-
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cache.ehcache.EhCacheFactoryBean;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.acls.AclPermissionEvaluator;
@@ -27,10 +26,24 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import net.sf.ehcache.CacheManager;
+
 @Configuration
 // @EnableCaching
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class LssMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
+
+    @Value("${spring.datasource.driver-class-name}")
+    private String driverClassName;
+
+    @Value("${spring.datasource.url}")
+    private String dataSourceURL;
+
+    @Value("${spring.datasource.username}")
+    private String dataSourceUserName;
+
+    @Value("${spring.datasource.password}")
+    private String dataSourcePassword;
 
     @Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {
@@ -92,7 +105,12 @@ public class LssMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
-        return DataSourceBuilder.create()
-            .build();
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(dataSourceURL);
+        dataSource.setUsername(dataSourceUserName);
+        dataSource.setPassword(dataSourcePassword);
+
+        return dataSource;
     }
 }
