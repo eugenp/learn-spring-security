@@ -13,11 +13,7 @@ Module  11 - Lesson 3</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-<<<<<<< HEAD
-        <version>1.5.17.RELEASE</version>
-=======
         <version>2.2.4.RELEASE</version>
->>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -109,8 +105,6 @@ Module  11 - Lesson 3</description>
             <version>${guava.version}</version>
         </dependency>
 
-<<<<<<< HEAD
-=======
         <!-- logging -->
 
         <dependency>
@@ -128,7 +122,6 @@ Module  11 - Lesson 3</description>
             <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
 
->>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8
         <!-- test scoped -->
 
         <dependency>
@@ -145,16 +138,6 @@ Module  11 - Lesson 3</description>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-<<<<<<< HEAD
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${spring-loaded.version}</version>
-                    </dependency>
-                </dependencies>
-=======
->>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8
             </plugin>
 
             <plugin>
@@ -179,11 +162,6 @@ Module  11 - Lesson 3</description>
 		
 		<!-- password validation -->
         <passay.version>1.0</passay.version>
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 0abf5981dcf0c21c5ac27e4dec781f80ea6315a8
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		
