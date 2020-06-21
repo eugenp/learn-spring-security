@@ -13,7 +13,7 @@ Module  4 - Lesson 1</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.17.RELEASE</version>
+        <version>2.2.4.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -69,9 +69,10 @@ Module  4 - Lesson 1</description>
         <!-- <version>${mysql.version}</version> -->
         <!-- </dependency> -->
 
-        <!-- test scoped -->
+        <!-- common utilities -->
 
-        <dependency>
+        <!-- test scoped -->
+         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>   
             <scope>test</scope>
@@ -84,13 +85,6 @@ Module  4 - Lesson 1</description>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${spring-loaded.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>

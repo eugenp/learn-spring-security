@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" 
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout">
 <head>
-<title>Profile</title>
+	<title>Profile</title>
 </head>
 <body>
-    <h1 layout:fragment="header">Profile</h1>
-    <div layout:fragment="content" class="container">
+<h1 layout:fragment="header">Profile</h1>
+<div layout:fragment="content" class="container">
 
-		Current user name:
-		<span sec:authentication="principal.username">John</span>
+	Current user name:
+	<span sec:authentication="principal.username">John</span>
 
-		<br/>
-		Current user name 2: <span sec:authentication="name">John</span>
+	<br/>
+	Current user name 2: <span sec:authentication="name">John</span>
 
-		<br/>
-		<br/>
-		Current user roles:
-		<span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+	<br/>
+	<br/>
+	Current user roles:
+	<span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
 
-		<br/>
-		Current user roles 2:
-		<span sec:authentication="authorities">[ROLE_USER, ROLE_ADMIN]</span>
+	<br/>
+	Current user roles 2:
+	<span sec:authentication="authorities">[ROLE_USER, ROLE_ADMIN]</span>
 
-    </div>
+</div>
 </body>
 </html>
