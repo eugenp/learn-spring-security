@@ -6,8 +6,8 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserDao;
@@ -19,8 +19,7 @@ public class UserService implements UserServiceInterface {
     @Inject
     UserDao userDAO;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder = new StandardPasswordEncoder();
 
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
