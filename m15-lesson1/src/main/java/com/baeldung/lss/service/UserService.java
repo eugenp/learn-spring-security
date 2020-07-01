@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserDao;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 @Stateless(name = "userService", mappedName = "userService")
 @Local
@@ -19,8 +20,7 @@ public class UserService implements UserServiceInterface {
     @Inject
     UserDao userDAO;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder = new StandardPasswordEncoder();
 
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
