@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "8c72e83e-9843-423f-89e2-4f8dfafe17a7",
+		"name": "LSSC",
+		"description": "Postman requests for Learn Spring Security Course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Spring Security Expressions",
+			"item": [
+				{
+					"name": "URL Authorization with Expressions",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "user",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "pass",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8081/doLogin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"doLogin"
+									]
+								},
+								"description": "Allows to login into application using credentials."
+							},
+							"response": []
+						},
+						{
+							"name": "Check HTTP Method Auth Expression",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:8081/secured",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"secured"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Requests to test URL Authorization Expression based on HTTP Method.",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "Demostrates how to use Spring Security Expressions",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
