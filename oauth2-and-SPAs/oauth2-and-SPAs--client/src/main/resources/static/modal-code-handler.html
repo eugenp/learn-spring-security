@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="text/javascript">
+      const parentWindow = window.opener || window.parent;
+      const typeOfWindow = window.opener && 'modal';
+      const urlParams = new URLSearchParams(window.location.search);
+      const authCode = urlParams.get('code'),
+        state = urlParams.get('state'),
+        error = urlParams.get('error'),
+        errorDescription = urlParams.get('error_description');
+
+      if (!error) {
+        const authCodeStatus = {
+          state,
+          type: 'authCode',
+          source: typeOfWindow,
+          authCode,
+        };
+        parentWindow ? parentWindow.postMessage(authCodeStatus, '*') : window.alert('This is not a modal window!');
+        window.close();
+      } else {
+        window.alert(`Error: ${error}. ${errorDescription}`);
+        window.close();
+      }
+    </script>
+  </body>
+</html>

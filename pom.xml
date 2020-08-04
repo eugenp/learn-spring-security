@@ -2,7 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>﻿﻿﻿﻿﻿The &quot;Learn Spring Security OAuth&quot; Course: OAuth2 Beyond the Basics - Deep-Dives (New Stack)</description>
+    <description>﻿﻿﻿﻿﻿The &quot;Learn Spring Security OAuth&quot; Course: OAuth2 Beyond the Basics - Deep-Dives</description>
     <name>lsso--oauth2-beyond-the-basics-deep-dives</name>
 
     <groupId>com.baeldung</groupId>
@@ -19,5 +19,8 @@
         <module>client-credentials-flow-end</module>
         <module>exploring-jws-with-oauth2-start</module>
         <module>exploring-jws-with-oauth2-end</module>
+        <module>oauth2-and-SPAs</module>
+        <module>legacy-stack-authorization-server-start</module>
+        <module>legacy-stack-authorization-server-end</module>
     </modules>
 </project>

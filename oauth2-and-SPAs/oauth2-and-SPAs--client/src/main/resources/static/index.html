@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LSSO - OAuth2 and SPAs</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+
+<!-- Styles -->
+<link rel="stylesheet" href="css/oauth-spas--styles.css" />
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+<link rel="icon" href="/lsso-client/favicon.ico" />
+
+<!-- Import the React, React-Dom and Babel libraries -->
+<!-- Note: Here we are using React's unminified-development version -->
+<!-- Downloaded from links in https://reactjs.org/docs/cdn-links.html and https://babeljs.io/docs/en/babel-standalone -->
+<script src="js/libs/react.development.js"></script>
+<script src="js/libs/react-dom.development.js"></script>
+<script src="js/libs/babel.min.js"></script>
+
+<!-- Axios to make requests easily -->
+<!-- Downloaded from links in https://github.com/axios/axios -->
+<script src="js/libs/axios.min.js"></script>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/javascript" src="js/configs/resource-configs.js"></script>
+    <script type="text/javascript" src="js/configs/provider-configs.js"></script>
+    <script type="text/javascript" src="js/functions/code-verifier-functions.js"></script>
+    <script type="text/javascript" src="js/functions/code-challenge-functions.js"></script>
+    <script type="text/javascript" src="js/functions/common-functions.js"></script>
+    <script type="text/babel" src="js/components/utils/spinner.js"></script>
+    <script type="text/babel" src="js/components/navbar/navbar.js"></script>
+    <script type="text/babel" src="js/components/pages/projects.js"></script>
+    <script type="text/babel" src="js/components/pages/project-item.js"></script>
+    <script type="text/babel" src="js/components/pages/profile.js"></script>
+    <script type="text/babel" src="js/components/pages/login.js"></script>
+    <script type="text/babel" src="js/components/app.js"></script>
+
+    <script type="text/babel">
+      console.clear();
+      // main rendering:
+      const rootElement = document.getElementById('root');
+      ReactDOM.render(<App />, rootElement);
+    </script>
+</body>
+</html>

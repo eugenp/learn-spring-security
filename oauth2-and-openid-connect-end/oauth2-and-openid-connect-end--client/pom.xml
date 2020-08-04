@@ -2,7 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>The &quot;Learn Spring Security OAuth&quot; Course: OAuth2 and OpenID Connect (new stack) - End -- Client</description>
+    <description>The &quot;Learn Spring Security OAuth&quot; Course: OAuth2 and OpenID Connect - End -- Client</description>
 
     <groupId>com.baeldung</groupId>
     <artifactId>oauth2-and-openid-connect-end--client</artifactId>
@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.6.RELEASE</version>
+        <version>2.3.1.RELEASE</version>
         <relativePath />
     </parent>
 
