@@ -1,0 +1,31 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          custom:
+            client-id: lssoClient
+            client-secret: lssoSecret
+            scope: read,write
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8082/lsso-client/login/oauth2/code/custom
+        provider:
+          custom:
+            authorization-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth
+            token-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token
+            user-info-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
+  thymeleaf:
+    cache: false
+    
+server: 
+  port: 8082
+  servlet: 
+    context-path: /lsso-client
+    
+logging: 
+  level: 
+    org.springframework: INFO
+
+gateway:
+  url: http://localhost:8084/lsso-gateway/

@@ -1,0 +1,28 @@
+server: 
+  port: 8084
+  servlet: 
+    context-path: /lsso-gateway
+
+####### resource server configuration properties
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: projects_route
+        uri: http://localhost:8081
+        predicates:
+        - Path=/lsso-gateway/projects/**
+        filters:
+        - RewritePath=/lsso-gateway/(?<segment>.*), /lsso-project-resource-server/api/$\{segment}
+      - id: tasks_route
+        uri: http://localhost:8085
+        predicates:
+        - Path=/lsso-gateway/tasks/**
+        filters:
+        - RewritePath=/lsso-gateway/(?<segment>.*), /lsso-task-resource-server/api/$\{segment}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8083/auth/realms/baeldung
+          jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
