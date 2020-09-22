@@ -23,6 +23,7 @@ public class Oauth2ClientLiveTest {
     private static final String USERNAME = "john@test.com";
     private static final String PASSWORD = "123";
     private static final String CLIENT_BASE_URL = "http://localhost:8082";
+    private static final String AUTH_SERVER_BASE_URL = "http://localhost:8083";
     private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/login/oauth2/code/custom";
     private static final String RESOURCE_URL = CLIENT_BASE_URL + "/lsso-client/projects";
     private static final String CLIENT_AUTHORIZATION_URI = CLIENT_BASE_URL + "/lsso-client/oauth2/authorization/custom";
@@ -48,21 +49,36 @@ public class Oauth2ClientLiveTest {
             .redirects()
             .follow(false)
             .get(fullAuthorizeUrl);
-        String authSessionId = response.getCookie("AUTH_SESSION_ID");
-        String kcPostAuthenticationUrl = response.asString()
-            .split("action=\"")[1].split("\"")[0].replace("&amp;", "&");
+        String authSessionId = response.getCookie("JSESSIONID");
+        String kcPostAuthenticationUrl = "/login";
 
-        // obtain authentication code and state
+        // open login form
+        response = RestAssured.given()
+            .cookie("JSESSIONID", authSessionId)
+            .get(AUTH_SERVER_BASE_URL + kcPostAuthenticationUrl);
+
+        String csrf = response.asString()
+            .split("value=\"")[1].split("\"")[0];
+
+        // do login
+        response = RestAssured.given()
+            .cookie("JSESSIONID", authSessionId)
+            .formParams("username", USERNAME, "password", PASSWORD, "_csrf", csrf)
+            .post(AUTH_SERVER_BASE_URL + kcPostAuthenticationUrl);
+        assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
+        authSessionId = response.getCookie("JSESSIONID");
+
+        String location = URLDecoder.decode(response.getHeader(HttpHeaders.LOCATION), "UTF-8");
+
+        // redirect to client url
         response = RestAssured.given()
             .redirects()
             .follow(false)
-            .cookie("AUTH_SESSION_ID", authSessionId)
-            .formParams("username", USERNAME, "password", PASSWORD, "credentialId", "")
-            .post(kcPostAuthenticationUrl);
-        assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
+            .cookie("JSESSIONID", authSessionId)
+            .get(location);
 
         // extract authorization code
-        String location = response.getHeader(HttpHeaders.LOCATION);
+        location = response.getHeader(HttpHeaders.LOCATION);
         String code = location.split("code=")[1].split("&")[0];
 
         // mimic oauth2login

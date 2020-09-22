@@ -13,6 +13,7 @@ spring:
           custom:
             authorization-uri: /
             token-uri: /
+            user-info-uri: /
   thymeleaf:
     cache: false
     

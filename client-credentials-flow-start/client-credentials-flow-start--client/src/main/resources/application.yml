@@ -4,7 +4,7 @@ spring:
       client:
         registration:
           customClientCredentials:
-            authorization-grant-type:
+            authorization-grant-type: /
             client-id: lssoClient
             client-secret: lssoSecret
             scope: write, read

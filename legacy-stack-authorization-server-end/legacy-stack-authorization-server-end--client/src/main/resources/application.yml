@@ -11,8 +11,10 @@ spring:
             redirect-uri: http://localhost:8082/lsso-client/login/oauth2/code/custom
         provider:
           custom:
-            authorization-uri: /
-            token-uri: /
+            authorization-uri: http://localhost:8083/oauth/authorize
+            token-uri: http://localhost:8083/oauth/token
+            user-info-uri: http://localhost:8083/users/userinfo
+            user-name-attribute: preferred_username
   thymeleaf:
     cache: false
     

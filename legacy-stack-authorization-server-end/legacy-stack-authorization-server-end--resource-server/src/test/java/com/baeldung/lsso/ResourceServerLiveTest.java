@@ -2,10 +2,16 @@ package com.baeldung.lsso;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -36,8 +42,9 @@ public class ResourceServerLiveTest {
     private static final String RESOURCE_SERVER_BASE_URL = "http://localhost:8081";
 
     private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/login/oauth2/code/custom";
-    private static final String AUTHORIZE_URL_PATTERN = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" + REDIRECT_URL;
-    private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/token";
+    private static final String AUTHORIZE_URL_PATTERN = AUTH_SERVER_BASE_URL + "/oauth/authorize?response_type=code&client_id=lssoClient&scope=%s&state=1234&redirect_uri=" + REDIRECT_URL;
+
+    private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/oauth/token";
     private static final String RESOURCE_URL = RESOURCE_SERVER_BASE_URL + "/lsso-resource-server/api/projects";
 
     @SuppressWarnings("unchecked")
@@ -55,16 +62,40 @@ public class ResourceServerLiveTest {
     }
 
     @Test
-    public void givenUserWithOtherScope_whenGetProjectResource_thenForbidden() {
-        String accessToken = obtainAccessToken("email");
-        System.out.println("ACCESS TOKEN: " + accessToken);
-
-        // Access resources using access token
+    public void givenUserWithOtherScope_whenGetProjectResource_thenSeeOther() {
+        // obtain authentication url with custom codes
         Response response = RestAssured.given()
-            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-            .get(RESOURCE_URL);
-        System.out.println(response.asString());
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
+            .redirects()
+            .follow(false)
+            .get(String.format(AUTHORIZE_URL_PATTERN, "email"));
+        String authSessionId = response.getCookie("JSESSIONID");
+        String kcPostAuthenticationUrl = "/login";
+
+        // open login form
+        response = RestAssured.given()
+            .cookie("JSESSIONID", authSessionId)
+            .get(AUTH_SERVER_BASE_URL + kcPostAuthenticationUrl);
+
+        String csrf = response.asString()
+            .split("value=\"")[1].split("\"")[0];
+
+        // obtain authentication code and state
+        response = RestAssured.given()
+            .cookie("JSESSIONID", authSessionId)
+            .formParams("username", USERNAME, "password", PASSWORD, "_csrf", csrf)
+            .post(AUTH_SERVER_BASE_URL + kcPostAuthenticationUrl);
+        assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
+
+        String url2 = URLDecoder.decode(response.getHeader(HttpHeaders.LOCATION), Charset.forName("UTF-8"));
+        String sessionId2 = response.getCookie("JSESSIONID");
+        response = RestAssured.given()
+            .redirects()
+            .follow(false)
+            .cookie("JSESSIONID", sessionId2)
+            .get(url2);
+
+        // extract authorization code
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SEE_OTHER.value());
     }
 
     @Test
@@ -73,10 +104,34 @@ public class ResourceServerLiveTest {
             .redirects()
             .follow(false)
             .get(String.format(AUTHORIZE_URL_PATTERN, "notSupported"));
+        String authSessionId = response.getCookie("JSESSIONID");
+        String kcPostAuthenticationUrl = "/login";
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND.value());
-        assertThat(response.getHeader(HttpHeaders.LOCATION)).contains("error=invalid_request")
-            .contains("error_description=Invalid+scopes%3A+notSupported");
+        // open login form
+        response = RestAssured.given()
+            .cookie("JSESSIONID", authSessionId)
+            .get(AUTH_SERVER_BASE_URL + kcPostAuthenticationUrl);
+
+        String csrf = response.asString()
+            .split("value=\"")[1].split("\"")[0];
+        // obtain authentication code and state
+        response = RestAssured.given()
+            .cookie("JSESSIONID", authSessionId)
+            .formParams("username", USERNAME, "password", PASSWORD, "_csrf", csrf)
+            .post(AUTH_SERVER_BASE_URL + kcPostAuthenticationUrl);
+        assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
+
+        String url2 = URLDecoder.decode(response.getHeader(HttpHeaders.LOCATION), Charset.forName("UTF-8"));
+        String sessionId2 = response.getCookie("JSESSIONID");
+        response = RestAssured.given()
+            .redirects()
+            .follow(false)
+            .cookie("JSESSIONID", sessionId2)
+            .get(url2);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SEE_OTHER.value());
+        assertThat(response.getHeader(HttpHeaders.LOCATION)).contains("error=invalid_scope")
+            .contains("error_description=Invalid%20scope:%20notSupported");
     }
 
     @Test
@@ -111,37 +166,60 @@ public class ResourceServerLiveTest {
     }
 
     private String obtainAccessToken(String scopes) {
-        // obtain authentication url with custom codes
+        // redirect to login form
         Response response = RestAssured.given()
             .redirects()
             .follow(false)
             .get(String.format(AUTHORIZE_URL_PATTERN, scopes));
-        String authSessionId = response.getCookie("AUTH_SESSION_ID");
-        String kcPostAuthenticationUrl = response.asString()
-            .split("action=\"")[1].split("\"")[0].replace("&amp;", "&");
+        String sessionId = response.getCookie("JSESSIONID");
+        String kcPostAuthenticationUrl = "/login";
+
+        // open login form
+        response = RestAssured.given()
+            .cookie("JSESSIONID", sessionId)
+            .get(AUTH_SERVER_BASE_URL + kcPostAuthenticationUrl);
+
+        String csrf = response.asString()
+            .split("value=\"")[1].split("\"")[0];
+
+        // do login
+        response = RestAssured.given()
+            .cookie("JSESSIONID", sessionId)
+            .formParams("username", USERNAME, "password", PASSWORD, "_csrf", csrf)
+            .post(AUTH_SERVER_BASE_URL + kcPostAuthenticationUrl);
+        assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
 
         // obtain authentication code and state
+        String authorizeUrl = URLDecoder.decode(response.getHeader(HttpHeaders.LOCATION), Charset.forName("UTF-8"));
+        sessionId = response.getCookie("JSESSIONID");
         response = RestAssured.given()
             .redirects()
             .follow(false)
-            .cookie("AUTH_SESSION_ID", authSessionId)
-            .formParams("username", USERNAME, "password", PASSWORD, "credentialId", "")
-            .post(kcPostAuthenticationUrl);
-        assertThat(HttpStatus.FOUND.value()).isEqualTo(response.getStatusCode());
+            .cookie("JSESSIONID", sessionId)
+            .get(authorizeUrl);
 
         // extract authorization code
         String location = response.getHeader(HttpHeaders.LOCATION);
-        String code = location.split("code=")[1].split("&")[0];
+
+        Map<String, String> queryParamsMap = Arrays.stream(location.substring(location.indexOf("?") + 1)
+            .split("&"))
+            .map(s -> s.split("="))
+            .collect(Collectors.toMap(kv -> kv[0], kv -> kv[1]));
+
+        String code = queryParamsMap.get("code");
 
         // get access token
+        Charset charset = StandardCharsets.ISO_8859_1;
+        String basicAuth = new String(Base64.getEncoder()
+            .encode((CLIENT_ID + ":" + CLIENT_SECRET).getBytes(charset)), charset);
+
         Map<String, String> params = new HashMap<String, String>();
         params.put("grant_type", "authorization_code");
         params.put("code", code);
-        params.put("client_id", CLIENT_ID);
         params.put("redirect_uri", REDIRECT_URL);
-        params.put("client_secret", CLIENT_SECRET);
         response = RestAssured.given()
-            .formParams(params)
+            .header("Authorization", "Basic " + basicAuth)
+            .queryParams(params)
             .post(TOKEN_URL);
         return response.jsonPath()
             .getString("access_token");

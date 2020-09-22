@@ -9,18 +9,22 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-/**
- * Needs the following to be running: 
- * - Authorization Server
- */
-public class AuthorizationServerLiveTest {
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class AuthorizationServerIntegrationTest {
+
+    @LocalServerPort
+    private int serverPort;
 
     private static final String USERNAME = "john@test.com";
     private static final String PASSWORD = "123";
@@ -28,12 +32,19 @@ public class AuthorizationServerLiveTest {
     private static final String CLIENT_ID = "lssoClient";
     private static final String CLIENT_SECRET = "lssoSecret";
 
-    private static final String AUTH_SERVER_BASE_URL = "http://localhost:8083";
+    private static final String AUTH_SERVER_BASE_PATTERN = "http://localhost:%s";
     private static final String CLIENT_BASE_URL = "http://localhost:8082";
 
     private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/login/oauth2/code/custom";
-    private static final String AUTHORIZE_URL = AUTH_SERVER_BASE_URL + "/oauth/authorize?response_type=code&client_id=lssoClient&scope=read&redirect_uri=" + REDIRECT_URL;
-    private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/oauth/token";
+    private static final String AUTHORIZE_URL = "/oauth/authorize?response_type=code&client_id=lssoClient&scope=read&redirect_uri=" + REDIRECT_URL;
+    private static final String TOKEN_URL = "/oauth/token";
+
+    private String authServerBaseUrl;
+
+    @BeforeEach
+    public void setup() {
+        authServerBaseUrl = String.format(AUTH_SERVER_BASE_PATTERN, serverPort);
+    }
 
     @Test
     public void givenAuthorizationCodeGrant_whenObtainAccessToken_thenSuccess() {
@@ -44,7 +55,7 @@ public class AuthorizationServerLiveTest {
 
     @Test
     public void whenServiceStarts_thenKeysEndpointIsAvailable() {
-        final String keysUrl = AUTH_SERVER_BASE_URL + "/endpoint/jwks.json";
+        final String keysUrl = authServerBaseUrl + "/endpoint/jwks.json";
 
         Response response = RestAssured.given()
             .redirects()
@@ -62,9 +73,9 @@ public class AuthorizationServerLiveTest {
         Response response = RestAssured.given()
             .redirects()
             .follow(false)
-            .get(AUTHORIZE_URL);
+            .get(authServerBaseUrl + AUTHORIZE_URL);
         String authSessionId = response.getCookie("JSESSIONID");
-        String kcPostAuthenticationUrl = AUTH_SERVER_BASE_URL + "/login";
+        String kcPostAuthenticationUrl = authServerBaseUrl + "/login";
 
         // open login form
         response = RestAssured.given()
@@ -110,7 +121,7 @@ public class AuthorizationServerLiveTest {
         response = RestAssured.given()
             .header("Authorization", "Basic " + basicAuth)
             .queryParams(params)
-            .post(TOKEN_URL);
+            .post(authServerBaseUrl + TOKEN_URL);
         return response.jsonPath()
             .getString("access_token");
     }

@@ -195,8 +195,7 @@ public class Oauth2ClientIntegrationTest {
             .expectBody()
             .consumeWith(response -> {
                 String bodyAsString = new String(response.getResponseBodyContent());
-                assertThat(bodyAsString)
-                    .contains("Project 1")
+                assertThat(bodyAsString).contains("Project 1")
                     .contains("Project 2")
                     .contains("Project 3")
                     .doesNotContain("Project 4");

@@ -9,4 +9,4 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://
+          jwk-set-uri: http://localhost:8083/endpoint/jwks.json

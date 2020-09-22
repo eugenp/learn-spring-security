@@ -1,2 +1,30 @@
 server:
   port: 8083
+
+spring:
+  security:
+    user:
+      name: john@test.com
+      password: 123
+
+security:
+  oauth2:
+    client:
+      client-id: lssoClient
+      client-secret: lssoSecret
+      scope:
+      - read
+      - write
+      authorized-grant-types:
+      - authorization_code
+      registered-redirect-uri:
+      - http://localhost:8082/lsso-client/login/oauth2/code/custom
+      auto-approve-scopes:
+      - read
+      - write
+
+    authorization:
+      jwt:
+        key-alias: mytest
+        key-store: classpath:/mytest.jks
+        key-store-password: mypass
