@@ -4,8 +4,9 @@ server:
 spring:
   security:
     user:
+      # john@test.com / 123
       name: john@test.com
-      password: 123
+      password: $2a$10$yCl.WgsHZGpKeplZCVH1mea9IcCsbmLNXdbGJ511ws7AeyuLT6m9.
 
 security:
   oauth2:
