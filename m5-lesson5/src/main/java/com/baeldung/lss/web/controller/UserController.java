@@ -1,7 +1,5 @@
 package com.baeldung.lss.web.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +42,12 @@ public class UserController {
         if (result.hasErrors()) {
             return new ModelAndView("tl/form", "formErrors", result.getAllErrors());
         }
+        if(user.getId() == null) {
+            redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
+        } else {
+            redirect.addFlashAttribute("globalMessage", "Successfully updated existing user");
+        }
         user = this.userRepository.save(user);
-        redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
         return new ModelAndView("redirect:/user/{user.id}", "user.id", user.getId());
     }
 
