@@ -1,12 +1,6 @@
 package com.baeldung.lss.model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class SecurityQuestion {
@@ -15,11 +9,11 @@ public class SecurityQuestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id", unique = true)
     private User user;
 
-    @OneToOne(targetEntity = SecurityQuestionDefinition.class, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "securityQuestionDefinition_id")
     private SecurityQuestionDefinition questionDefinition;
 
