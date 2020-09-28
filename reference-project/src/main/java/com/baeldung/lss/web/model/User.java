@@ -41,6 +41,15 @@ public class User {
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
+    @OneToOne(fetch = FetchType.EAGER,mappedBy = "user",cascade = CascadeType.REMOVE)
+    private PasswordResetToken passwordResetToken;
+
+    @OneToOne(fetch = FetchType.EAGER,mappedBy = "user",cascade = CascadeType.REMOVE)
+    private VerificationToken verificationToken;
+
+    @OneToOne(fetch = FetchType.EAGER,mappedBy = "user",cascade = CascadeType.REMOVE)
+    private SecurityQuestion securityQuestion;
+
     public User() {
         super();
         this.secret = Base32.random();
@@ -106,6 +115,34 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public PasswordResetToken getPasswordResetToken() {
+        return passwordResetToken;
+    }
+
+    public void setPasswordResetToken(PasswordResetToken passwordResetToken) {
+        this.passwordResetToken = passwordResetToken;
+    }
+
+    public VerificationToken getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(VerificationToken verificationToken) {
+        this.verificationToken = verificationToken;
+    }
+
+    public SecurityQuestion getSecurityQuestion() {
+        return securityQuestion;
+    }
+
+    public void setSecurityQuestion(SecurityQuestion securityQuestion) {
+        this.securityQuestion = securityQuestion;
     }
 
     @Override

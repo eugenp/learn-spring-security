@@ -9,11 +9,11 @@ public class SecurityQuestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id", unique = true)
     private User user;
 
-    @OneToOne(targetEntity = SecurityQuestionDefinition.class, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "securityQuestionDefinition_id")
     private SecurityQuestionDefinition questionDefinition;
 

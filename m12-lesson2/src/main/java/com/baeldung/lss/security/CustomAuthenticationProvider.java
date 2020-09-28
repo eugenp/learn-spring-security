@@ -31,7 +31,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 .toString();
         final String verificationCode = ((CustomWebAuthenticationDetails) auth.getDetails()).getVerificationCode();
         final User user = userRepository.findByEmail(username);
-        if ((user == null) || !encoder.matches(user.getPassword(), password)) {
+        if ((user == null) || !encoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Invalid username or password");
         }
 
