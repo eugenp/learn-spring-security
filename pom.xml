@@ -12,10 +12,6 @@
     <modules>
         <module>m11-lesson3</module>
         <module>m11-lesson4</module>
-        
-        <!-- 
-        <module>m11-lesson5</module> 
-        -->
     </modules>
 
 </project>
