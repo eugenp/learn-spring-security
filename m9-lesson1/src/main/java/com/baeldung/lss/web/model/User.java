@@ -1,12 +1,13 @@
 package com.baeldung.lss.web.model;
 
-import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Calendar;
 
 @Entity
 public class User {
@@ -20,7 +21,7 @@ public class User {
 
     @NotEmpty(message = "Email is required.")
     private String email;
-
+    
     private Calendar created = Calendar.getInstance();
 
     public Long getId() {
@@ -30,7 +31,7 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     public Calendar getCreated() {
         return this.created;
     }
@@ -38,6 +39,7 @@ public class User {
     public void setCreated(Calendar created) {
         this.created = created;
     }
+
 
     public String getUsername() {
         return this.username;

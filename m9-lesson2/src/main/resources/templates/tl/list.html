@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
 <head>
 <title>Users : View all</title>
 </head>
@@ -13,7 +13,6 @@
             <thead>
                 <tr>
                     <td>Username</td>
-                    <td>Created</td>
                 </tr>
             </thead>
             <tbody>
@@ -22,7 +21,6 @@
                 </tr>
                 <tr th:each="user : ${users}">
                     <td><a href="view.html" th:href="@{'/user/' + ${user.id}}" th:text="${user.email}"> Username </a></td>
-                    <td th:text="${#calendars.format(user.created)}">July 11, 2012 2:17:16 PM CDT</td>
                 </tr>
             </tbody>
         </table>

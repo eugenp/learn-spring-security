@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class User {
@@ -26,7 +26,7 @@ public class User {
 
     @NotEmpty(message = "Email is required.")
     private String password;
-
+    
     private Calendar created = Calendar.getInstance();
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -40,7 +40,7 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     public Calendar getCreated() {
         return this.created;
     }

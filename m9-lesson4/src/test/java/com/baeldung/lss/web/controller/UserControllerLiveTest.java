@@ -14,26 +14,21 @@ public class UserControllerLiveTest {
 
     static {
         RestAssured.baseURI = "http://localhost:8081";
-    }
+    }    
 
     @Test
     public void givenAuthenticated_whenDeletingUser_thenUserDeleted() {
-        final Response response = givenAuthenticated("admin", "pass").formParam("username", randomUsername())
-            .formParam("email", randomEmail())
-            .when()
-            .post("/user/?form")
-            .then()
-            .statusCode(302)
-            .extract()
-            .response();
+        final Response response = givenAuthenticated("admin", "pass").formParam("username", randomUsername()).formParam("email", randomEmail())
+                .when().post("/user/?form")
+                .then().statusCode(302)
+                .extract().response();
 
         final String locationHeader = response.getHeader("Location");
         final String userId = locationHeader.substring(locationHeader.lastIndexOf("/") + 1);
 
-        givenAuthenticated("admin", "pass").when()
-            .get("/user/delete/" + userId)
-            .then()
-            .statusCode(200);
+        givenAuthenticated("admin", "pass")
+                .when().get("/user/delete/" + userId)
+                .then().statusCode(200);
     }
 
     // Private Helper Methods
@@ -47,8 +42,7 @@ public class UserControllerLiveTest {
     }
 
     private RequestSpecification givenAuthenticated(final String username, final String password) {
-        return given().auth()
-            .form(username, password, new FormAuthConfig("/doLogin", "username", "password"));
+        return given().auth().form(username, password, new FormAuthConfig("/doLogin", "username", "password"));
     }
 
 }

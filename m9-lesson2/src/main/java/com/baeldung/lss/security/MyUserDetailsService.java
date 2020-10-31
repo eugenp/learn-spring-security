@@ -44,10 +44,7 @@ public class MyUserDetailsService implements UserDetailsService {
     // UTIL
 
     public final Collection<? extends GrantedAuthority> getAuthorities(final Collection<Role> roles) {
-        return roles.stream()
-            .flatMap(role -> role.getPrivileges()
-                .stream())
-            .map(p -> new SimpleGrantedAuthority(p.getName()))
-            .collect(Collectors.toList());
+        return roles.stream().flatMap(role -> role.getPrivileges().stream()).map(p -> new SimpleGrantedAuthority(p.getName())).collect(Collectors.toList());
     }
+
 }

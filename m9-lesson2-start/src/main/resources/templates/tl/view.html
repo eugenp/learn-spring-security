@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
 <head>
 <title>Users : View</title>
 </head>
@@ -14,8 +14,6 @@
             <dd id="id" th:text="${user.id}">123</dd>
             <dt>Date</dt>
             <dd id="created" th:text="${#calendars.format(user.created)}">July 11, 2012 2:17:16 PM CDT</dd>
-            <dt>Username</dt>
-            <dd id="username" th:text="${user.username}">Username</dd>
             <dt>Email</dt>
             <dd id="email" th:text="${user.email}">Email</dd>
         </dl>

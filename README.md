@@ -1,2 +1,2 @@
-# Learn Spring Security Core - Advanced Authorization
-This is the codebase for Module 'Advanced Authorization' of [Learn Spring Security Core](https://bit.ly/github-lssc)
+# Module 9 - Advanced Authorization
+This is the codebase for Module 9 of [Learn Spring Security](http://bit.ly/github-lss)

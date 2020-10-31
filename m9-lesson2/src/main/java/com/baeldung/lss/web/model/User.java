@@ -1,18 +1,10 @@
 package com.baeldung.lss.web.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Collection;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class User {
@@ -24,10 +16,8 @@ public class User {
     @NotEmpty(message = "Email is required.")
     private String email;
 
-    @NotEmpty(message = "Email is required.")
+    @NotEmpty(message = "Password is required.")
     private String password;
-
-    private Calendar created = Calendar.getInstance();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -39,14 +29,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Calendar getCreated() {
-        return this.created;
-    }
-
-    public void setCreated(Calendar created) {
-        this.created = created;
     }
 
     public String getEmail() {
