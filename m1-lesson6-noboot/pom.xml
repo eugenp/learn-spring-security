@@ -1,7 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<description>The &quot;Learn Spring Security Core&quot; Course: Anonymous "Authentication" - no-Boot</description>
+	<description>The &quot;Learn Spring Security&quot; Course
+Module  1 - Lesson 6 no-Boot</description>
 	<name>learn-spring-security</name>
 
 	<groupId>com.baeldung.m1</groupId>
@@ -66,6 +67,11 @@
 		<!-- validation -->
 
 		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation-api.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
@@ -94,8 +100,27 @@
 			<version>${jackson-databind.version}</version>
 		</dependency>
 
+		<!-- common utilities -->
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+
 		<!-- logging -->
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -120,6 +145,19 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>${hamcrest-library.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -187,19 +225,28 @@
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
 		<jstl.version>1.2</jstl.version>
 
+		<!-- commons and utils -->
+		<commons-lang3.version>3.5</commons-lang3.version>
+		<guava.version>21.0</guava.version>
+
 		<!-- logging -->
 		<log4j-over-slf4j.version>1.7.25</log4j-over-slf4j.version>
 		<jcl-over-slf4j.version>1.7.25</jcl-over-slf4j.version>
 		<logback-classic.version>1.2.3</logback-classic.version>
+		<slf4j-api.version>1.7.25</slf4j-api.version>
+		
 		
 		<!-- marshalling -->
 		<jackson-databind.version>2.8.8.1</jackson-databind.version>
 
 		<!-- validation -->
+		<validation-api.version>1.1.0.Final</validation-api.version>
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 
 		<!-- test -->
+		<rest-assured.version>2.9.0</rest-assured.version>
 		<mockito-core.version>1.10.19</mockito-core.version>
+		<hamcrest-library.version>1.3</hamcrest-library.version>
 		<junit.version>4.12</junit.version>
 
 		<!-- maven plugins -->

@@ -1,10 +1,10 @@
 package com.baeldung.lss.persistence;
 
+import com.baeldung.lss.web.model.User;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
-
-import com.baeldung.lss.web.model.User;
 
 public class InMemoryUserRepository implements UserRepository {
 

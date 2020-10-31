@@ -27,32 +27,31 @@ public class LssWebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login")
-            .setViewName("loginPage");
+        registry.addViewController("/login").setViewName("loginPage");
 
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
-
+    
     @Bean
     @Description("Thymeleaf Template Resolver")
     public ClassLoaderTemplateResolver templateResolver() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix("templates/");
-        templateResolver.setSuffix(".html");
+        templateResolver.setPrefix("templates/");     
+        templateResolver.setSuffix(".html");        
         templateResolver.setTemplateMode("HTML5");
-
+     
         return templateResolver;
     }
-
+     
     @Bean
     @Description("Thymeleaf Template Engine")
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.addDialect(new LayoutDialect());
-        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.setTemplateResolver(templateResolver());        
         return templateEngine;
     }
-
+    
     @Bean
     @Description("Thymeleaf View Resolver")
     public ThymeleafViewResolver viewResolver() {
@@ -62,21 +61,22 @@ public class LssWebMvcConfiguration extends WebMvcConfigurerAdapter {
         viewResolver.setCache(false);
         return viewResolver;
     }
-
+        
+    
     @Bean
     public UserRepository userRepository() {
         return new InMemoryUserRepository();
     }
-
+    
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new Converter<String, User>() {
+        registry.addConverter(new  Converter<String, User>() {
             @Override
             public User convert(String id) {
                 return userRepository().findUser(Long.valueOf(id));
             }
         });
-
+       
     }
 
 }

@@ -1,7 +1,7 @@
 package com.baeldung.lss.web.controller;
 
-import javax.validation.Valid;
-
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.web.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.web.model.User;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
@@ -47,8 +46,7 @@ public class UserController {
 
     @RequestMapping(value = "delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
-        this.userRepository.findById(id)
-            .ifPresent(user -> this.userRepository.delete(user));
+    	this.userRepository.findById(id).ifPresent(user -> this.userRepository.delete(user));
         return new ModelAndView("redirect:/user/");
     }
 
