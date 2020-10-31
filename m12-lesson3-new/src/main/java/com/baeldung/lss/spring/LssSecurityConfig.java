@@ -6,7 +6,6 @@ import com.baeldung.lss.web.model.User;
 import com.twilio.Twilio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -16,13 +15,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
 
 @Configuration
-@ComponentScan({"com.baeldung.lss.security"})
+@ComponentScan({ "org.baeldung.lss.security" })
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -45,11 +42,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         super();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
-    }
-
     //
 
     @Autowired
@@ -60,19 +52,18 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {// @formatter:off
         http
-                .authorizeRequests()
+        .authorizeRequests()
                 .antMatchers("/signup", "/user/register").permitAll()
                 .anyRequest().hasRole("USER")
-                .and()
-                .formLogin().
-                loginPage("/login").permitAll().
-                loginProcessingUrl("/doLogin")
-                .defaultSuccessUrl("/user")
-                .authenticationDetailsSource(authenticationDetailsSource)
-                .and()
-                .logout().permitAll().logoutUrl("/logout")
-                .and()
-                .csrf().disable()
+        .and()
+        .formLogin().
+            loginPage("/login").permitAll().
+            loginProcessingUrl("/doLogin")
+            .authenticationDetailsSource(authenticationDetailsSource)
+        .and()
+        .logout().permitAll().logoutUrl("/logout")
+        .and()
+        .csrf().disable()
         ;
     } // @formatter:on
 
@@ -81,23 +72,18 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     public static class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.antMatcher("/code*")
-                    .authorizeRequests()
-                    .anyRequest()
-                    .hasRole("TEMP_USER")
-                    .and()
-                    .httpBasic();
+            http.antMatcher("/code*").authorizeRequests().anyRequest().hasRole("TEMP_USER").and().httpBasic();
         }
     }
 
     @PostConstruct
     private void init() {
         Twilio.init(accountSid, authToken);
-        String encodedPassword = this.passwordEncoder().encode("pass");
+
         final User user = new User();
         user.setEmail("user@example.com");
-        user.setPassword(encodedPassword);
-        user.setPasswordConfirmation(encodedPassword);
+        user.setPassword("pass");
+        user.setPasswordConfirmation("pass");
         userRepository.save(user);
     }
 

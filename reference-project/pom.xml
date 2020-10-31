@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
-        Reference Project M1-M9 &quot; M12</description>
+        Reference Project M1-M9 &amp; M12</description>
     <name>learn-spring-security</name>
 
     <groupId>com.baeldung.lss</groupId>

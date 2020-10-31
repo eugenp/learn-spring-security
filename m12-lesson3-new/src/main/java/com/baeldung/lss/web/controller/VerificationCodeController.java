@@ -1,5 +1,9 @@
 package com.baeldung.lss.web.controller;
 
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.web.model.User;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import org.jboss.aerogear.security.otp.Totp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,11 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.web.model.User;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
 
 @Controller
 public class VerificationCodeController {
@@ -39,8 +38,7 @@ public class VerificationCodeController {
 
         System.out.println("messageBody:" + messageBody);
 
-        final Message message = Message.creator(new PhoneNumber(user.getPhone()), new PhoneNumber(senderNumber), messageBody)
-            .create();
+        final Message message = Message.creator(new PhoneNumber(user.getPhone()), new PhoneNumber(senderNumber), messageBody).create();
         System.out.println(message.getSid());
 
     }

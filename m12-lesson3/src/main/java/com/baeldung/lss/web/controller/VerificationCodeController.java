@@ -1,29 +1,31 @@
 package com.baeldung.lss.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.jboss.aerogear.security.otp.Totp;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.web.model.User;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.MessageFactory;
 import com.twilio.sdk.resource.instance.Message;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.jboss.aerogear.security.otp.Totp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class VerificationCodeController {
+
+    @Autowired
+    private TwilioRestClient twilioRestClient;
 
     @Value("${twilio.sender}")
     private String senderNumber;
@@ -31,15 +33,12 @@ public class VerificationCodeController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private TwilioRestClient twilioRestClient;
-
     //
 
     @RequestMapping(value = "/code", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public void sendCode(Authentication auth) throws TwilioRestException {
-        final User user = userRepository.findByEmail(auth.getName());
+    public void sendCode(@RequestParam("username") String username) throws TwilioRestException {
+        final User user = userRepository.findByEmail(username);
         if (user == null) {
             return;
         }
@@ -51,8 +50,7 @@ public class VerificationCodeController {
         params.add(new BasicNameValuePair("From", senderNumber));
         System.out.println(params);
 
-        final MessageFactory messageFactory = twilioRestClient.getAccount()
-            .getMessageFactory();
+        final MessageFactory messageFactory = twilioRestClient.getAccount().getMessageFactory();
         final Message message = messageFactory.create(params);
         System.out.println(message.getSid());
     }

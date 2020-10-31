@@ -1,17 +1,15 @@
 package com.baeldung.lss.web.model;
 
-import java.util.Calendar;
+import com.baeldung.lss.validation.PasswordMatches;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.jboss.aerogear.security.otp.api.Base32;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import org.jboss.aerogear.security.otp.api.Base32;
-
-import com.baeldung.lss.validation.PasswordMatches;
+import java.util.Calendar;
 
 @Entity
 @PasswordMatches
@@ -103,21 +101,8 @@ public class User {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("User [id=")
-            .append(id)
-            .append(", email=")
-            .append(email)
-            .append(", password=")
-            .append(password)
-            .append(", passwordConfirmation=")
-            .append(passwordConfirmation)
-            .append(", created=")
-            .append(created)
-            .append(", secret=")
-            .append(secret)
-            .append(", phone=")
-            .append(phone)
-            .append("]");
+        builder.append("User [id=").append(id).append(", email=").append(email).append(", password=").append(password).append(", passwordConfirmation=").append(passwordConfirmation).append(", created=").append(created).append(", secret=").append(secret)
+                .append(", phone=").append(phone).append("]");
         return builder.toString();
     }
 

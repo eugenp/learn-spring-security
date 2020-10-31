@@ -1,8 +1,6 @@
-# Learn Spring Security Core - Two-Factor Authentication
-This is the codebase for Module 'Two-Factor Authentication' of [Learn Spring Security Core](https://bit.ly/github-lssc)
+# Module 12 - Two-Factor Authentication
+This is the codebase for Module 1 of [Learn Spring Security](http://bit.ly/github-lssc)
 
-## Non-Standard Modules
+### Non-Standard Module 
 
-_m14-lesson4-new_ 
-- uses Twilio SDK version 7.x
-- the standard version _m14-lesson4_ uses an older Twilio SDK - version 3.x
+_m12-lesson3-new_ uses Twilio SDK version 7.x. The standard version _m12-lesson3_ uses Twilio SDK version 3.x

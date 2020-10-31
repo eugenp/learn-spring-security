@@ -1,7 +1,8 @@
 package com.baeldung.lss.web.controller;
 
-import javax.validation.Valid;
-
+import com.baeldung.lss.service.IUserService;
+import com.baeldung.lss.validation.EmailExistsException;
+import com.baeldung.lss.web.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -9,9 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.baeldung.lss.service.IUserService;
-import com.baeldung.lss.validation.EmailExistsException;
-import com.baeldung.lss.web.model.User;
+import javax.validation.Valid;
 
 @Controller
 class RegistrationController {
