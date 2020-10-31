@@ -1,7 +1,7 @@
 package com.baeldung.lss.web.controller;
 
-import javax.validation.Valid;
-
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.web.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.web.model.User;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
@@ -40,12 +39,8 @@ public class UserController {
         if (result.hasErrors()) {
             return new ModelAndView("tl/form", "formErrors", result.getAllErrors());
         }
-        if(user.getId() == null) {
-            redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
-        } else {
-            redirect.addFlashAttribute("globalMessage", "Successfully updated existing user");
-        }
         user = this.userRepository.save(user);
+        redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
         return new ModelAndView("redirect:/user/{user.id}", "user.id", user.getId());
     }
 

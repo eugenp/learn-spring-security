@@ -1,12 +1,11 @@
 package com.baeldung.test;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class LiveTest {
 

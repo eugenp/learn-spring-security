@@ -1,11 +1,10 @@
 package com.baeldung.lss.spring;
 
+import com.baeldung.lss.security.CustomMethodSecurityExpressionHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
-
-import com.baeldung.lss.security.CustomMethodSecurityExpressionHandler;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
