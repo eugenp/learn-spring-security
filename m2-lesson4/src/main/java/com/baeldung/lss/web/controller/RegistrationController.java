@@ -1,10 +1,10 @@
 package com.baeldung.lss.web.controller;
 
-import com.baeldung.lss.model.User;
-import com.baeldung.lss.model.VerificationToken;
-import com.baeldung.lss.registration.OnRegistrationCompleteEvent;
-import com.baeldung.lss.service.IUserService;
-import com.baeldung.lss.validation.EmailExistsException;
+import java.util.Calendar;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.Calendar;
+import com.baeldung.lss.model.User;
+import com.baeldung.lss.model.VerificationToken;
+import com.baeldung.lss.registration.OnRegistrationCompleteEvent;
+import com.baeldung.lss.service.IUserService;
+import com.baeldung.lss.validation.EmailExistsException;
 
 @Controller
 class RegistrationController {
@@ -40,6 +42,7 @@ class RegistrationController {
             return new ModelAndView("registrationPage", "user", user);
         }
         try {
+        	user.setEnabled(false);
             final User registered = userService.registerNewUser(user);
 
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
@@ -61,10 +64,7 @@ class RegistrationController {
 
         final User user = verificationToken.getUser();
         final Calendar cal = Calendar.getInstance();
-        if ((verificationToken.getExpiryDate()
-            .getTime()
-            - cal.getTime()
-                .getTime()) <= 0) {
+        if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Your registration token has expired. Please register again.");
             return new ModelAndView("redirect:/login");
         }

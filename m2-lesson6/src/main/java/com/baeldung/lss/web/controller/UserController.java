@@ -1,9 +1,7 @@
 package com.baeldung.lss.web.controller;
 
-import com.baeldung.lss.model.User;
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.service.IUserService;
-import com.baeldung.lss.validation.EmailExistsException;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
+import com.baeldung.lss.model.User;
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.service.IUserService;
+import com.baeldung.lss.validation.EmailExistsException;
 
 @Controller
 @RequestMapping("/user")
@@ -26,6 +27,8 @@ class UserController {
 
     @Autowired
     private IUserService userService;
+
+    //
 
     @RequestMapping
     public ModelAndView list() {
@@ -61,8 +64,10 @@ class UserController {
 
     @RequestMapping(value = "delete/{id}")
     public ModelAndView delete(@PathVariable("id") final Long id) {
-        this.userRepository.findById(id)
-            .ifPresent(user ->  this.userRepository.delete(user));
+    	User user = this.userRepository.findOne(id);
+		if (user != null) {
+			this.userRepository.delete(user);
+		}
         return new ModelAndView("redirect:/");
     }
 

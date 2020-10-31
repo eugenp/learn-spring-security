@@ -7,6 +7,4 @@ public interface SecurityQuestionRepository extends JpaRepository<SecurityQuesti
 
     SecurityQuestion findByQuestionDefinitionIdAndUserIdAndAnswer(Long questionDefinitionId, Long userId, String answer);
 
-    SecurityQuestion findByUserId(Long userId);
-
 }

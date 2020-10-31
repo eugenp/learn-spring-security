@@ -1,11 +1,16 @@
 package com.baeldung.lss.model;
 
-import com.baeldung.lss.validation.PasswordMatches;
-
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.Calendar;
+
+import com.baeldung.lss.validation.PasswordMatches;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @PasswordMatches
@@ -30,9 +35,6 @@ public class User {
     private Boolean enabled;
 
     private Calendar created = Calendar.getInstance();
-
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.REMOVE)
-    private VerificationToken verificationToken;
 
     public User() {
         super();
@@ -85,14 +87,6 @@ public class User {
 
     public void setEnabled(final Boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public VerificationToken getVerificationToken() {
-        return verificationToken;
-    }
-
-    public void setVerificationToken(VerificationToken verificationToken) {
-        this.verificationToken = verificationToken;
     }
 
     @Override
