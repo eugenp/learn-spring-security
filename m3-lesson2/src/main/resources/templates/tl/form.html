@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
 <head>
 <title>Users : Create</title>
 </head>
@@ -13,8 +13,7 @@
             <div class="pull-right">
                 <a th:href="@{/user/}" href="users.html"> Users </a>
             </div>
-            <input type="hidden" th:field="*{id}"  />
-            <input type="hidden" th:field="*{enabled}" >
+            <input type="hidden" th:field="*{id}" th:class="${#fields.hasErrors('id')} ? 'field-error'" />
 
             <label for="email">Email</label>
             <input type="email" th:field="*{email}" th:class="${#fields.hasErrors('email')} ? 'field-error'" />

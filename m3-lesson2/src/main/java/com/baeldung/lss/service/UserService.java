@@ -2,10 +2,6 @@ package com.baeldung.lss.service;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import com.baeldung.lss.model.PasswordResetToken;
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.model.VerificationToken;
@@ -13,6 +9,8 @@ import com.baeldung.lss.persistence.PasswordResetTokenRepository;
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.persistence.VerificationTokenRepository;
 import com.baeldung.lss.validation.EmailExistsException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
@@ -20,9 +18,6 @@ class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private VerificationTokenRepository verificationTokenRepository;
@@ -35,7 +30,6 @@ class UserService implements IUserService {
         if (emailExist(user.getEmail())) {
             throw new EmailExistsException("There is an account with that email address: " + user.getEmail());
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -57,7 +51,7 @@ class UserService implements IUserService {
 
     @Override
     public void changeUserPassword(final User user, final String password) {
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(password);
         userRepository.save(user);
     }
 
@@ -80,21 +74,6 @@ class UserService implements IUserService {
     private boolean emailExist(final String email) {
         final User user = userRepository.findByEmail(email);
         return user != null;
-    }
-
-    @Override
-    public User updateExistingUser(User user) throws EmailExistsException {
-        final Long id = user.getId();
-        final String email = user.getEmail();
-        final User emailOwner = userRepository.findByEmail(email);
-        if (emailOwner != null && !id.equals(emailOwner.getId())) {
-            throw new EmailExistsException("Email not available.");
-        }
-        final String password = user.getPassword();
-        if (password != null) {
-            user.setPassword(passwordEncoder.encode(password));
-        }
-        return userRepository.save(user);
     }
 
 }

@@ -1,6 +1,12 @@
 package com.baeldung.lss.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,7 +21,7 @@ public class VerificationToken {
 
     private String token;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
@@ -68,8 +74,7 @@ public class VerificationToken {
         final Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(new Date().getTime());
         cal.add(Calendar.MINUTE, expiryTimeInMinutes);
-        return new Date(cal.getTime()
-            .getTime());
+        return new Date(cal.getTime().getTime());
     }
 
     public void updateToken(final String token) {
@@ -128,12 +133,7 @@ public class VerificationToken {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Token [String=")
-            .append(token)
-            .append("]")
-            .append("[Expires")
-            .append(expiryDate)
-            .append("]");
+        builder.append("Token [String=").append(token).append("]").append("[Expires").append(expiryDate).append("]");
         return builder.toString();
     }
 
