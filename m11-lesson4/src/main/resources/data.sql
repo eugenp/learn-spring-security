@@ -1,12 +1,10 @@
-INSERT INTO users (id, email, password) VALUES
--- User eugen@email.com/pass
-(1, 'eugen@email.com', '$2a$04$kqRvgmJBlWZQQ2c9NT9IH.ZhxFY07Y2xE73vmLHxBq2hNTvGvUc5m'),
--- User eric@email.com/123
-(2, 'eric@email.com', '$2a$10$BuPWnSrcLPxwMcCwu7eyBu/x7817Mo3MzYbZGVFfgIewEUUXPmpy6');
+INSERT INTO user (id, email, password) VALUES
+(1, 'eugen@email.com', 'pass'),
+(2, 'eric@email.com', '123');
 
 INSERT INTO possession (id, name, owner_id) VALUES
 (1, 'Eugen Possession', 1),
-(2, 'Common Possesion', 1),
+(2, 'Common Possession', 1),
 (3, 'Eric Possession', 2);
 
 INSERT INTO acl_sid (id, principal, sid) VALUES

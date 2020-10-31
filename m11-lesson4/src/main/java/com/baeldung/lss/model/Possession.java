@@ -6,10 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "possession")
 public class Possession implements IEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -107,13 +105,7 @@ public class Possession implements IEntity {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Possession [id=")
-            .append(id)
-            .append(", name=")
-            .append(name)
-            .append(", owner=")
-            .append(owner)
-            .append("]");
+        builder.append("Possession [id=").append(id).append(", name=").append(name).append(", owner=").append(owner).append("]");
         return builder.toString();
     }
 

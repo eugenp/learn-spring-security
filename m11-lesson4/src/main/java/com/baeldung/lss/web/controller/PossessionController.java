@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.baeldung.lss.model.Possession;
 import com.baeldung.lss.persistence.PossessionRepository;
-import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.security.LssPermissionService;
 
 @Controller
@@ -27,9 +26,6 @@ public class PossessionController {
     private PossessionRepository possessionRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private LssPermissionService permissionService;
 
     // API
@@ -38,18 +34,15 @@ public class PossessionController {
     @ResponseBody
     @PostAuthorize("hasPermission(returnObject, 'READ') or hasPermission(returnObject, 'ADMINISTRATION')")
     public Possession findOne(@PathVariable("id") final Long id) {
-        return possessionRepository.findById(id)
-            .orElse(null);
+        return possessionRepository.findOne(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView create(@Valid Possession possession, Authentication authentication) {
-        possession.setOwner(userRepository.findByEmail(authentication.getName()));
-        possession = possessionRepository.save(possession);
-        System.out.println(possession);
-        // permissionService.addPermissionForAuthority(possession, BasePermission.ADMINISTRATION, "ADMIN");
-        permissionService.addPermissionForUser(possession, BasePermission.ADMINISTRATION, authentication.getName());
-        return new ModelAndView("redirect:/user?message=Possession created with id " + possession.getId());
+        final Possession newPossession = possessionRepository.save(possession);
+
+        permissionService.addPermissionForUser(newPossession, BasePermission.ADMINISTRATION, authentication.getName());
+        return new ModelAndView("redirect:/user?message=Possession created with id " + newPossession.getId());
     }
 
     //

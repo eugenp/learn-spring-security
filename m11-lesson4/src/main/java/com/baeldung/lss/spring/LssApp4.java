@@ -1,5 +1,6 @@
 package com.baeldung.lss.spring;
 
+import com.baeldung.lss.security.LssMethodSecurityConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -10,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("com.baeldung.lss")
 @EnableJpaRepositories("com.baeldung.lss")
 @EntityScan("com.baeldung.lss.model")
-public class LssApp4 {
-
+public class LssApp4 {	
+	
     public static void main(String[] args) throws Exception {
         SpringApplication.run(new Class[] { LssApp4.class, LssSecurityConfig.class, LssWebMvcConfiguration.class, LssMethodSecurityConfig.class }, args);
     }

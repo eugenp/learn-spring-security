@@ -1,7 +1,6 @@
 package com.baeldung.lss.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.acls.domain.GrantedAuthoritySid;
 import org.springframework.security.acls.domain.ObjectIdentityImpl;
 import org.springframework.security.acls.domain.PrincipalSid;
 import org.springframework.security.acls.model.MutableAcl;
@@ -34,11 +33,6 @@ public class LssPermissionService {
         addPermissionForSid(targetObj, permission, sid);
     }
 
-    public void addPermissionForAuthority(IEntity targetObj, Permission permission, String authority) {
-        final Sid sid = new GrantedAuthoritySid(authority);
-        addPermissionForSid(targetObj, permission, sid);
-    }
-
     private void addPermissionForSid(IEntity targetObj, Permission permission, Sid sid) {
         final TransactionTemplate tt = new TransactionTemplate(transactionManager);
 
@@ -54,8 +48,7 @@ public class LssPermissionService {
                     acl = aclService.createAcl(oi);
                 }
 
-                acl.insertAce(acl.getEntries()
-                    .size(), permission, sid, true);
+                acl.insertAce(acl.getEntries().size(), permission, sid, true);
                 aclService.updateAcl(acl);
             }
         });
