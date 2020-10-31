@@ -13,48 +13,20 @@
     </div>
     
     <div class="container">
-        <!--  authentication tag-->
-        Current user name: <sec:authentication property="principal.username" /><br/>
-        Current user name: <sec:authentication property="name" /><br/>
+
+        Authorities: <sec:authentication property="principal.authorities" />
         <br/>
-        Current user roles: <sec:authentication property="principal.authorities" /><br/>
-        Current user roles: <sec:authentication property="authorities" /><br/>
+        Authorities New: <sec:authentication property="authorities" />
         <br/>
-        Current user organization : <sec:authentication property="principal.organization" />
+        Name: <sec:authentication property="name" />
         <br/>
-        <!--  -->
+        <%-- Org: <sec:authentication property="principal.organization" />  --%>
+
         <sec:authentication property="principal.username" var="currentUserName" scope="page"/>
         <c:if test="${currentUserName.startsWith('u')}">
         <div>User name starts with 'u'</div>
         </c:if>
-        
-        <hr/>
-        <!-- authorize tag -->
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-		    Only admins can see this message
-		</sec:authorize>
-		 
-		<sec:authorize access="hasRole('ROLE_USER')">
-		    Only users can see this message
-		</sec:authorize>
-		
-		<hr/>
-		
-		<sec:authorize url="/user/delete/1">
-		    Only users allowed to call the "/user/delete/1" URL can see this message
-		</sec:authorize>
-		
-		<sec:authorize url="/user/delete/1" method="POST">
-            Only users allowed to call POST "/user/delete/1" URL can see this message
-        </sec:authorize>
-        
-        <hr/>
-        
-        <sec:authorize access="hasRole('ROLE_ADMIN')" var="isAdmin"/>
-        <c:if test="${isAdmin}">
-        <div>Current user is admin</div>
-        </c:if>
-        
     </div>
+
 </body>
 </html>

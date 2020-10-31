@@ -23,6 +23,9 @@
 	Current user roles 2:
 	<span sec:authentication="authorities">[ROLE_USER, ROLE_ADMIN]</span>
 
+	<br/>
+	Current user name 3:
+	<span th:text="${#authentication.name}">The value of the "name" property of the authentication object</span>
 </div>
 </body>
 </html>

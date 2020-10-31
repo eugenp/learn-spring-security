@@ -8,24 +8,13 @@
 <h1 layout:fragment="header">Profile</h1>
 <div layout:fragment="content" class="container">
 
-	<div sec:authorize="hasRole('ROLE_USER')">
-		Only users can see this message
-	</div>
-	<div sec:authorize="hasRole('ROLE_ADMIN')">
-		Only admins can see this message
-	</div>
+	<div sec:authorize="hasRole('ROLE_ADMIN')">Only admins can see this message</div>
 
-	<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-		Only admins can see this message
-	</div>
+	<div sec:authorize="hasRole('ROLE_USER')">Only users can see this message</div>
 
-	<div sec:authorize-url="/user/delete/1">
-		Only users who can call "/user/delete/1" URL can see this message
-	</div>
+	<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Only admins can see this message</div>
 
-	<div sec:authorize-url="POST /user/delete/1">
-		Only users who can POST to /user/delete/1 will see this message
-	</div>
+	<div sec:authorize-url="/user/delete/1">Only users who can call "/user/delete/1" URL can see this message</div>
 
 </div>
 </body>
