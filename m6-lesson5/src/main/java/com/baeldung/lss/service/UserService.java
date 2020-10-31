@@ -39,18 +39,4 @@ class UserService implements IUserService {
         return user != null;
     }
 
-    @Override
-    public User updateExistingUser(User user) throws EmailExistsException {
-        final Long id = user.getId();
-        final String email = user.getEmail();
-        final User emailOwner = userRepository.findByEmail(email);
-        if (emailOwner != null && !id.equals(emailOwner.getId())) {
-            throw new EmailExistsException("Email not available.");
-        }
-        final String password = user.getPassword();
-        if (password != null) {
-            user.setPassword(passwordEncoder.encode(password));
-        }
-        return userRepository.save(user);
-    }
 }

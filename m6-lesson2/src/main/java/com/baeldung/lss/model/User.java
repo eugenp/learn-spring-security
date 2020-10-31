@@ -1,15 +1,11 @@
 package com.baeldung.lss.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-
 import com.baeldung.lss.validation.PasswordMatches;
 import com.baeldung.lss.validation.ValidPassword;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
 
 @Entity
 @PasswordMatches

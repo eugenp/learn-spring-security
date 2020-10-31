@@ -6,7 +6,6 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,7 +18,6 @@ import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
 
 @EnableWebSecurity
-@Configuration
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -33,9 +31,13 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     //
+    private void cleanUpExistingUsers() {
+        userRepository.deleteAll();
+    }
 
     @PostConstruct
     private void saveTestUser() {
+        cleanUpExistingUsers();
         final User user = new User();
         user.setEmail("test@email.com");
         user.setPassword(passwordEncoder().encode("pass"));
@@ -55,6 +57,10 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/user/register",
                         "/registrationConfirm*",
                         "/badUser*",
+                        "/forgotPassword*",
+                        "/user/resetPassword*",
+                        "/user/changePassword*",
+                        "/user/savePassword*",
                         "/js/**").permitAll()
                 .anyRequest().authenticated()
 
@@ -73,7 +79,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10, new SecureRandom());
+        return new BCryptPasswordEncoder(12);
     }
 
 }

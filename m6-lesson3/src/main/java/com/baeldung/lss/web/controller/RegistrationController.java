@@ -1,22 +1,27 @@
 package com.baeldung.lss.web.controller;
 
-import javax.validation.Valid;
-
+import com.baeldung.lss.model.User;
+import com.baeldung.lss.service.IUserService;
+import com.baeldung.lss.validation.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.baeldung.lss.model.User;
-import com.baeldung.lss.service.IUserService;
-import com.baeldung.lss.validation.EmailExistsException;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.UUID;
 
 @Controller
 class RegistrationController {
@@ -56,6 +61,37 @@ class RegistrationController {
         }
         redirectAttributes.addFlashAttribute("message", "You have been successfully registered.");
         return new ModelAndView("redirect:/login");
+    }
+
+    // password reset
+
+    @RequestMapping(value = "/user/resetPassword", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView resetPassword(final HttpServletRequest request, @RequestParam("email") final String userEmail, final RedirectAttributes redirectAttributes) {
+        final User user = userService.findUserByEmail(userEmail);
+        if (user != null) {
+            final String token = UUID.randomUUID()
+                    .toString();
+            userService.createPasswordResetTokenForUser(user, token);
+            final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+            final SimpleMailMessage email = constructResetTokenEmail(appUrl, token, user);
+            mailSender.send(email);
+        }
+
+        redirectAttributes.addFlashAttribute("message", "You should receive an Password Reset Email shortly");
+        return new ModelAndView("redirect:/login");
+    }
+
+    // NON-API
+
+    private SimpleMailMessage constructResetTokenEmail(final String contextPath, final String token, final User user) {
+        final String url = contextPath + "/user/changePassword?id=" + user.getId() + "&token=" + token;
+        final SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(user.getEmail());
+        email.setSubject("Reset Password");
+        email.setText("Please open the following URL to reset your password: \r\n" + url);
+        email.setFrom(env.getProperty("support.email"));
+        return email;
     }
 
 }
