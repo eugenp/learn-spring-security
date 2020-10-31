@@ -47,13 +47,7 @@ class UserController {
             return new ModelAndView("tl/form", "formErrors", result.getAllErrors());
         }
         try {
-            if (user.getId() == null) {
-                userService.registerNewUser(user);
-                redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
-            } else {
-                userService.updateExistingUser(user);
-                redirect.addFlashAttribute("globalMessage", "Successfully updated the user");
-            }
+            userService.registerNewUser(user);
         } catch (EmailExistsException e) {
             result.addError(new FieldError("user", "email", e.getMessage()));
             return new ModelAndView("tl/form", "user", user);
@@ -64,7 +58,7 @@ class UserController {
 
     @RequestMapping(value = "delete/{id}")
     public ModelAndView delete(@PathVariable("id") final Long id) {
-        this.userRepository.deleteById(id);
+        this.userRepository.delete(id);
         return new ModelAndView("redirect:/");
     }
 

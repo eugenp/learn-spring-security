@@ -8,8 +8,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.baeldung.lss.spring.LssApp4;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = LssApp4.class)
-public class Lss4IntegrationTest {
+@SpringBootTest(classes= LssApp4.class)
+public class Lss5IntegrationTest {
 
     @Test
     public void whenLoadApplication_thenSuccess() {

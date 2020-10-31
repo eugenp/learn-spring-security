@@ -2,28 +2,28 @@ package com.baeldung.lss.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @EnableWebSecurity
+@Configuration
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public LssSecurityConfig() {
-        super();
-    }
-
-    //
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { // @formatter:off 
-        auth.
-            inMemoryAuthentication().passwordEncoder(passwordEncoder()).
-            withUser("user").password(passwordEncoder().encode("pass")).
-            roles("USER");
+        /*auth.
+            inMemoryAuthentication().
+            withUser("test@test.com").password("pass").            
+            roles("USER");*/        
+        auth.userDetailsService(userDetailsService);
+        
     } // @formatter:on
 
     @Override
@@ -33,22 +33,11 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
         
         .and()
-        .formLogin().
-            loginPage("/login").permitAll().
-            loginProcessingUrl("/doLogin")
-
-        .and()
-        .logout().permitAll().logoutUrl("/logout")
-        
-        .and()
-        .csrf().disable()
-        ;
-    }
+        .httpBasic();
+    } // @formatter:on
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public LssUserDetailsService userDetailsService() {
+        return new LssUserDetailsService();
     }
-    
-
 }

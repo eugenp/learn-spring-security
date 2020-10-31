@@ -29,9 +29,7 @@ public class UserDao {
     }
 
     public User findByEmail(String email) {
-        User user = (User) em.createQuery("SELECT u FROM User u where u.email = :value1")
-            .setParameter("value1", email)
-            .getSingleResult();
+        User user = (User) em.createQuery("SELECT u FROM User u where u.email = :value1").setParameter("value1", email).getSingleResult();
         return user;
     }
 
