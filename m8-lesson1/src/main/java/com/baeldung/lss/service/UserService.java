@@ -3,7 +3,6 @@ package com.baeldung.lss.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.baeldung.lss.model.PasswordResetToken;
@@ -20,9 +19,6 @@ class UserService implements IUserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private PasswordResetTokenRepository passwordTokenRepository;
 
     @Override
@@ -30,7 +26,7 @@ class UserService implements IUserService {
         if (emailExist(user.getEmail())) {
             throw new EmailExistsException("There is an account with that email address: " + user.getEmail());
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
 
@@ -69,7 +65,7 @@ class UserService implements IUserService {
             throw new EmailExistsException("Email not available.");
         }
         if (user.getPassword() != null) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(user.getPassword());
         }
         return userRepository.save(user);
     }

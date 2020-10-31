@@ -3,7 +3,6 @@ package com.baeldung.lss.spring;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
@@ -42,15 +39,15 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     private void saveTestUser() {
         final User user = new User();
         user.setEmail("test@email.com");
-        user.setPassword(passwordEncoder().encode("pass"));
+        user.setPassword("pass");
         userRepository.save(user);
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        /*final DaoAuthenticationProvider daoAuthProvider = new DaoAuthenticationProvider();
-        daoAuthProvider.setUserDetailsService(userDetailsService);
-        auth.authenticationProvider(daoAuthProvider).authenticationProvider(customAuthenticationProvider);*/
+        /*final DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        auth.authenticationProvider(customAuthenticationProvider).authenticationProvider(daoAuthenticationProvider);*/
 
         // auth.parentAuthenticationManager(new ProviderManager(Lists.newArrayList(customAuthenticationProvider)));
 
@@ -63,9 +60,17 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {// @formatter:off
         http
-        .authorizeRequests()
-                .antMatchers("/badUser*","/js/**").permitAll()
-                .anyRequest().authenticated()
+            .authorizeRequests()
+            .antMatchers("/signup",
+                "/user/register",
+                "/registrationConfirm*",
+                "/badUser*",
+                "/forgotPassword*",
+                "/user/resetPassword*",
+                "/user/changePassword*",
+                "/user/savePassword*",
+                "/js/**").permitAll()
+            .anyRequest().authenticated()
 
         .and()
         .formLogin().
@@ -79,9 +84,4 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         ;
     } // @formatter:on
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

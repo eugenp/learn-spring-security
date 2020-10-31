@@ -3,7 +3,7 @@ package com.baeldung.lss.spring;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.boot.context.embedded.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,8 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import com.baeldung.lss.model.User;
@@ -38,7 +36,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {// @formatter:off
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService);
     }// @formatter:on
 
     @Override
@@ -63,26 +61,21 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     } // @formatter:on
 
-    @PostConstruct
-    private void saveTestUser() {
-        final User user = new User();
-        user.setEmail("test@email.com");
-        user.setPassword(passwordEncoder().encode("pass"));
-        userRepository.save(user);
-    }
-
     @Bean
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    @PostConstruct
+    private void saveTestUser() {
+        final User user = new User();
+        user.setEmail("test@email.com");
+        user.setPassword("pass");
+        userRepository.save(user);
     }
 
     @Bean
-    public static ServletListenerRegistrationBean httpSessionEventPublisher() { // (5)
+    public static ServletListenerRegistrationBean httpSessionEventPublisher() {	//(5)
         return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
     }
 }

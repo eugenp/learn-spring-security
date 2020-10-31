@@ -17,7 +17,7 @@ public class ActiveUserService {
 
     // API
 
-    public final List<String> getActiveUsers() { // @formatter:off
+    public final List<String> getAllActiveUsers() { // @formatter:off
         final List<Object> principals = sessionRegistry.getAllPrincipals();
         final User[] users = principals.toArray(new User[principals.size()]);
         
