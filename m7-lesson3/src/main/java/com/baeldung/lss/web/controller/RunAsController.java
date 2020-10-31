@@ -16,15 +16,11 @@ class RunAsController {
     @Autowired
     private RunAsService runAsService;
 
-    @Secured({ "ROLE_USER", "RUN_AS_REPORTER" })
     @RequestMapping
     @ResponseBody
+    @Secured({ "ROLE_USER", "RUN_AS_REPORTER" })
     public String tryRunAs() {
-        final Authentication auth = runAsService.getCurrentUser();
-        auth.getAuthorities()
-            .forEach(a -> System.out.println(a.getAuthority()));
-        return "Current User Authorities inside this RunAS method only " + auth.getAuthorities()
-            .toString();
+        return runAsService.getCurrentUser().getAuthorities().toString();
     }
 
 }

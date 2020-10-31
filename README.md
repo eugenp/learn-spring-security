@@ -1,2 +1,2 @@
-# Learn Spring Security Core - Spring Security Configuration
-This is the codebase for Module 'Spring Security Configuration' of [Learn Spring Security Core](https://bit.ly/github-lssc)
+# Module 7 - Spring Security Configuration
+This is the codebase for Module 7 of [Learn Spring Security](http://bit.ly/github-lss)

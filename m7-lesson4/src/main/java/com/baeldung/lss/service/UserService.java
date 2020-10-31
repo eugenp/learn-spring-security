@@ -2,8 +2,9 @@ package com.baeldung.lss.service;
 
 import javax.transaction.Transactional;
 
+import com.baeldung.lss.model.PasswordResetToken;
+import com.baeldung.lss.persistence.PasswordResetTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.baeldung.lss.model.User;
@@ -18,18 +19,26 @@ class UserService implements IUserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
+    private PasswordResetTokenRepository passwordTokenRepository;
+    
     @Autowired
     private AsyncBean asyncBean;
 
     // read
-
+    
     @Override
-    public Iterable<User> findAll() {
+    public Iterable<User> findAll() { 
         asyncBean.asyncCall();
 
         return userRepository.findAll();
+    }
+
+    @Override
+    public User registerNewUser(final User user) throws EmailExistsException {
+        if (emailExist(user.getEmail())) {
+            throw new EmailExistsException("There is an account with that email address: " + user.getEmail());
+        }
+        return userRepository.save(user);
     }
 
     @Override
@@ -37,34 +46,32 @@ class UserService implements IUserService {
         return userRepository.findByEmail(email);
     }
 
-    // write
 
     @Override
-    public User registerNewUser(final User user) throws EmailExistsException {
-        if (emailExist(user.getEmail())) {
-            throw new EmailExistsException("There is an account with that email address: " + user.getEmail());
-        }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public void createPasswordResetTokenForUser(final User user, final String token) {
+        final PasswordResetToken myToken = new PasswordResetToken(token, user);
+        passwordTokenRepository.save(myToken);
+    }
+
+    @Override
+    public PasswordResetToken getPasswordResetToken(final String token) {
+        return passwordTokenRepository.findByToken(token);
+    }
+
+    @Override
+    public void changeUserPassword(final User user, final String password) {
+        user.setPassword(password);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void saveRegisteredUser(final User user) {
+        userRepository.save(user);
     }
 
     private boolean emailExist(final String email) {
         final User user = userRepository.findByEmail(email);
         return user != null;
-    }
-
-    @Override
-    public User updateExistingUser(User user) throws EmailExistsException {
-        final Long id = user.getId();
-        final String email = user.getEmail();
-        final User emailOwner = userRepository.findByEmail(email);
-        if (emailOwner != null && !id.equals(emailOwner.getId())) {
-            throw new EmailExistsException("Email not available.");
-        }
-        if (user.getPassword() != null) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        return userRepository.save(user);
     }
 
 }

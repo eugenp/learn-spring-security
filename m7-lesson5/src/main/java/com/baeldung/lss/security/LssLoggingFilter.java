@@ -18,15 +18,12 @@ public class LssLoggingFilter extends GenericFilterBean {
     private final Logger log = Logger.getLogger(LssLoggingFilter.class);
 
     @Override
-    public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse, final FilterChain filterChain) throws IOException, ServletException {
-        final HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        final String url = httpServletRequest.getRequestURL()
-            .toString();
-        final String queryString = Optional.ofNullable(httpServletRequest.getQueryString())
-            .map(value -> "?" + value)
-            .orElse("");
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
+        final HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        final String url = httpServletRequest.getRequestURL().toString();
+        final String queryString = Optional.ofNullable(httpServletRequest.getQueryString()).map(value -> "?" + value).orElse("");
         log.info(String.format("applying LssLoggingFilter for URI: %s%s", url, queryString));
 
-        filterChain.doFilter(servletRequest, servletResponse);
+        chain.doFilter(request, response);
     }
 }
