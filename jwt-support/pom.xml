@@ -5,14 +5,14 @@
     <description>The &quot;Learn Spring Security OAuth&quot; Course: Tokens and JWT</description>
 
     <groupId>com.baeldung</groupId>
-    <artifactId>tokens-jwt</artifactId>
+    <artifactId>jwt-support</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>tokens-jwt--auth-server</module>
-        <module>tokens-jwt--resource-server</module>
-        <module>tokens-jwt--client</module>
+        <module>jwt-support--auth-server</module>
+        <module>jwt-support--resource-server</module>
+        <module>jwt-support--client</module>
     </modules>
 
 </project>

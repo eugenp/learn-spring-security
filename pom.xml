@@ -17,7 +17,7 @@
         <module>authorization-server-keycloak-end</module>
         <module>oauth-client-start</module>
         <module>oauth-client-end</module>
-        <module>tokens-jwt</module>
+        <module>jwt-support</module>
     </modules>
 
 </project>
