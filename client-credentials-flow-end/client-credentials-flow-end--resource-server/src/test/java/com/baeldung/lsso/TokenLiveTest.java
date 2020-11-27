@@ -1,16 +1,18 @@
 package com.baeldung.lsso;
 
-import com.baeldung.lsso.persistence.model.Project;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.junit.Test;
-import org.springframework.http.HttpStatus;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
+import org.springframework.http.HttpStatus;
+
+import com.baeldung.lsso.persistence.model.Project;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 public class TokenLiveTest {
 
@@ -26,17 +28,24 @@ public class TokenLiveTest {
         params.put("client_id", "lssoClient");
         params.put("client_secret", "lssoSecret");
 
-        Response response = RestAssured.given().formParams(params).post(CONNECT_TOKEN);
+        Response response = RestAssured.given()
+            .formParams(params)
+            .post(CONNECT_TOKEN);
 
-        String accessToken = response.jsonPath().getString("access_token");
+        String accessToken = response.jsonPath()
+            .getString("access_token");
 
         assertThat(accessToken).isNotBlank();
 
-        response = RestAssured.given().auth().oauth2(accessToken).get(SERVER_API_PROJECTS);
+        response = RestAssured.given()
+            .auth()
+            .oauth2(accessToken)
+            .get(SERVER_API_PROJECTS);
 
         assertThat(HttpStatus.OK.value()).isEqualTo(response.getStatusCode());
 
-        List<Project> projects = response.getBody().as(List.class);
-        assertThat(3).isEqualTo(projects.size());
+        List<Project> projects = response.getBody()
+            .as(List.class);
+        assertThat(projects.size()).isGreaterThanOrEqualTo(3);
     }
 }
