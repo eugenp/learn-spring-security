@@ -15,7 +15,6 @@ import io.restassured.response.Response;
 /**
  * Needs the following to be running: 
  * - Project Resource Server
- * - Task Resource Server
  * - Gateway
  * - Authorization Server
  * - Client Application Server
@@ -29,7 +28,6 @@ public class Oauth2ClientLiveTest {
     private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/login/oauth2/code/custom";
     private static final String PROJECTS_RESOURCE_URL = CLIENT_BASE_URL + "/lsso-client/projects";
     private static final String ADD_PROJECT_URL = CLIENT_BASE_URL + "/lsso-client/addproject";
-    private static final String TASKS_RESOURCE_URL = CLIENT_BASE_URL + "/lsso-client/tasks";
     private static final String CLIENT_AUTHORIZATION_URI = CLIENT_BASE_URL + "/lsso-client/oauth2/authorization/custom";
 
     @Test
@@ -111,22 +109,7 @@ public class Oauth2ClientLiveTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND.value());
         assertThat(response.getHeader(HttpHeaders.LOCATION)).contains("lsso-client/projects");
 
-        // check tasks page with valid query param
-        response = RestAssured.given()
-            .redirects()
-            .follow(false)
-            .cookie("JSESSIONID", newClientSessionId)
-            .get(TASKS_RESOURCE_URL + "?projectId=1");
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.asString()).contains("Tasks : View all");
-
-        // check tasks page with invalid query param
-        response = RestAssured.given()
-            .redirects()
-            .follow(false)
-            .cookie("JSESSIONID", newClientSessionId)
-            .get(TASKS_RESOURCE_URL);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        // tasks page can't be verified in the -start module
     }
 
 }

@@ -16,7 +16,6 @@ import io.restassured.response.Response;
  * This Live Test requires:
  * - the Authorization Server to be running
  * - the Project Resource Server to be running
- * - the Task Resource Server to be running
  */
 public class GatewayLiveTest {
 
@@ -33,7 +32,6 @@ public class GatewayLiveTest {
     private static final String AUTHORIZE_URL_PATTERN = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" + REDIRECT_URL;
     private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/token";
     private static final String GATEWAY_PROJECTS_RESOURCE_URL = GATEWAY_SERVER_BASE_URL + "/projects";
-    private static final String GATEWAY_TASKS_RESOURCE_URL = GATEWAY_SERVER_BASE_URL + "/tasks?projectId=1";
 
     @Test
     public void givenValidUser_whenGetProjectResource_thenSuccess() {
@@ -43,17 +41,6 @@ public class GatewayLiveTest {
         Response response = RestAssured.given()
             .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
             .get(GATEWAY_PROJECTS_RESOURCE_URL);
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-    }
-
-    @Test
-    public void givenValidUser_whenGetTasksResource_thenSuccess() {
-        String accessToken = obtainAccessToken("read write");
-
-        // Access resources using access token
-        Response response = RestAssured.given()
-            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-            .get(GATEWAY_TASKS_RESOURCE_URL);
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 

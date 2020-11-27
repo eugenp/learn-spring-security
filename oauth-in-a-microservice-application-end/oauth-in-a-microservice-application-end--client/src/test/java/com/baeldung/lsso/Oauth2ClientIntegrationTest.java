@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -69,6 +70,10 @@ public class Oauth2ClientIntegrationTest {
 
     @BeforeEach
     public void setUp() throws Exception {
+        webTestClient = webTestClient.mutate()
+            .responseTimeout(Duration.ofMillis(30000))
+            .build();
+
         createAuthServer();
 
         createGatewayServer();
