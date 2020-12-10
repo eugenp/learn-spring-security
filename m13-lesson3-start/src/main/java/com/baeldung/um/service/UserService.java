@@ -25,7 +25,9 @@ class UserService implements IUserService {
         if (emailExist(user.getEmail())) {
             throw new EmailExistsException("There is an account with that email address: " + user.getEmail());
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        final String passwordEncoded = passwordEncoder.encode(user.getPassword());
+        user.setPassword(passwordEncoded);
+        user.setPasswordConfirmation(passwordEncoded);
         return repository.save(user);
     }
 
