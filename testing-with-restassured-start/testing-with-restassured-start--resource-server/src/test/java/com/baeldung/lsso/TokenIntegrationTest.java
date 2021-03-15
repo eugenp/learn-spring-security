@@ -3,7 +3,7 @@ package com.baeldung.lsso;
 import com.baeldung.lsso.web.dto.ProjectDto;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;

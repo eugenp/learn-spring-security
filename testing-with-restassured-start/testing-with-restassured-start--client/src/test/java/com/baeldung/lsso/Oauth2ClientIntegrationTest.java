@@ -35,9 +35,8 @@ import okhttp3.mockwebserver.RecordedRequest;
 @AutoConfigureWebTestClient
 public class Oauth2ClientIntegrationTest {
 
-    private final String CLIENT_BASE_URL = "/lsso-client";
-    private final String CLIENT_SECURED_URL = CLIENT_BASE_URL + "/projects";
-    private String REDIRECT_URI = CLIENT_BASE_URL + "/login/oauth2/code/custom?state=%s&code=%s";
+    private final String CLIENT_SECURED_URL = "/projects";
+    private String REDIRECT_URI = "/login/oauth2/code/custom?state=%s&code=%s";
 
     @Value("${spring.security.oauth2.client.provider.custom.authorization-uri}")
     private String authServerAuthorizationURL;
@@ -195,8 +194,7 @@ public class Oauth2ClientIntegrationTest {
             .expectBody()
             .consumeWith(response -> {
                 String bodyAsString = new String(response.getResponseBodyContent());
-                assertThat(bodyAsString)
-                    .contains("Project 1")
+                assertThat(bodyAsString).contains("Project 1")
                     .contains("Project 2")
                     .contains("Project 3")
                     .doesNotContain("Project 4");
