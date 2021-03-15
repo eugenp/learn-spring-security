@@ -39,12 +39,11 @@ import okhttp3.mockwebserver.RecordedRequest;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 public class Oauth2ClientIntegrationTest {
-
-    private static final String CLIENT_BASE_URL = "/lsso-client";
-    private static final String CLIENT_SECURED_PROJECTS_URL = CLIENT_BASE_URL + "/projects";
-    private static final String CLIENT_SECURED_ADD_PROJECT_URL = CLIENT_BASE_URL + "/addproject";
-    private static final String CLIENT_SECURED_TASKS_URL = CLIENT_BASE_URL + "/tasks";
-    private static final String REDIRECT_URI = CLIENT_BASE_URL + "/login/oauth2/code/custom?state=%s&code=%s";
+    
+    private static final String CLIENT_SECURED_PROJECTS_URL = "/projects";
+    private static final String CLIENT_SECURED_ADD_PROJECT_URL = "/addproject";
+    private static final String CLIENT_SECURED_TASKS_URL = "/tasks";
+    private static final String REDIRECT_URI = "/login/oauth2/code/custom?state=%s&code=%s";
 
     @Value("${spring.security.oauth2.client.provider.custom.authorization-uri}")
     private String authServerAuthorizationURL;

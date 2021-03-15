@@ -1,10 +1,10 @@
 package com.baeldung.lsso.service.impl;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.baeldung.lsso.persistence.model.Project;
 import com.baeldung.lsso.persistence.repository.IProjectRepository;
@@ -26,7 +26,7 @@ public class ProjectServiceImpl implements IProjectService {
 
     @Override
     public Project save(Project project) {
-        if (StringUtils.isEmpty(project.getId())) {
+        if (Objects.isNull(project.getId())) {
             project.setDateCreated(LocalDate.now());
         }
         return projectRepository.save(project);
