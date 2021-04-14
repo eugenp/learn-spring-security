@@ -4,8 +4,8 @@ spring:
       client:
         registration:
           github:
-            client-id: c29bd63c1501c38e503e
-            client-secret: 2c44ac021a73835dfa48d82069aafc34a553ee55
+            client-id: github-client-id
+            client-secret: github-client-secret
   thymeleaf:
     cache: false
     
