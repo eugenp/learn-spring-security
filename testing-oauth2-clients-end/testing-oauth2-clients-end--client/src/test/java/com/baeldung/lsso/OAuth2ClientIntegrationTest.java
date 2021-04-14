@@ -37,7 +37,7 @@ public class OAuth2ClientIntegrationTest {
         assertThat(clientRegistration.getClientSecret()).isEqualTo("lssoSecret");
         assertThat(clientRegistration.getAuthorizationGrantType()
             .getValue()).isEqualTo("authorization_code");
-        assertThat(clientRegistration.getRedirectUriTemplate()).isEqualTo("http://localhost:8082/lsso-client/login/oauth2/code/custom");
+        assertThat(clientRegistration.getRedirectUri()).isEqualTo("http://localhost:8082/lsso-client/login/oauth2/code/custom");
         assertThat(clientRegistration.getScopes()).hasSize(2)
             .contains("read", "write");
         assertThat(clientRegistration.getProviderDetails()

@@ -22,9 +22,8 @@ import static org.hamcrest.CoreMatchers.startsWith;
 public class Oauth2ClientIntegrationTest {
 
     public static final String JSESSIONID = "JSESSIONID";
-    private final String CLIENT_BASE_URL = "/lsso-client";
-    private final String CLIENT_SECURED_URL = CLIENT_BASE_URL + "/projects";
-    private final String CLIENT_REDIRECT_URL = CLIENT_BASE_URL + "login/oauth2/code/github";
+    private final String CLIENT_SECURED_URL = "/projects";
+    private final String CLIENT_REDIRECT_URL = "login/oauth2/code/github";
 
     @Value("${spring.security.oauth2.client.registration.github.client-id}")
     private String clientId;
