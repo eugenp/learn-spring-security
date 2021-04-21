@@ -80,9 +80,11 @@
     </build>
     
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        <groovy.version>3.0.8</groovy.version>
+      <!-- non-dependencies -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<!-- Groovy  -->
+		<groovy.version>3.0.8</groovy.version>
     </properties>
 
     <developers>
