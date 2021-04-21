@@ -29,5 +29,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         	loginProcessingUrl("/doLogin")
         ;
     } 
+    
 
 }

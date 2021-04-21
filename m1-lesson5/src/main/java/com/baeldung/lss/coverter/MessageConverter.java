@@ -1,7 +1,5 @@
 package com.baeldung.lss.coverter;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -16,8 +14,6 @@ public class MessageConverter implements Converter<String, User> {
 
 	@Override
 	public User convert(String id) {
-
-		Optional<User> result = userRepository.findById(Long.valueOf(id));
-		return result.isPresent() ? result.get() : null;
+		return userRepository.findUser(Long.valueOf(id));
 	}
 }
