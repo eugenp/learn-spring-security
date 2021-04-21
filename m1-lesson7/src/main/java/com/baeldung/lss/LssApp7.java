@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class LssApp7 {
 
     public static void main(String[] args) throws Exception {
-    	SpringApplication.run(LssApp7.class, args);
+        SpringApplication.run(LssApp7.class, args);
     }
 
 }

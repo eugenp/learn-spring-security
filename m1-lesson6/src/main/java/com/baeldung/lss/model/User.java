@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import javax.validation.constraints.NotEmpty;
 
-
 public class User {
 
     private Long id;

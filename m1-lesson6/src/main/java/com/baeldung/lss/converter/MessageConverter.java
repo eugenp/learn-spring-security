@@ -9,12 +9,12 @@ import com.baeldung.lss.repository.UserRepository;
 
 @Component
 public class MessageConverter implements Converter<String, User> {
-	
-	@Autowired
-	UserRepository userRepository;
 
-	@Override
-	public User convert(String id) {
-		return userRepository.findUser(Long.valueOf(id));
-	}
+    @Autowired
+    UserRepository userRepository;
+
+    @Override
+    public User convert(String id) {
+        return userRepository.findUser(Long.valueOf(id));
+    }
 }

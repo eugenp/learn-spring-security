@@ -59,7 +59,7 @@ public class UserController {
 
     // the form
 
-    @GetMapping(params = {"form"})
+    @GetMapping(params = { "form" })
     public String createForm(@ModelAttribute User user) {
         return "tl/form";
     }

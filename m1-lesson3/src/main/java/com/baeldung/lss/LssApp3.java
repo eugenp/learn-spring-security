@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LssApp3 {
 
     public static void main(String[] args) {
-    	SpringApplication.run(LssApp3.class, args);
+        SpringApplication.run(LssApp3.class, args);
     }
 
 }

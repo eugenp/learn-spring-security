@@ -14,25 +14,25 @@ import com.baeldung.lss.converter.MessageConverter;
 @EnableWebMvc
 @Configuration
 public class LssWebMvcConfiguration implements WebMvcConfigurer {
-    
-	@Autowired
-	private MessageConverter converter;
+
+    @Autowired
+    private MessageConverter converter;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("loginPage");
 
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-    }   
-    
+    }
+
     @Override
     public void addFormatters(FormatterRegistry registry) {
-    	registry.addConverter(converter);
+        registry.addConverter(converter);
     }
-    
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    	 registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
-    
+
 }

@@ -1,6 +1,5 @@
 package com.baeldung.lss.model;
 
-
 import java.util.Calendar;
 
 import javax.validation.constraints.NotEmpty;
