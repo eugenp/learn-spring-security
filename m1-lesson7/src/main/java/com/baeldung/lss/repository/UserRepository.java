@@ -1,7 +1,8 @@
-package com.baeldung.lss.persistence;
+package com.baeldung.lss.repository;
 
-import com.baeldung.lss.web.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.baeldung.lss.entity.User;
 
 import java.util.Optional;
 
