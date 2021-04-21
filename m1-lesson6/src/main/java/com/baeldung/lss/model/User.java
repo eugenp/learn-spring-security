@@ -1,4 +1,4 @@
-package com.baeldung.lss.web.model;
+package com.baeldung.lss.model;
 
 import java.util.Calendar;
 

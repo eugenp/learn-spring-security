@@ -1,7 +1,10 @@
-package com.baeldung.lss.persistence;
+package com.baeldung.lss.repository;
 
-import com.baeldung.lss.web.model.User;
+import org.springframework.stereotype.Repository;
 
+import com.baeldung.lss.model.User;
+
+@Repository
 public interface UserRepository {
 
     Iterable<User> findAll();

@@ -1,4 +1,4 @@
-package com.baeldung.lss.spring;
+package com.baeldung.lss.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,7 +19,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { // @formatter:off 
         auth.
             inMemoryAuthentication().
-            withUser("user").password("pass").
+            withUser("user").password("{noop}pass").
             roles("USER");
     } // @formatter:on
 
