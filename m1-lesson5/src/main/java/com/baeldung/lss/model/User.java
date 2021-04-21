@@ -1,11 +1,17 @@
-package com.baeldung.lss.web.model;
+package com.baeldung.lss.model;
+
 
 import java.util.Calendar;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.keyvalue.annotation.KeySpace;
+
+@KeySpace("users")
 public class User {
 
+	@Id
     private Long id;
 
     @NotEmpty(message = "Username is required.")
