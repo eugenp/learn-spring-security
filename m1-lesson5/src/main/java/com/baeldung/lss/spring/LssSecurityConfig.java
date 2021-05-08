@@ -19,7 +19,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { // @formatter:off 
         auth.
             inMemoryAuthentication().
-            withUser("user").password("pass").
+            withUser("user").password("{noop}pass").
             roles("USER");
     } // @formatter:on
 
