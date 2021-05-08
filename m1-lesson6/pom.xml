@@ -13,7 +13,7 @@ Module  1 - Lesson 6</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
+        <version>2.4.5</version>
         <relativePath></relativePath> <!-- lookup parent from repository -->
     </parent>
 
@@ -24,10 +24,6 @@ Module  1 - Lesson 6</description>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
@@ -41,10 +37,14 @@ Module  1 - Lesson 6</description>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${jakarta.validation.version}</version>
         </dependency>
 
         <!-- security -->
@@ -56,10 +56,10 @@ Module  1 - Lesson 6</description>
 
         <!-- marshalling -->
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-databind</artifactId>-->
+<!--        </dependency>-->
 
         <!-- common utilities -->
 
@@ -170,6 +170,7 @@ Module  1 - Lesson 6</description>
         <!-- commons and utils -->
         <commons-lang3.version>3.5</commons-lang3.version>
         <guava.version>21.0</guava.version>
+       <jakarta.validation.version>2.0.2</jakarta.validation.version>
         
         <!-- persistence -->       
         <validation-api.version>1.1.0.Final</validation-api.version>
@@ -179,7 +180,8 @@ Module  1 - Lesson 6</description>
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+        <spring-loaded.version>1.2.6.RELEASE</spring-loaded.version>
 
     </properties>
 
