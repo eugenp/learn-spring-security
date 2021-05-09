@@ -13,7 +13,7 @@ Module  1 - Lesson 1</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
+        <version>2.4.5</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -24,10 +24,6 @@ Module  1 - Lesson 1</description>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
@@ -47,6 +43,11 @@ Module  1 - Lesson 1</description>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
+		<dependency>
+      		<groupId>org.springframework.boot</groupId>
+      		<artifactId>spring-boot-starter-validation</artifactId>
+    	</dependency>
+		
         <!-- security -->
 
 <!--         <dependency> -->
@@ -56,10 +57,10 @@ Module  1 - Lesson 1</description>
 
         <!-- marshalling -->
 
-        <dependency>
+        <!-- dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-        </dependency>
+        </dependency -->
 
         <!-- common utilities -->
 
@@ -72,7 +73,6 @@ Module  1 - Lesson 1</description>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
         </dependency>
 
         <!-- logging -->
@@ -165,7 +165,8 @@ Module  1 - Lesson 1</description>
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>	
+		<spring-loaded.version>1.2.6.RELEASE</spring-loaded.version>	
 
     </properties>
 
