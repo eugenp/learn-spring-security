@@ -13,7 +13,7 @@ Module  1 - Lesson 5</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
+        <version>2.4.5</version>
         <relativePath></relativePath> <!-- lookup parent from repository -->
     </parent>
 
@@ -25,10 +25,7 @@ Module  1 - Lesson 5</description>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-        </dependency>
+        
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
@@ -48,6 +45,10 @@ Module  1 - Lesson 5</description>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
         <!-- security -->
 
         <dependency>
@@ -57,10 +58,10 @@ Module  1 - Lesson 5</description>
 
         <!-- marshalling -->
 
-        <dependency>
+        <!-- dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-        </dependency>
+        </dependency -->
 
         <!-- common utilities -->
 
@@ -73,7 +74,6 @@ Module  1 - Lesson 5</description>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
         </dependency>
 
         <!-- logging -->
@@ -182,6 +182,7 @@ Module  1 - Lesson 5</description>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
 		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
 
+		<spring-loaded.version>1.2.6.RELEASE</spring-loaded.version>
     </properties>
 
     <developers>
