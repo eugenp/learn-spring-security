@@ -13,8 +13,8 @@ Module  1 - Lesson 5</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
-        <relativePath></relativePath> <!-- lookup parent from repository -->
+        <version>2.4.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <dependencies>
@@ -166,7 +166,7 @@ Module  1 - Lesson 5</description>
 
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         
         <!-- commons and utils -->
         <commons-lang3.version>3.5</commons-lang3.version>
