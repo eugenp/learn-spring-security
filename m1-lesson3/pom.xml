@@ -182,7 +182,7 @@ Module  1 - Lesson 3</description>
 
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         
         <!-- commons and utils -->
         <commons-lang3.version>3.5</commons-lang3.version>
@@ -196,7 +196,9 @@ Module  1 - Lesson 3</description>
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+
+        <spring-loaded.version>1.2.8.RELEASE</spring-loaded.version>
 
     </properties>
 
