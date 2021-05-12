@@ -158,13 +158,6 @@ Module  1 - Lesson 3</description>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${spring-loaded.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>
@@ -198,7 +191,6 @@ Module  1 - Lesson 3</description>
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
 		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
-        <spring-loaded.version>1.2.6.RELEASE</spring-loaded.version>
 
     </properties>
 
