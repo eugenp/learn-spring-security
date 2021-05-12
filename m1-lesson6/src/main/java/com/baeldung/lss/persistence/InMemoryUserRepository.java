@@ -8,9 +8,9 @@ import com.baeldung.lss.web.model.User;
 
 public class InMemoryUserRepository implements UserRepository {
 
-    private static AtomicLong counter = new AtomicLong();
+    private static final AtomicLong counter = new AtomicLong();
 
-    private final ConcurrentMap<Long, User> users = new ConcurrentHashMap<Long, User>();
+    private final ConcurrentMap<Long, User> users = new ConcurrentHashMap<>();
 
     //
 

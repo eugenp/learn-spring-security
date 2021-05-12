@@ -29,7 +29,7 @@ public class LssApp5 {
         };
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(new Class[] { LssApp5.class, LssSecurityConfig.class }, args);
     }
 

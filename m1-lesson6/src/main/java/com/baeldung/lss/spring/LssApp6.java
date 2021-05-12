@@ -17,7 +17,7 @@ public class LssApp6 {
         return new InMemoryUserRepository();
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(new Class[] { LssApp6.class, LssSecurityConfig.class, LssWebMvcConfiguration.class }, args);
     }
 

@@ -28,7 +28,7 @@ public class LssApp1 {
         };
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(LssApp1.class, args);
     }
 
