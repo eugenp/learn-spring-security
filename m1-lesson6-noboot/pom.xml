@@ -254,8 +254,6 @@ Module  1 - Lesson 6 no-Boot</description>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
 		<maven-war-plugin.vesion>3.1.0</maven-war-plugin.vesion>
 
-		<spring-loaded.version>1.2.8.RELEASE</spring-loaded.version>
-
 	</properties>
 
 	<developers>
