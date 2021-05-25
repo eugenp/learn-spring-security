@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
 Module  3 - Lesson 3- Start</description>
-    <name>learn-spring-security</name>
+    
 
     <groupId>com.baeldung.m3</groupId>
     <artifactId>learn-spring-security-m3-l3-start</artifactId>
