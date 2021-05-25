@@ -2,7 +2,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security Core&quot; Course: Remember Me with Cookie - End</description>
-    <name>learn-spring-security</name>
+    
 
     <groupId>com.baeldung.m3</groupId>
     <artifactId>learn-spring-security-m3-l2</artifactId>
@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.1</version>
+        <version>2.4.5</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
