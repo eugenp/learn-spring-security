@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
 Module  1 - Lesson 6</description>
-    <name>learn-spring-security</name>
+    
 
     <groupId>com.baeldung.m1</groupId>
     <artifactId>learn-spring-security-m1-l6</artifactId>
