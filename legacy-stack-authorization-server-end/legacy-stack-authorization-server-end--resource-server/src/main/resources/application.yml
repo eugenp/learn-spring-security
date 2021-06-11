@@ -10,3 +10,5 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:8083/endpoint/jwks.json
+  jpa:
+    defer-datasource-initialization: true

@@ -10,3 +10,5 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://
+  jpa:
+    defer-datasource-initialization: true
