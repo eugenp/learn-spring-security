@@ -13,8 +13,8 @@ Module  1 - Lesson 5</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
-        <relativePath></relativePath> <!-- lookup parent from repository -->
+        <version>2.4.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <dependencies>
@@ -46,6 +46,11 @@ Module  1 - Lesson 5</description>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
         <!-- security -->
@@ -142,13 +147,6 @@ Module  1 - Lesson 5</description>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${spring-loaded.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>
@@ -180,7 +178,7 @@ Module  1 - Lesson 5</description>
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>		
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
 
     </properties>
 

@@ -28,7 +28,7 @@ public class LssApp4 {
         };
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(new Class[] { LssApp4.class, LssSecurityConfig.class }, args);
     }
 

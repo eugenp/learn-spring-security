@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("com.baeldung.lss.web.model")
 public class LssApp7 {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(new Class[] { LssApp7.class, LssSecurityConfig.class, LssWebMvcConfiguration.class }, args);
     }
 

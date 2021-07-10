@@ -1,8 +1,7 @@
 package com.baeldung.lss.web.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import java.util.Calendar;
+import javax.validation.constraints.NotEmpty;
 
 public class User {
 
