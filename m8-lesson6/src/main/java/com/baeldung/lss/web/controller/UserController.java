@@ -41,7 +41,7 @@ class UserController {
     public ModelAndView list() {
         final List<User> users = activeUserService.getActiveUsers()
             .stream()
-            .map(s -> new User(s))
+            .map(s -> userService.findUserByEmail(s))
             .collect(Collectors.toList());
         // final Iterable<User> users = this.userRepository.findAll();
 
