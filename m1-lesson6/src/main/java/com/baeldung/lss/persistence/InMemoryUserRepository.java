@@ -1,11 +1,13 @@
 package com.baeldung.lss.persistence;
 
+import com.baeldung.lss.web.model.User;
+import org.springframework.stereotype.Repository;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.baeldung.lss.web.model.User;
-
+@Repository
 public class InMemoryUserRepository implements UserRepository {
 
     private static AtomicLong counter = new AtomicLong();
