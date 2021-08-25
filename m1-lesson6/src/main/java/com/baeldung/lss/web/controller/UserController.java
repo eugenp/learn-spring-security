@@ -1,7 +1,7 @@
 package com.baeldung.lss.web.controller;
 
-import javax.validation.Valid;
-
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.web.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.web.model.User;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
@@ -35,8 +34,8 @@ public class UserController {
     }
 
     @RequestMapping("{id}")
-    public ModelAndView view(@PathVariable("id") User user) {
-        return new ModelAndView("tl/view", "user", user);
+    public ModelAndView view(@PathVariable("id") Long id) {
+        return new ModelAndView("tl/view", "user", userRepository.findUser(id));
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -56,8 +55,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
-    public ModelAndView modifyForm(@PathVariable("id") User user) {
-        return new ModelAndView("tl/form", "user", user);
+    public ModelAndView modifyForm(@PathVariable("id") Long id) {
+        return new ModelAndView("tl/form", "user", userRepository.findUser(id));
     }
 
     // the form
