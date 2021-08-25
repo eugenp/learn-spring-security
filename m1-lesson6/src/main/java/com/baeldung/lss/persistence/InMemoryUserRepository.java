@@ -8,11 +8,9 @@ import com.baeldung.lss.web.model.User;
 
 public class InMemoryUserRepository implements UserRepository {
 
-    private static AtomicLong counter = new AtomicLong();
+    private static final AtomicLong COUNTER = new AtomicLong();
 
-    private final ConcurrentMap<Long, User> users = new ConcurrentHashMap<Long, User>();
-
-    //
+    private final ConcurrentMap<Long, User> users = new ConcurrentHashMap<>();
 
     @Override
     public Iterable<User> findAll() {
@@ -23,7 +21,7 @@ public class InMemoryUserRepository implements UserRepository {
     public User save(User user) {
         Long id = user.getId();
         if (id == null) {
-            id = counter.incrementAndGet();
+            id = COUNTER.incrementAndGet();
             user.setId(id);
         }
         this.users.put(id, user);
