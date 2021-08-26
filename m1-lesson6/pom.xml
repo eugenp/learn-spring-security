@@ -79,7 +79,6 @@
                     <dependency>
                         <groupId>org.springframework</groupId>
                         <artifactId>springloaded</artifactId>
-                        <version>${spring-loaded.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
