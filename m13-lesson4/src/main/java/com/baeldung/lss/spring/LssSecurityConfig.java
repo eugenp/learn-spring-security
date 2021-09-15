@@ -41,7 +41,11 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
                     .groupSearchFilter("member={0}")
                     .contextSource()
                     .root("dc=springframework,dc=org")
-                    .ldif("classpath:users.ldif");
+                    .ldif("classpath:users.ldif")
+                    .and()
+                    .passwordCompare()
+                    .passwordEncoder(passwordEncoder())
+                    .passwordAttribute("userPassword");
                     //.url("ldap://localhost:10389/dc=springframework,dc=org");
         }
     }// @formatter:on
@@ -66,7 +70,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
 
