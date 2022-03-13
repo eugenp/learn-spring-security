@@ -5,7 +5,7 @@ import com.baeldung.lss.web.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.convert.converter.Converter;
@@ -25,7 +25,7 @@ public class LssApp1 {
         return new Converter<String, User>() {
             @Override
             public User convert(String id) {
-                return userRepository.findOne(Long.valueOf(id));
+                return userRepository.getOne(Long.valueOf(id));
             }
         };
     }
