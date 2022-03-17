@@ -43,11 +43,6 @@ Module 9 - Lesson 4</description>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-
         <!-- security -->
 
         <dependency>
@@ -62,6 +57,12 @@ Module 9 - Lesson 4</description>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb-api.version}</version>
+        </dependency>
+        
         <!-- persistence -->
 
         <dependency>
@@ -167,13 +168,6 @@ Module 9 - Lesson 4</description>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${spring-loaded.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>
@@ -233,7 +227,10 @@ Module 9 - Lesson 4</description>
         <!-- commons and utils -->
         <commons-lang3.version>3.5</commons-lang3.version>
         <guava.version>21.0</guava.version>			
-        
+         
+          <!-- marshalling -->
+        <jaxb-api.version>2.2.12</jaxb-api.version> 
+               
         <!-- persistence -->       
         <validation-api.version>1.1.0.Final</validation-api.version>
   
