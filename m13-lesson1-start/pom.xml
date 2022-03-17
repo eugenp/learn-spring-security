@@ -10,30 +10,35 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
-			<version>7.0</version>
+			<version>${javaee-web-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.1.0.Final</version>
+			<version>${hibernate-entitymanager.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.2.4.Final</version>
+			<version>${hibernate-validator.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.3.4</version>
+			<version>${hsqldb.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb-api.version}</version>
+        </dependency>
         
 	</dependencies>
 	<build>
@@ -41,7 +46,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
+                <version>${maven-war-plugin.version}</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
@@ -49,16 +54,39 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
+                <version>${maven-compiler-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
+  
+    <properties>
     
-	<developers>
+        <!-- non-dependencies -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        
+        <!-- javax -->
+        <javaee-web-api.version>7.0</javaee-web-api.version>
+    
+        <!-- persistence -->
+        <hibernate-entitymanager.version>5.1.0.Final</hibernate-entitymanager.version>
+        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+        <hsqldb.version>2.3.4</hsqldb.version>
+        
+        <!-- marshalling -->
+        <jaxb-api.version>2.2.12</jaxb-api.version>     
+    
+        <!-- test -->
+        <junit.version>4.12</junit.version>
+        
+        <!-- maven plugins -->
+		<maven-war-plugin.version>2.6</maven-war-plugin.version>
+		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>  
+                
+    </properties>
+	
+    <developers>
 		<developer>
 			<email>eugen@baeldung.com</email>
 			<name>Eugen Paraschiv</name>
