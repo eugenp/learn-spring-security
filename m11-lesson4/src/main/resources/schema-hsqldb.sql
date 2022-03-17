@@ -1,6 +1,6 @@
 -- HSQL Schema
-drop table if exists users;
 drop table if exists possession;
+drop table if exists users;
 drop table if exists acl_entry;
 drop table if exists acl_object_identity;
 drop table if exists acl_class;
