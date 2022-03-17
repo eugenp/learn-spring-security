@@ -2,7 +2,6 @@ package com.baeldung.lsso;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
-import com.baeldung.lsso.web.dto.ProjectDto;
-
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 /**
@@ -42,8 +38,8 @@ public class ResourceServerLiveTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void givenUserWithReadScope_whenGetProjectResource_thenSuccess() {
-        String accessToken = obtainAccessToken("read");
+    public void givenAccessToken_whenGetProjectResource_thenSuccess() {
+        String accessToken = obtainAccessToken();
         System.out.println("ACCESS TOKEN: " + accessToken);
 
         // Access resources using access token
@@ -54,68 +50,12 @@ public class ResourceServerLiveTest {
         assertThat(response.as(List.class)).hasSizeGreaterThan(0);
     }
 
-    @Test
-    public void givenUserWithOtherScope_whenGetProjectResource_thenForbidden() {
-        String accessToken = obtainAccessToken("email");
-        System.out.println("ACCESS TOKEN: " + accessToken);
-
-        // Access resources using access token
-        Response response = RestAssured.given()
-            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-            .get(RESOURCE_URL);
-        System.out.println(response.asString());
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
-    }
-
-    @Test
-    public void givenUserWithNonSupportedScope_whenObtainingAuthorizationCode_thenRedirectedWithErrorCode() {
-        Response response = RestAssured.given()
-            .redirects()
-            .follow(false)
-            .get(String.format(AUTHORIZE_URL_PATTERN, "notSupported"));
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND.value());
-        assertThat(response.getHeader(HttpHeaders.LOCATION)).contains("error=invalid_request")
-            .contains("error_description=Invalid+scopes%3A+notSupported");
-    }
-
-    @Test
-    public void givenUserWithReadScope_whenPostNewProjectResource_thenForbidden() {
-        String accessToken = obtainAccessToken("read");
-        System.out.println("ACCESS TOKEN: " + accessToken);
-        ProjectDto newProject = new ProjectDto(null, "newProject", LocalDate.now());
-
-        Response response = RestAssured.given()
-            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-            .body(newProject)
-            .post(RESOURCE_URL);
-        System.out.println(response.asString());
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
-    }
-
-    @Test
-    public void givenUserWithWriteScope_whenPostNewProjectResource_thenCreated() {
-        String accessToken = obtainAccessToken("read write");
-        System.out.println("ACCESS TOKEN: " + accessToken);
-        ProjectDto newProject = new ProjectDto(null, "newProject", LocalDate.now());
-
-        Response response = RestAssured.given()
-            .contentType(ContentType.JSON)
-            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-            .body(newProject)
-            .log()
-            .all()
-            .post(RESOURCE_URL);
-        System.out.println(response.asString());
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED.value());
-    }
-
-    private String obtainAccessToken(String scopes) {
+    private String obtainAccessToken() {
         // obtain authentication url with custom codes
         Response response = RestAssured.given()
             .redirects()
             .follow(false)
-            .get(String.format(AUTHORIZE_URL_PATTERN, scopes));
+            .get(String.format(AUTHORIZE_URL_PATTERN, "read"));
         String authSessionId = response.getCookie("AUTH_SESSION_ID");
         String kcPostAuthenticationUrl = response.asString()
             .split("action=\"")[1].split("\"")[0].replace("&amp;", "&");
