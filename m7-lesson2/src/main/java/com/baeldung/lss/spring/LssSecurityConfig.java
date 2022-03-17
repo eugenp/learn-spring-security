@@ -3,14 +3,12 @@ package com.baeldung.lss.spring;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.baeldung.lss.model.User;
@@ -26,8 +24,11 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserRepository userRepository;
 
-    public LssSecurityConfig() {
+    private PasswordEncoder passwordEncoder;
+
+    public LssSecurityConfig(PasswordEncoder passwordEncoder) {
         super();
+        this.passwordEncoder = passwordEncoder;
     }
 
     //
@@ -36,13 +37,13 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     private void saveTestUser() {
         final User user = new User();
         user.setEmail("test@email.com");
-        user.setPassword(passwordEncoder().encode("pass"));
+        user.setPassword(passwordEncoder.encode("pass"));
         userRepository.save(user);
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {// @formatter:off
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     } // @formatter:on
 
     @Override
@@ -64,9 +65,4 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         ;
     } // @formatter:on
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
