@@ -38,13 +38,10 @@ Module  5 - On Method Auth Expressions Start</description>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
         <!-- security -->
@@ -73,6 +70,11 @@ Module  5 - On Method Auth Expressions Start</description>
         <!-- </dependency> -->
 
         <!-- common utilities -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb-api.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -109,7 +111,10 @@ Module  5 - On Method Auth Expressions Start</description>
         <javax-validation.version>2.0.0.Final</javax-validation.version>
         <!-- commons and utils -->
         <guava.version>21.0</guava.version>
-        
+
+        <!-- marshalling -->
+        <jaxb-api.version>2.2.12</jaxb-api.version>
+
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
