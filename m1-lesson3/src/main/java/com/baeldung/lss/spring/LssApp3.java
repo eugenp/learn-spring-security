@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.baeldung.lss.persistence.InMemoryUserRepository;
 import com.baeldung.lss.persistence.UserRepository;
@@ -17,6 +19,11 @@ public class LssApp3 {
     @Bean
     public UserRepository userRepository() {
         return new InMemoryUserRepository();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
