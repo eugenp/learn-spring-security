@@ -1,2 +1,2 @@
-# Learn Spring Security Core - Advanced Authentication
-This is the codebase for Module 'Advanced Authentication' of [Learn Spring Security Core](https://bit.ly/github-lssc)
+# Module 8 - Advanced Authentication
+This is the codebase for Module 8 of [Learn Spring Security](http://bit.ly/github-lss)

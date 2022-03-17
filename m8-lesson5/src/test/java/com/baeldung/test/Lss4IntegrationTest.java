@@ -11,7 +11,7 @@ import com.baeldung.lss.spring.LssApp5;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(LssApp5.class)
 @IntegrationTest
-public class Lss5IntegrationTest {
+public class Lss4IntegrationTest {
 
     @Test
     public void whenLoadApplication_thenSuccess() {

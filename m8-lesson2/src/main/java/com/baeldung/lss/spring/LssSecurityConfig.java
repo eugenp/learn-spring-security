@@ -3,7 +3,6 @@ package com.baeldung.lss.spring;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,14 +13,13 @@ import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.security.CustomAuthenticationProvider;
 
 @EnableWebSecurity
-@Configuration
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private CustomAuthenticationProvider provider;
+    private CustomAuthenticationProvider customAuthenticationProvider;
 
     public LssSecurityConfig() {
         super();
@@ -39,23 +37,23 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {// @formatter:off
-        auth.authenticationProvider(provider);
+        auth.authenticationProvider(customAuthenticationProvider);
     } // @formatter:on
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {// @formatter:off
         http
-            .authorizeRequests()
-            .antMatchers("/signup",
-                "/user/register",
-                "/registrationConfirm*",
-                "/badUser*",
-                "/forgotPassword*",
-                "/user/resetPassword*",
-                "/user/changePassword*",
-                "/user/savePassword*",
-                "/js/**").permitAll()
-            .anyRequest().authenticated()
+        .authorizeRequests()
+                .antMatchers("/signup",
+                        "/user/register",
+                        "registrationConfirm",
+                        "/badUser*",
+                        "/forgotPassword",
+                        "/user/resetPassword",
+                        "/user/changePassword",
+                        "/user/savePassword",
+                        "/js/**").permitAll()
+                .anyRequest().authenticated()
 
         .and()
         .formLogin().
@@ -69,4 +67,5 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         ;
     } // @formatter:on
+
 }

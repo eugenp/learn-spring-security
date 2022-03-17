@@ -1,5 +1,7 @@
 package com.baeldung.lss.service;
 
+import javax.transaction.Transactional;
+
 import com.baeldung.lss.model.PasswordResetToken;
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.PasswordResetTokenRepository;
@@ -7,8 +9,6 @@ import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.validation.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @Transactional
@@ -25,7 +25,6 @@ class UserService implements IUserService {
         if (emailExist(user.getEmail())) {
             throw new EmailExistsException("There is an account with that email address: " + user.getEmail());
         }
-        user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
 
@@ -53,20 +52,6 @@ class UserService implements IUserService {
     private boolean emailExist(final String email) {
         final User user = userRepository.findByEmail(email);
         return user != null;
-    }
-
-    @Override
-    public User updateExistingUser(User user) throws EmailExistsException {
-        final Long id = user.getId();
-        final String email = user.getEmail();
-        final User emailOwner = userRepository.findByEmail(email);
-        if (emailOwner != null && !id.equals(emailOwner.getId())) {
-            throw new EmailExistsException("Email not available.");
-        }
-        if (user.getPassword() != null) {
-            user.setPassword(user.getPassword());
-        }
-        return userRepository.save(user);
     }
 
 }

@@ -39,8 +39,9 @@ class UserController {
 
     @RequestMapping
     public ModelAndView list() {
-        List<String> allActiveUsers = activeUserService.getAllActiveUsers();
-        Iterable<User> users = allActiveUsers.stream().map(s -> new User(s)).collect(Collectors.toList());
+        final List<User> users = activeUserService.getActiveUsers().stream().map(s -> new User(s)).collect(Collectors.toList());
+        // final Iterable<User> users = this.userRepository.findAll();
+
         return new ModelAndView("tl/list", "users", users);
     }
 
@@ -55,17 +56,12 @@ class UserController {
             return new ModelAndView("tl/form", "formErrors", result.getAllErrors());
         }
         try {
-            if (user.getId() == null) {
-                userService.registerNewUser(user);
-                redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
-            } else {
-                userService.updateExistingUser(user);
-                redirect.addFlashAttribute("globalMessage", "Successfully updated the user");
-            }
+            userService.registerNewUser(user);
         } catch (EmailExistsException e) {
             result.addError(new FieldError("user", "email", e.getMessage()));
             return new ModelAndView("tl/form", "user", user);
         }
+        redirect.addFlashAttribute("globalMessage", "Successfully created a new user");
         return new ModelAndView("redirect:/user/{user.id}", "user.id", user.getId());
     }
 

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security&quot; Course
 Module  8 - Lesson 4</description>
-    
+    <name>learn-spring-security</name>
 
     <groupId>com.baeldung.m8</groupId>
     <artifactId>learn-spring-security-m8-l4</artifactId>
@@ -28,10 +28,12 @@ Module  8 - Lesson 4</description>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -86,10 +88,10 @@ Module  8 - Lesson 4</description>
             <scope>runtime</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>mysql</groupId>-->
-<!--            <artifactId>mysql-connector-java</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
 
         <!-- mail -->
 
@@ -160,25 +162,20 @@ Module  8 - Lesson 4</description>
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-test</artifactId>            
+            <scope>test</scope>            
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>   
             <scope>test</scope>
         </dependency>
-
+        
     </dependencies>
 
     <build>
         <plugins>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -218,7 +215,7 @@ Module  8 - Lesson 4</description>
         <httpclient.version>4.5.1</httpclient.version>
         <jackson.version>2.7.1</jackson.version>
         <javassist.version>3.20.0-GA</javassist.version>
-        <mysql.version>8.0.11</mysql.version> <!-- 5.1.38 -->
+        <mysql.version>5.1.39</mysql.version> <!-- 5.1.38 -->
 
         <slf4j.version>1.7.13</slf4j.version>
 
@@ -230,10 +227,6 @@ Module  8 - Lesson 4</description>
 
         <!-- marshalling -->
         <jaxb-api.version>2.2.12</jaxb-api.version>
-
-        <!-- mail -->
-        <javax.mail-api.version>1.5.5</javax.mail-api.version>
-        <javax.mail.version>1.5.5</javax.mail.version>
 
         <!-- commons and utils -->
         <commons-lang3.version>3.4</commons-lang3.version>

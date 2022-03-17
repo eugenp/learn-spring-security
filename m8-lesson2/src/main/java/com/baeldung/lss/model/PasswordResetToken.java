@@ -70,8 +70,7 @@ public class PasswordResetToken {
         final Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(new Date().getTime());
         cal.add(Calendar.MINUTE, expiryTimeInMinutes);
-        return new Date(cal.getTime()
-            .getTime());
+        return new Date(cal.getTime().getTime());
     }
 
     public void updateToken(final String token) {
@@ -130,12 +129,7 @@ public class PasswordResetToken {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Token [String=")
-            .append(token)
-            .append("]")
-            .append("[Expires")
-            .append(expiryDate)
-            .append("]");
+        builder.append("Token [String=").append(token).append("]").append("[Expires").append(expiryDate).append("]");
         return builder.toString();
     }
 

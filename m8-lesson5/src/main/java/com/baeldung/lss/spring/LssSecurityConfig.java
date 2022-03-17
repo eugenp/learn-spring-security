@@ -3,9 +3,7 @@ package com.baeldung.lss.spring;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,13 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
 
 @EnableWebSecurity
-@Configuration
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -61,11 +57,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     } // @formatter:on
 
-    @Bean
-    public SessionRegistry sessionRegistry() {
-        return new SessionRegistryImpl();
-    }
-
     @PostConstruct
     private void saveTestUser() {
         final User user = new User();
@@ -75,7 +66,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public static ServletListenerRegistrationBean httpSessionEventPublisher() {	//(5)
-        return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
     }
 }

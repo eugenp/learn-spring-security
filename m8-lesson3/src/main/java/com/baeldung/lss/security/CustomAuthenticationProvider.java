@@ -15,8 +15,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         final String name = authentication.getName();
-        final String password = authentication.getCredentials()
-            .toString();
+        final String password = authentication.getCredentials().toString();
 
         if (!supportsAuthentication(authentication)) {
             return null;
@@ -37,11 +36,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     //
 
     private boolean doAuthenticationAgainstThirdPartySystem() {
-        return true;
+        return false;
     }
 
     private boolean supportsAuthentication(Authentication authentication) {
-        return true;
+        return false;
     }
 
 }
