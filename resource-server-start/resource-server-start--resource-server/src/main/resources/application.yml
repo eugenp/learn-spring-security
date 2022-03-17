@@ -4,3 +4,9 @@ server:
     context-path: /lsso-resource-server
 
 ####### resource server configuration properties
+spring:
+  jpa:
+    open-in-view: false
+  devtools:
+    livereload:
+      port: 35730

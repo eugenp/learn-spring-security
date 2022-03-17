@@ -69,11 +69,13 @@
             <artifactId>rest-assured</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>mockwebserver</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -107,6 +109,7 @@
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>13</java.version>
+
     </properties>
 
     <parent>

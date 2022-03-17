@@ -1,6 +1,9 @@
 spring:
   thymeleaf:
     cache: false
+  devtools:
+    livereload:
+      port: 35729
     
 server: 
   port: 8082
