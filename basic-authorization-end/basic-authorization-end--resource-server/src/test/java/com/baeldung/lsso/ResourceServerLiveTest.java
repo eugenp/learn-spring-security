@@ -56,7 +56,7 @@ public class ResourceServerLiveTest {
 
     @Test
     public void givenUserWithOtherScope_whenGetProjectResource_thenForbidden() {
-        String accessToken = obtainAccessToken("other");
+        String accessToken = obtainAccessToken("email");
         System.out.println("ACCESS TOKEN: " + accessToken);
 
         // Access resources using access token
