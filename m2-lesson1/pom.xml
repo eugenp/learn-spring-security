@@ -43,11 +43,6 @@ Module  2 - Lesson 1</description>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-		</dependency>
-
 		<!-- security -->
 
 		<dependency>
@@ -61,6 +56,12 @@ Module  2 - Lesson 1</description>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
+ 
+         <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb-api.version}</version>
+        </dependency>   
 
 		<!-- persistence -->
 
@@ -93,7 +94,7 @@ Module  2 - Lesson 1</description>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3.version}</version>
 		</dependency>
-
+    
 		<!-- logging -->
 
 		<dependency>
@@ -148,13 +149,6 @@ Module  2 - Lesson 1</description>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<dependencies>
-					<dependency>
-						<groupId>org.springframework</groupId>
-						<artifactId>springloaded</artifactId>
-						<version>${spring-loaded.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 
 			<plugin>
@@ -164,7 +158,7 @@ Module  2 - Lesson 1</description>
 					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>
-
+      
 		</plugins>
 	</build>
 
@@ -236,7 +230,6 @@ Module  2 - Lesson 1</description>
 		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
 		<cargo-maven2-plugin.version>1.4.18</cargo-maven2-plugin.version>
-		<maven-war-plugin.version>2.6</maven-war-plugin.version>
 
 	</properties>
 
