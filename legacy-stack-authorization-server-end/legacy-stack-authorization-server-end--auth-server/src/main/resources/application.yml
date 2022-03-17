@@ -7,6 +7,9 @@ spring:
       # john@test.com / 123
       name: john@test.com
       password: $2a$10$yCl.WgsHZGpKeplZCVH1mea9IcCsbmLNXdbGJ511ws7AeyuLT6m9.
+  devtools:
+    livereload:
+      port: 35731
 
 security:
   oauth2:

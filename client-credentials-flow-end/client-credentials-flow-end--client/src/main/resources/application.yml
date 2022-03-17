@@ -11,6 +11,9 @@ spring:
         provider:
           customClientCredentials:
             token-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token
+  devtools:
+    livereload:
+      port: 35729
 
 server: 
   port: 8082
