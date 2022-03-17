@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -19,21 +18,24 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @Configuration
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
     private DataSource dataSource;
 
-    public LssSecurityConfig() {
+    public LssSecurityConfig(PasswordEncoder passwordEncoder) {
         super();
+        this.passwordEncoder = passwordEncoder;
     }
 
     //
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { // @formatter:off
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     } // @formatter:on
 
     @Override
@@ -73,11 +75,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
         jdbcTokenRepository.setDataSource(dataSource);
         return jdbcTokenRepository;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }
