@@ -42,11 +42,6 @@ Module  1 - Lesson 2</description>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-
         <!-- security -->
 
 <!--         <dependency> -->
@@ -74,7 +69,7 @@ Module  1 - Lesson 2</description>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
-
+        
         <!-- logging -->
 
         <dependency>
@@ -140,13 +135,6 @@ Module  1 - Lesson 2</description>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${spring-loaded.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>
