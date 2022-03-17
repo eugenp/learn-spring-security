@@ -108,6 +108,7 @@
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>13</java.version>
+
     </properties>
 
     <parent>
