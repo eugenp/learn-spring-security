@@ -5,6 +5,9 @@ spring:
   datasource:
     username: sa
     url: jdbc:h2:mem:testdb
+  jpa:
+    open-in-view: false
+    
 
 keycloak:
   server:
@@ -13,3 +16,7 @@ keycloak:
       username: bael-admin
       password: pass
     realmImportFile: baeldung-realm.json
+
+logging:
+  level:
+    liquibase: error

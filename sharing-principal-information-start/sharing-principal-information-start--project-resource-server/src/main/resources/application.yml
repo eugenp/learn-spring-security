@@ -6,3 +6,7 @@ server:
 spring:
   jpa:
     defer-datasource-initialization: true
+    open-in-view: false
+  devtools:
+    livereload:
+      port: 35730
