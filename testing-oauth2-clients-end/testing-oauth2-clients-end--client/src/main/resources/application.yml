@@ -17,6 +17,9 @@ spring:
             user-name-attribute: preferred_username
   thymeleaf:
     cache: false
+  devtools:
+    livereload:
+      port: 35729
     
 server: 
   port: 8082
