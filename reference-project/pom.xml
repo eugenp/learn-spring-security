@@ -168,7 +168,7 @@
 
         <!-- commons and utils -->
         <guava.version>21.0</guava.version>
-
+        
         <!-- maven plugins -->
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 
