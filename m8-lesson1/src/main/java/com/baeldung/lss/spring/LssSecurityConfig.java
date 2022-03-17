@@ -26,8 +26,11 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserRepository userRepository;
 
-    public LssSecurityConfig() {
+    private PasswordEncoder passwordEncoder;
+
+    public LssSecurityConfig(PasswordEncoder passwordEncoder) {
         super();
+        this.passwordEncoder = passwordEncoder;
     }
 
     //
@@ -36,13 +39,13 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     private void saveTestUser() {
         final User user = new User();
         user.setEmail("test@email.com");
-        user.setPassword(passwordEncoder().encode("pass"));
+        user.setPassword(passwordEncoder.encode("pass"));
         userRepository.save(user);
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {// @formatter:off
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     } // @formatter:on
 
     @Override
@@ -65,8 +68,4 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     } // @formatter:on
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
