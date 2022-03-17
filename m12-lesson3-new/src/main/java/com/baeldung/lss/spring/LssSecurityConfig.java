@@ -22,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.annotation.PostConstruct;
 
 @Configuration
-@ComponentScan({"com.baeldung.lss.security"})
+@ComponentScan({ "com.baeldung.lss.security" })
 @EnableWebSecurity
 public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -41,13 +41,11 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserRepository userRepository;
 
-    public LssSecurityConfig() {
-        super();
-    }
+    private PasswordEncoder passwordEncoder;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
+    public LssSecurityConfig(PasswordEncoder passwordEncoder) {
+        super();
+        this.passwordEncoder = passwordEncoder;
     }
 
     //
@@ -82,18 +80,18 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.antMatcher("/code*")
-                    .authorizeRequests()
-                    .anyRequest()
-                    .hasRole("TEMP_USER")
-                    .and()
-                    .httpBasic();
+                .authorizeRequests()
+                .anyRequest()
+                .hasRole("TEMP_USER")
+                .and()
+                .httpBasic();
         }
     }
 
     @PostConstruct
     private void init() {
         Twilio.init(accountSid, authToken);
-        String encodedPassword = this.passwordEncoder().encode("pass");
+        String encodedPassword = this.passwordEncoder.encode("pass");
         final User user = new User();
         user.setEmail("user@example.com");
         user.setPassword(encodedPassword);

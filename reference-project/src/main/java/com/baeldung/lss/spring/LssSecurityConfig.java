@@ -1,31 +1,28 @@
 package com.baeldung.lss.spring;
 
-import com.baeldung.lss.security.CustomAuthenticationProvider;
-import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
-import com.baeldung.lss.security.LssLoggingFilter;
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.intercept.RunAsImplAuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-import javax.sql.DataSource;
+import com.baeldung.lss.security.CustomAuthenticationProvider;
+import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
+import com.baeldung.lss.security.LssLoggingFilter;
 
 @EnableWebSecurity
 @Configuration
@@ -33,9 +30,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     @Autowired
     private LssLoggingFilter lssLoggingFilter;
@@ -49,6 +43,14 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${google.auth.enabled}")
     private boolean isGoogleAuthEnabled;
 
+    @Autowired
+    @Qualifier(value = "daoAuthenticationProvider")
+    private AuthenticationProvider daoAuthenticationProvider;
+
+    @Autowired
+    @Qualifier(value = "runAsAuthenticationProvider")
+    public AuthenticationProvider runAsAuthenticationProvider;
+
     public LssSecurityConfig() {
         super();
     }
@@ -58,27 +60,11 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         if (isGoogleAuthEnabled) {
             auth.authenticationProvider(customAuthenticationProvider);
         } else {
-            auth.authenticationProvider(daoAuthenticationProvider());
+            auth.authenticationProvider(daoAuthenticationProvider);
         }
-        auth.authenticationProvider(runAsAuthenticationProvider());
+        auth.authenticationProvider(runAsAuthenticationProvider);
 
     } // @formatter:on
-
-    @Bean
-    public AuthenticationProvider daoAuthenticationProvider() {
-        final DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
-
-    @Bean
-    public AuthenticationProvider runAsAuthenticationProvider() {
-        final RunAsImplAuthenticationProvider authProvider = new RunAsImplAuthenticationProvider();
-        authProvider.setKey("MyRunAsKey");
-        return authProvider;
-    }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception { // @formatter:off
@@ -128,11 +114,6 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
         jdbcTokenRepository.setDataSource(dataSource);
         return jdbcTokenRepository;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     @Bean
