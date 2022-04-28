@@ -1,2 +1,2 @@
-# Module 4 - Spring Security on the Client
-This is the codebase for Module 4 of [Learn Spring Security](http://bit.ly/github-lss)
+# Learn Spring Security Core - Spring Security on the Client
+This is the codebase for Module 'Spring Security on the Client' of [Learn Spring Security Core](https://bit.ly/github-lssc)
