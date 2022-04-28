@@ -26,7 +26,7 @@ server:
     context-path: /lsso-client
     
 logging: 
-  level: 
+  level:
     org.springframework: INFO
 
 resourceserver:

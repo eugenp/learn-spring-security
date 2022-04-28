@@ -20,7 +20,7 @@ server:
   servlet:
     context-path: /lsso-client
 
-logging:
+logging: 
   level:
     org.springframework: INFO
 
