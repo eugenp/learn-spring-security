@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.web.model.User;
 
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
