@@ -22,5 +22,8 @@
         <module>oauth2-and-SPAs</module>
         <module>legacy-stack-authorization-server-start</module>
         <module>legacy-stack-authorization-server-end</module>
+        <module>token-revocation-start</module>
+        <module>token-revocation-end</module>
     </modules>
+
 </project>
