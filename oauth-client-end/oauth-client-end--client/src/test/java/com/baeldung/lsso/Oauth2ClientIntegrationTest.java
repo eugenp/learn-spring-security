@@ -1,9 +1,20 @@
 package com.baeldung.lsso;
 
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import okhttp3.mockwebserver.RecordedRequest;
-import org.junit.jupiter.api.AfterEach;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.endsWith;
+import static org.hamcrest.CoreMatchers.startsWith;
+
+import java.net.URI;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +25,23 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.reactive.server.ExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.endsWith;
-import static org.hamcrest.CoreMatchers.startsWith;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 public class Oauth2ClientIntegrationTest {
+
+    private final static Pair<String, String> AUTH_SERVER_AUTH_URI_PROP = Pair.of("spring.security.oauth2.client.provider.custom.authorization-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/auth");
+    private final static Pair<String, String> AUTH_SERVER_TOKEN_PROP = Pair.of("spring.security.oauth2.client.provider.custom.token-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/token");
+    private final static Pair<String, String> AUTH_SERVER_USERINFO_PROP = Pair.of("spring.security.oauth2.client.provider.custom.user-info-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/userinfo");
+    private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url", "http://localhost:{PORT}/lsso-resource-server/api/projects/");
 
     private final String CLIENT_BASE_URL = "/lsso-client";
     private final String CLIENT_SECURED_URL = CLIENT_BASE_URL + "/projects";
@@ -56,35 +65,42 @@ public class Oauth2ClientIntegrationTest {
     @Autowired
     private WebTestClient webTestClient;
 
-    MockWebServer authServer;
+    private static MockWebServer authServer;
+    private static MockWebServer resourceServer;
 
-    MockWebServer resourceServer;
-
-    @BeforeEach
-    public void setUp() throws Exception {
-        createAuthServer();
-
-        createResourceServer();
-
-        webTestClient = webTestClient.mutate()
-            .responseTimeout(Duration.ofMillis(300000))
-            .build();
+    @DynamicPropertySource
+    static void buildServerUri(DynamicPropertyRegistry registry) {
+        registry.add(RESOURCE_SERVER_PROP.getKey(), () -> RESOURCE_SERVER_PROP.getValue()
+            .replace("{PORT}", String.valueOf(resourceServer.getPort())));
+        registry.add(AUTH_SERVER_AUTH_URI_PROP.getKey(), () -> AUTH_SERVER_AUTH_URI_PROP.getValue()
+            .replace("{PORT}", String.valueOf(authServer.getPort())));
+        registry.add(AUTH_SERVER_TOKEN_PROP.getKey(), () -> AUTH_SERVER_TOKEN_PROP.getValue()
+            .replace("{PORT}", String.valueOf(authServer.getPort())));
+        registry.add(AUTH_SERVER_USERINFO_PROP.getKey(), () -> AUTH_SERVER_USERINFO_PROP.getValue()
+            .replace("{PORT}", String.valueOf(authServer.getPort())));
     }
 
-    @AfterEach
-    public void tearDown() throws Exception {
+    @BeforeAll
+    public static void setUp() throws Exception {
+
+        authServer = new MockWebServer();
+        resourceServer = new MockWebServer();
+
+        authServer.start();
+        resourceServer.start();
+    }
+
+    @AfterAll
+    public static void tearDown() throws Exception {
         authServer.shutdown();
         resourceServer.shutdown();
     }
 
-    private void createResourceServer() throws IOException {
-        resourceServer = new MockWebServer();
-        resourceServer.start(8081);
-    }
-
-    private void createAuthServer() throws IOException {
-        authServer = new MockWebServer();
-        authServer.start(8083);
+    @BeforeEach
+    public void beforeEach() throws Exception {
+        webTestClient = webTestClient.mutate()
+            .responseTimeout(Duration.ofMillis(300000))
+            .build();
     }
 
     @Test
@@ -194,8 +210,7 @@ public class Oauth2ClientIntegrationTest {
             .expectBody()
             .consumeWith(response -> {
                 String bodyAsString = new String(response.getResponseBodyContent());
-                assertThat(bodyAsString)
-                    .contains("Project 1")
+                assertThat(bodyAsString).contains("Project 1")
                     .contains("Project 2")
                     .contains("Project 3")
                     .doesNotContain("Project 4");
