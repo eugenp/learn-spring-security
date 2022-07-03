@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,9 +40,23 @@ public class ProjectClientController {
     }
 
     @GetMapping("/addproject")
-    public String addNewProject(Model model) {
+    public String addNewProject(Model model, @AuthenticationPrincipal OAuth2User oauth2User) {
+        if (!hasEmailScope(oauth2User))
+            return "requestpermission";
+        if (!isUserEmailVerified(oauth2User))
+            return "verifyemail";
         model.addAttribute("project", new ProjectModel(0L, "", LocalDate.now()));
         return "addproject";
+    }
+
+    private boolean isUserEmailVerified(OAuth2User oauth2User) {
+        return (Boolean) oauth2User.getAttributes()
+            .getOrDefault("email_verified", false);
+    }
+
+    private boolean hasEmailScope(OAuth2User oauth2User) {
+        return oauth2User.getAuthorities()
+            .contains(new SimpleGrantedAuthority("SCOPE_email"));
     }
 
     @PostMapping("/projects")
@@ -57,5 +74,4 @@ public class ProjectClientController {
             return "addproject";
         }
     }
-
 }

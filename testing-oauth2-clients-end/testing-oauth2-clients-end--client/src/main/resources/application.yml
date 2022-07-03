@@ -5,8 +5,17 @@ spring:
         registration:
           custom:
             client-id: lssoClient
+            client-name: Custom without Email scope
             client-secret: lssoSecret
             scope: read,write
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8082/lsso-client/login/oauth2/code/custom
+          custom-with-email-permission:
+            provider: custom
+            client-id: lssoClient
+            client-name: Custom with Email scope
+            client-secret: lssoSecret
+            scope: read,write,email
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8082/lsso-client/login/oauth2/code/custom
         provider:

@@ -16,13 +16,11 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {// @formatter:off
         http.authorizeRequests()
             .antMatchers("/").permitAll()
-            .anyRequest().permitAll()
+            .anyRequest().authenticated()
             .and()
-            .oauth2Client()
+            .oauth2Login()
             .and()
-            .logout().logoutSuccessUrl("/")
-            .and()
-            .csrf().disable();
+            .logout().logoutSuccessUrl("/");
     }// @formatter:on
 
     @Bean

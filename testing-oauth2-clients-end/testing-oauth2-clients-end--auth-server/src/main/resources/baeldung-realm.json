@@ -316,7 +316,33 @@
     },
     "notBefore" : 0,
     "groups" : [ ]
-  } ],
+  },
+    {
+      "id" : "fed2e966-ad61-41cf-af3b-77918571aeee",
+      "createdTimestamp" : 1653412877525,
+      "username" : "tom@baeldung.com",
+      "enabled" : true,
+      "totp" : false,
+      "emailVerified" : true,
+      "firstName" : "Tom",
+      "email" : "tom@baeldung.com",
+      "credentials" : [ {
+        "id" : "2dda05e9-b517-4cc1-8546-0380659f687b",
+        "type" : "password",
+        "createdDate" : 1653412904910,
+        "secretData" : "{\"value\":\"TKpc8WsW/QhgMfkBaFrdBee7zsgwZsRlGbOIhFr1uZp4x1xbM37KrakGBgnRIo2abl/wzPmhi3o8RBWxOgZ9lQ==\",\"salt\":\"yFk91Pvu7xZnRzxI84OYpw==\"}",
+        "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\"}"
+      } ],
+      "disableableCredentialTypes" : [ ],
+      "requiredActions" : [ ],
+      "realmRoles" : [ "offline_access", "uma_authorization" ],
+      "clientRoles" : {
+        "account" : [ "manage-account", "view-profile" ]
+      },
+      "notBefore" : 0,
+      "groups" : [ ]
+    }
+  ],
   "scopeMappings" : [ {
     "clientScope" : "offline_access",
     "roles" : [ "offline_access" ]

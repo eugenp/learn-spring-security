@@ -1,8 +1,15 @@
 package com.baeldung.lsso;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
-public class OAuth2ClientIntegrationTest {
+@AutoConfigureMockMvc
+public class Oauth2ClientIntegrationTest {
+
+    @Autowired
+    private MockMvc mvc;
 
 }
