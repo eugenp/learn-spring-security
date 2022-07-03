@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.startsWith;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +14,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.AfterEach;
+import org.apache.commons.lang3.tuple.Pair;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.reactive.server.ExchangeResult;
 import org.springframework.test.web.reactive.server.FluxExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -39,6 +42,10 @@ import okhttp3.mockwebserver.RecordedRequest;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 public class Oauth2ClientIntegrationTest {
+    private final static Pair<String, String> AUTH_SERVER_AUTH_URI_PROP = Pair.of("spring.security.oauth2.client.provider.custom.authorization-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/auth");
+    private final static Pair<String, String> AUTH_SERVER_TOKEN_PROP = Pair.of("spring.security.oauth2.client.provider.custom.token-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/token");
+    private final static Pair<String, String> AUTH_SERVER_USERINFO_PROP = Pair.of("spring.security.oauth2.client.provider.custom.user-info-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/userinfo");
+    private final static Pair<String, String> GATEWAY_SERVER_URL = Pair.of("gateway.url", "http://localhost:{PORT}/lsso-gateway/");
 
     private static final String CLIENT_SECURED_PROJECTS_URL = "/projects";
     private static final String CLIENT_SECURED_ADD_PROJECT_URL = "/addproject";
@@ -63,35 +70,42 @@ public class Oauth2ClientIntegrationTest {
     @Autowired
     private WebTestClient webTestClient;
 
-    MockWebServer authServer;
+    private static MockWebServer authServer;
+    private static MockWebServer gatewayServer;
 
-    MockWebServer gatewayServer;
-
-    @BeforeEach
-    public void setUp() throws Exception {
-        webTestClient = webTestClient.mutate()
-            .responseTimeout(Duration.ofMillis(30000))
-            .build();
-
-        createAuthServer();
-
-        createGatewayServer();
+    @DynamicPropertySource
+    static void buildServerUri(DynamicPropertyRegistry registry) {
+        registry.add(GATEWAY_SERVER_URL.getKey(), () -> GATEWAY_SERVER_URL.getValue()
+            .replace("{PORT}", String.valueOf(gatewayServer.getPort())));
+        registry.add(AUTH_SERVER_AUTH_URI_PROP.getKey(), () -> AUTH_SERVER_AUTH_URI_PROP.getValue()
+            .replace("{PORT}", String.valueOf(authServer.getPort())));
+        registry.add(AUTH_SERVER_TOKEN_PROP.getKey(), () -> AUTH_SERVER_TOKEN_PROP.getValue()
+            .replace("{PORT}", String.valueOf(authServer.getPort())));
+        registry.add(AUTH_SERVER_USERINFO_PROP.getKey(), () -> AUTH_SERVER_USERINFO_PROP.getValue()
+            .replace("{PORT}", String.valueOf(authServer.getPort())));
     }
 
-    @AfterEach
-    public void tearDown() throws Exception {
+    @BeforeAll
+    public static void setUp() throws Exception {
+
+        authServer = new MockWebServer();
+        gatewayServer = new MockWebServer();
+
+        authServer.start();
+        gatewayServer.start();
+    }
+
+    @AfterAll
+    public static void tearDown() throws Exception {
         authServer.shutdown();
         gatewayServer.shutdown();
     }
 
-    private void createGatewayServer() throws IOException {
-        gatewayServer = new MockWebServer();
-        gatewayServer.start(8084);
-    }
-
-    private void createAuthServer() throws IOException {
-        authServer = new MockWebServer();
-        authServer.start(8083);
+    @BeforeEach
+    public void beforeEach() throws Exception {
+        webTestClient = webTestClient.mutate()
+            .responseTimeout(Duration.ofMillis(300000))
+            .build();
     }
 
     @Test
