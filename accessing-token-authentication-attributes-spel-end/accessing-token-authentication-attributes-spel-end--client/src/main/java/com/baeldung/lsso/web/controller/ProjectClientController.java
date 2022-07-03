@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +21,13 @@ public class ProjectClientController {
     @Autowired
     private WebClient webClient;
 
+    @Value("${resourceserver.api.project.url:http://localhost:8081/lsso-resource-server/api/projects/}")
+    private String projectApiUrl;
+
     @GetMapping("/projects")
     public String getProjects(Model model) {
         List<ProjectModel> projects = this.webClient.get()
-            .uri("http://localhost:8081/lsso-resource-server/api/projects/")
+            .uri(projectApiUrl)
             .retrieve()
             .bodyToMono(new ParameterizedTypeReference<List<ProjectModel>>() {
             })
@@ -42,7 +46,7 @@ public class ProjectClientController {
     public String saveProject(ProjectModel project, Model model) {
         try {
             this.webClient.post()
-                .uri("http://localhost:8081/lsso-resource-server/api/projects/")
+                .uri(projectApiUrl)
                 .bodyValue(project)
                 .retrieve()
                 .bodyToMono(Void.class)
