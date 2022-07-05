@@ -18,6 +18,8 @@
         <module>accessing-token-authentication-attributes-spel-end</module>
         <module>basic-authorization-start</module>
         <module>basic-authorization-end</module>
+        <module>custom-authorities-from-jwt-claims-end</module>
+        <module>custom-authorities-from-jwt-claims-start</module>
     </modules>
 
 </project>
