@@ -15,8 +15,6 @@
         <module>oauth-in-a-microservice-application-start</module>
         <module>sharing-principal-information-start</module>
         <module>sharing-principal-information-end</module>
-        <module>oauth-validations-on-resource-servers-start</module>
-        <module>oauth-validations-on-resource-servers-end</module>
     </modules>
 
 </project>
