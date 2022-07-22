@@ -20,6 +20,8 @@
         <module>basic-authorization-end</module>
         <module>custom-authorities-from-jwt-claims-end</module>
         <module>custom-authorities-from-jwt-claims-start</module>
+        <module>resource-server-testing-support-start</module>
+        <module>resource-server-testing-support-end</module>
     </modules>
 
 </project>
