@@ -98,7 +98,7 @@
 		<!-- as of boot 1.4, spring-boot-starter-redis renamed to spring-boot-starter-data-redis  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-redis</artifactId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
         
         <!-- test scoped -->

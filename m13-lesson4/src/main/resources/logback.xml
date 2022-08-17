@@ -5,4 +5,7 @@
 
     <!-- logger name="org.springframework" level="DEBUG"/-->
 
+    <logger name="org.apache.directory.server.core.DefaultDirectoryService" level="OFF"/>
+    <logger name="org.apache.directory.server.schema.registries.DefaultAttributeTypeRegistry" level="OFF"/>
+
 </configuration>
