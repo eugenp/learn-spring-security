@@ -3,17 +3,17 @@ package com.baeldung.lsso.spring;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @EnableWebSecurity
-public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ClientSecurityConfig {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {// @formatter:off
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http.authorizeRequests()
             .antMatchers("/").permitAll()
             .anyRequest().authenticated()
@@ -21,6 +21,7 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
             .oauth2Login()
             .and()
             .logout().logoutSuccessUrl("/");
+        return http.build();
     }// @formatter:on
 
     @Bean
@@ -31,5 +32,4 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
             .apply(oauth2.oauth2Configuration())
             .build();
     }
-
 }

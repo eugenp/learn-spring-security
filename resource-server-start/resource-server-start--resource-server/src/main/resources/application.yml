@@ -1,11 +1,15 @@
-server: 
+server:
   port: 8081
-  servlet: 
+  servlet:
     context-path: /lsso-resource-server
 
 ####### resource server configuration properties
 spring:
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE;
   jpa:
+    defer-datasource-initialization: true
     open-in-view: false
   devtools:
     livereload:
