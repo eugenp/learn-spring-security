@@ -1,6 +1,6 @@
-server: 
+server:
   port: 8081
-  servlet: 
+  servlet:
     context-path: /lsso-resource-server
 
 ####### resource server configuration properties
@@ -12,7 +12,11 @@ spring:
           issuer-uri: http://localhost:8083/auth/realms/baeldung
           jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
   jpa:
+    defer-datasource-initialization: true
     open-in-view: false
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
   devtools:
     livereload:
       port: 35730
