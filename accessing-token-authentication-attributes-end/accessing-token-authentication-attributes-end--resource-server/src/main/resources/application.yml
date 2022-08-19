@@ -13,6 +13,7 @@ spring:
           jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
   jpa:
     open-in-view: false
+    defer-datasource-initialization: true
   devtools:
     livereload:
       port: 35730

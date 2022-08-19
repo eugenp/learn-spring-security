@@ -15,4 +15,5 @@ spring:
     livereload:
       port: 35730
   jpa:
+    defer-datasource-initialization: true
     open-in-view: false

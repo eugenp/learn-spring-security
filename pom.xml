@@ -12,6 +12,8 @@
 
     <modules>
         <module>verify-validate-claims-jwt</module>
+        <module>custom-validators-for-jwt-claims-start</module>
+        <module>custom-validators-for-jwt-claims-end</module>
         <module>accessing-token-authentication-attributes-start</module>
         <module>accessing-token-authentication-attributes-end</module>
         <module>accessing-token-authentication-attributes-spel-start</module>
@@ -22,6 +24,8 @@
         <module>custom-authorities-from-jwt-claims-start</module>
         <module>resource-server-testing-support-start</module>
         <module>resource-server-testing-support-end</module>
+        <module>multi-tenancy-support-start</module>
+        <module>multi-tenancy-support-end</module>
     </modules>
 
 </project>
