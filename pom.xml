@@ -24,6 +24,8 @@
         <module>multi-tenancy-support-end</module>
         <module>resource-server-testing-support-start</module>
         <module>resource-server-testing-support-end</module>
+        <module>custom-validators-for-jwt-claims-start</module>
+        <module>custom-validators-for-jwt-claims-end</module>
     </modules>
 
 </project>
