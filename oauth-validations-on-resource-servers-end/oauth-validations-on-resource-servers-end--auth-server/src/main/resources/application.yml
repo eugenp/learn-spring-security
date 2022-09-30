@@ -1,0 +1,21 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:testdb
+  jpa:
+    open-in-view: false
+
+keycloak:
+  server:
+    contextPath: /auth
+    adminUser:
+      username: bael-admin
+      password: pass
+    realmImportFile: baeldung-realm.json
+
+logging:
+  level:
+    liquibase: error

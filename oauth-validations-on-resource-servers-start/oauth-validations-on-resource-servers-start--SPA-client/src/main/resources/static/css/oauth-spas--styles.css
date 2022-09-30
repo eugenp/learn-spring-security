@@ -1,0 +1,181 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+}
+
+.login-button{
+  background: #535353;
+  border-style: none;
+  border-radius: 10px;
+  font-size: 1em;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  color: white;
+  width: 30%;
+  padding: 10px;
+}
+
+.content-container {
+  margin: 8em auto 2em;
+  width: 80%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.projects-container {
+  background-color: #63b175;
+  border-radius: 17px;
+}
+
+.projects-container > div {
+  display: flex;
+  flex-direction: column;
+}
+.projects-container .empty-projects-message {
+  min-height: 4em;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  color: white;
+  font-weight: bold;
+}
+
+.projects {
+  flex: 3 1 0;
+  margin: 20px 10%;
+}
+
+.projects .project-item {
+  height: 4em;
+  display: flex;
+  justify-content: center;
+  padding: 0 25px;
+}
+
+.projects .project-item div {
+  margin: auto 0;
+}
+
+.projects .project-item:first-child {
+  border-radius: 10px 10px 0 0;
+  border-width: 7px 0 0 0;
+  border-color: #535353;
+  border-style: solid;
+}
+
+.projects .project-item:last-child {
+  border-radius: 0 0 10px 10px;
+  border-width: 0 0 7px 0;
+  border-color: #535353;
+  border-style: solid;
+}
+
+.projects .project-item .project-name {
+  font-size: 1.5em;
+  color: white;
+  font-weight: bold;
+}
+
+.projects .project-item .view-tasks-button {
+  border: none;
+  background: #323232;
+  color: white;
+  border-radius: 15px;
+}
+
+.create-project {
+  flex: 1 1 0;
+  margin: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.5em;
+}
+
+.create-project input {
+  margin: 0 15% 5px 15%;
+  height: 2.2em;
+  text-align: center;
+  border-radius: 10px;
+  border-style: none;
+}
+
+.create-project button {
+  margin: 5px 40%;
+  height: 2.5em;
+  border: none;
+  background: #323232;
+  color: white;
+  border-radius: 15px;
+}
+
+/* Tasks */
+
+.tasks, task-items {
+  flex: 3 1 0;
+  margin: 20px 10%;
+  color: white;
+  text-align: center;
+}
+
+.tasks .task-item {
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  padding: 0 25px;
+}
+
+.tasks .task-item div {
+  margin: auto 0;
+}
+
+/* Spinner */
+
+.spinner-container {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.spinner-container .spinner-icon {
+  border: 16px solid green;
+  border-top: 16px solid lightgray;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+}
+
+button {
+  cursor: pointer;
+}
+
+.view-tasks-button {
+  margin: 4px 8px;
+  height: 2.5em;
+  border-radius: 15px;
+}
+
+.task-item {
+  min-height: 3em;
+  width: 100%;
+  display: block;
+  justify-content: center;
+  padding: 0 25px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,12 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /lsso-client
+
+logging:
+  level:
+    org.springframework: INFO
+spring:
+  devtools:
+    livereload:
+      port: 35729
