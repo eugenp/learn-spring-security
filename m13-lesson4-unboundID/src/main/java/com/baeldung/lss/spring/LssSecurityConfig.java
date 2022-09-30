@@ -9,10 +9,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 @Configuration
-public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
+public class LssSecurityConfig {
 
     public LssSecurityConfig() {
         super();
@@ -46,8 +47,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         }
     }// @formatter:on
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception { // @formatter:off
+    @Bean
+    protected SecurityFilterChain configure(HttpSecurity http) throws Exception { // @formatter:off
         http
         .authorizeRequests()
                 .antMatchers("/user").access("hasAnyRole('ADMIN','USER')")
@@ -61,9 +62,9 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         .logout().permitAll().logoutUrl("/logout")
         
         .and()
-        .csrf().disable()
-        ;
-    }
+        .csrf().disable();
+        return http.build();
+    } // @formatter:on
 
     @Bean
     public PasswordEncoder passwordEncoder() {

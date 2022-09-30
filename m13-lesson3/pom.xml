@@ -88,19 +88,26 @@
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
-        
+
+
+        <!-- as of boot 1.4, spring-boot-starter-redis renamed to spring-boot-starter-data-redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+
         <!-- Spring Session -->	    
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session</artifactId>
 		</dependency>
 				
-		<!-- as of boot 1.4, spring-boot-starter-redis renamed to spring-boot-starter-data-redis  -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-        
         <!-- test scoped -->
 
         <dependency>
@@ -135,12 +142,14 @@
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        
-		<!-- password validation -->
-        <passay.version>1.0</passay.version>		
-        
+
+        <!-- password validation -->
+        <passay.version>1.0</passay.version>
+
+        <!-- Rest assured -->
         <rest-assured.version>2.9.0</rest-assured.version>
-		
+
+
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		

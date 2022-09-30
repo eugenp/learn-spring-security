@@ -9,9 +9,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
-public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
+public class LssSecurityConfig {
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -27,8 +28,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     } // @formatter:on
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {// @formatter:off
+    @Bean
+    protected SecurityFilterChain configure(HttpSecurity http) throws Exception {// @formatter:off
         http
         .authorizeRequests()
                 .antMatchers("/badUser*","/js/**").permitAll()
@@ -45,6 +46,7 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .csrf().disable()
         ;
+        return http.build();
     } // @formatter:on
 
     @Bean
