@@ -34,7 +34,7 @@ import okhttp3.mockwebserver.RecordedRequest;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class Oauth2ClientIntegrationTest {
+public class OAuth2ClientIntegrationTest {
 
     private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url", "http://localhost:{PORT}/lsso-resource-server/api/projects/");
 
@@ -85,7 +85,7 @@ public class Oauth2ClientIntegrationTest {
             .andExpect(status().isOk())
             .andExpect(xpath("//button[@type='button']").string("Go Back"));
     }
-    
+
     @Test
     void givenEndpointRequireEmailVerifiedAttrAndEmailScope_whenNoEmailScope_thenRouteToReqPermissionPage() throws Exception {
         this.mvc.perform(get("/addproject").with(oauth2Login().attributes(attrs -> attrs.put("email_verified", true))))

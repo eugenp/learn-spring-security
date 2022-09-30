@@ -7,7 +7,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class Oauth2ClientIntegrationTest {
+public class OAuth2ClientIntegrationTest {
 
     @Autowired
     private MockMvc mvc;

@@ -13,12 +13,12 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 /**
- * Needs the following to be running: 
+ * Needs the following to be running:
  * - Resource Server
  * - Authorization Server
  * - Client Application Server
  */
-public class Oauth2ClientLiveTest {
+public class OAuth2ClientLiveTest {
 
     private static final String USERNAME = "john@test.com";
     private static final String PASSWORD = "123";
