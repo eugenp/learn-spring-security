@@ -1,0 +1,107 @@
+{
+	"hostname": {
+		"provider": "${keycloak.hostname.provider:default}",
+		"fixed": {
+			"hostname": "${keycloak.hostname.fixed.hostname:localhost}",
+			"httpPort": "${keycloak.hostname.fixed.httpPort:-1}",
+			"httpsPort": "${keycloak.hostname.fixed.httpsPort:-1}",
+			"alwaysHttps": "${keycloak.hostname.fixed.alwaysHttps:false}"
+		},
+		"default": {
+			"frontendUrl": "${keycloak.frontendUrl:}",
+			"adminUrl": "${keycloak.adminUrl:}",
+			"forceBackendUrlToFrontendUrl": "${keycloak.hostname.default.forceBackendUrlToFrontendUrl:false}"
+		}
+	},
+	"admin": {
+		"realm": "master"
+	},
+	"eventsStore": {
+		"provider": "${keycloak.eventsStore.provider:jpa}",
+		"jpa": {
+			"exclude-events": [
+				"REFRESH_TOKEN"
+			]
+		}
+	},
+	"eventsListener": {
+		"jboss-logging": {
+			"success-level": "debug",
+			"error-level": "warn"
+		}
+	},
+	"realm": {
+		"provider": "${keycloak.realm.provider:jpa}"
+	},
+	"user": {
+		"provider": "${keycloak.user.provider:jpa}"
+	},
+	"userFederatedStorage": {
+		"provider": "${keycloak.userFederatedStorage.provider:jpa}"
+	},
+	"userSessionPersister": {
+		"provider": "${keycloak.userSessionPersister.provider:jpa}"
+	},
+	"authorizationPersister": {
+		"provider": "${keycloak.authorization.provider:jpa}"
+	},
+	"userCache": {
+		"default": {
+			"enabled": true
+		}
+	},
+	"timer": {
+		"provider": "basic"
+	},
+	"theme": {
+		"staticMaxAge": "${keycloak.theme.staticMaxAge:2592000}",
+		"cacheTemplates": "${keycloak.theme.cacheTemplates:true}",
+		"cacheThemes": "${keycloak.theme.cacheThemes:true}",
+		"folder": {
+			"dir": "${keycloak.theme.dir}"
+		}
+	},
+	"scheduled": {
+		"interval": 900
+	},
+	"connectionsHttpClient": {
+		"default": {
+			
+		}
+	},
+	"connectionsJpa": {
+		"provider": "default",
+		"default": {
+			"dataSource": "spring/datasource",
+			"url": "${env.KEYCLOAK_DATABASE_URL:jdbc:h2:./target/keycloak}",
+			"driver": "${keycloak.connectionsJpa.driver:org.h2.Driver}",
+			"driverDialect": "${keycloak.connectionsJpa.driverDialect:}",
+			"user": "${keycloak.connectionsJpa.user:sa}",
+			"password": "${keycloak.connectionsJpa.password:}",
+			"initializeEmpty": true,
+			"migrationStrategy": "update",
+			"showSql": "${keycloak.connectionsJpa.showSql:false}",
+			"formatSql": "${keycloak.connectionsJpa.formatSql:true}",
+			"globalStatsInterval": "${keycloak.connectionsJpa.globalStatsInterval:-1}"
+		}
+	},
+	"realmCache": {
+		"default": {
+			"enabled": true
+		}
+	},
+	"connectionsInfinispan": {
+		"default": {
+			"embedded": "true"
+		}
+	},
+	"scripting": {
+		
+	},
+	"jta-lookup": {
+		"provider": "${keycloak.jta.lookup.provider:jboss}",
+		"jboss": {
+			"enabled": true
+		}
+	}
+}
