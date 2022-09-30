@@ -1,25 +1,30 @@
 package com.baeldung.lsso.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedGrantedAuthoritiesUserDetailsService;
 import org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter;
 
 @Configuration
-public class TaskResourceSecurityConfig extends WebSecurityConfigurerAdapter {
+public class TaskResourceSecurityConfig {
+
+    @Autowired
+    private AuthenticationConfiguration authenticationConfiguration;
 
     @Bean
     public AbstractPreAuthenticatedProcessingFilter preAuthFilter() throws Exception {
         RequestHeaderAuthenticationFilter preAuthFilter = new RequestHeaderAuthenticationFilter();
         preAuthFilter.setPrincipalRequestHeader("BAEL-username");
-        preAuthFilter.setAuthenticationManager(authenticationManager());
+        preAuthFilter.setAuthenticationManager(authenticationConfiguration.getAuthenticationManager());
         TaskResourceCustomAuthenticationDetailsSource authDetailsSource = new TaskResourceCustomAuthenticationDetailsSource();
         preAuthFilter.setAuthenticationDetailsSource(authDetailsSource);
         return preAuthFilter;
@@ -32,8 +37,8 @@ public class TaskResourceSecurityConfig extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {// @formatter:off
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http.addFilterAt(preAuthFilter(), AbstractPreAuthenticatedProcessingFilter.class)
             .csrf().disable()
             .authorizeRequests()
@@ -46,6 +51,7 @@ public class TaskResourceSecurityConfig extends WebSecurityConfigurerAdapter {
           .and()
             .sessionManagement()
               .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        return http.build();
     }//@formatter:on
 
 }

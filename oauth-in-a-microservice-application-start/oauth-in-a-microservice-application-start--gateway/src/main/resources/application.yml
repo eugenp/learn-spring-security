@@ -1,7 +1,5 @@
 server: 
   port: 8084
-  servlet: 
-    context-path: /lsso-gateway
 
 logging: 
   level: 
