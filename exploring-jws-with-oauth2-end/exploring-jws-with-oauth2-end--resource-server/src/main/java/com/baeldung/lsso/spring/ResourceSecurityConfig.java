@@ -5,19 +5,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class ResourceSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ResourceSecurityConfig {
 
     @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
     private String jwkSetUri;
-    
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {// @formatter:off
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http.authorizeRequests()
               .antMatchers(HttpMethod.GET, "/api/projects/**")
                 .hasAuthority("SCOPE_read")
@@ -28,6 +28,7 @@ public class ResourceSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
               .oauth2ResourceServer()
                 .jwt();
+        return http.build();
     }//@formatter:on
 
     @Bean

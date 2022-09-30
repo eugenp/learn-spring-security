@@ -1,16 +1,18 @@
 package com.baeldung.lsso;
 
-import com.baeldung.lsso.web.dto.ProjectDto;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+
+import com.baeldung.lsso.web.dto.ProjectDto;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 public class TokenIntegrationTest {
     private static final String AUTH_SERVICE_BASE_URL = "http://localhost:8083/auth/realms/baeldung";

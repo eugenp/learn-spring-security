@@ -24,6 +24,8 @@
         <module>legacy-stack-authorization-server-end</module>
         <module>token-revocation-start</module>
         <module>token-revocation-end</module>
+	    <module>logout-with-oauth-and-oidc-start</module>
+	    <module>logout-with-oauth-and-oidc-end</module>
     </modules>
 
 </project>
