@@ -1,14 +1,14 @@
 package com.baeldung.lss.web.controller;
 
-import static com.jayway.restassured.RestAssured.given;
+import static io.restassured.RestAssured.given;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.authentication.FormAuthConfig;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.RestAssured;
+import io.restassured.authentication.FormAuthConfig;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 public class UserControllerLiveTest {
 
