@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.3</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -120,9 +120,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>${rest-assured.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -174,7 +173,6 @@
     <properties>
 
         <google.auth.enabled>false</google.auth.enabled>
-        <rest-assured.version>2.8.0</rest-assured.version>
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
