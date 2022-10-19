@@ -1,8 +1,8 @@
 package com.baeldung.lss.persistence;
 
-import com.baeldung.lss.model.PasswordResetToken;
-import com.baeldung.lss.model.VerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.baeldung.lss.model.PasswordResetToken;
 
 public interface PasswordResetTokenRepository extends JpaRepository<PasswordResetToken, Long> {
 

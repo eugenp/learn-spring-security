@@ -1,9 +1,8 @@
 package com.baeldung.lss.persistence;
 
-import com.baeldung.lss.model.SecurityQuestion;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.security.Security;
+import com.baeldung.lss.model.SecurityQuestion;
 
 public interface SecurityQuestionRepository extends JpaRepository<SecurityQuestion, Long> {
 
