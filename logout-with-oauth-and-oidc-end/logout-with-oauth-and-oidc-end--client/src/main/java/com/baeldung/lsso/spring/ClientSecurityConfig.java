@@ -16,9 +16,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 @EnableWebSecurity
 public class ClientSecurityConfig {
 
-	@Value("${client.base-url}")
-	private String logoutRedirectUrl;
-
 	@Autowired
 	private ClientRegistrationRepository clientRegistrationRepository;
 
@@ -41,7 +38,7 @@ public class ClientSecurityConfig {
 
 		// Sets the location that the End-User's User Agent will be redirected to
 		// after the logout has been performed at the Provider
-		oidcLogoutSuccessHandler.setPostLogoutRedirectUri(logoutRedirectUrl);
+		oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}");
 
 		return oidcLogoutSuccessHandler;
 	}

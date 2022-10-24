@@ -38,5 +38,3 @@ resourceserver:
     project:
       url: http://localhost:8081/lsso-resource-server/api/projects/
       
-client:
-  base-url: http://localhost:8082/lsso-client
