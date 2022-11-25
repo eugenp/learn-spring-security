@@ -15,16 +15,18 @@ public class ResourceSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
-        http.authorizeRequests()
-              .antMatchers(HttpMethod.GET, "/api/projects/**")
-              	.access("hasAuthority('SCOPE_read') and hasAuthority('EMAIL_USERNAME')")
-              .antMatchers(HttpMethod.POST, "/api/projects")
-                .hasAuthority("SCOPE_write")
-              .anyRequest()
-                .authenticated()
-            .and()
-              .oauth2ResourceServer()
-                .jwt();
+        
+    	http.authorizeHttpRequests(authorize -> authorize
+		        .antMatchers(HttpMethod.GET, "/api/projects/**")
+		      		.hasAuthority("EMAIL_USERNAME")
+		        .antMatchers(HttpMethod.GET, "/api/projects/**")
+		      		.hasAuthority("SCOPE_read")
+		        .antMatchers(HttpMethod.POST, "/api/projects")
+		            .hasAuthority("SCOPE_write")
+		        .anyRequest()
+		            .authenticated())
+        .oauth2ResourceServer()
+          .jwt();
         return http.build();
     }//@formatter:on
 

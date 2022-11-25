@@ -35,14 +35,13 @@ public class ResourceSecurityConfig {
                 return new ProviderManager(authProvider);
             });
 
-        http.authorizeRequests()
-              .antMatchers(HttpMethod.GET, "/api/projects/**")
-                .hasAuthority("SCOPE_read")
-              .antMatchers(HttpMethod.POST, "/api/projects")
-                .hasAuthority("SCOPE_write")
-              .anyRequest()
-                .authenticated()
-            .and()
+        http.authorizeHttpRequests(authorize -> authorize
+	              .antMatchers(HttpMethod.GET, "/api/projects/**")
+	                .hasAuthority("SCOPE_read")
+	              .antMatchers(HttpMethod.POST, "/api/projects")
+	                .hasAuthority("SCOPE_write")
+	              .anyRequest()
+	                .authenticated())
               .oauth2ResourceServer(oauth -> oauth.authenticationManagerResolver(authenticationManagerResolver));
         return http.build();
     }//@formatter:on

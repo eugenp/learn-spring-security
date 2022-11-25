@@ -12,10 +12,9 @@ public class ResourceSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
-        http.authorizeRequests()
-              .anyRequest()
-                .authenticated()
-            .and()
+        http.authorizeHttpRequests(authorize -> authorize
+	              .anyRequest()
+	                .authenticated())
               .oauth2ResourceServer()
                 .jwt();
         return http.build();
