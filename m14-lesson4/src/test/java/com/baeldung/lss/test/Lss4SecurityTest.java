@@ -2,7 +2,6 @@ package com.baeldung.lss.test;
 
 import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.mockUser;
 import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.springSecurity;
-import static org.springframework.web.reactive.function.client.ExchangeFilterFunctions.basicAuthentication;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,8 +33,6 @@ public class Lss4SecurityTest {
                     .bindToApplicationContext(this.context)                            
                     .apply(springSecurity()) 
                     .configureClient()                   
-                    .filter(basicAuthentication())                      
-                    //.filter(basicAuthentication("user","pass")) 
                     .build();
          // @formatter:on
     }
@@ -85,7 +82,7 @@ public class Lss4SecurityTest {
                 .mutateWith(mockUser().roles("ADMIN"))
                 .post()
                 .uri("/user/")
-                .syncBody(new User())
+                .bodyValue(new User())
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.CREATED)
                 .expectBody(User.class); 
