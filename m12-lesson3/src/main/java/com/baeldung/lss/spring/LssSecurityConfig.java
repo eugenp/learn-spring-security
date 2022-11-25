@@ -1,9 +1,7 @@
 package com.baeldung.lss.spring;
 
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
-import com.baeldung.lss.web.model.User;
-import com.twilio.sdk.TwilioRestClient;
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,16 +13,18 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
-import javax.annotation.PostConstruct;
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
+import com.baeldung.lss.web.model.User;
+import com.twilio.sdk.TwilioRestClient;
 
 @Configuration
 @ComponentScan({ "com.baeldung.lss.security" })
 @EnableWebSecurity
-public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
+public class LssSecurityConfig {
 
     @Value("${twilio.sid}")
     private String accountSid;
@@ -55,8 +55,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authProvider);
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {// @formatter:off
+    @Bean
+    public SecurityFilterChain filterChain1(HttpSecurity http) throws Exception {// @formatter:off
         http
                 .authorizeRequests()
                 .antMatchers("/signup", "/user/register").permitAll()
@@ -70,21 +70,22 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().permitAll().logoutUrl("/logout")
                 .and()
-                .csrf().disable()
-        ;
+                .csrf().disable();
+        return http.build();
     } // @formatter:on
 
     @Configuration
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public static class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
+    public static class BasicSecurityConfig {
+        @Bean
+        public SecurityFilterChain filterChain2(HttpSecurity http) throws Exception {// @formatter:off
             http.antMatcher("/code*")
                 .authorizeRequests()
                 .anyRequest()
                 .hasRole("TEMP_USER")
                 .and()
                 .httpBasic();
+            return http.build();
         }
     }
 

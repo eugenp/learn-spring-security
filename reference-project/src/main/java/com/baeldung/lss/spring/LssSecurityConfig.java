@@ -12,9 +12,9 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -26,7 +26,7 @@ import com.baeldung.lss.security.LssLoggingFilter;
 
 @EnableWebSecurity
 @Configuration
-public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
+public class LssSecurityConfig {
 
     @Autowired
     private DataSource dataSource;
@@ -66,8 +66,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
 
     } // @formatter:on
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception { // @formatter:off
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http
                 .addFilterBefore(lssLoggingFilter, AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
@@ -105,8 +105,8 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionRegistry(sessionRegistry()).and().sessionFixation().none()
 
                 .and()
-                .csrf().disable()
-        ;
+                .csrf().disable();
+        return http.build();
     } // @formatter:on
 
     @Bean
