@@ -36,7 +36,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
+ 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${javax.servlet-api.version}</version>
@@ -200,12 +200,12 @@
 		<!-- non-dependencies -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<org.springframework-version>5.3.19</org.springframework-version>
-		<spring-security.version>5.6.2</spring-security.version>
+		<org.springframework-version>5.3.23</org.springframework-version>
+		<spring-security.version>5.7.5</spring-security.version>
 
 		<!-- web -->
 		<thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
-		<thymeleaf-layout-dialect.version>3.0.0</thymeleaf-layout-dialect.version>
+		<thymeleaf-layout-dialect.version>3.1.0</thymeleaf-layout-dialect.version>
 
 		<javax.servlet-api.version>4.0.1</javax.servlet-api.version>
 		<jstl.version>1.2</jstl.version>
@@ -216,18 +216,18 @@
 		<logback-classic.version>1.2.11</logback-classic.version>
 		
 		<!-- marshalling -->
-		<jackson-databind.version>2.13.2.2</jackson-databind.version>
+		<jackson-databind.version>2.13.4.2</jackson-databind.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
     
 		<!-- validation -->
-		<hibernate-validator.version>6.2.3.Final</hibernate-validator.version>
+		<hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
 
 		<!-- test -->
-		<mockito-core.version>4.0.0</mockito-core.version>
+		<mockito-core.version>4.8.1</mockito-core.version>
 		<junit.version>4.13.2</junit.version>
 
 		<!-- maven plugins -->
-		<maven-surefire-plugin.version>3.0.0-M1</maven-surefire-plugin.version>
+		<maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
 		<maven-war-plugin.vesion>3.3.2</maven-war-plugin.vesion>
 
