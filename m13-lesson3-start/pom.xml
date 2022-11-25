@@ -1,8 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security Core&quot; Course: Session Management with spring-session - Start</description>
-    
+
 
     <groupId>com.baeldung.m13</groupId>
     <artifactId>learn-spring-security-m13-l3-start</artifactId>
@@ -42,7 +43,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -80,10 +84,10 @@
             <scope>runtime</scope>
         </dependency>
 
-<!--         <dependency> -->
-<!--             <groupId>mysql</groupId> -->
-<!--             <artifactId>mysql-connector-java</artifactId> -->
-<!--         </dependency> -->
+        <!-- <dependency> -->
+        <!-- <groupId>mysql</groupId> -->
+        <!-- <artifactId>mysql-connector-java</artifactId> -->
+        <!-- </dependency> -->
 
         <!-- common utilities -->
 
@@ -150,18 +154,18 @@
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        
+
         <!-- commons and utils -->
         <guava.version>21.0</guava.version>
 
-		<!-- password validation -->
-        <passay.version>1.0</passay.version>		
-        
+        <!-- password validation -->
+        <passay.version>1.0</passay.version>
+
         <!-- maven plugins -->
-		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-		
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+
     </properties>
-    
+
     <developers>
         <developer>
             <email>eugen@baeldung.com</email>
