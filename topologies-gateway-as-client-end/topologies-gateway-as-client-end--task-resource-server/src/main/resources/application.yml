@@ -1,0 +1,18 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /lsso-task-resource-server
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8083/auth/realms/baeldung
+          jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
+  jpa:
+    defer-datasource-initialization: true
+    open-in-view: false
+  devtools:
+    livereload:
+      port: 35731

@@ -1,0 +1,55 @@
+server:
+  port: 8084
+
+logging:
+  level:
+    org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: DEBUG
+    org.springframework.web.reactive.function.client.ExchangeFunctions: DEBUG
+
+####### resource server configuration properties
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay
+        - RemoveRequestHeader=Cookie
+      routes:
+        - id: projects_route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/projects/**
+          filters:
+            - RewritePath=/(?<segment>.*), /lsso-project-resource-server/api/$\{segment}
+        - id: tasks_route
+          uri: http://localhost:8085
+          predicates:
+            - Path=/tasks/**
+          filters:
+            - RewritePath=/(?<segment>.*), /lsso-task-resource-server/api/$\{segment}
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:8082"
+            allowedHeaders:
+             - Content-Type
+             - X-XSRF-TOKEN
+            allowedMethods:
+              - GET
+              - POST
+            allowCredentials: true 
+  security:
+    oauth2:
+      client:
+        registration:
+          custom:
+            client-id: lssoClient
+            client-secret: lssoSecret
+            scope: read,write
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8084/login/oauth2/code/custom
+        provider:
+          custom:
+            authorization-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth
+            token-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token
+            user-info-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username

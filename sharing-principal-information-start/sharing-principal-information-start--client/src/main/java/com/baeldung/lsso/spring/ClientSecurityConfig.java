@@ -14,10 +14,8 @@ public class ClientSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
-        http.authorizeRequests()
-            .antMatchers("/").permitAll()
-            .anyRequest().authenticated()
-            .and()
+        http.authorizeHttpRequests(authorize -> authorize.antMatchers("/").permitAll()
+	            .anyRequest().authenticated())
             .oauth2Login()
             .and()
             .logout().logoutSuccessUrl("/");
