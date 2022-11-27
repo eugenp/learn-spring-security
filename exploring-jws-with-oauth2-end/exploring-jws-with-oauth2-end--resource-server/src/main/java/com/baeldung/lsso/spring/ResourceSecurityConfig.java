@@ -18,14 +18,13 @@ public class ResourceSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
-        http.authorizeRequests()
-              .antMatchers(HttpMethod.GET, "/api/projects/**")
-                .hasAuthority("SCOPE_read")
-              .antMatchers(HttpMethod.POST, "/api/projects")
-                .hasAuthority("SCOPE_write")
-              .anyRequest()
-                .authenticated()
-            .and()
+        http.authorizeHttpRequests(authorize -> authorize
+	              .antMatchers(HttpMethod.GET, "/api/projects/**")
+	                .hasAuthority("SCOPE_read")
+	              .antMatchers(HttpMethod.POST, "/api/projects")
+	                .hasAuthority("SCOPE_write")
+	              .anyRequest()
+	                .authenticated())
               .oauth2ResourceServer()
                 .jwt();
         return http.build();

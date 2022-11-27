@@ -1,0 +1,13 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE;
+  jpa:
+    open-in-view: false
+
+logging:
+  level:
+    liquibase: error
