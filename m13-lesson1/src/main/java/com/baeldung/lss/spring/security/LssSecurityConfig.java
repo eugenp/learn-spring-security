@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
@@ -22,7 +24,9 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
             inMemoryAuthentication().
             withUser("test@test.com").password("pass").            
             roles("USER");*/        
-        auth.userDetailsService(userDetailsService);
+        auth
+        .userDetailsService(userDetailsService)
+        .passwordEncoder(passwordEncoder());
         
     } // @formatter:on
 
@@ -39,5 +43,10 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public LssUserDetailsService lssUserDetailsService() {
         return new LssUserDetailsService();
+    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+    	return new StandardPasswordEncoder();
     }
 }
