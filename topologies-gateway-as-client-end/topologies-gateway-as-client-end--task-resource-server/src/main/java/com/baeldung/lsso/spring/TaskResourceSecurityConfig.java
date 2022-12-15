@@ -13,12 +13,11 @@ public class TaskResourceSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
-        http.authorizeRequests()
-          .antMatchers(HttpMethod.GET, "/api/tasks/**")
-            .hasAuthority("SCOPE_read")
-          .anyRequest()
-            .authenticated()
-        .and()
+        http.authorizeHttpRequests(authorize -> authorize
+            .antMatchers(HttpMethod.GET, "/api/tasks/**")
+              .hasAuthority("SCOPE_read")
+            .anyRequest()
+              .authenticated())
           .oauth2ResourceServer()
             .jwt();
         return http.build();
