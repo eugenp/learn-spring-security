@@ -1,5 +1,7 @@
 package com.baeldung.lsso.web.controller;
 
+import static org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.oauth2AuthorizedClient;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,8 +18,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.baeldung.lsso.web.model.ProjectModel;
-
-import static org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.oauth2AuthorizedClient;
 
 @Controller
 public class ProjectClientController {
