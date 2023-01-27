@@ -1,12 +1,13 @@
 package com.baeldung.lsso;
 
-import com.baeldung.lsso.spring.CustomClaimValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
 import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
 import org.springframework.security.oauth2.jwt.Jwt;
+
+import com.baeldung.lsso.spring.CustomClaimValidator;
 
 public class CustomClaimValidatorUnitTest {
 

@@ -1,10 +1,10 @@
 package com.baeldung.lsso.service.impl;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-import java.util.Objects;
 
 import com.baeldung.lsso.persistence.model.Project;
 import com.baeldung.lsso.persistence.repository.IProjectRepository;
