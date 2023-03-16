@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "128f2d99-1fa6-41a1-a947-e328f84438fb",
+		"_postman_id": "6ff8f2cb-b2b8-4986-a7e6-bcd9bf7e5d3c",
 		"name": "LSSO",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "418131"
 	},
 	"item": [
 		{
@@ -17,7 +18,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "9c2831af-2c89-4414-9add-846ff533e4d8",
 										"exec": [
 											"const $ = cheerio.load(pm.response.text());",
 											"const formAction = $('#kc-form-login').attr('action');",
@@ -74,7 +74,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "2557c67a-ce08-4c9c-b798-8b3e5521f1bb",
 										"exec": [
 											"var redirectLocation = pm.response.headers.get(\"Location\"),",
 											"  sdk = require('postman-collection'),",
@@ -118,10 +117,7 @@
 											"value": "123",
 											"type": "text"
 										}
-									],
-									"options": {
-										"urlencoded": {}
-									}
+									]
 								},
 								"url": {
 									"raw": "{{bael.formAction}}",
@@ -138,7 +134,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "d4216800-c2bb-4881-8b44-d0cb3a0ef8b3",
 										"exec": [
 											"var accessToken = pm.response.json().access_token;",
 											"  ",
@@ -191,10 +186,7 @@
 											"value": "{{bael.authCode}}",
 											"type": "text"
 										}
-									],
-									"options": {
-										"urlencoded": {}
-									}
+									]
 								},
 								"url": {
 									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token",
@@ -215,12 +207,9 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "The Basics of OAuth2",
@@ -234,7 +223,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "ca7b915e-0fc7-4b31-a572-9759d6b85348",
 										"exec": [
 											"const $ = cheerio.load(pm.response.text());",
 											"const formAction = $('#kc-form-login').attr('action');",
@@ -291,7 +279,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "25f17e45-28ee-4132-a768-5580e47ab5db",
 										"exec": [
 											"var redirectLocation = pm.response.headers.get(\"Location\"),",
 											"  sdk = require('postman-collection'),",
@@ -335,10 +322,7 @@
 											"value": "123",
 											"type": "text"
 										}
-									],
-									"options": {
-										"urlencoded": {}
-									}
+									]
 								},
 								"url": {
 									"raw": "{{bael.formAction}}",
@@ -355,7 +339,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "09a677c6-20ea-4589-ac6c-1aba85e6a2c5",
 										"exec": [
 											"var accessToken = pm.response.json().access_token;",
 											"  ",
@@ -408,10 +391,7 @@
 											"value": "{{bael.authCode}}",
 											"type": "text"
 										}
-									],
-									"options": {
-										"urlencoded": {}
-									}
+									]
 								},
 								"url": {
 									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token",
@@ -440,7 +420,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "",
+											"value": "{{bael.accessToken}}",
 											"type": "string"
 										}
 									]
@@ -468,7 +448,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b4a93054-f5ce-4894-8509-f03504b2bbd9",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -478,16 +457,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "61696bfa-eed8-4042-8ab0-5f640e132cca",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Authorization Server with Keycloak",
@@ -532,10 +508,7 @@
 											"value": "<secret>",
 											"type": "text"
 										}
-									],
-									"options": {
-										"urlencoded": {}
-									}
+									]
 								},
 								"url": {
 									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token",
@@ -556,12 +529,9 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "OAuth2 Beyond the Basics - The Resource Server",
@@ -575,7 +545,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "b46ed055-c18b-4e6a-968d-9dd201ad4a50",
 										"exec": [
 											"const $ = cheerio.load(pm.response.text());",
 											"const formAction = $('#kc-form-login').attr('action');",
@@ -588,7 +557,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "739d8de0-b533-4301-b301-4d0e780f27c2",
 										"exec": [
 											""
 										],
@@ -642,7 +610,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "4bfb492d-df44-4e81-9ef9-5679a76d40e5",
 										"exec": [
 											"var redirectLocation = pm.response.headers.get(\"Location\"),",
 											"  sdk = require('postman-collection'),",
@@ -703,7 +670,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "d897a146-2312-4b30-8f25-d2b7504e1737",
 										"exec": [
 											"var accessToken = pm.response.json().access_token;",
 											"  ",
@@ -813,7 +779,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "4a97fcce-dbc1-463e-bae4-22db401d5029",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -823,16 +788,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3b15ce00-0835-45e1-a7c1-bd8c86a7e68e",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Basic Authorization with OAuth2",
@@ -843,7 +805,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "d9591bea-9d92-4417-9929-6e38d48ac64b",
 										"exec": [
 											"const $ = cheerio.load(pm.response.text());",
 											"const formAction = $('#kc-form-login').attr('action');",
@@ -861,7 +822,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "a8356724-f1c7-44a3-91e4-4801d2e7fb8f",
 										"exec": [
 											""
 										],
@@ -918,7 +878,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "d464989e-5b4d-4735-a3eb-7bfc259ab3dd",
 										"exec": [
 											"var redirectLocation = pm.response.headers.get(\"Location\"),",
 											"  sdk = require('postman-collection'),",
@@ -985,7 +944,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "d13098ae-7347-46ec-b780-7a973d02c9cd",
 										"exec": [
 											"var accessToken = pm.response.json().access_token;",
 											"  ",
@@ -1096,7 +1054,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "04a352cf-df64-4d9b-9c46-dd2047a3ab40",
 										"exec": [
 											"const $ = cheerio.load(pm.response.text());",
 											"const formAction = $('#kc-form-login').attr('action');",
@@ -1114,7 +1071,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "3a642a12-7d9a-44f7-bcf3-56efe6294143",
 										"exec": [
 											""
 										],
@@ -1171,7 +1127,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "408e458e-af61-4ca9-b187-813ee9c236ca",
 										"exec": [
 											"var redirectLocation = pm.response.headers.get(\"Location\"),",
 											"  sdk = require('postman-collection'),",
@@ -1238,7 +1193,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "e6961a6a-bbc5-424e-867a-25a3a36b7f58",
 										"exec": [
 											"var accessToken = pm.response.json().access_token;",
 											"  ",
@@ -1381,7 +1335,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "e6b9cb60-0f5a-4909-b730-f0d0ad84fc06",
 										"exec": [
 											"const $ = cheerio.load(pm.response.text());",
 											"const formAction = $('#kc-form-login').attr('action');",
@@ -1399,7 +1352,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "2cea3305-fbe6-4088-ac90-64967bb98dc2",
 										"exec": [
 											""
 										],
@@ -1456,7 +1408,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "ec77b122-ef33-4f8a-9df5-1f26df219bc5",
 										"exec": [
 											"var redirectLocation = pm.response.headers.get(\"Location\"),",
 											"  sdk = require('postman-collection'),",
@@ -1523,7 +1474,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "92cbd369-1dfa-42b4-8e23-569e107cbec1",
 										"exec": [
 											"var accessToken = pm.response.json().access_token;",
 											"  ",
@@ -1634,7 +1584,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "49cd20c1-20cd-4131-920a-b398c671fec7",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1644,16 +1593,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6063103d-4f62-4f74-be04-d5c03a0e17f3",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Accessing Bearer Token Attributes",
@@ -1664,7 +1610,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "237593f1-d762-4927-84d5-ad384ea15ac1",
 										"exec": [
 											"const $ = cheerio.load(pm.response.text());",
 											"const formAction = $('#kc-form-login').attr('action');",
@@ -1729,7 +1674,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "c18b957a-db8a-4574-81c0-4124ae36172d",
 										"exec": [
 											"var redirectLocation = pm.response.headers.get(\"Location\"),",
 											"  sdk = require('postman-collection'),",
@@ -1796,7 +1740,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "3c661d16-4bc9-44e0-801b-9cb50c94c1b9",
 										"exec": [
 											"var accessToken = pm.response.json().access_token;",
 											"  ",
@@ -1938,7 +1881,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "111ee66e-b957-454c-a450-8e42e3087f05",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -1948,16 +1890,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "777523eb-793a-445d-aa68-72fe19ef6459",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Accessing Bearer Token Attributes using SpEL",
@@ -1968,7 +1907,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "09c723c1-dad3-44d7-a332-ec2366fc0f55",
 										"exec": [
 											"const $ = cheerio.load(pm.response.text());",
 											"const formAction = $('#kc-form-login').attr('action');",
@@ -2033,7 +1971,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "a391cfa9-c669-4d50-aec8-313c51feb1b0",
 										"exec": [
 											"var redirectLocation = pm.response.headers.get(\"Location\"),",
 											"  sdk = require('postman-collection'),",
@@ -2100,7 +2037,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "cb6be713-57dc-4722-b923-f6208de37364",
 										"exec": [
 											"var accessToken = pm.response.json().access_token;",
 											"  ",
@@ -2274,7 +2210,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "84ab67ff-00f9-4e10-b864-ab2b6b8860ef",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -2284,19 +2219,626 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6b7814f1-54b0-4cad-93c4-6f3f657e333f",
 								"type": "text/javascript",
 								"exec": [
 									""
 								]
 							}
 						}
+					]
+				},
+				{
+					"name": "Custom Authorities From JWT Claims",
+					"item": [
+						{
+							"name": "Extract Authorization Endpoint",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const $ = cheerio.load(pm.response.text());",
+											"const formAction = $('#kc-form-login').attr('action');",
+											"",
+											"pm.collectionVariables.set(\"bael.formAction\", formAction);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=read&redirect_uri=http://localhost:8082/lsso-client/login/oauth2/code/custom",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"auth",
+										"realms",
+										"baeldung",
+										"protocol",
+										"openid-connect",
+										"auth"
+									],
+									"query": [
+										{
+											"key": "response_type",
+											"value": "code"
+										},
+										{
+											"key": "client_id",
+											"value": "lssoClient"
+										},
+										{
+											"key": "scope",
+											"value": "read"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:8082/lsso-client/login/oauth2/code/custom"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Authorization Code - Regular Account",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var redirectLocation = pm.response.headers.get(\"Location\"),",
+											"  sdk = require('postman-collection'),",
+											"  url = new sdk.Url(redirectLocation),",
+											"  code = url.query.find(param => param.key === \"code\").value;",
+											"  ",
+											"pm.collectionVariables.set(\"bael.authCode\", code);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"followRedirects": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "john_test_username",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{bael.formAction}}",
+									"host": [
+										"{{bael.formAction}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Access Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var accessToken = pm.response.json().access_token;",
+											"  ",
+											"pm.collectionVariables.set(\"bael.accessToken\", accessToken);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "lssoClient",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "lssoSecret",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:8082/lsso-client/login/oauth2/code/custom",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "{{bael.authCode}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"auth",
+										"realms",
+										"baeldung",
+										"protocol",
+										"openid-connect",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Projects",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bael.accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/lsso-resource-server/api/projects",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"lsso-resource-server",
+										"api",
+										"projects"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Authorization Code - Email Account",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var redirectLocation = pm.response.headers.get(\"Location\"),",
+											"  sdk = require('postman-collection'),",
+											"  url = new sdk.Url(redirectLocation),",
+											"  code = url.query.find(param => param.key === \"code\").value;",
+											"  ",
+											"pm.collectionVariables.set(\"bael.authCode\", code);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"followRedirects": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "john@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{bael.formAction}}",
+									"host": [
+										"{{bael.formAction}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Custom Validators for JWT Claims",
+					"item": [
+						{
+							"name": "1. Extract Authorization Endpoint",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const $ = cheerio.load(pm.response.text());",
+											"const formAction = $('#kc-form-login').attr('action');",
+											"",
+											"pm.collectionVariables.set(\"bael.formAction\", formAction);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=read&redirect_uri=http://localhost:8082/lsso-client/login/oauth2/code/custom",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"auth",
+										"realms",
+										"baeldung",
+										"protocol",
+										"openid-connect",
+										"auth"
+									],
+									"query": [
+										{
+											"key": "response_type",
+											"value": "code"
+										},
+										{
+											"key": "client_id",
+											"value": "lssoClient"
+										},
+										{
+											"key": "scope",
+											"value": "read"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:8082/lsso-client/login/oauth2/code/custom"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2.1. Request Authorization Code - john@test.com",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var redirectLocation = pm.response.headers.get(\"Location\"),",
+											"  sdk = require('postman-collection'),",
+											"  url = new sdk.Url(redirectLocation),",
+											"  code = url.query.find(param => param.key === \"code\").value;",
+											"  ",
+											"pm.collectionVariables.set(\"bael.authCode\", code);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"followRedirects": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "john@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{bael.formAction}}",
+									"host": [
+										"{{bael.formAction}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2.2. Request Authorization Code - mike@other.com",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var redirectLocation = pm.response.headers.get(\"Location\"),",
+											"  sdk = require('postman-collection'),",
+											"  url = new sdk.Url(redirectLocation),",
+											"  code = url.query.find(param => param.key === \"code\").value;",
+											"  ",
+											"pm.collectionVariables.set(\"bael.authCode\", code);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"followRedirects": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "mike@other.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "pass",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{bael.formAction}}",
+									"host": [
+										"{{bael.formAction}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Request Access Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var accessToken = pm.response.json().access_token;",
+											"  ",
+											"pm.collectionVariables.set(\"bael.accessToken\", accessToken);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "lssoClient",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "lssoSecret",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:8082/lsso-client/login/oauth2/code/custom",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "{{bael.authCode}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"auth",
+										"realms",
+										"baeldung",
+										"protocol",
+										"openid-connect",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Request Projects",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bael.accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/lsso-resource-server/api/projects",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"lsso-resource-server",
+										"api",
+										"projects"
+									]
+								}
+							},
+							"response": []
+						}
 					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "OAuth2 Beyond the Basics - The Client",
@@ -2310,7 +2852,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "9febc66b-d6b1-453c-b3e2-6c3b6b18bd83",
 										"exec": [
 											"const $ = cheerio.load(pm.response.text());",
 											"const formAction = $('#kc-form-login').attr('action');",
@@ -2323,7 +2864,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "e37b4c40-55c3-43a8-b67f-7d80cdb54486",
 										"exec": [
 											""
 										],
@@ -2377,7 +2917,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "5843e549-5673-4885-a4c9-e2ffa05f1c55",
 										"exec": [
 											"var redirectLocation = pm.response.headers.get(\"Location\"),",
 											"  sdk = require('postman-collection'),",
@@ -2421,10 +2960,7 @@
 											"value": "123",
 											"type": "text"
 										}
-									],
-									"options": {
-										"urlencoded": {}
-									}
+									]
 								},
 								"url": {
 									"raw": "{{bael.formAction}}",
@@ -2441,7 +2977,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "3f325897-c43e-4c82-9257-acea4fd6130b",
 										"exec": [
 											"var refreshToken = pm.response.json().refresh_token;",
 											"  ",
@@ -2494,10 +3029,7 @@
 											"value": "{{bael.authCode}}",
 											"type": "text"
 										}
-									],
-									"options": {
-										"urlencoded": {}
-									}
+									]
 								},
 								"url": {
 									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token",
@@ -2524,7 +3056,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "0689b444-9908-4190-ba67-83ee839a116f",
 										"exec": [
 											"var refreshToken = pm.response.json().refresh_token;",
 											"  ",
@@ -2572,10 +3103,7 @@
 											"value": "<refresh_token>",
 											"type": "text"
 										}
-									],
-									"options": {
-										"urlencoded": {}
-									}
+									]
 								},
 								"url": {
 									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token",
@@ -2596,19 +3124,415 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
+		},
+		{
+			"name": "OAuth2 Beyond the Basics - Deep-Dives",
+			"item": [
+				{
+					"name": "Token revocation",
+					"item": [
+						{
+							"name": "Extract Authorization Endpoint",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const $ = cheerio.load(pm.response.text());",
+											"const formAction = $('#kc-form-login').attr('action');",
+											"",
+											"pm.collectionVariables.set(\"bael.formAction\", formAction);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=read&redirect_uri=http://localhost:8082/lsso-client/login/oauth2/code/custom",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"auth",
+										"realms",
+										"baeldung",
+										"protocol",
+										"openid-connect",
+										"auth"
+									],
+									"query": [
+										{
+											"key": "response_type",
+											"value": "code"
+										},
+										{
+											"key": "client_id",
+											"value": "lssoClient"
+										},
+										{
+											"key": "scope",
+											"value": "read"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:8082/lsso-client/login/oauth2/code/custom"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Authorization Code",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var redirectLocation = pm.response.headers.get(\"Location\"),",
+											"  sdk = require('postman-collection'),",
+											"  url = new sdk.Url(redirectLocation),",
+											"  code = url.query.find(param => param.key === \"code\").value;",
+											"  ",
+											"pm.collectionVariables.set(\"bael.authCode\", code);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"followRedirects": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "john@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{bael.formAction}}",
+									"host": [
+										"{{bael.formAction}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Access and Refresh Tokens",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var refreshToken = pm.response.json().refresh_token;",
+											"var accessToken = pm.response.json().access_token",
+											"",
+											"pm.collectionVariables.set(\"bael.accessToken\", accessToken);",
+											"pm.collectionVariables.set(\"bael.refreshToken\", refreshToken);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "lssoClient",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "lssoSecret",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:8082/lsso-client/login/oauth2/code/custom",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "{{bael.authCode}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"auth",
+										"realms",
+										"baeldung",
+										"protocol",
+										"openid-connect",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Revoke Refresh Token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "lssoClient",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "lssoSecret",
+											"type": "text"
+										},
+										{
+											"key": "token_type_hint",
+											"value": "refresh_token",
+											"type": "text"
+										},
+										{
+											"key": "token",
+											"value": "{{bael.refreshToken}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/revoke",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"auth",
+										"realms",
+										"baeldung",
+										"protocol",
+										"openid-connect",
+										"revoke"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Projects",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bael.accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/lsso-resource-server/api/projects",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"lsso-resource-server",
+										"api",
+										"projects"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Revoke Access Token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "lssoClient",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "lssoSecret",
+											"type": "text"
+										},
+										{
+											"key": "token_type_hint",
+											"value": "access_token",
+											"type": "text"
+										},
+										{
+											"key": "token",
+											"value": "{{bael.accessToken}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/revoke",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"auth",
+										"realms",
+										"baeldung",
+										"protocol",
+										"openid-connect",
+										"revoke"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Access Token Introspection",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "{{bael.accessToken}}",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "lssoClient",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "lssoSecret",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token/introspect",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"auth",
+										"realms",
+										"baeldung",
+										"protocol",
+										"openid-connect",
+										"token",
+										"introspect"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "d7adcc44-e909-4476-88a1-1d31511ceb4f",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -2618,7 +3542,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "70808436-1e37-4089-83f9-5788209b4d4e",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -2628,35 +3551,28 @@
 	],
 	"variable": [
 		{
-			"id": "0910a848-44bb-4232-801f-4b52690793a2",
 			"key": "bael.form-action",
 			"value": "http://localhost:8083/auth/realms/baeldung/login-actions/authenticate?session_code=uVL9FwZnVdGXo5vDi3AYh8B7gqFOBasOYVGafJMckLo&execution=3502ea0b-98b1-4d4b-b9ba-cfc78bbc0748&client_id=lssoClient&tab_id=KyWJLfGKAwo"
 		},
 		{
-			"id": "6510e8cc-9659-40ae-bfe7-9f5c0e062b5b",
 			"key": "bael.formAction",
 			"value": "http://localhost:8083/auth/realms/baeldung/login-actions/authenticate?session_code=9L4cSU2bJ4qedwneJxiSicaX0gewLhczW_cjDbU2Hbs&execution=0cd44dee-396b-4103-bbb8-136d29bf05d4&client_id=lssoClient&tab_id=9jgLoTVXni4"
 		},
 		{
-			"id": "c63a390f-e226-4536-8508-6d262ea57c09",
 			"key": "bael.authCode",
 			"value": "82d3650a-8005-4c92-b45b-8e6755eb28ee.b67bbc0d-2220-42b5-9bf5-c5e8add78e36.b88ce206-63d6-43b6-87c9-ea09d8c02f32"
 		},
 		{
-			"id": "94cd62fc-177e-4705-94ac-bcf648750689",
 			"key": "bael.accessToken",
 			"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJlUktVWG10TFhKMHBBNkxBS29aWko1ZlU0VDhCdmxKdERCb3pXanFFdnhjIn0.eyJleHAiOjE1OTIzMjUxODAsImlhdCI6MTU5MjMyNDg4MCwiYXV0aF90aW1lIjoxNTkyMzI0ODc4LCJqdGkiOiJkYmMxODVmOC0xMjAxLTQ1ZTQtYWNkMC0wNTMyM2MyYTk0YmIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODMvYXV0aC9yZWFsbXMvYmFlbGR1bmciLCJzdWIiOiJhNTQ2MTQ3MC0zM2ViLTRiMmQtODJkNC1iMDQ4NGU5NmFkN2YiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJsc3NvQ2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImI2N2JiYzBkLTIyMjAtNDJiNS05YmY1LWM1ZThhZGQ3OGUzNiIsImFjciI6IjEiLCJzY29wZSI6InByb2ZpbGUgd3JpdGUiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqb2huQHRlc3QuY29tIn0.Y7Vk_xKp3Pa22AlKlqbu_-HZD9qmIXaNQ2XhU75DKsFrh3hwxK4QfGO5HrXX2R84mi8zYaoIp3fcaozKrP0BaLdESTThGEmI2UQQ1tr5DZztWCSb_o0pcpOLQR7Ux0N4LO8SBGeQMo1V9LAHncRwa42kPlytrhyFvyLiSsY9gGv11e_w8j_FdrOwdIwhhDJjmSDoQOKPhYoP5NK6HLEYvv5xqqbReLj5FXcfkEtQ91fT4HSQxaD-_40ohzSmOhGaO_4kUIEqyvf1O1wF9Qsnq8QupsL0BNLvmf_11H4KmJ9GAN_e8d4MZHGhLzuqsowd943v4RA-cYw6G_-OTVyF1g"
 		},
 		{
-			"id": "68be14ff-b196-4ee4-935d-c1a2b8d7fcd8",
 			"key": "bael.refreshToken",
 			"value": ""
 		},
 		{
-			"id": "c46b20b8-4ec7-4f10-9d59-40cc376dc874",
 			"key": "bael.tempCookies",
 			"value": "AUTH_SESSION_ID=b67bbc0d-2220-42b5-9bf5-c5e8add78e36; KC_RESTART=eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwZDkwY2JkNy03MTY0LTQyY2MtODhlMi1kMjE1ZTc5YWU4ZWEifQ.eyJjaWQiOiJsc3NvQ2xpZW50IiwicHR5Ijoib3BlbmlkLWNvbm5lY3QiLCJydXJpIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgyL2xzc28tY2xpZW50L2xvZ2luL29hdXRoMi9jb2RlL2N1c3RvbSIsImFjdCI6IkFVVEhFTlRJQ0FURSIsIm5vdGVzIjp7InNjb3BlIjoid3JpdGUiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODMvYXV0aC9yZWFsbXMvYmFlbGR1bmciLCJyZXNwb25zZV90eXBlIjoiY29kZSIsInJlZGlyZWN0X3VyaSI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4Mi9sc3NvLWNsaWVudC9sb2dpbi9vYXV0aDIvY29kZS9jdXN0b20ifX0.ldi5P3aUI_hmxFOH5swnLuJxTaY8xRVzSmqoXF2FDOI"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
