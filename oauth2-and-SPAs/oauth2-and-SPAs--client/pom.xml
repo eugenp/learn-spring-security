@@ -92,7 +92,7 @@
     <properties>
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>13</java.version>
+        <java.version>17</java.version>
         <selenium.version>4.0.0</selenium.version>
         <bonigarcia.webdriver.version>5.0.3</bonigarcia.webdriver.version>
     </properties>

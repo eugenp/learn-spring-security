@@ -80,7 +80,7 @@
     <properties>
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>13</java.version>
+        <java.version>17</java.version>
         <oauth-autoconfig.version>2.4.2</oauth-autoconfig.version>
     </properties>
 

@@ -112,7 +112,7 @@
     <properties>
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>13</java.version>
+        <java.version>17</java.version>
         
         <!-- resolve from the corresponding spring-security-core version in https://github.com/spring-projects/spring-security/blob/main/dependencies/spring-security-dependencies.gradle-->
     </properties>
