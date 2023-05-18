@@ -5,8 +5,10 @@ import io.restassured.RestAssured;
 import io.restassured.authentication.FormAuthConfig;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,12 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * This Test class relies on HSQL DB and all integration tests in this class are run against
  * in-memory HSQL DB instead of MySQL DB.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = LssApp.class,
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class LssCheckAuthorizationIntegrationTest {
 
     private static String APP_ROOT = "http://localhost:8081";
-    private final FormAuthConfig formAuthConfig = new FormAuthConfig(APP_ROOT + "/doLogin", "username", "password");
+    private final FormAuthConfig formAuthConfig = new FormAuthConfig("/doLogin", "username", "password");
 
     @Test
     public void givenAdminUser_whenViewUserInfo_thenOK() {
