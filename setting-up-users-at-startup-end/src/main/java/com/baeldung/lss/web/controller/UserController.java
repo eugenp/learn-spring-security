@@ -1,7 +1,5 @@
 package com.baeldung.lss.web.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,6 +16,8 @@ import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.security.ActiveUserService;
 import com.baeldung.lss.service.IUserService;
 import com.baeldung.lss.validation.EmailExistsException;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
