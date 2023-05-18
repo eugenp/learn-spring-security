@@ -2,9 +2,6 @@ package com.baeldung.lsso.web.model;
 
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 public class TaskModel {
 
     private Long id;
@@ -13,10 +10,8 @@ public class TaskModel {
 
     private String description;
 
-    @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dateCreated;
 
-    @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dueDate;
 
     public TaskModel() {
