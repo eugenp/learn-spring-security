@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.3</version>
+        <version>3.0.4</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -33,10 +33,6 @@
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -65,7 +61,7 @@
 
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
         </dependency>
 
         <!-- persistence -->

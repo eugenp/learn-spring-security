@@ -1,14 +1,15 @@
 package com.baeldung.lss.web.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Calendar;
 
 import com.baeldung.lss.validation.PasswordMatches;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @PasswordMatches

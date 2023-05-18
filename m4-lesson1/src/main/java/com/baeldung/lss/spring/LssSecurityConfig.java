@@ -1,41 +1,39 @@
 package com.baeldung.lss.spring;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity
+import jakarta.servlet.DispatcherType;
+
 @Configuration
 public class LssSecurityConfig {
 
-    private PasswordEncoder passwordEncoder;
-
-    public LssSecurityConfig(PasswordEncoder passwordEncoder) {
-        super();
-        this.passwordEncoder = passwordEncoder;
-    }
+   
 
     //
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {// @formatter:off
-        auth.
-            inMemoryAuthentication().passwordEncoder(passwordEncoder).
-            withUser("user").password(passwordEncoder.encode("pass")).
-            roles("USER");
-    } // @formatter:on
-
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
+        UserDetails user = User.withUsername("user")
+            .password(passwordEncoder.encode("pass"))
+            .roles("USER")
+            .build();
+        return new InMemoryUserDetailsManager(user);
+    }
+	
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http
-        .authorizeRequests()
-                .antMatchers("/signup", "/user/register").permitAll()
-                .antMatchers("/user/delete/*").hasRole("USER")
+        .authorizeHttpRequests()
+                .requestMatchers("/signup", "/user/register").permitAll()
+                .requestMatchers("/user/delete/*").hasRole("USER")
+                .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .anyRequest().authenticated()
 
         .and()

@@ -36,9 +36,9 @@ public class LssSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http
-        .authorizeRequests()
-                .antMatchers("/signup", "/user/register").permitAll()
-                .antMatchers("/user/delete/*").hasRole("ADMIN")
+        .authorizeHttpRequests()
+                .requestMatchers("/signup", "/user/register").permitAll()
+                .requestMatchers("/user/delete/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
 
         .and()

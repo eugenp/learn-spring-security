@@ -16,5 +16,4 @@ public class LssWebMvcConfiguration implements WebMvcConfigurer {
 
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
-
 }

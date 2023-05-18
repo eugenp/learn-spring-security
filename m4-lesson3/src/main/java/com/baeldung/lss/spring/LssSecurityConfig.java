@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import jakarta.servlet.DispatcherType;
+
 @Configuration
 @ComponentScan({ "com.baeldung.lss.security" })
 @EnableWebSecurity
@@ -36,9 +38,10 @@ public class LssSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http
-        .authorizeRequests()
-                .antMatchers("/signup", "/user/register").permitAll()
-                .antMatchers("/user/delete/*").hasRole("ADMIN")
+        .authorizeHttpRequests()
+                .requestMatchers("/signup", "/user/register").permitAll()
+                .requestMatchers("/user/delete/*").hasRole("ADMIN")
+                .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .anyRequest().authenticated()
 
         .and()
