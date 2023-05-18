@@ -1,7 +1,5 @@
 package com.baeldung.lss.web.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
@@ -17,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.service.IUserService;
 import com.baeldung.lss.validation.EmailExistsException;
+
+import jakarta.validation.Valid;
 
 @Controller
 class RegistrationController {
