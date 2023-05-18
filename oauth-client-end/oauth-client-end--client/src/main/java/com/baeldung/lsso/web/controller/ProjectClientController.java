@@ -22,7 +22,7 @@ import com.baeldung.lsso.web.model.ProjectModel;
 @Controller
 public class ProjectClientController {
 
-    @Value("${resourceserver.api.project.url:http://localhost:8081/lsso-resource-server/api/projects/}")
+    @Value("${resourceserver.api.project.url:http://localhost:8081/lsso-resource-server/api/projects}")
     private String projectApiUrl;
 
     @Autowired

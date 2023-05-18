@@ -78,7 +78,7 @@ public class Oauth2ClientLiveTest {
         response = RestAssured.given()
             .cookie("JSESSIONID", newClientSessionId)
             .get(RESOURCE_URL);
-        assertThat(HttpStatus.OK.value()).isEqualTo(response.getStatusCode());
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.asString()).contains("Projects : View all");
         System.out.println(response.asString());
     }
