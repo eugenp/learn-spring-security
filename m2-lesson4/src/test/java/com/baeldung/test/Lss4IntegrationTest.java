@@ -3,8 +3,6 @@ package com.baeldung.test;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 
-import javax.servlet.Filter;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +16,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.baeldung.lss.spring.LssApp4;
+
+import jakarta.servlet.Filter;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = LssApp4.class, webEnvironment = WebEnvironment.RANDOM_PORT)

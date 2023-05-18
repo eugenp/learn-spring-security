@@ -2,15 +2,16 @@ package com.baeldung.lss.registration.listener;
 
 import java.util.UUID;
 
-import com.baeldung.lss.model.User;
-import com.baeldung.lss.registration.OnRegistrationCompleteEvent;
-import com.baeldung.lss.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+
+import com.baeldung.lss.model.User;
+import com.baeldung.lss.registration.OnRegistrationCompleteEvent;
+import com.baeldung.lss.service.IUserService;
 
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {

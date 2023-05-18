@@ -1,7 +1,8 @@
 package com.baeldung.lss.registration;
 
-import com.baeldung.lss.model.User;
 import org.springframework.context.ApplicationEvent;
+
+import com.baeldung.lss.model.User;
 
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
 

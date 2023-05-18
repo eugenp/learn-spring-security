@@ -3,9 +3,6 @@ package com.baeldung.lss.web.controller;
 import java.util.Calendar;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
@@ -29,6 +26,9 @@ import com.baeldung.lss.registration.OnRegistrationCompleteEvent;
 import com.baeldung.lss.service.IUserService;
 import com.baeldung.lss.validation.EmailExistsException;
 import com.google.common.collect.ImmutableMap;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @Controller
 class RegistrationController {

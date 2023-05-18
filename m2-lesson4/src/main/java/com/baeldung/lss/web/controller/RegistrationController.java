@@ -1,10 +1,7 @@
 package com.baeldung.lss.web.controller;
 
-import com.baeldung.lss.model.User;
-import com.baeldung.lss.model.VerificationToken;
-import com.baeldung.lss.registration.OnRegistrationCompleteEvent;
-import com.baeldung.lss.service.IUserService;
-import com.baeldung.lss.validation.EmailExistsException;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -16,9 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.Calendar;
+import com.baeldung.lss.model.User;
+import com.baeldung.lss.model.VerificationToken;
+import com.baeldung.lss.registration.OnRegistrationCompleteEvent;
+import com.baeldung.lss.service.IUserService;
+import com.baeldung.lss.validation.EmailExistsException;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @Controller
 class RegistrationController {
