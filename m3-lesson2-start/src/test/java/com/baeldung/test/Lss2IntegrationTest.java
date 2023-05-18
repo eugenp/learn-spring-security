@@ -1,7 +1,5 @@
 package com.baeldung.test;
 
-import javax.servlet.Filter;
-
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 
@@ -17,6 +15,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.baeldung.lss.spring.LssApp2;
+
+import jakarta.servlet.Filter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = { LssApp2.class })
