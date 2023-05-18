@@ -42,11 +42,6 @@
 			<version>${javax.servlet-api.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>${jstl.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf</artifactId>
 			<version>${thymeleaf.version}</version>
@@ -208,7 +203,6 @@
 		<thymeleaf-layout-dialect.version>3.1.0</thymeleaf-layout-dialect.version>
 
 		<javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-		<jstl.version>1.2</jstl.version>
 
 		<!-- logging -->
 		<log4j-over-slf4j.version>1.7.36</log4j-over-slf4j.version>
