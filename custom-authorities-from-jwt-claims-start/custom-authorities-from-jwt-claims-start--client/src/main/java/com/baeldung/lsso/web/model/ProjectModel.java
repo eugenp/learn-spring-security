@@ -2,14 +2,11 @@ package com.baeldung.lsso.web.model;
 
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class ProjectModel {
     private Long id;
     private String name;
 
-    @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dateCreated;
 
     public ProjectModel() {

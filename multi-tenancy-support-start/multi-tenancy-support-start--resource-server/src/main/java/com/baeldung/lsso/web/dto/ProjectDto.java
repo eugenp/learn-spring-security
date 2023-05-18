@@ -2,16 +2,12 @@ package com.baeldung.lsso.web.dto;
 
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 public class ProjectDto {
 
     private Long id;
 
     private String name;
 
-    @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dateCreated;
 
     public ProjectDto() {
