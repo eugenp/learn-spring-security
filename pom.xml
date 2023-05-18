@@ -26,8 +26,6 @@
         <module>token-revocation-end</module>
 	    <module>logout-with-oauth-and-oidc-start</module>
 	    <module>logout-with-oauth-and-oidc-end</module>
-        <module>spring-authorization-server-start</module>
-        <module>spring-authorization-server-end</module>
     </modules>
 
 </project>
