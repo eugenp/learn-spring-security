@@ -165,7 +165,7 @@ public class Oauth2ClientIntegrationTest {
             .expectStatus()
             .isFound()
             .expectHeader()
-            .value(HttpHeaders.LOCATION, endsWith(CLIENT_SECURED_URL))
+            .value(HttpHeaders.LOCATION, endsWith(CLIENT_SECURED_URL + "?continue"))
             .returnResult(Void.class);
 
         // assert that Access Token Endpoint was requested as expected

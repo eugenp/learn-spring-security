@@ -79,4 +79,15 @@ public class ResourceServerIntegrationTest {
             .andExpect(header().string(HttpHeaders.WWW_AUTHENTICATE, allOf(containsString("insufficient_scope"), containsString("The request requires higher privileges than provided by the access token"))));
 
     }
+    
+    @Test
+    public void givenJwtAndEmailFormatUsernameAsClaimWithoutReadScope_whenHttpGet_thenForbidden() throws Exception {
+        this.mvc.perform(get("/api/projects").with(jwt().jwt(jwtBuilder -> jwtBuilder.claim("scope", "email")
+            .claim("preferred_username", "john@test.com"))
+            .authorities(new CustomAuthoritiesExtractor()))
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isForbidden())
+            .andExpect(header().string(HttpHeaders.WWW_AUTHENTICATE, allOf(containsString("insufficient_scope"), containsString("The request requires higher privileges than provided by the access token"))));
+
+    }
 }

@@ -36,9 +36,9 @@ public class ResourceSecurityConfig {
             });
 
         http.authorizeHttpRequests(authorize -> authorize
-	              .antMatchers(HttpMethod.GET, "/api/projects/**")
+	              .requestMatchers(HttpMethod.GET, "/api/projects/**")
 	                .hasAuthority("SCOPE_read")
-	              .antMatchers(HttpMethod.POST, "/api/projects")
+	              .requestMatchers(HttpMethod.POST, "/api/projects")
 	                .hasAuthority("SCOPE_write")
 	              .anyRequest()
 	                .authenticated())
