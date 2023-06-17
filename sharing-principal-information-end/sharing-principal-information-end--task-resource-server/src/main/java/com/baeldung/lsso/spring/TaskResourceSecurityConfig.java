@@ -42,9 +42,9 @@ public class TaskResourceSecurityConfig {
         http.addFilterAt(preAuthFilter(), AbstractPreAuthenticatedProcessingFilter.class)
             .csrf().disable()
             .authorizeHttpRequests(authorize -> authorize
-	              .antMatchers(HttpMethod.GET, "/api/tasks/**")
+	              .requestMatchers(HttpMethod.GET, "/api/tasks/**")
 	                .hasAuthority("SCOPE_read")
-	              .antMatchers(HttpMethod.POST, "/api/tasks")
+	              .requestMatchers(HttpMethod.POST, "/api/tasks")
 	                .hasAuthority("SCOPE_write")
 	              .anyRequest()
 	                .authenticated())

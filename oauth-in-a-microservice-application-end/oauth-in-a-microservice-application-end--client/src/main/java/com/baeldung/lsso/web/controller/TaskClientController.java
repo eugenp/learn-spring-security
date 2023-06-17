@@ -16,7 +16,7 @@ import com.baeldung.lsso.web.model.TaskModel;
 @Controller
 public class TaskClientController {
 
-    @Value("${gateway.url:http://localhost:8084/lsso-gateway/}" + "tasks/")
+    @Value("${gateway.url:http://localhost:8084/lsso-gateway/}" + "tasks")
     private String taskApiUrl;
 
     @Autowired

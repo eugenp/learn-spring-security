@@ -9,6 +9,7 @@ import org.springframework.security.web.server.authentication.DelegatingServerAu
 import org.springframework.security.web.server.authentication.RedirectServerAuthenticationSuccessHandler;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
 import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
+import org.springframework.security.web.server.csrf.ServerCsrfTokenRequestAttributeHandler;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
@@ -18,7 +19,8 @@ public class LssoGatewaySecurity {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {//@formatter:off
         CookieServerCsrfTokenRepository csrfRepository = CookieServerCsrfTokenRepository.withHttpOnlyFalse();
-        
+        ServerCsrfTokenRequestAttributeHandler requestHandler = new ServerCsrfTokenRequestAttributeHandler();
+
         return http.authorizeExchange()
            .anyExchange()
              .authenticated()
@@ -27,8 +29,10 @@ public class LssoGatewaySecurity {
                  new DelegatingServerAuthenticationSuccessHandler(
                      cookieCsrfHandler(csrfRepository),
                      new RedirectServerAuthenticationSuccessHandler("http://localhost:8082/lsso-client/"))))
-             .csrf(csrf -> csrf
-                 .csrfTokenRepository(csrfRepository))
+             .csrf(csrf -> {
+                 csrf.csrfTokenRepository(csrfRepository);
+                 csrf.csrfTokenRequestHandler(requestHandler);
+             })
            .build();
         //@formatter:on
     }

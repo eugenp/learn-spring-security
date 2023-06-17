@@ -18,7 +18,7 @@ import com.baeldung.lsso.web.model.ProjectModel;
 @Controller
 public class ProjectClientController {
 
-    @Value("${gateway.url:http://localhost:8084/lsso-gateway/}" + "projects/")
+    @Value("${gateway.url:http://localhost:8084/lsso-gateway/}" + "projects")
     private String projectApiUrl;
 
     @Autowired

@@ -172,7 +172,7 @@ public class Oauth2ClientIntegrationTest {
             .expectStatus()
             .isFound()
             .expectHeader()
-            .value(HttpHeaders.LOCATION, endsWith(CLIENT_SECURED_PROJECTS_URL))
+            .value(HttpHeaders.LOCATION, endsWith(CLIENT_SECURED_PROJECTS_URL + "?continue"))
             .returnResult(Void.class);
 
         // assert that Access Token Endpoint was requested as expected
@@ -223,7 +223,7 @@ public class Oauth2ClientIntegrationTest {
 
         RecordedRequest capturedProjectRequest = gatewayServer.takeRequest();
         assertThat(capturedProjectRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
-        String projectsPath = new URI(gatewayBaseUrl + "projects/").getPath();
+        String projectsPath = new URI(gatewayBaseUrl + "projects").getPath();
         assertThat(capturedProjectRequest.getPath()).isEqualTo(projectsPath);
         assertThat(capturedProjectRequest.getHeader(HttpHeaders.AUTHORIZATION)).isEqualTo("Bearer " + accessToken);
 
@@ -258,7 +258,7 @@ public class Oauth2ClientIntegrationTest {
 
         RecordedRequest capturedAddProjectRequest = gatewayServer.takeRequest();
         assertThat(capturedAddProjectRequest.getMethod()).isEqualTo(HttpMethod.POST.name());
-        String addProjectsPath = new URI(gatewayBaseUrl + "projects/").getPath();
+        String addProjectsPath = new URI(gatewayBaseUrl + "projects").getPath();
         assertThat(capturedAddProjectRequest.getPath()).isEqualTo(addProjectsPath);
         assertThat(capturedAddProjectRequest.getBody()
             .readUtf8()).contains("newProjectName");
@@ -287,7 +287,7 @@ public class Oauth2ClientIntegrationTest {
 
         RecordedRequest capturedTasksRequest = gatewayServer.takeRequest();
         assertThat(capturedTasksRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
-        URI tasksPath = new URI(gatewayBaseUrl + "tasks/" + tasksQueryParamsSection);
+        URI tasksPath = new URI(gatewayBaseUrl + "tasks" + tasksQueryParamsSection);
         assertThat(capturedTasksRequest.getPath()).isEqualTo(tasksPath.getPath() + "?" + tasksPath.getQuery());
         assertThat(capturedTasksRequest.getHeader(HttpHeaders.AUTHORIZATION)).isEqualTo("Bearer " + accessToken);
 

@@ -27,7 +27,7 @@ spring:
           filters:
             - RewritePath=/(?<segment>.*), /lsso-task-resource-server/api/$\{segment}
       globalcors:
-        cors-configurations:
+        corsConfigurations:
           '[/**]':
             allowedOrigins: "http://localhost:8082"
             allowedHeaders:
