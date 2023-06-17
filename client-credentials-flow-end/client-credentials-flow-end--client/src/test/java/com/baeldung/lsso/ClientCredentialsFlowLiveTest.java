@@ -20,7 +20,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 @SpringBootTest
 public class ClientCredentialsFlowLiveTest {
 
-    @Value("${resourceserver.api.project.url:http://localhost:8081/lsso-resource-server/api/projects/}")
+    @Value("${resourceserver.api.project.url:http://localhost:8081/lsso-resource-server/api/projects}")
     private String projectApiUrl;
 
     @Autowired

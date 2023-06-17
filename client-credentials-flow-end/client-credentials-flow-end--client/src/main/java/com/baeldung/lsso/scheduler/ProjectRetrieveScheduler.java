@@ -16,7 +16,7 @@ import com.baeldung.lsso.web.model.ProjectModel;
 @Component
 public class ProjectRetrieveScheduler {
 
-    @Value("${resourceserver.api.project.url:http://localhost:8081/lsso-resource-server/api/projects/}")
+    @Value("${resourceserver.api.project.url:http://localhost:8081/lsso-resource-server/api/projects}")
     private String projectApiUrl;
 
     private static final Logger LOG = LoggerFactory.getLogger(ProjectRetrieveScheduler.class);

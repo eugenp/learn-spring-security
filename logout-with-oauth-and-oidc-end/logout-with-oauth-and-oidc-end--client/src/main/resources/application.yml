@@ -36,5 +36,5 @@ logging:
 resourceserver:
   api:
     project:
-      url: http://localhost:8081/lsso-resource-server/api/projects/
+      url: http://localhost:8081/lsso-resource-server/api/projects
       
