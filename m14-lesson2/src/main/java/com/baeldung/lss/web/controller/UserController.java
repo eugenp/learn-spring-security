@@ -6,8 +6,6 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.stream.Stream;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,11 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.thymeleaf.spring5.context.webflux.ReactiveDataDriverContextVariable;
+import org.thymeleaf.spring6.context.webflux.ReactiveDataDriverContextVariable;
 
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.web.model.User;
 
+import jakarta.validation.Valid;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;

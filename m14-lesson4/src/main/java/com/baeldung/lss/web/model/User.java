@@ -2,7 +2,7 @@ package com.baeldung.lss.web.model;
 
 import java.util.Calendar;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 public class User {
 

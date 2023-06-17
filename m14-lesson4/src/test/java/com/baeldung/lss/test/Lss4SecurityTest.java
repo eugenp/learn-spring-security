@@ -81,7 +81,7 @@ public class Lss4SecurityTest {
         this.restClient
                 .mutateWith(mockUser().roles("ADMIN"))
                 .post()
-                .uri("/user/")
+                .uri("/user")
                 .bodyValue(new User())
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.CREATED)
