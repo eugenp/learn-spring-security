@@ -3,11 +3,15 @@ package com.baeldung.lss.spring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import com.baeldung.lss.security.CustomMethodSecurityExpressionHandler;
+import com.baeldung.lss.security.CustomMethodSecurityExpressionProvider;
 
 @EnableWebSecurity
 @Configuration
@@ -34,7 +38,7 @@ public class LssSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http
-        .authorizeRequests()
+        .authorizeHttpRequests()
             .anyRequest().permitAll()
         .and()
         
@@ -43,5 +47,16 @@ public class LssSecurityConfig {
         .and()
         .csrf().disable();
         return http.build();
+    }
+    
+//    @Bean("alternativeMethodSecurityExpressionHandler")
+    static MethodSecurityExpressionHandler createExpressionHandler() {
+        CustomMethodSecurityExpressionHandler expressionHandler = new CustomMethodSecurityExpressionHandler();
+        return expressionHandler;
+    }
+    
+    @Bean("methodSecurityExpressionProvider")
+    public CustomMethodSecurityExpressionProvider createMyAuthorizer() {
+    	return new CustomMethodSecurityExpressionProvider();
     }
 }

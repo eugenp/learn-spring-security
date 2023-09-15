@@ -3,8 +3,6 @@ package com.baeldung.lss.persistence;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +12,8 @@ import com.baeldung.lss.persistence.dao.PrivilegeRepository;
 import com.baeldung.lss.persistence.model.CustomUserDetails;
 import com.baeldung.lss.persistence.model.Organization;
 import com.baeldung.lss.persistence.model.Privilege;
+
+import jakarta.annotation.PostConstruct;
 
 @Component
 public class SetupData {
