@@ -3,24 +3,28 @@ package com.baeldung.lss.spring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.authorization.AuthorityAuthorizationManager;
+import org.springframework.security.authorization.AuthorizationManager;
+import org.springframework.security.authorization.AuthorizationManagers;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 
 @EnableWebSecurity
 @Configuration
 public class LssSecurityConfig {
 
     private PasswordEncoder passwordEncoder;
-    private AccessDecisionManager unnanimous;
 
-    public LssSecurityConfig(PasswordEncoder passwordEncoder, AccessDecisionManager unnanimous) {
+    private AuthorizationManager<RequestAuthorizationContext> baseAccessRules;
+
+    public LssSecurityConfig(PasswordEncoder passwordEncoder, AuthorizationManager<RequestAuthorizationContext> baseAccessRules) {
         super();
         this.passwordEncoder = passwordEncoder;
-        this.unnanimous = unnanimous;
+        this.baseAccessRules = baseAccessRules;
     }
 
     //
@@ -37,16 +41,16 @@ public class LssSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http
-        .authorizeRequests()
-            
-            .antMatchers("/secured").access("hasRole('ADMIN')")
-            .anyRequest().authenticated().accessDecisionManager(unnanimous)
-        
-        .and()
+        .authorizeHttpRequests((authorize) -> authorize
+            .requestMatchers("/secured").access(AuthorizationManagers.allOf(
+                baseAccessRules,
+                AuthorityAuthorizationManager.hasRole("ADMIN")
+                ))
+            .anyRequest().access(baseAccessRules)
+        )
         .formLogin().
             loginPage("/login").permitAll().
             loginProcessingUrl("/doLogin")
-
         .and()
         .logout().permitAll().logoutUrl("/logout")
         
@@ -55,6 +59,6 @@ public class LssSecurityConfig {
         return http.build();
     }
     
-    // 
+    
 
 }

@@ -3,7 +3,7 @@ package com.baeldung.test;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 
-import javax.servlet.Filter;
+import jakarta.servlet.Filter;
 
 import org.junit.Before;
 import org.junit.Test;
