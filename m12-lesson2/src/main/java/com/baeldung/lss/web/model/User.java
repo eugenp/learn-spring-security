@@ -2,16 +2,16 @@ package com.baeldung.lss.web.model;
 
 import java.util.Calendar;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import org.jboss.aerogear.security.otp.api.Base32;
 
 import com.baeldung.lss.validation.PasswordMatches;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @PasswordMatches

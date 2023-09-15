@@ -37,8 +37,8 @@ public class LssSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http
-        .authorizeRequests()
-                .antMatchers("/signup", "/user/register","/code*","/isUsing2FA*").permitAll()
+        .authorizeHttpRequests()
+                .requestMatchers("/signup", "/user/register","/code*","/isUsing2FA*").permitAll()
                 .anyRequest().authenticated()
 
         .and()

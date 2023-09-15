@@ -1,7 +1,5 @@
 package com.baeldung.lss.spring;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +18,8 @@ import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
 import com.baeldung.lss.web.model.User;
 import com.twilio.Twilio;
+
+import jakarta.annotation.PostConstruct;
 
 @Configuration
 @ComponentScan({ "com.baeldung.lss.security" })
@@ -58,8 +58,8 @@ public class LssSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain1(HttpSecurity http) throws Exception {// @formatter:off
         http
-                .authorizeRequests()
-                .antMatchers("/signup", "/user/register").permitAll()
+                .authorizeHttpRequests()
+                .requestMatchers("/signup", "/user/register").permitAll()
                 .anyRequest().hasRole("USER")
                 .and()
                 .formLogin().
@@ -79,8 +79,9 @@ public class LssSecurityConfig {
     public static class BasicSecurityConfig {
         @Bean
         public SecurityFilterChain filterChain2(HttpSecurity http) throws Exception {// @formatter:off
-            http.antMatcher("/code*")
-                .authorizeRequests()
+            http
+                .authorizeHttpRequests()
+                .requestMatchers("/code*").permitAll()
                 .anyRequest()
                 .hasRole("TEMP_USER")
                 .and()

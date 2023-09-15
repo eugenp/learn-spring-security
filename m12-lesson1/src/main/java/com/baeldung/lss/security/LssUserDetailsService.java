@@ -1,11 +1,7 @@
 package com.baeldung.lss.security;
 
-import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Collection;
-
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.web.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.web.model.User;
+
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional

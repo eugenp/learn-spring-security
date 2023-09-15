@@ -1,7 +1,7 @@
 package com.baeldung.lss.security;
 
-import com.baeldung.lss.persistence.UserRepository;
-import com.baeldung.lss.web.model.User;
+import java.util.Arrays;
+
 import org.jboss.aerogear.security.otp.Totp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -13,7 +13,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
+import com.baeldung.lss.persistence.UserRepository;
+import com.baeldung.lss.web.model.User;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
