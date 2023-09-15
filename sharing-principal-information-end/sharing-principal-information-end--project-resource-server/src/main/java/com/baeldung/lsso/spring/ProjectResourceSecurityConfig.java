@@ -7,12 +7,15 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedGrantedAuthoritiesUserDetailsService;
 import org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 public class ProjectResourceSecurityConfig {
@@ -38,18 +41,22 @@ public class ProjectResourceSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
+    MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
+        return new MvcRequestMatcher.Builder(introspector);
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {// @formatter:off
         http.addFilterAt(preAuthFilter(), AbstractPreAuthenticatedProcessingFilter.class)
-            .csrf().disable()
+            .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize -> authorize
-	              .requestMatchers(HttpMethod.GET, "/api/projects/**")
+	              .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**"))
 	                .hasAuthority("SCOPE_read")
-	              .requestMatchers(HttpMethod.POST, "/api/projects")
+	              .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects"))
 	                .hasAuthority("SCOPE_write")
 	              .anyRequest()
 	                .authenticated())
-            .sessionManagement()
-              .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }//@formatter:on
 

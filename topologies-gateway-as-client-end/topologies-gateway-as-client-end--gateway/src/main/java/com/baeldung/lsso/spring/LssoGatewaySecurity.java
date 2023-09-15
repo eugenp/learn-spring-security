@@ -21,10 +21,7 @@ public class LssoGatewaySecurity {
         CookieServerCsrfTokenRepository csrfRepository = CookieServerCsrfTokenRepository.withHttpOnlyFalse();
         ServerCsrfTokenRequestAttributeHandler requestHandler = new ServerCsrfTokenRequestAttributeHandler();
 
-        return http.authorizeExchange()
-           .anyExchange()
-             .authenticated()
-           .and()
+        return http.authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec.anyExchange().authenticated())
              .oauth2Login(oauth2 -> oauth2.authenticationSuccessHandler(
                  new DelegatingServerAuthenticationSuccessHandler(
                      cookieCsrfHandler(csrfRepository),

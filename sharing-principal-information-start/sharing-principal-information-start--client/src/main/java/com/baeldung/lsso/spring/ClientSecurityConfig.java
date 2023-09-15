@@ -1,8 +1,9 @@
 package com.baeldung.lsso.spring;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction;
@@ -16,9 +17,8 @@ public class ClientSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/").permitAll()
 	            .anyRequest().authenticated())
-            .oauth2Login()
-            .and()
-            .logout().logoutSuccessUrl("/");
+                .oauth2Login(Customizer.withDefaults())
+                .logout(logoutCustomizer -> logoutCustomizer.logoutSuccessUrl("/"));
         return http.build();
     }// @formatter:on
 
