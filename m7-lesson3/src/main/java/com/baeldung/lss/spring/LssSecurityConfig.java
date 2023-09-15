@@ -1,7 +1,5 @@
 package com.baeldung.lss.spring;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
+
+import jakarta.annotation.PostConstruct;
 
 @EnableWebSecurity
 @Configuration
@@ -64,7 +64,7 @@ public class LssSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http
         .authorizeRequests()
-                .antMatchers("/badUser*","/js/**").permitAll()
+                .requestMatchers("/badUser*","/js/**").permitAll()
                 .anyRequest().authenticated()
 
         .and()
