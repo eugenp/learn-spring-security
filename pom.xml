@@ -15,6 +15,8 @@
         <module>refresh-token</module>
         <module>testing-oauth2-clients-start</module>
         <module>testing-oauth2-clients-end</module>
+        <module>authorization-code-flow-pkce-start</module>
+        <module>authorization-code-flow-pkce-end</module>
     </modules>
 
 </project>
