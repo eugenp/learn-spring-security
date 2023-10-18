@@ -2,7 +2,7 @@ package com.baeldung.lss.web.controller;
 
 import java.util.Arrays;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -63,7 +63,7 @@ public class UserController {
     public ModelAndView delete(@PathVariable("id") Long id) {
         this.userRepository.findById(id)
             .ifPresent(user -> this.userRepository.delete(user));
-        return new ModelAndView("redirect:/user/");
+        return new ModelAndView("redirect:/user");
     }
 
     @RequestMapping(value = "modify/{id}", method = RequestMethod.GET)

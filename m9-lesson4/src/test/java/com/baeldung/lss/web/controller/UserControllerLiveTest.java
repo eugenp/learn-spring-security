@@ -21,7 +21,7 @@ public class UserControllerLiveTest {
         final Response response = givenAuthenticated("admin", "pass").formParam("username", randomUsername())
             .formParam("email", randomEmail())
             .when()
-            .post("/user/?form")
+            .post("/user?form")
             .then()
             .statusCode(302)
             .extract()
