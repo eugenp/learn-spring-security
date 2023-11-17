@@ -29,7 +29,7 @@ import okhttp3.mockwebserver.RecordedRequest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ClientIntegrationTest {
-    private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url", "http://localhost:{PORT}/lsso-resource-server/api/projects/");
+    private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url", "http://localhost:{PORT}/lsso-resource-server/api/projects");
     private final static Pair<String, String> AUTH_SERVER_PROP = Pair.of("spring.security.oauth2.client.provider.customClientCredentials.token-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/token");
 
     @Value("${resourceserver.api.project.url:http://localhost:8081/lsso-resource-server/api/projects}")
