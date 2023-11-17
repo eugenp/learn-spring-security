@@ -43,7 +43,7 @@ public class Oauth2ClientIntegrationTest {
         + ".baeldung.token-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/token");
     private final static Pair<String, String> AUTH_SERVER_USERINFO_PROP = Pair.of("spring.security.oauth2.client.provider"
         + ".baeldung.user-info-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/userinfo");
-    private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url", "http://localhost:{PORT}/lsso-resource-server/api/projects/");
+    private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url", "http://localhost:{PORT}/lsso-resource-server/api/projects");
 
     private final String CLIENT_SECURED_URL = "/projects";
     private String REDIRECT_URI = "/login/oauth2/code/custom?state=%s&code=%s";

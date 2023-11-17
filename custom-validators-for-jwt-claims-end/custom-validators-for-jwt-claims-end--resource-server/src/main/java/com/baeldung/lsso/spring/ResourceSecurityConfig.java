@@ -33,7 +33,7 @@ public class ResourceSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {// @formatter:off
         http.authorizeHttpRequests(authorize -> authorize
-	              .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**"))
+	              .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects**"))
 	                .hasAuthority("SCOPE_read")
 	              .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects"))
 	                .hasAuthority("SCOPE_write")
