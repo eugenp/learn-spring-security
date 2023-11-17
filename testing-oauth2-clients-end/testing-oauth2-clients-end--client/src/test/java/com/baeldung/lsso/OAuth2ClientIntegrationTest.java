@@ -36,7 +36,7 @@ import okhttp3.mockwebserver.RecordedRequest;
 @AutoConfigureMockMvc
 public class OAuth2ClientIntegrationTest {
 
-    private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url", "http://localhost:{PORT}/lsso-resource-server/api/projects/");
+    private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url", "http://localhost:{PORT}/lsso-resource-server/api/projects");
 
     private static MockWebServer resourceServer;
 
