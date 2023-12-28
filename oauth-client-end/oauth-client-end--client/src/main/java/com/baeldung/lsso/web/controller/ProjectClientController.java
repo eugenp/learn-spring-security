@@ -32,7 +32,7 @@ public class ProjectClientController {
     public String getProjects(@RegisteredOAuth2AuthorizedClient("custom") OAuth2AuthorizedClient authorizedClient, Model model) {
         List<ProjectModel> projects = this.webClient.get()
             .uri(projectApiUrl)
-                .attributes(oauth2AuthorizedClient(authorizedClient))
+            .attributes(oauth2AuthorizedClient(authorizedClient))
             .retrieve()
             .bodyToMono(new ParameterizedTypeReference<List<ProjectModel>>() {
             })
