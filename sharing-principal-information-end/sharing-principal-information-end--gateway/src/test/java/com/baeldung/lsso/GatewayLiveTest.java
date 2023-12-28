@@ -30,7 +30,9 @@ public class GatewayLiveTest {
     private static final String GATEWAY_SERVER_BASE_URL = "http://localhost:8084/lsso-gateway";
 
     private static final String REDIRECT_URL = "http://localhost:8082/lsso-client/login/oauth2/code/custom";
-    private static final String AUTHORIZE_URL_PATTERN = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" + REDIRECT_URL;
+    private static final String AUTHORIZE_URL_PATTERN =
+        AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" +
+            REDIRECT_URL;
     private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/token";
     private static final String GATEWAY_PROJECTS_RESOURCE_URL = GATEWAY_SERVER_BASE_URL + "/projects";
     private static final String GATEWAY_TASKS_RESOURCE_URL = GATEWAY_SERVER_BASE_URL + "/tasks?projectId=1";

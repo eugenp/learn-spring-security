@@ -1,8 +1,8 @@
-server: 
+server:
   port: 8081
-  servlet: 
+  servlet:
     context-path: /lsso-project-resource-server
-    
+
 spring:
   jpa:
     defer-datasource-initialization: true

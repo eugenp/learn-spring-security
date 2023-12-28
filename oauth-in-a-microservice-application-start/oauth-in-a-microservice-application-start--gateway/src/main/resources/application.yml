@@ -1,8 +1,8 @@
-server: 
+server:
   port: 8084
 
-logging: 
-  level: 
+logging:
+  level:
     org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: DEBUG
     org.springframework.web.reactive.function.client.ExchangeFunctions: DEBUG
 
@@ -11,15 +11,15 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: projects_route
-        uri: http://localhost:8081
-        predicates:
-        - Path=/lsso-gateway/projects/**
-        filters:
-        - RewritePath=/lsso-gateway/(?<segment>.*), /lsso-project-resource-server/api/$\{segment}
-      - id: tasks_route
-        uri: http://localhost:8085
-        predicates:
-        - Path=/lsso-gateway/tasks/**
-        filters:
-        - RewritePath=/lsso-gateway/(?<segment>.*), /lsso-task-resource-server/api/$\{segment}
+        - id: projects_route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/lsso-gateway/projects/**
+          filters:
+            - RewritePath=/lsso-gateway/(?<segment>.*), /lsso-project-resource-server/api/$\{segment}
+        - id: tasks_route
+          uri: http://localhost:8085
+          predicates:
+            - Path=/lsso-gateway/tasks/**
+          filters:
+            - RewritePath=/lsso-gateway/(?<segment>.*), /lsso-task-resource-server/api/$\{segment}

@@ -48,14 +48,10 @@ public class ProjectResourceSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {// @formatter:off
         http.addFilterAt(preAuthFilter(), AbstractPreAuthenticatedProcessingFilter.class)
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authorize -> authorize
-	              .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**"))
-	                .hasAuthority("SCOPE_read")
-	              .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects"))
-	                .hasAuthority("SCOPE_write")
-	              .anyRequest()
-	                .authenticated())
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(authorize -> authorize.requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**")).hasAuthority("SCOPE_read")
+                .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects")).hasAuthority("SCOPE_write")
+                .anyRequest().authenticated())
             .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }//@formatter:on

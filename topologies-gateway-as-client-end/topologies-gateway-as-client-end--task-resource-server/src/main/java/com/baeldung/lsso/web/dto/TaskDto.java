@@ -2,7 +2,7 @@ package com.baeldung.lsso.web.dto;
 
 import java.time.LocalDate;
 
-public record TaskDto (
+public record TaskDto(
 
     Long id,
 
@@ -13,4 +13,5 @@ public record TaskDto (
     LocalDate dateCreated,
 
     LocalDate dueDate) {
+
 }

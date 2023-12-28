@@ -24,8 +24,7 @@ public class TaskResourceServerIntegrationTest {
 
     @Test
     public void givenGetRequest_whenTasksEndpoint_thenOk() throws Exception {
-        this.mvc.perform(get(TASKS_SVC_ENDPOINT_URL + "?projectId=1")
-            .accept(MediaType.APPLICATION_JSON))
+        this.mvc.perform(get(TASKS_SVC_ENDPOINT_URL + "?projectId=1").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)));
     }

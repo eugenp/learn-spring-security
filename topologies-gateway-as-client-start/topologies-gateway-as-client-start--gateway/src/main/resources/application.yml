@@ -28,7 +28,7 @@ spring:
           '[/**]':
             allowedOrigins: "http://localhost:8082"
             allowedHeaders:
-             - Content-Type
+              - Content-Type
             allowedMethods:
               - GET
               - POST

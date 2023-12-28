@@ -114,7 +114,8 @@ public class LssoClientUILiveTest {
         createProjectButton.click();
 
         // Verify that there is now one additional project
-        chromeDriver.navigate().refresh();
+        chromeDriver.navigate()
+            .refresh();
         standardWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("project-item")));
         int newNrProjects = chromeDriver.findElements(By.className("project-item"))
             .size();

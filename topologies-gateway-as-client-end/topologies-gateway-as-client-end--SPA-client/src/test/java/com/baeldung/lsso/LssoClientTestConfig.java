@@ -13,7 +13,8 @@ public class LssoClientTestConfig {
 
     @Bean
     public WebDriver chromeDriver() {
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver()
+            .setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         return new ChromeDriver(options);

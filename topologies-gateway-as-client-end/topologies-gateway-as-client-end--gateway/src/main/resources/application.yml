@@ -31,12 +31,12 @@ spring:
           '[/**]':
             allowedOrigins: "http://localhost:8082"
             allowedHeaders:
-             - Content-Type
-             - X-XSRF-TOKEN
+              - Content-Type
+              - X-XSRF-TOKEN
             allowedMethods:
               - GET
               - POST
-            allowCredentials: true 
+            allowCredentials: true
   security:
     oauth2:
       client:

@@ -26,8 +26,7 @@ public class ProjectResourceServerIntegrationTest {
 
     @Test
     public void givenGetRequest_whenProjectsEndpoint_thenOk() throws Exception {
-        this.mvc.perform(get(PROJECT_SVC_ENDPOINT_URL)
-            .accept(MediaType.APPLICATION_JSON))
+        this.mvc.perform(get(PROJECT_SVC_ENDPOINT_URL).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)));
     }
@@ -36,10 +35,9 @@ public class ProjectResourceServerIntegrationTest {
     public void givenPostRequest_whenProjectsEndpoint_thenCreated() throws Exception {
         String newProject = "{ \"name\": \"newProject\" }";
 
-        this.mvc.perform(post(PROJECT_SVC_ENDPOINT_URL)
-            .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(newProject))
+        this.mvc.perform(post(PROJECT_SVC_ENDPOINT_URL).accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(newProject))
             .andExpect(status().isCreated());
     }
 
@@ -47,10 +45,9 @@ public class ProjectResourceServerIntegrationTest {
     public void givenPutRequest_whenProjectsEndpoint_thenCreated() throws Exception {
         String existingProject = "{ \"name\": \"existingProject\" }";
 
-        this.mvc.perform(put(PROJECT_SVC_ENDPOINT_URL + "/1")
-            .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(existingProject))
+        this.mvc.perform(put(PROJECT_SVC_ENDPOINT_URL + "/1").accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(existingProject))
             .andExpect(status().isOk());
     }
 

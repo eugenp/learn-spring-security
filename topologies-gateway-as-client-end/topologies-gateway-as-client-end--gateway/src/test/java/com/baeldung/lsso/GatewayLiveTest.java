@@ -103,7 +103,7 @@ public class GatewayLiveTest {
             .get(RESOURCE_URL);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
     }
-    
+
     @Test
     public void givenAuthorizationCodeGrant_whenAccessProjectsUsingCookiesAndCorrectCorsOrigin_thenOk() {
         Response response = getAuthenticatedClientSessionResponse();
@@ -116,10 +116,10 @@ public class GatewayLiveTest {
             .get(RESOURCE_URL);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK.value());
     }
-    
+
     @Test
     public void givenCorsSetup_whenRequestOptions_thenCorsHeadersRetrieved() {
-        Response response= RestAssured.given()
+        Response response = RestAssured.given()
             .header(HttpHeaders.ORIGIN, "http://localhost:8082")
             .header(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, HttpMethod.POST.name())
             .header(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS, "content-type,x-xsrf-token")
@@ -130,7 +130,7 @@ public class GatewayLiveTest {
         assertThat(response.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS)).isEqualTo("true");
         assertThat(response.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS)).isEqualTo("content-type, x-xsrf-token");
     }
-    
+
     @Test
     public void givenAuthorizationCodeGrant_whenCreateUsingCookiesButWithoutCsrfToken_thenForbidden() {
         Response response = getAuthenticatedClientSessionResponse();
@@ -142,9 +142,10 @@ public class GatewayLiveTest {
             .cookie("SESSION", newClientSessionId)
             .post(RESOURCE_URL);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
-        assertThat(response.getBody().asString()).isEqualTo("An expected CSRF token cannot be found");
+        assertThat(response.getBody()
+            .asString()).isEqualTo("An expected CSRF token cannot be found");
     }
-    
+
     @Test
     public void givenAuthorizationCodeGrant_whenCreateUsingCookiesButWithCsrfToken_thenCreated() {
         Response response = getAuthenticatedClientSessionResponse();
@@ -161,5 +162,5 @@ public class GatewayLiveTest {
             .post(RESOURCE_URL);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
-    
+
 }

@@ -12,7 +12,8 @@ public class LssoClientTestConfig {
 
     @Bean
     public WebDriver chromeDriver() {
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver()
+            .setup();
         return new ChromeDriver();
     }
 }

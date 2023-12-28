@@ -29,7 +29,7 @@ public class TaskResourceServerIntegrationTest {
     @Test
     public void givenJwt_whenGetTasksEndpoint_thenOk() throws Exception {
         this.mvc.perform(get(TASK_SVC_ENDPOINT_URL + "?projectId=1").with(jwt())
-            .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)));
     }
@@ -44,15 +44,16 @@ public class TaskResourceServerIntegrationTest {
     @Test
     public void givenJwtAndOnlyWriteScope_whenGetTasksEndpoint_thenForbidden() throws Exception {
         this.mvc.perform(get(TASK_SVC_ENDPOINT_URL + "?projectId=1").with(jwt().jwt(jwtBuilder -> jwtBuilder.claim("scope", "write")))
-            .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isForbidden())
-            .andExpect(header().string(HttpHeaders.WWW_AUTHENTICATE, allOf(containsString("insufficient_scope"), containsString("The request requires higher privileges than provided by the access token"))));
+            .andExpect(header().string(HttpHeaders.WWW_AUTHENTICATE,
+                allOf(containsString("insufficient_scope"), containsString("The request requires higher privileges than provided by the access token"))));
     }
 
     @Test
     public void givenJwtAndReadScope_whenGetTasksEndpoint_thenOk() throws Exception {
         this.mvc.perform(get(TASK_SVC_ENDPOINT_URL + "?projectId=1").with(jwt().jwt(jwtBuilder -> jwtBuilder.claim("scope", "read")))
-            .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)));
     }

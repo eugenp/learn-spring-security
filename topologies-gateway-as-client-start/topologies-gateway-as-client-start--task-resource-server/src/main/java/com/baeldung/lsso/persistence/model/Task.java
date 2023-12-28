@@ -101,38 +101,51 @@ public class Task {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Task other = (Task) obj;
         if (dateCreated == null) {
-            if (other.dateCreated != null)
+            if (other.dateCreated != null) {
                 return false;
-        } else if (!dateCreated.equals(other.dateCreated))
+            }
+        } else if (!dateCreated.equals(other.dateCreated)) {
             return false;
+        }
         if (description == null) {
-            if (other.description != null)
+            if (other.description != null) {
                 return false;
-        } else if (!description.equals(other.description))
+            }
+        } else if (!description.equals(other.description)) {
             return false;
+        }
         if (dueDate == null) {
-            if (other.dueDate != null)
+            if (other.dueDate != null) {
                 return false;
-        } else if (!dueDate.equals(other.dueDate))
+            }
+        } else if (!dueDate.equals(other.dueDate)) {
             return false;
+        }
         if (id == null) {
-            if (other.id != null)
+            if (other.id != null) {
                 return false;
-        } else if (!id.equals(other.id))
+            }
+        } else if (!id.equals(other.id)) {
             return false;
+        }
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         return true;
     }
 
