@@ -43,7 +43,9 @@ public class ResourceServerLiveTest {
     private static final String RESOURCE_SERVER_BASE_URL = "http://localhost:8081";
 
     private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/login/oauth2/code/custom";
-    private static final String AUTHORIZE_URL_PATTERN_WITHOUT_CODE_CHALLENGE = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" + REDIRECT_URL;
+    private static final String AUTHORIZE_URL_PATTERN_WITHOUT_CODE_CHALLENGE =
+        AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" +
+            REDIRECT_URL;
     private static final String AUTHORIZE_URL_PATTERN = AUTHORIZE_URL_PATTERN_WITHOUT_CODE_CHALLENGE + "&code_challenge=%s&code_challenge_method=S256";
     private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/auth/realms/baeldung/protocol/openid-connect/token";
     private static final String RESOURCE_URL = RESOURCE_SERVER_BASE_URL + "/lsso-resource-server/api/projects";
@@ -172,12 +174,14 @@ public class ResourceServerLiveTest {
 
     private static Map<String, String> generatePkceParameters() throws NoSuchAlgorithmException {
         final Map<String, String> pkceParams = new HashMap<>();
-        final StringKeyGenerator defaultSecureKeyGenerator = new Base64StringKeyGenerator(
-            Base64.getUrlEncoder().withoutPadding(), 96);
+        final StringKeyGenerator defaultSecureKeyGenerator = new Base64StringKeyGenerator(Base64.getUrlEncoder()
+            .withoutPadding(), 96);
         final String codeVerifier = defaultSecureKeyGenerator.generateKey();
         final MessageDigest md = MessageDigest.getInstance("SHA-256");
         final byte[] digest = md.digest(codeVerifier.getBytes(StandardCharsets.US_ASCII));
-        final String codeChallenge = Base64.getUrlEncoder().withoutPadding().encodeToString(digest);
+        final String codeChallenge = Base64.getUrlEncoder()
+            .withoutPadding()
+            .encodeToString(digest);
         pkceParams.put(PkceParameterNames.CODE_VERIFIER, codeVerifier);
         pkceParams.put(PkceParameterNames.CODE_CHALLENGE, codeChallenge);
         pkceParams.put(PkceParameterNames.CODE_CHALLENGE_METHOD, "S256");

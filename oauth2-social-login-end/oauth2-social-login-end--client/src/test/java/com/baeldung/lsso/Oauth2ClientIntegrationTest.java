@@ -55,7 +55,7 @@ public class Oauth2ClientIntegrationTest {
         String redirectTarget = result.getResponseHeaders()
             .getFirst(HttpHeaders.LOCATION);
 
-        ExchangeResult resultGithub =this.webTestClient.get()
+        ExchangeResult resultGithub = this.webTestClient.get()
             .uri(redirectTarget)
             .cookie(JSESSIONID, cookieSession)
             .exchange()

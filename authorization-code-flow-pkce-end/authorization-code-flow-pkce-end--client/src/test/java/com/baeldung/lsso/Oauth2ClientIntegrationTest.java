@@ -39,8 +39,8 @@ import okhttp3.mockwebserver.RecordedRequest;
 @AutoConfigureWebTestClient
 public class Oauth2ClientIntegrationTest {
 
-    private static final String CLIENT_SECURED_URL =  "/projects";
-    private static final String REDIRECT_URI =  "/login/oauth2/code/custom?state=%s&code=%s";
+    private static final String CLIENT_SECURED_URL = "/projects";
+    private static final String REDIRECT_URI = "/login/oauth2/code/custom?state=%s&code=%s";
 
     @Value("${spring.security.oauth2.client.provider.custom.authorization-uri}")
     private String authServerAuthorizationURL;
@@ -211,8 +211,7 @@ public class Oauth2ClientIntegrationTest {
             .expectBody()
             .consumeWith(response -> {
                 String bodyAsString = new String(response.getResponseBodyContent());
-                assertThat(bodyAsString)
-                    .contains("Project 1")
+                assertThat(bodyAsString).contains("Project 1")
                     .contains("Project 2")
                     .contains("Project 3")
                     .doesNotContain("Project 4");
@@ -228,7 +227,9 @@ public class Oauth2ClientIntegrationTest {
     private static String getCodeChallenge(String codeVerifier) throws NoSuchAlgorithmException {
         final MessageDigest md = MessageDigest.getInstance("SHA-256");
         final byte[] digest = md.digest(codeVerifier.getBytes(StandardCharsets.US_ASCII));
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(digest);
+        return Base64.getUrlEncoder()
+            .withoutPadding()
+            .encodeToString(digest);
     }
 
     @Test

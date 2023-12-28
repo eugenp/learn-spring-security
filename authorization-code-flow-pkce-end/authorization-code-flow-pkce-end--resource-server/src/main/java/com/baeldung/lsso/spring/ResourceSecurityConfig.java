@@ -19,14 +19,9 @@ public class ResourceSecurityConfig {
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {// @formatter:off
-        http.authorizeHttpRequests(authorizeHttpRequestsCustomizer ->
-                authorizeHttpRequestsCustomizer
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**"))
-                        .hasAuthority("SCOPE_read")
-                    .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects"))
-                        .hasAuthority("SCOPE_write")
-                    .anyRequest()
-                        .authenticated())
+        http.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> authorizeHttpRequestsCustomizer.requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**")).hasAuthority("SCOPE_read")
+                .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects")).hasAuthority("SCOPE_write")
+                .anyRequest().authenticated())
             .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
         return http.build();
     }//@formatter:on

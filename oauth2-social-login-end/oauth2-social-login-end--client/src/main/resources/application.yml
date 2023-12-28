@@ -8,13 +8,13 @@ spring:
             client-secret: github-client-secret
   thymeleaf:
     cache: false
-    
-server: 
+
+server:
   port: 8082
-  servlet: 
+  servlet:
     context-path: /lsso-client
-    
-logging: 
-  level: 
+
+logging:
+  level:
     org.springframework: INFO
         

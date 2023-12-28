@@ -18,20 +18,19 @@ public class ClientSecurityConfig {
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http, OAuth2AuthorizationRequestResolver oAuth2AuthorizationRequestResolver) throws Exception {// @formatter:off
-        http.authorizeHttpRequests(authorizeHttpRequestsCustomizer ->
-                authorizeHttpRequestsCustomizer
-                    .requestMatchers("/").permitAll()
-                    .anyRequest().authenticated())
+        http.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> authorizeHttpRequestsCustomizer.requestMatchers("/").permitAll()
+                .anyRequest().authenticated())
             .oauth2Login(oauth2LoginCustomizer ->
                 oauth2LoginCustomizer.authorizationEndpoint(authorizationEndpointCustomizer ->
-                        authorizationEndpointCustomizer.authorizationRequestResolver(oAuth2AuthorizationRequestResolver)))
+                    authorizationEndpointCustomizer.authorizationRequestResolver(oAuth2AuthorizationRequestResolver)))
             .logout(logoutCustomizer -> logoutCustomizer.logoutSuccessUrl("/"));
         return http.build();
     }// @formatter:on
 
     @Bean
     WebClient webClient(ClientRegistrationRepository clientRegistrationRepository, OAuth2AuthorizedClientRepository authorizedClientRepository) {
-        ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2 = new ServletOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository, authorizedClientRepository);
+        ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2 = new ServletOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository,
+            authorizedClientRepository);
         oauth2.setDefaultOAuth2AuthorizedClient(true);
         return WebClient.builder()
             .apply(oauth2.oauth2Configuration())
@@ -40,7 +39,8 @@ public class ClientSecurityConfig {
 
     @Bean
     public OAuth2AuthorizationRequestResolver pkceResolver(ClientRegistrationRepository clientRegistrationRepository) {
-        DefaultOAuth2AuthorizationRequestResolver defaultOAuth2AuthorizationRequestResolver = new DefaultOAuth2AuthorizationRequestResolver(clientRegistrationRepository, OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI);
+        DefaultOAuth2AuthorizationRequestResolver defaultOAuth2AuthorizationRequestResolver = new DefaultOAuth2AuthorizationRequestResolver(
+            clientRegistrationRepository, OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI);
         defaultOAuth2AuthorizationRequestResolver.setAuthorizationRequestCustomizer(OAuth2AuthorizationRequestCustomizers.withPkce());
         return defaultOAuth2AuthorizationRequestResolver;
     }

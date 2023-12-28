@@ -15,10 +15,8 @@ public class ClientSecurityConfig {
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {// @formatter:off
-        http.authorizeHttpRequests(authorizeHttpRequestsCustomizer ->
-                authorizeHttpRequestsCustomizer
-                    .requestMatchers("/").permitAll()
-                    .anyRequest().authenticated())
+        http.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> authorizeHttpRequestsCustomizer.requestMatchers("/").permitAll()
+                .anyRequest().authenticated())
             .oauth2Login(Customizer.withDefaults())
             .logout(logoutCustomizer -> logoutCustomizer.logoutSuccessUrl("/"));
         return http.build();
@@ -26,7 +24,8 @@ public class ClientSecurityConfig {
 
     @Bean
     WebClient webClient(ClientRegistrationRepository clientRegistrationRepository, OAuth2AuthorizedClientRepository authorizedClientRepository) {
-        ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2 = new ServletOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository, authorizedClientRepository);
+        ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2 = new ServletOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository,
+            authorizedClientRepository);
         oauth2.setDefaultOAuth2AuthorizedClient(true);
         return WebClient.builder()
             .apply(oauth2.oauth2Configuration())

@@ -46,10 +46,12 @@ public class ProjectClientController {
 
     @GetMapping("/addproject")
     public String addNewProject(Model model, @AuthenticationPrincipal OAuth2User oauth2User) {
-        if (!hasEmailScope(oauth2User))
+        if (!hasEmailScope(oauth2User)) {
             return "requestpermission";
-        if (!isUserEmailVerified(oauth2User))
+        }
+        if (!isUserEmailVerified(oauth2User)) {
             return "verifyemail";
+        }
         model.addAttribute("project", new ProjectModel(0L, "", LocalDate.now()));
         return "addproject";
     }
