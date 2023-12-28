@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +103,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
-    @PreAuthorize("isAdmin()")
+    @PreAuthorize("@methodSecurityExpressionProvider.isAdmin(#root)")
     public ModelAndView modifyForm(@PathVariable("id") User user) {
         return new ModelAndView("tl/form", "user", user);
     }

@@ -4,9 +4,9 @@ import com.baeldung.lss.validation.PasswordMatches;
 import com.baeldung.lss.validation.ValidPassword;
 import org.jboss.aerogear.security.otp.api.Base32;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import java.util.Calendar;
 import java.util.Collection;
 

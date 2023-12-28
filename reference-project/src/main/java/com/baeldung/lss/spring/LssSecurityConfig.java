@@ -2,6 +2,7 @@ package com.baeldung.lss.spring;
 
 import javax.sql.DataSource;
 
+import com.baeldung.lss.security.CustomMethodSecurityExpressionProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.session.SessionRegistry;
@@ -25,6 +27,7 @@ import com.baeldung.lss.security.CustomWebAuthenticationDetailsSource;
 import com.baeldung.lss.security.LssLoggingFilter;
 
 @EnableWebSecurity
+@EnableMethodSecurity
 @Configuration
 public class LssSecurityConfig {
 
@@ -70,8 +73,8 @@ public class LssSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
         http
                 .addFilterBefore(lssLoggingFilter, AnonymousAuthenticationFilter.class)
-                .authorizeRequests()
-                .antMatchers("/signup",
+                .authorizeHttpRequests()
+                .requestMatchers("/signup",
                         "/user/register",
                         "/registrationConfirm*",
                         "/badUser*",
@@ -82,7 +85,7 @@ public class LssSecurityConfig {
                         "/code*",
                         "/isUsing2FA*",
                         "/js/**").permitAll()
-                .antMatchers("/secured").hasRole("USER")//access("hasRole('USER')")
+                .requestMatchers("/secured").hasRole("USER")//access("hasRole('USER')")
                 .anyRequest().authenticated()
 
                 .and()
@@ -124,5 +127,10 @@ public class LssSecurityConfig {
     @Bean
     public static ServletListenerRegistrationBean httpSessionEventPublisher() {
         return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
+    }
+
+    @Bean("methodSecurityExpressionProvider")
+    public CustomMethodSecurityExpressionProvider createMyAuthorizer() {
+        return new CustomMethodSecurityExpressionProvider();
     }
 }

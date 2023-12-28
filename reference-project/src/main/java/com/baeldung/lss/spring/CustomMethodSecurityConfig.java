@@ -1,43 +1,24 @@
 package com.baeldung.lss.spring;
 
-import com.baeldung.lss.security.CustomMethodSecurityExpressionHandler;
+import org.springframework.aop.Advisor;
+import org.springframework.aop.support.JdkRegexpMethodPointcut;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.ConfigAttribute;
-import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
-import org.springframework.security.access.intercept.RunAsManager;
-import org.springframework.security.access.intercept.RunAsManagerImpl;
-import org.springframework.security.access.method.MapBasedMethodSecurityMetadataSource;
-import org.springframework.security.access.method.MethodSecurityMetadataSource;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.context.annotation.Role;
+import org.springframework.security.authorization.AuthorityAuthorizationManager;
+import org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class CustomMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
+@EnableMethodSecurity
+public class CustomMethodSecurityConfig {
 
-    @Override
-    protected MethodSecurityExpressionHandler createExpressionHandler() {
-        CustomMethodSecurityExpressionHandler expressionHandler = new CustomMethodSecurityExpressionHandler();
-        return expressionHandler;
+    @Bean
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+    static Advisor methodSecurityPointcut() {
+        JdkRegexpMethodPointcut pattern = new JdkRegexpMethodPointcut();
+        pattern.setPattern("com.baeldung.lss.web.controller.UserController.createForm*");
+        return new AuthorizationManagerBeforeMethodInterceptor(pattern, AuthorityAuthorizationManager.hasRole("ADMIN"));
     }
-
-    @Override
-    protected RunAsManager runAsManager() {
-        final RunAsManagerImpl runAsManager = new RunAsManagerImpl();
-        runAsManager.setKey("MyRunAsKey");
-        return runAsManager;
-    }
-
-    @Override
-    public MethodSecurityMetadataSource customMethodSecurityMetadataSource() {
-        final Map<String, List<ConfigAttribute>> methodMap = new HashMap<>();
-        methodMap.put("com.baeldung.lss.web.controller.UserController.createForm*", SecurityConfig.createList("ROLE_ADMIN"));
-        return new MapBasedMethodSecurityMetadataSource(methodMap);
-    }
-
 }

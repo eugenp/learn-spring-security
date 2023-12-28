@@ -1,7 +1,7 @@
 package com.baeldung.lss.web.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class SecurityQuestionDefinition {

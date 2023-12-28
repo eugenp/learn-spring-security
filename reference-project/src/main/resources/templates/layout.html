@@ -14,7 +14,7 @@
             <a class="brand" href="/" sec:authorize="hasRole('ADMIN')"> Admins Home </a>
             <a class="brand" href="/" sec:authorize="hasRole('USER')"> Users Home </a>
             <ul class="nav">
-                <li><a th:href="@{/user/}" href="users.html"> Users </a></li>
+                <li><a th:href="@{/user}" href="users.html"> Users </a></li>
             </ul>
             <ul class="nav">
                 <li><a th:href="@{/secured}" href="securedPage.html"> Secured </a></li>

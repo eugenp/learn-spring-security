@@ -1,6 +1,6 @@
 package com.baeldung.lss.web.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 

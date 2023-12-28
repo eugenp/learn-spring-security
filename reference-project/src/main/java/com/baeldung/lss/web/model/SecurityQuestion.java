@@ -1,6 +1,6 @@
 package com.baeldung.lss.web.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class SecurityQuestion {
