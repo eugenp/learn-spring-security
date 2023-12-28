@@ -7,7 +7,7 @@
     <h1 layout:fragment="header">Possessions</h1>
     <div layout:fragment="content" class="container">
         <div class="pull-right">
-            <a th:href="@{/user/}" href="users.html"> Users </a>
+            <a th:href="@{/user}" href="users.html"> Users </a>
         </div>
         <form id="pForm" th:action="@{/possessions}" th:object="${possession}" method="post">
             <input type="hidden" th:field="*{id}" />

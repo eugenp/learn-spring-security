@@ -1,11 +1,14 @@
 package com.baeldung.lss.spring;
 
+import javax.cache.Caching;
+import javax.cache.configuration.MutableConfiguration;
+import javax.cache.spi.CachingProvider;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cache.ehcache.EhCacheFactoryBean;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.jcache.JCacheCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -16,22 +19,18 @@ import org.springframework.security.acls.domain.AclAuthorizationStrategy;
 import org.springframework.security.acls.domain.AclAuthorizationStrategyImpl;
 import org.springframework.security.acls.domain.ConsoleAuditLogger;
 import org.springframework.security.acls.domain.DefaultPermissionGrantingStrategy;
-import org.springframework.security.acls.domain.EhCacheBasedAclCache;
+import org.springframework.security.acls.domain.SpringCacheBasedAclCache;
 import org.springframework.security.acls.jdbc.BasicLookupStrategy;
 import org.springframework.security.acls.jdbc.JdbcMutableAclService;
 import org.springframework.security.acls.jdbc.LookupStrategy;
 import org.springframework.security.acls.model.AclCache;
 import org.springframework.security.acls.model.PermissionGrantingStrategy;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import net.sf.ehcache.CacheManager;
-
 @Configuration
-// @EnableCaching
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class LssMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
+@EnableMethodSecurity
+public class LssMethodSecurityConfig {
 
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
@@ -45,8 +44,8 @@ public class LssMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
     @Value("${spring.datasource.password}")
     private String dataSourcePassword;
 
-    @Override
-    protected MethodSecurityExpressionHandler createExpressionHandler() {
+    @Bean
+    public MethodSecurityExpressionHandler methodSecurityExpressionHandler() {
         final DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
         expressionHandler.setPermissionEvaluator(aclPermissionEvaluator());
         return expressionHandler;
@@ -76,20 +75,20 @@ public class LssMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
     @Bean
     public AclCache aclCache() {
-        final EhCacheFactoryBean factoryBean = new EhCacheFactoryBean();
-        final EhCacheManagerFactoryBean cacheManager = new EhCacheManagerFactoryBean();
-        cacheManager.setAcceptExisting(true);
-        cacheManager.setCacheManagerName(CacheManager.getInstance()
-            .getName());
-        cacheManager.afterPropertiesSet();
+        return new SpringCacheBasedAclCache(cacheManager().getCache("aclCache"),
+                permissionGrantingStrategy(), aclAuthorizationStrategy());
+    }
 
-        factoryBean.setName("aclCache");
-        factoryBean.setCacheManager(cacheManager.getObject());
-        factoryBean.setMaxBytesLocalHeap("16M");
-        factoryBean.setMaxEntriesLocalHeap(0L);
-        factoryBean.afterPropertiesSet();
-        return new EhCacheBasedAclCache(factoryBean.getObject(), permissionGrantingStrategy(), aclAuthorizationStrategy());
+    @Bean
+    public CacheManager cacheManager() {
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        javax.cache.CacheManager cacheManager = cachingProvider.getCacheManager();
 
+        MutableConfiguration<Object, Object> mutableConfiguration = new MutableConfiguration<>();
+        mutableConfiguration.setStoreByValue(false);  // otherwise value has to be Serializable
+        cacheManager.createCache("aclCache", mutableConfiguration);
+
+        return new JCacheCacheManager(cacheManager);
     }
 
     @Bean

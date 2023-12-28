@@ -3,7 +3,7 @@ package com.baeldung.lss.security;
 import java.util.Arrays;
 import java.util.Collection;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

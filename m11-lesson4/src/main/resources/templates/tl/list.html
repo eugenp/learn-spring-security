@@ -9,7 +9,7 @@
         <div th:if="${param.message}" th:text="${param.message[0]}" class="alert alert-info">Message</div>
         
         <div class="pull-right">
-            <a href="form.html" th:href="@{/user/(form)}">Create User</a>
+            <a href="form.html" th:href="@{/user(form)}">Create User</a>
         </div>
         <table class="table table-bordered table-striped">
             <thead>
@@ -30,7 +30,7 @@
         <hr/>
         <br/>
         <div>
-           <a href="possession.html" th:href="@{/possessions/(form)}" class="pull-right">Create Possession</a>
+           <a href="possession.html" th:href="@{/possessions(form)}" class="pull-right">Create Possession</a>
             
             Find Possession by id <input id="pId" type="number" name="pId"/> <button onclick="getPossession()">Find</button>
             <br/><div id="result"></div>
