@@ -28,14 +28,10 @@ public class ResourceSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {// @formatter:off
         http.cors(withDefaults())
-            .authorizeHttpRequests(authorize -> authorize
-	              .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**"))
-	                .hasAuthority("SCOPE_read")
-	              .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects"))
-	                .hasAuthority("SCOPE_write")
-	              .anyRequest()
-	                .authenticated())
-                    .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
+            .authorizeHttpRequests(authorize -> authorize.requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**")).hasAuthority("SCOPE_read")
+                .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects")).hasAuthority("SCOPE_write")
+                .anyRequest().authenticated())
+            .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
         return http.build();
     }//@formatter:on
 

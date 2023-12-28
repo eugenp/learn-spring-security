@@ -31,7 +31,9 @@ public class AuthorizationServerLiveTest {
     private static final String CLIENT_BASE_URL = "http://localhost:8082";
 
     private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/modal-code-handler.html";
-    private static final String AUTHORIZE_URL_PATTERN = AUTH_SERVER_BASE_URL + "/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&code_challenge_method=S256&code_challenge=%s&redirect_uri=" + REDIRECT_URL;
+    private static final String AUTHORIZE_URL_PATTERN = AUTH_SERVER_BASE_URL +
+        "/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&code_challenge_method=S256&code_challenge=%s&redirect_uri=" +
+        REDIRECT_URL;
     private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/protocol/openid-connect/token";
 
     @Test

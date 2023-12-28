@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <description>The &quot;Learn Spring Security OAuth&quot; Course: Token Revocation - End -- Resource Server</description>
 
@@ -59,15 +59,15 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>mockwebserver</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- to use WebTestClient, but still using a Servlet application -->
-        
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webflux</artifactId>
@@ -79,7 +79,7 @@
             <artifactId>reactor-netty</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
     </dependencies>
 
     <build>
@@ -113,7 +113,7 @@
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        
+
         <!-- resolve from the corresponding spring-security-core version in https://github.com/spring-projects/spring-security/blob/main/dependencies/spring-security-dependencies.gradle-->
     </properties>
 
@@ -121,7 +121,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.1.2</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
 </project>

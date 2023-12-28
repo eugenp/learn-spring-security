@@ -17,15 +17,15 @@ security:
       client-id: lssoClient
       client-secret: lssoSecret
       scope:
-      - read
-      - write
+        - read
+        - write
       authorized-grant-types:
-      - authorization_code
+        - authorization_code
       registered-redirect-uri:
-      - http://localhost:8082/lsso-client/login/oauth2/code/custom
+        - http://localhost:8082/lsso-client/login/oauth2/code/custom
       auto-approve-scopes:
-      - read
-      - write
+        - read
+        - write
 
     authorization:
       jwt:

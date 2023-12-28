@@ -23,7 +23,8 @@ import okhttp3.mockwebserver.MockWebServer;
 @AutoConfigureWebTestClient
 public class ResourceServerMockingServersIntegrationTest {
 
-    private final static Pair<String, String> AUTH_SERVER_INTROSPECTION_PROP = Pair.of("spring.security.oauth2.resourceserver.opaque-token.introspection-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/token/introspect");
+    private final static Pair<String, String> AUTH_SERVER_INTROSPECTION_PROP = Pair.of("spring.security.oauth2.resourceserver.opaque-token.introspection-uri",
+        "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/token/introspect");
 
     private final String RESOURCE_SECURED_URL = "/api/projects";
 

@@ -33,7 +33,8 @@ public class ProjectRetrieveScheduler {
         List<ProjectModel> retrievedProjects = webClient.get()
             .uri(projectApiUrl)
             .retrieve()
-            .bodyToMono(new ParameterizedTypeReference<List<ProjectModel>>() {})
+            .bodyToMono(new ParameterizedTypeReference<List<ProjectModel>>() {
+            })
             .block();
 
         LOG.info("Projects in the repository: " + retrievedProjects.size());

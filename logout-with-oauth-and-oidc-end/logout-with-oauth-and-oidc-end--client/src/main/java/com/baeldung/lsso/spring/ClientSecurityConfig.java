@@ -16,40 +16,38 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class ClientSecurityConfig {
 
-	@Autowired
-	private ClientRegistrationRepository clientRegistrationRepository;
+    @Autowired
+    private ClientRegistrationRepository clientRegistrationRepository;
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
-        http.authorizeHttpRequests(authorize -> authorize
-	            .requestMatchers("/").permitAll()
-	            .anyRequest().authenticated())
-	            .oauth2Login(Customizer.withDefaults())
-	            .logout(logout -> logout
-	                .logoutSuccessHandler(oidcLogoutSuccessHandler()));
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
+        http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/").permitAll()
+                .anyRequest().authenticated())
+            .oauth2Login(Customizer.withDefaults())
+            .logout(logout -> logout.logoutSuccessHandler(oidcLogoutSuccessHandler()));
         return http.build();
     }// @formatter:on
 
-	private LogoutSuccessHandler oidcLogoutSuccessHandler() {
-		OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler = new OidcClientInitiatedLogoutSuccessHandler(
-				this.clientRegistrationRepository);
+    private LogoutSuccessHandler oidcLogoutSuccessHandler() {
+        OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler = new OidcClientInitiatedLogoutSuccessHandler(this.clientRegistrationRepository);
 
-		// Sets the location that the End-User's User Agent will be redirected to
-		// after the logout has been performed at the Provider
-		oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}");
+        // Sets the location that the End-User's User Agent will be redirected to
+        // after the logout has been performed at the Provider
+        oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}");
 
-		return oidcLogoutSuccessHandler;
-	}
+        return oidcLogoutSuccessHandler;
+    }
 
-	@Bean
-	WebClient webClient(ClientRegistrationRepository clientRegistrationRepository,
-			OAuth2AuthorizedClientRepository authorizedClientRepository) {
-		ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2 = new ServletOAuth2AuthorizedClientExchangeFilterFunction(
-				clientRegistrationRepository, authorizedClientRepository);
+    @Bean
+    WebClient webClient(ClientRegistrationRepository clientRegistrationRepository, OAuth2AuthorizedClientRepository authorizedClientRepository) {
+        ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2 = new ServletOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository,
+            authorizedClientRepository);
 
-		oauth2.setDefaultOAuth2AuthorizedClient(true);
+        oauth2.setDefaultOAuth2AuthorizedClient(true);
 
-		return WebClient.builder().apply(oauth2.oauth2Configuration()).build();
-	}
+        return WebClient.builder()
+            .apply(oauth2.oauth2Configuration())
+            .build();
+    }
 
 }

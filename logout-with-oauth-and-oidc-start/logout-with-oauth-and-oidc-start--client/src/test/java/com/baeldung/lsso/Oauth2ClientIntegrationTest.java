@@ -51,17 +51,24 @@ import okhttp3.mockwebserver.RecordedRequest;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 public class Oauth2ClientIntegrationTest {
-    private final static Pair<String, String> AUTH_SERVER_AUTH_URI_PROP = Pair.of("spring.security.oauth2.client.provider.custom.authorization-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/auth");
-    private final static Pair<String, String> AUTH_SERVER_TOKEN_PROP = Pair.of("spring.security.oauth2.client.provider.custom.token-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/token");
-    private final static Pair<String, String> AUTH_SERVER_USERINFO_PROP = Pair.of("spring.security.oauth2.client.provider.custom.user-info-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/userinfo");
-    private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url", "http://localhost:{PORT}/lsso-resource-server/api/projects");
-    private final static Pair<String, String> AUTH_SERVER_CERTS_PROP = Pair.of("spring.security.oauth2.client.provider.custom.jwk-set-uri", "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/certs");
-    private final static Pair<String, String> ISSUER_URI_PROP = Pair.of("spring.security.oauth2.client.provider.custom.issuer-uri", "http://localhost:{PORT}/auth/realms/baeldung");
-    
+
+    private final static Pair<String, String> AUTH_SERVER_AUTH_URI_PROP = Pair.of("spring.security.oauth2.client.provider.custom.authorization-uri",
+        "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/auth");
+    private final static Pair<String, String> AUTH_SERVER_TOKEN_PROP = Pair.of("spring.security.oauth2.client.provider.custom.token-uri",
+        "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/token");
+    private final static Pair<String, String> AUTH_SERVER_USERINFO_PROP = Pair.of("spring.security.oauth2.client.provider.custom.user-info-uri",
+        "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/userinfo");
+    private final static Pair<String, String> RESOURCE_SERVER_PROP = Pair.of("resourceserver.api.project.url",
+        "http://localhost:{PORT}/lsso-resource-server/api/projects");
+    private final static Pair<String, String> AUTH_SERVER_CERTS_PROP = Pair.of("spring.security.oauth2.client.provider.custom.jwk-set-uri",
+        "http://localhost:{PORT}/auth/realms/baeldung/protocol/openid-connect/certs");
+    private final static Pair<String, String> ISSUER_URI_PROP = Pair.of("spring.security.oauth2.client.provider.custom.issuer-uri",
+        "http://localhost:{PORT}/auth/realms/baeldung");
+
     private final String CLIENT_SECURED_URL = "/projects";
     private String REDIRECT_URI = "/login/oauth2/code/custom?state=%s&code=%s";
     private String META_DATA_DISCOVERY_URI_PATH = ".well-known/openid-configuration";
-    
+
     @Value("${spring.security.oauth2.client.provider.custom.authorization-uri}")
     private String authServerAuthorizationURL;
 
@@ -76,16 +83,16 @@ public class Oauth2ClientIntegrationTest {
 
     @Value("${resourceserver.api.project.url}")
     private String projectsUrl;
-    
+
     @Value("${spring.security.oauth2.client.provider.custom.jwk-set-uri}")
     private String jwkSetURI;
-    
+
     @Value("${spring.security.oauth2.client.provider.custom.issuer-uri}")
     private String issuerURI;
 
     @Autowired
     private WebTestClient webTestClient;
-    
+
     @Autowired
     ObjectMapper objectMapper;
 
@@ -103,9 +110,9 @@ public class Oauth2ClientIntegrationTest {
         registry.add(AUTH_SERVER_USERINFO_PROP.getKey(), () -> AUTH_SERVER_USERINFO_PROP.getValue()
             .replace("{PORT}", String.valueOf(authServer.getPort())));
         registry.add(AUTH_SERVER_CERTS_PROP.getKey(), () -> AUTH_SERVER_CERTS_PROP.getValue()
-                .replace("{PORT}", String.valueOf(authServer.getPort())));
+            .replace("{PORT}", String.valueOf(authServer.getPort())));
         registry.add(ISSUER_URI_PROP.getKey(), () -> ISSUER_URI_PROP.getValue()
-                .replace("{PORT}", String.valueOf(authServer.getPort())));
+            .replace("{PORT}", String.valueOf(authServer.getPort())));
     }
 
     @BeforeAll
@@ -116,9 +123,9 @@ public class Oauth2ClientIntegrationTest {
 
         authServer.start();
         resourceServer.start();
-        
+
         authServer.enqueue(new MockResponse().setBody(mockMetadataDiscoveryR())
-                    .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
+            .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
     }
 
     @AfterAll
@@ -133,7 +140,6 @@ public class Oauth2ClientIntegrationTest {
             .responseTimeout(Duration.ofMillis(300000))
             .build();
     }
-
 
     @Test
     public void givenAuthServerAndResourceServer_whenPerformClientLoginProcess_thenProcessExecutesOk() throws Exception {
@@ -191,7 +197,7 @@ public class Oauth2ClientIntegrationTest {
         String mockedUserInfo = mockUserInfo();
         authServer.enqueue(new MockResponse().setBody(mockedUserInfo)
             .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
-        
+
         // send request to redirect_uri with code and state
         String code = "123";
         result = this.webTestClient.get()
@@ -207,8 +213,9 @@ public class Oauth2ClientIntegrationTest {
         // assert that meta data discovery endpoint was requested as expected
         RecordedRequest capturedMetadataDiscoveryRequest = authServer.takeRequest();
         assertThat(capturedMetadataDiscoveryRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
-        assertThat(capturedMetadataDiscoveryRequest.getPath().endsWith(META_DATA_DISCOVERY_URI_PATH));
-        
+        assertThat(capturedMetadataDiscoveryRequest.getPath()
+            .endsWith(META_DATA_DISCOVERY_URI_PATH));
+
         // assert that Access Token Endpoint was requested as expected
         RecordedRequest capturedTokenRequest = authServer.takeRequest();
         assertThat(capturedTokenRequest.getMethod()).isEqualTo(HttpMethod.POST.name());
@@ -268,7 +275,6 @@ public class Oauth2ClientIntegrationTest {
         assertThat(capturedProjectRequest.getHeader(HttpHeaders.AUTHORIZATION)).isEqualTo("Bearer " + accessToken);
     }
 
-
     private String mockIdToken(String nonce, RSAKey rsaJWK) throws JOSEException {
         JWSSigner signer = new RSASSASigner(rsaJWK);
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("fakeSub")
@@ -311,25 +317,25 @@ public class Oauth2ClientIntegrationTest {
     }
     
     private static String mockMetadataDiscoveryR() {
-    	//@// @formatter:off
-    	String metaDataDiscoveryResponsebody = "{"
-    			+ "   \"issuer\":\"http://localhost:PORT/auth/realms/baeldung\","
-    			+ "   \"authorization_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/auth\","
-    			+ "   \"token_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/token\","
-    			+ "   \"token_introspection_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/token/introspect\","
-    			+ "   \"userinfo_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/userinfo\","
-    			+ "   \"end_session_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/logout\","
-    			+ "   \"jwks_uri\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/certs\","
-    			+ "   \"check_session_iframe\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/login-status-iframe.html\","
-    			+ "   \"subject_types_supported\":["
-    			+ "      \"public\","
-    			+ "      \"pairwise\""
-    			+ "   ]"
-    			+ "}";
-    	// @formatter:on
-		return metaDataDiscoveryResponsebody.replaceAll("PORT",String.valueOf(authServer.getPort()));
-	}
-    
+        //@// @formatter:off
+        String metaDataDiscoveryResponsebody = "{"
+            + "   \"issuer\":\"http://localhost:PORT/auth/realms/baeldung\","
+            + "   \"authorization_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/auth\","
+            + "   \"token_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/token\","
+            + "   \"token_introspection_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/token/introspect\","
+            + "   \"userinfo_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/userinfo\","
+            + "   \"end_session_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/logout\","
+            + "   \"jwks_uri\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/certs\","
+            + "   \"check_session_iframe\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/login-status-iframe.html\","
+            + "   \"subject_types_supported\":["
+            + "      \"public\","
+            + "      \"pairwise\""
+            + "   ]"
+            + "}";
+        // @formatter:on
+        return metaDataDiscoveryResponsebody.replaceAll("PORT", String.valueOf(authServer.getPort()));
+    }
+
     @Test
     public void whenUnauthorized_thenRedirect() throws Exception {
         this.webTestClient.get()

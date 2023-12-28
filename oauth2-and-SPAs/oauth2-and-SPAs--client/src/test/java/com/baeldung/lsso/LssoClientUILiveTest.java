@@ -31,11 +31,11 @@ public class LssoClientUILiveTest {
     private static final String CLIENT_START_PAGE = CLIENT_BASE_URL + "/lsso-client";
     private WebDriverWait standardWait = null;
 
-
     @BeforeEach
     public void setupWait() {
         this.standardWait = new WebDriverWait(chromeDriver, Duration.ofSeconds(4));
     }
+
     @Test
     public void givenServerStarts_thenEnsurePageLoads() {
         chromeDriver.get(CLIENT_START_PAGE);
@@ -45,7 +45,8 @@ public class LssoClientUILiveTest {
         // Ensure login button is present
         WebDriverWait standardWait = new WebDriverWait(chromeDriver, Duration.ofSeconds(4));
         standardWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login-container")));
-        WebElement button = chromeDriver.findElement(By.className("login-container")).findElement(By.tagName("button"));
+        WebElement button = chromeDriver.findElement(By.className("login-container"))
+            .findElement(By.tagName("button"));
         assertThat(button).isNotNull();
         String buttonText = button.getText();
         assertThat(buttonText).isEqualToIgnoringCase("login");
@@ -63,13 +64,15 @@ public class LssoClientUILiveTest {
         // Click login button
         WebDriverWait standardWait = new WebDriverWait(chromeDriver, Duration.ofSeconds(4));
         standardWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login-container")));
-        WebElement button = chromeDriver.findElement(By.className("login-container")).findElement(By.tagName("button"));
+        WebElement button = chromeDriver.findElement(By.className("login-container"))
+            .findElement(By.tagName("button"));
         button.click();
 
         String newWindowName = getNameOfLoginModal(mainWindowName);
 
         // Ensure we can switch to new window with login form and that the username field is present
-        chromeDriver.switchTo().window(newWindowName);
+        chromeDriver.switchTo()
+            .window(newWindowName);
         WebElement usernameField = chromeDriver.findElement(By.id("username"));
         assertThat(usernameField).isNotNull();
 
@@ -92,8 +95,10 @@ public class LssoClientUILiveTest {
         // Ensure we have "projects" and "profile" in top menu
         WebElement topMenu = chromeDriver.findElement(By.className("menu"));
         List<WebElement> menuItems = topMenu.findElements(By.tagName("li"));
-        assertThat(menuItems.get(0).getText()).isEqualToIgnoringCase("projects");
-        assertThat(menuItems.get(1).getText()).isEqualToIgnoringCase("profile");
+        assertThat(menuItems.get(0)
+            .getText()).isEqualToIgnoringCase("projects");
+        assertThat(menuItems.get(1)
+            .getText()).isEqualToIgnoringCase("profile");
     }
 
     @Test
@@ -106,14 +111,16 @@ public class LssoClientUILiveTest {
 
         // Click login button
         standardWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login-container")));
-        WebElement button = chromeDriver.findElement(By.className("login-container")).findElement(By.tagName("button"));
+        WebElement button = chromeDriver.findElement(By.className("login-container"))
+            .findElement(By.tagName("button"));
         button.click();
 
         // Get name of new window for login modal
         String newWindowName = getNameOfLoginModal(mainWindowName);
 
         // Fill out form and attempt login with incorrect credentials
-        chromeDriver.switchTo().window(newWindowName);
+        chromeDriver.switchTo()
+            .window(newWindowName);
         WebElement usernameField = chromeDriver.findElement(By.id("username"));
         usernameField.sendKeys("wrong");
 
@@ -139,25 +146,31 @@ public class LssoClientUILiveTest {
 
         // Count original number of projects
         standardWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("projects")));
-        int originalNrProjects = chromeDriver.findElements(By.className("project-item")).size();
+        int originalNrProjects = chromeDriver.findElements(By.className("project-item"))
+            .size();
 
         // Ensure we can now create a new project
-        WebElement createProjectInput = chromeDriver.findElement(By.className("create-project")).findElement(By.tagName("input"));
+        WebElement createProjectInput = chromeDriver.findElement(By.className("create-project"))
+            .findElement(By.tagName("input"));
         createProjectInput.sendKeys("New project");
 
-        WebElement createProjectButton = chromeDriver.findElement(By.className("create-project")).findElement(By.tagName("button"));
+        WebElement createProjectButton = chromeDriver.findElement(By.className("create-project"))
+            .findElement(By.tagName("button"));
         createProjectButton.click();
 
         // Reload page and hit login button again to fetch updated source
-        chromeDriver.navigate().refresh();
+        chromeDriver.navigate()
+            .refresh();
 
         standardWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login-container")));
-        WebElement button = chromeDriver.findElement(By.className("login-container")).findElement(By.tagName("button"));
+        WebElement button = chromeDriver.findElement(By.className("login-container"))
+            .findElement(By.tagName("button"));
         button.click();
 
         // Verify that there is now one additional project
         standardWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("projects")));
-        int newNrProjects = chromeDriver.findElements(By.className("project-item")).size();
+        int newNrProjects = chromeDriver.findElements(By.className("project-item"))
+            .size();
         assertThat(newNrProjects).isEqualTo(originalNrProjects + 1);
     }
 
@@ -168,15 +181,18 @@ public class LssoClientUILiveTest {
         standardWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("create-project")));
 
         // Try to create project
-        WebElement createProjectInput = chromeDriver.findElement(By.className("create-project")).findElement(By.tagName("input"));
+        WebElement createProjectInput = chromeDriver.findElement(By.className("create-project"))
+            .findElement(By.tagName("input"));
         createProjectInput.sendKeys("New project");
 
-        WebElement createProjectButton = chromeDriver.findElement(By.className("create-project")).findElement(By.tagName("button"));
+        WebElement createProjectButton = chromeDriver.findElement(By.className("create-project"))
+            .findElement(By.tagName("button"));
         createProjectButton.click();
 
         // Locate error alert
         standardWait.until(ExpectedConditions.alertIsPresent());
-        Alert errorAlert = chromeDriver.switchTo().alert();
+        Alert errorAlert = chromeDriver.switchTo()
+            .alert();
         assertThat(errorAlert).isNotNull();
         assertThat(errorAlert.getText()).containsIgnoringCase("403");
     }
@@ -195,14 +211,16 @@ public class LssoClientUILiveTest {
             WebElement writeCheckbox = chromeDriver.findElement(By.id("writeCb"));
             writeCheckbox.click();
         }
-        WebElement button = chromeDriver.findElement(By.className("login-container")).findElement(By.tagName("button"));
+        WebElement button = chromeDriver.findElement(By.className("login-container"))
+            .findElement(By.tagName("button"));
         button.click();
 
         // Get name of new window for login modal
         String newWindowName = getNameOfLoginModal(mainWindowName);
 
         // Fill out form and attempt login
-        chromeDriver.switchTo().window(newWindowName);
+        chromeDriver.switchTo()
+            .window(newWindowName);
         WebElement usernameField = chromeDriver.findElement(By.id("username"));
         usernameField.sendKeys(USERNAME);
 
@@ -213,7 +231,8 @@ public class LssoClientUILiveTest {
         submitButton.click();
 
         // Switch back to main window
-        chromeDriver.switchTo().window(mainWindowName);
+        chromeDriver.switchTo()
+            .window(mainWindowName);
     }
 
     private String getNameOfLoginModal(String nameOfMainWindow) {
@@ -229,6 +248,7 @@ public class LssoClientUILiveTest {
     }
 
     private enum Privileges {
-        READ_ONLY, READ_AND_WRITE
+        READ_ONLY,
+        READ_AND_WRITE
     }
 }

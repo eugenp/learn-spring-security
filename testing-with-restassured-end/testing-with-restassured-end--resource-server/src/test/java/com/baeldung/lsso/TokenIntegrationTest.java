@@ -16,9 +16,11 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 public class TokenIntegrationTest {
+
     private static final String AUTH_SERVICE_BASE_URL = "http://localhost:8083/auth/realms/baeldung";
     private static final String REDIRECT_URL = "http://localhost:8082/lsso-client/login/oauth2/code/custom";
-    private static final String AUTH_SERVICE_AUTHORIZE_URL = AUTH_SERVICE_BASE_URL + "/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=read write&redirect_uri=" + REDIRECT_URL;
+    private static final String AUTH_SERVICE_AUTHORIZE_URL =
+        AUTH_SERVICE_BASE_URL + "/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=read write&redirect_uri=" + REDIRECT_URL;
     private static final String CONNECT_TOKEN = AUTH_SERVICE_BASE_URL + "/protocol/openid-connect/token";
     private static final String SERVER_API_PROJECTS = "http://localhost:8081/lsso-resource-server/api/projects";
 

@@ -1,9 +1,9 @@
-server: 
+server:
   port: 8082
-  servlet: 
+  servlet:
     context-path: /lsso-client
-    
-logging: 
+
+logging:
   level:
     org.springframework: INFO
 spring:

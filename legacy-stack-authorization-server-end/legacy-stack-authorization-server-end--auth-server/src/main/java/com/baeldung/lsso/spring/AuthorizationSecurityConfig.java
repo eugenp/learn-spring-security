@@ -16,9 +16,10 @@ public class AuthorizationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorize -> authorize
-	            .antMatchers("/endpoint/jwks.json").permitAll()
-	            .anyRequest().authenticated())
+        http.authorizeHttpRequests(authorize -> authorize.antMatchers("/endpoint/jwks.json")
+                .permitAll()
+                .anyRequest()
+                .authenticated())
             .formLogin();
     }
 

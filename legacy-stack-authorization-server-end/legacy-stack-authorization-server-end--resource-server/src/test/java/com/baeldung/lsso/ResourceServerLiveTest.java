@@ -42,7 +42,8 @@ public class ResourceServerLiveTest {
     private static final String RESOURCE_SERVER_BASE_URL = "http://localhost:8081";
 
     private static final String REDIRECT_URL = CLIENT_BASE_URL + "/lsso-client/login/oauth2/code/custom";
-    private static final String AUTHORIZE_URL_PATTERN = AUTH_SERVER_BASE_URL + "/oauth/authorize?response_type=code&client_id=lssoClient&scope=%s&state=1234&redirect_uri=" + REDIRECT_URL;
+    private static final String AUTHORIZE_URL_PATTERN =
+        AUTH_SERVER_BASE_URL + "/oauth/authorize?response_type=code&client_id=lssoClient&scope=%s&state=1234&redirect_uri=" + REDIRECT_URL;
 
     private static final String TOKEN_URL = AUTH_SERVER_BASE_URL + "/oauth/token";
     private static final String RESOURCE_URL = RESOURCE_SERVER_BASE_URL + "/lsso-resource-server/api/projects";
@@ -202,7 +203,7 @@ public class ResourceServerLiveTest {
         String location = response.getHeader(HttpHeaders.LOCATION);
 
         Map<String, String> queryParamsMap = Arrays.stream(location.substring(location.indexOf("?") + 1)
-            .split("&"))
+                .split("&"))
             .map(s -> s.split("="))
             .collect(Collectors.toMap(kv -> kv[0], kv -> kv[1]));
 

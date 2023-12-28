@@ -17,19 +17,19 @@ spring:
             user-name-attribute: preferred_username
             jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
             issuer-uri: http://localhost:8083/auth/realms/baeldung
-            
+
   thymeleaf:
     cache: false
   devtools:
     livereload:
       port: 35729
-    
-server: 
+
+server:
   port: 8082
-  servlet: 
+  servlet:
     context-path: /lsso-client
-    
-logging: 
+
+logging:
   level:
     org.springframework: INFO
 

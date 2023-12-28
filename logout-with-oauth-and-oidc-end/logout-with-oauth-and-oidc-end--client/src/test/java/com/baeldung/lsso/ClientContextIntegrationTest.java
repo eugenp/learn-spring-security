@@ -17,7 +17,8 @@ import okhttp3.mockwebserver.MockWebServer;
 @SpringBootTest(classes = { LssoClientApplication.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ClientContextIntegrationTest {
 
-    private final static Pair<String, String> ISSUER_URI_PROP = Pair.of("spring.security.oauth2.client.provider.custom.issuer-uri", "http://localhost:{PORT}/auth/realms/baeldung");
+    private final static Pair<String, String> ISSUER_URI_PROP = Pair.of("spring.security.oauth2.client.provider.custom.issuer-uri",
+        "http://localhost:{PORT}/auth/realms/baeldung");
 
     @DynamicPropertySource
     static void buildServerUri(DynamicPropertyRegistry registry) {
@@ -47,21 +48,21 @@ public class ClientContextIntegrationTest {
 
     private static String mockMetadataDiscovery() {
         //@// @formatter:off
-	    	String metaDataDiscoveryResponsebody = "{"
-	    			+ "   \"issuer\":\"http://localhost:PORT/auth/realms/baeldung\","
-	    			+ "   \"authorization_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/auth\","
-	    			+ "   \"token_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/token\","
-	    			+ "   \"token_introspection_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/token/introspect\","
-	    			+ "   \"userinfo_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/userinfo\","
-	    			+ "   \"end_session_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/logout\","
-	    			+ "   \"jwks_uri\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/certs\","
-	    			+ "   \"check_session_iframe\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/login-status-iframe.html\","
-	    			+ "   \"subject_types_supported\":["
-	    			+ "      \"public\","
-	    			+ "      \"pairwise\""
-	    			+ "   ]"
-	    			+ "}";
-	    	// @formatter:on
+        String metaDataDiscoveryResponsebody = "{"
+            + "   \"issuer\":\"http://localhost:PORT/auth/realms/baeldung\","
+            + "   \"authorization_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/auth\","
+            + "   \"token_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/token\","
+            + "   \"token_introspection_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/token/introspect\","
+            + "   \"userinfo_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/userinfo\","
+            + "   \"end_session_endpoint\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/logout\","
+            + "   \"jwks_uri\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/certs\","
+            + "   \"check_session_iframe\":\"http://localhost:PORT/auth/realms/baeldung/protocol/openid-connect/login-status-iframe.html\","
+            + "   \"subject_types_supported\":["
+            + "      \"public\","
+            + "      \"pairwise\""
+            + "   ]"
+            + "}";
+        // @formatter:on
         return metaDataDiscoveryResponsebody.replaceAll("PORT", String.valueOf(authServer.getPort()));
     }
 
