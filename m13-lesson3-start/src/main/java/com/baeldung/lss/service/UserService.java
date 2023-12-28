@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.validation.EmailExistsException;
+import com.baeldung.lss.web.model.User;
 
 @Service
 @Transactional
 class UserService implements IUserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -28,16 +28,11 @@ class UserService implements IUserService {
         final String passwordEncoded = passwordEncoder.encode(user.getPassword());
         user.setPassword(passwordEncoded);
         user.setPasswordConfirmation(passwordEncoded);
-        return userRepository.save(user);
+        return repository.save(user);
     }
 
-    @Override
-    public User findUserByEmail(final String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    private boolean emailExist(final String email) {
-        final User user = userRepository.findByEmail(email);
+    private boolean emailExist(String email) {
+        final User user = repository.findByEmail(email);
         return user != null;
     }
 
@@ -45,7 +40,7 @@ class UserService implements IUserService {
     public User updateExistingUser(User user) throws EmailExistsException {
         final Long id = user.getId();
         final String email = user.getEmail();
-        final User emailOwner = userRepository.findByEmail(email);
+        final User emailOwner = repository.findByEmail(email);
         if (emailOwner != null && !id.equals(emailOwner.getId())) {
             throw new EmailExistsException("Email not available.");
         }
@@ -55,7 +50,7 @@ class UserService implements IUserService {
             user.setPassword(passwordEncoded);
             user.setPasswordConfirmation(passwordEncoded);
         }
-        return userRepository.save(user);
+        return repository.save(user);
     }
 
 }
