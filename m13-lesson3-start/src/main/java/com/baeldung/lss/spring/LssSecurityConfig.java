@@ -31,7 +31,7 @@ public class LssSecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception { // @formatter:off
         http
-        .authorizeRequests()
+        .authorizeHttpRequests()
                 .anyRequest().authenticated()
         
         .and()

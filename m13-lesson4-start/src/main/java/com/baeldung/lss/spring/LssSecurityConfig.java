@@ -19,13 +19,14 @@ public class LssSecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception { // @formatter:off
         http
-        .authorizeRequests()
-                .antMatchers("/user").access("hasAnyRole('ADMIN','USER')")
-                .antMatchers("/user/*").access("hasRole('ADMIN')")
+        .authorizeHttpRequests()
+                .requestMatchers("/user").hasAnyRole("ADMIN", "USER")
+                .requestMatchers("/user/*").hasRole("ADMIN")
         .and()
         .formLogin().
             loginPage("/login").permitAll().
-            loginProcessingUrl("/doLogin")
+            loginProcessingUrl("/doLogin").
+            defaultSuccessUrl("/user", true)
 
         .and()
         .logout().permitAll().logoutUrl("/logout")
@@ -36,7 +37,7 @@ public class LssSecurityConfig {
     } // @formatter:on
     
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
 

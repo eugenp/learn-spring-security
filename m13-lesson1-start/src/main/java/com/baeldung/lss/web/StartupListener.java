@@ -1,13 +1,13 @@
 package com.baeldung.lss.web;
 
-import javax.ejb.EJB;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.annotation.WebListener;
+import jakarta.ejb.EJB;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.annotation.WebListener;
 
 import com.baeldung.lss.service.UserServiceInterface;
 
 @WebListener
-public class StartupListener implements javax.servlet.ServletContextListener {
+public class StartupListener implements jakarta.servlet.ServletContextListener {
 
     @EJB(mappedName = "userService")
     UserServiceInterface userService;

@@ -1,6 +1,6 @@
 package com.baeldung.lss.web.controller;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserRepository;

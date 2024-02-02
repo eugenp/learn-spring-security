@@ -1,6 +1,6 @@
 package com.baeldung.lss.security;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Collection;
 

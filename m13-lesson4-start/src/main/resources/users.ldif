@@ -1,10 +1,5 @@
 version: 1
 
-dn: dc=springframework,dc=org
-objectclass: top
-objectclass: domain
-dc: springframework
-
 dn: ou=people,dc=springframework,dc=org
 objectClass: organizationalUnit
 objectClass: top

@@ -1,13 +1,17 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
     <title>Users : View</title>
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css"
+          rel="stylesheet"/>
 </head>
 <body>
-<h1 layout:fragment="header">Users : Create</h1>
+<div th:insert="~{layout :: navbar}"></div>
 <div layout:fragment="content" class="container">
+    <h1 layout:fragment="header">Users : Create</h1>
     <div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">Some Success message</div>
     <div class="pull-right">
-        <a th:href="@{/user/}" href="list.html"> Users </a>
+        <a th:href="@{/user}" href="list.html"> Users </a>
     </div>
     <dl>
         <dt>ID</dt>
@@ -18,7 +22,9 @@
         <dd id="email" th:text="${user.email}">Email</dd>
     </dl>
     <div class="pull-left">
-        <a href="users" th:href="@{'/user/delete/' + ${user.id}}"> delete </a> | <a href="form.html" th:href="@{'/user/modify/' + ${user.id}}"> modify </a>
+        <a href="users" th:href="@{'/user/delete/' + ${user.id}}"> delete </a> | <a href="form.html"
+                                                                                    th:href="@{'/user/modify/' + ${user.id}}">
+        modify </a>
     </div>
 </div>
 </body>

@@ -2,9 +2,9 @@ package com.baeldung.lss.service;
 
 import java.util.List;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.Local;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 import com.baeldung.lss.model.User;
 import com.baeldung.lss.persistence.UserDao;

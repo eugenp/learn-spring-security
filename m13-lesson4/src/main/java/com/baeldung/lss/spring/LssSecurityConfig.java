@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.web.util.matcher.RegexRequestMatcher.regexMatcher;
+
 @EnableWebSecurity
 @Configuration
 public class LssSecurityConfig {
@@ -51,15 +53,17 @@ public class LssSecurityConfig {
     }// @formatter:on
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
+    protected SecurityFilterChain configure(HttpSecurity http) throws Exception { // @formatter:off
         http
-        .authorizeRequests()
-                .antMatchers("/user").access("hasAnyRole('ADMIN','USER')")
-                .antMatchers("/user/*").access("hasRole('ADMIN')")
+        .authorizeHttpRequests()
+                .requestMatchers(regexMatcher("/user\\?form")).hasAnyRole("ADMIN")
+                .requestMatchers("/user").hasAnyRole("ADMIN", "USER")
+                .requestMatchers("/user/**").hasRole("ADMIN")
         .and()
         .formLogin().
             loginPage("/login").permitAll().
-            loginProcessingUrl("/doLogin")
+            loginProcessingUrl("/doLogin").
+            defaultSuccessUrl("/user", true)
 
         .and()
         .logout().permitAll().logoutUrl("/logout")
@@ -67,7 +71,7 @@ public class LssSecurityConfig {
         .and()
         .csrf().disable();
         return http.build();
-    }
+    } // @formatter:on
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
