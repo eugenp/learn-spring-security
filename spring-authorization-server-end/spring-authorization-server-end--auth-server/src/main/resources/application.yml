@@ -1,0 +1,29 @@
+server:
+  port: 8083
+
+#spring:
+#  security:
+#    user:
+#      # john@test.com / 123
+#      name: john@test.com
+#      password: "{bcrypt}$2a$10$HeG0X/h1bralSqJ.XxOWwON.dXsWv2CspITNgJZ4hR7cTD5a4.fBu"
+#    oauth2:
+#      authorizationserver:
+#        client:
+#          lssoClient:
+#            registration:
+#              # lssoClient / lssoSecret
+#              client-id: "lssoClient"
+#              client-secret: "{bcrypt}$2a$10$s2onvDh4DiiVClBGgbYN6eLwXHFPl4YATKpAAmoK1Rx7Fdzd3KCqm"
+#              client-authentication-methods:
+#                - "client_secret_basic"
+#              authorization-grant-types:
+#                - "authorization_code"
+#                - "refresh_token"
+#              redirect-uris:
+#                - "http://localhost:8082/lsso-client/login/oauth2/code/spring"
+#              scopes:
+#                - "openid"
+#                - "read"
+#                - "write"
+#            require-authorization-consent: false

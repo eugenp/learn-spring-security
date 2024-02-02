@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <description>﻿﻿﻿﻿﻿The &quot;Learn Spring Security OAuth&quot; Course: OAuth2 Beyond the Basics - Deep-Dives</description>
     <name>lsso--oauth2-beyond-the-basics-deep-dives</name>
@@ -24,8 +24,10 @@
         <module>legacy-stack-authorization-server-end</module>
         <module>token-revocation-start</module>
         <module>token-revocation-end</module>
-	    <module>logout-with-oauth-and-oidc-start</module>
-	    <module>logout-with-oauth-and-oidc-end</module>
+        <module>logout-with-oauth-and-oidc-start</module>
+        <module>logout-with-oauth-and-oidc-end</module>
+        <module>spring-authorization-server-start</module>
+        <module>spring-authorization-server-end</module>
     </modules>
 
 </project>
