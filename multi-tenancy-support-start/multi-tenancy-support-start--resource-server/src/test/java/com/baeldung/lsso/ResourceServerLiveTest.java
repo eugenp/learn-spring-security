@@ -26,7 +26,8 @@ import io.restassured.response.Response;
 public class ResourceServerLiveTest {
 
     private final String redirectUrl = "http://localhost:8082/lsso-client/login/oauth2/code/custom";
-    private final String authorizeUrlPattern = "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" + redirectUrl;
+    private final String authorizeUrlPattern =
+        "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=lssoClient&scope=%s&redirect_uri=" + redirectUrl;
     private final String tokenUrl = "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token";
     private final String resourceUrl = "http://localhost:8081/lsso-resource-server/api/projects";
 

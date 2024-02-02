@@ -27,6 +27,7 @@ public class AuthServersConfig {
     }
 
     public static class AuthServer {
+
         private String jwkSetUrl;
         private String issuerUri;
 

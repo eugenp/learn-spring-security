@@ -24,7 +24,6 @@ public class ProjectClientController {
     @Value("${resourceserver.api.project.url:http://localhost:8081/lsso-resource-server/api/projects}")
     private String projectApiUrl;
 
-
     @GetMapping("/projects")
     public String getProjects(Model model) {
         List<ProjectModel> projects = this.webClient.get()

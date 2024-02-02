@@ -37,19 +37,15 @@ public class ResourceSecurityConfig {
         JwtIssuerAuthenticationManagerResolver authenticationManagerResolver = new JwtIssuerAuthenticationManagerResolver
             ((issuer) -> {
                 JwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(authServersConfig.getIssuersJwkSetURIs().get(issuer))
-                .jwsAlgorithm(SignatureAlgorithm.RS256).build();
+                    .jwsAlgorithm(SignatureAlgorithm.RS256).build();
                 AuthenticationProvider authProvider = new JwtAuthenticationProvider(jwtDecoder);
                 return new ProviderManager(authProvider);
             });
 
-        http.authorizeHttpRequests(authorize -> authorize
-	              .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**"))
-	                .hasAuthority("SCOPE_read")
-	              .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects"))
-	                .hasAuthority("SCOPE_write")
-	              .anyRequest()
-	                .authenticated())
-              .oauth2ResourceServer(oauth -> oauth.authenticationManagerResolver(authenticationManagerResolver));
+        http.authorizeHttpRequests(authorize -> authorize.requestMatchers(mvc.pattern(HttpMethod.GET, "/api/projects/**")).hasAuthority("SCOPE_read")
+                .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/projects")).hasAuthority("SCOPE_write")
+                .anyRequest().authenticated())
+            .oauth2ResourceServer(oauth -> oauth.authenticationManagerResolver(authenticationManagerResolver));
         return http.build();
     }//@formatter:on
 

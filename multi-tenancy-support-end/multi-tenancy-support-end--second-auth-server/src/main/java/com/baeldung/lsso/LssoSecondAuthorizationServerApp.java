@@ -24,7 +24,8 @@ public class LssoSecondAuthorizationServerApp {
     }
 
     @Bean
-    ApplicationListener<ApplicationReadyEvent> onApplicationReadyEventListener(ServerProperties serverProperties, KeycloakServerProperties keycloakServerProperties) {
+    ApplicationListener<ApplicationReadyEvent> onApplicationReadyEventListener(ServerProperties serverProperties,
+        KeycloakServerProperties keycloakServerProperties) {
 
         return (evt) -> {
 

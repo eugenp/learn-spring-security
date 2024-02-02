@@ -16,10 +16,10 @@ public class CustomClaimValidatorUnitTest {
     @Test
     public void givenJwt_withValidUser_thenOK() {
         Jwt jwt = Jwt.withTokenValue("token")
-                .header("alg", "none")
-                .header("typ", "JWT")
-                .claim("preferred_username", "john@test.com")
-                .build();
+            .header("alg", "none")
+            .header("typ", "JWT")
+            .claim("preferred_username", "john@test.com")
+            .build();
 
         OAuth2TokenValidatorResult result = customClaimValidator.validate(jwt);
         Assertions.assertFalse(result.hasErrors());
@@ -28,15 +28,17 @@ public class CustomClaimValidatorUnitTest {
     @Test
     public void givenJwt_withInvalidUser_thenFailed() {
         Jwt jwt = Jwt.withTokenValue("token")
-                .header("alg", "none")
-                .header("typ", "JWT")
-                .claim("preferred_username", "john@email.com")
-                .build();
+            .header("alg", "none")
+            .header("typ", "JWT")
+            .claim("preferred_username", "john@email.com")
+            .build();
 
         OAuth2TokenValidatorResult result = customClaimValidator.validate(jwt);
         Assertions.assertTrue(result.hasErrors());
 
-        OAuth2Error error = result.getErrors().iterator().next();
+        OAuth2Error error = result.getErrors()
+            .iterator()
+            .next();
         Assertions.assertEquals(OAuth2ErrorCodes.ACCESS_DENIED, error.getErrorCode());
     }
 
@@ -51,7 +53,9 @@ public class CustomClaimValidatorUnitTest {
         OAuth2TokenValidatorResult result = customClaimValidator.validate(jwt);
         Assertions.assertTrue(result.hasErrors());
 
-        OAuth2Error error = result.getErrors().iterator().next();
+        OAuth2Error error = result.getErrors()
+            .iterator()
+            .next();
         Assertions.assertEquals(OAuth2ErrorCodes.ACCESS_DENIED, error.getErrorCode());
     }
 }

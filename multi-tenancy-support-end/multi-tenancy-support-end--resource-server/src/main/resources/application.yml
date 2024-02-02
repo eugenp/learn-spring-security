@@ -23,7 +23,7 @@ oauth:
     tenant2:
       jwk-set-url: http://localhost:8084/auth/realms/tenant2/protocol/openid-connect/certs
       issuer-uri: http://localhost:8084/auth/realms/tenant2
-      
+
 logging:
   level:
     org.springframework.web.client.RestTemplate: DEBUG

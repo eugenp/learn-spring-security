@@ -20,7 +20,8 @@ import org.springframework.context.annotation.Configuration;
 public class EmbeddedKeycloakConfig {
 
     @Bean
-    ServletRegistrationBean<HttpServlet30Dispatcher> keycloakJaxRsApplication(KeycloakServerProperties keycloakServerProperties, DataSource dataSource) throws Exception {
+    ServletRegistrationBean<HttpServlet30Dispatcher> keycloakJaxRsApplication(KeycloakServerProperties keycloakServerProperties, DataSource dataSource)
+        throws Exception {
 
         mockJndiEnvironment(dataSource);
         EmbeddedKeycloakApplication.keycloakServerProperties = keycloakServerProperties;

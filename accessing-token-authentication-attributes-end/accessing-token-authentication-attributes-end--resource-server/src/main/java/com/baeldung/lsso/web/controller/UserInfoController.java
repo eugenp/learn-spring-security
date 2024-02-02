@@ -21,7 +21,8 @@ public class UserInfoController {
 
     @GetMapping("/user/info/direct")
     public Map<String, Object> getDirectUserInfo(@AuthenticationPrincipal Jwt principal) {
-        String username = (String) principal.getClaims().get("preferred_username");
+        String username = (String) principal.getClaims()
+            .get("preferred_username");
 
         return Collections.singletonMap("username", username);
     }
