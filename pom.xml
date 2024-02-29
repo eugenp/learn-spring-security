@@ -22,8 +22,6 @@
         <module>basic-authorization-end</module>
         <module>custom-authorities-from-jwt-claims-end</module>
         <module>custom-authorities-from-jwt-claims-start</module>
-        <module>multi-tenancy-support-start</module>
-        <module>multi-tenancy-support-end</module>
         <module>resource-server-testing-support-start</module>
         <module>resource-server-testing-support-end</module>
         <module>multi-tenancy-support-start</module>
