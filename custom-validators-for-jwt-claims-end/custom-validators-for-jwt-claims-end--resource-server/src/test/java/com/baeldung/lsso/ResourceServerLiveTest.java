@@ -46,7 +46,8 @@ public class ResourceServerLiveTest {
         RestAssured.given()
             .header("Authorization", "Bearer " + accessToken)
             .get(resourceUrl())
-            .then().assertThat()
+            .then()
+            .assertThat()
             .statusCode(HttpStatus.OK.value());
     }
 
@@ -57,7 +58,8 @@ public class ResourceServerLiveTest {
         RestAssured.given()
             .header("Authorization", "Bearer " + accessToken)
             .get(resourceUrl())
-            .then().assertThat()
+            .then()
+            .assertThat()
             .statusCode(HttpStatus.UNAUTHORIZED.value())
             .header("WWW-Authenticate", stringContainsInOrder("invalid_token", "Only @test.com users are allowed access"));
     }

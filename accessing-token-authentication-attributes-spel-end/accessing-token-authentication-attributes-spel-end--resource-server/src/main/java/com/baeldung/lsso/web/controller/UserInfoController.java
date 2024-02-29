@@ -21,8 +21,7 @@ public class UserInfoController {
     }
 
     @GetMapping("/user/info/spel1")
-    public Map<String, Object> getUserName(
-            @AuthenticationPrincipal(expression = "claims") Map<String, Object> claims) {
+    public Map<String, Object> getUserName(@AuthenticationPrincipal(expression = "claims") Map<String, Object> claims) {
 
         return Collections.singletonMap("username", claims.get("preferred_username"));
     }

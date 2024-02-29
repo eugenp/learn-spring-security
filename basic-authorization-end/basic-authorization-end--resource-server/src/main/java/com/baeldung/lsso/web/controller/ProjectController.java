@@ -3,10 +3,10 @@ package com.baeldung.lsso.web.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,9 +67,9 @@ public class ProjectController {
     }
 
     protected Project convertToEntity(ProjectDto dto) {
-        Project project = new Project(dto.getName(), dto.getDateCreated());
-        if (!StringUtils.isEmpty(dto.getId())) {
-            project.setId(dto.getId());
+        Project project = new Project(dto.name(), dto.dateCreated());
+        if (Objects.nonNull(dto.id())) {
+            project.setId(dto.id());
         }
         return project;
     }

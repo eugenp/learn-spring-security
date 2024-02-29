@@ -1,6 +1,6 @@
-server: 
+server:
   port: 8081
-  servlet: 
+  servlet:
     context-path: /lsso-resource-server
 
 ####### resource server configuration properties
@@ -15,4 +15,5 @@ spring:
     livereload:
       port: 35730
   jpa:
+    defer-datasource-initialization: true
     open-in-view: false

@@ -30,81 +30,79 @@ public class ResourceServerTestingSupportIntegrationTest {
     @Test
     public void givenJwt_whenListProjects_thenOk() throws Exception {
         this.mvc.perform(get("/api/projects").with(jwt()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)))
-                .andExpect(jsonPath("$..name", Matchers.hasItems("Project 1", "Project 2")));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)))
+            .andExpect(jsonPath("$..name", Matchers.hasItems("Project 1", "Project 2")));
     }
 
     @Test
     public void givenJwt_whenCreateProject_thenOk() throws Exception {
         // Create project
         this.mvc.perform(post("/api/projects").with(jwt().jwt(jwtBuilder -> jwtBuilder.claim("scope", "write")))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\"New Testing Project 1\"}"))
-                .andExpect(status().isCreated());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"New Testing Project 1\"}"))
+            .andExpect(status().isCreated());
 
         // Check projects
         this.mvc.perform(get("/api/projects").with(jwt()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", Matchers.greaterThan(3)))
-                .andExpect(jsonPath("$..name", Matchers.hasItems("New Testing Project 1")));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.size()", Matchers.greaterThan(3)))
+            .andExpect(jsonPath("$..name", Matchers.hasItems("New Testing Project 1")));
     }
 
     @Test
     public void givenJwtWithDefaultScope_whenCreateProject_thenForbidden() throws Exception {
         this.mvc.perform(post("/api/projects").with(jwt())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\"New Testing Project 1\"}"))
-                .andExpect(status().isForbidden());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"New Testing Project 1\"}"))
+            .andExpect(status().isForbidden());
     }
 
     @Test
     public void givenJwtWithCustomAuthority_whenCreateProject_thenOk() throws Exception {
         // Create project
         this.mvc.perform(post("/api/projects").with(jwt().authorities(new SimpleGrantedAuthority("SCOPE_write")))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\"New Testing Project 1\"}"))
-                .andExpect(status().isCreated());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"New Testing Project 1\"}"))
+            .andExpect(status().isCreated());
 
         // Check projects
         this.mvc.perform(get("/api/projects").with(jwt()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", Matchers.greaterThan(3)))
-                .andExpect(jsonPath("$..name", Matchers.hasItems("New Testing Project 1")));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.size()", Matchers.greaterThan(3)))
+            .andExpect(jsonPath("$..name", Matchers.hasItems("New Testing Project 1")));
     }
 
     @Test
     public void givenJwtWithConverter_whenListProjects_thenOk() throws Exception {
         this.mvc.perform(get("/api/projects").with(jwt().authorities(new CustomAuthoritiesConverter())))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)))
-                .andExpect(jsonPath("$..name", Matchers.hasItems("Project 1", "Project 2")));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)))
+            .andExpect(jsonPath("$..name", Matchers.hasItems("Project 1", "Project 2")));
     }
 
     @Test
     public void givenJwtWithConverter_whenCreateProject_thenOk() throws Exception {
         // Create project
-        this.mvc.perform(post("/api/projects").with(jwt()
-                                .jwt(jwtBuilder -> jwtBuilder.subject("admin"))
-                                .authorities(new CustomAuthoritiesConverter()))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\"New Testing Project 1\"}"))
-                .andExpect(status().isCreated());
+        this.mvc.perform(post("/api/projects").with(jwt().jwt(jwtBuilder -> jwtBuilder.subject("admin"))
+                    .authorities(new CustomAuthoritiesConverter()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"New Testing Project 1\"}"))
+            .andExpect(status().isCreated());
 
         // Check projects
         this.mvc.perform(get("/api/projects").with(jwt()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", Matchers.greaterThan(3)))
-                .andExpect(jsonPath("$..name", Matchers.hasItems("New Testing Project 1")));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.size()", Matchers.greaterThan(3)))
+            .andExpect(jsonPath("$..name", Matchers.hasItems("New Testing Project 1")));
     }
 
     @Test
     public void givenJwtWithExpiredToken_whenListProjects_thenOk() throws Exception {
-        this.mvc.perform(get("/api/projects").with(jwt().jwt(jwtBuilderConsumer -> jwtBuilderConsumer
-                        .expiresAt(Instant.now().minus(Duration.ofDays(5)))
-                )))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)))
-                .andExpect(jsonPath("$..name", Matchers.hasItems("Project 1", "Project 2")));
+        this.mvc.perform(get("/api/projects").with(jwt().jwt(jwtBuilderConsumer -> jwtBuilderConsumer.expiresAt(Instant.now()
+                .minus(Duration.ofDays(5))))))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)))
+            .andExpect(jsonPath("$..name", Matchers.hasItems("Project 1", "Project 2")));
     }
 }

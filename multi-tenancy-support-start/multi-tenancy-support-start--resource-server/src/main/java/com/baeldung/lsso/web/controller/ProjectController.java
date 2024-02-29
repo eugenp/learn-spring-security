@@ -65,9 +65,9 @@ public class ProjectController {
     }
 
     protected Project convertToEntity(ProjectDto dto) {
-        Project project = new Project(dto.getName(), dto.getDateCreated());
-        if (Objects.nonNull(dto.getId())) {
-            project.setId(dto.getId());
+        Project project = new Project(dto.name(), dto.dateCreated());
+        if (Objects.nonNull(dto.id())) {
+            project.setId(dto.id());
         }
         return project;
     }

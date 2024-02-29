@@ -25,7 +25,7 @@ public class ResourceServerIntegrationTest {
     @Test
     public void givenJwt_whenHttpGet_thenOk() throws Exception {
         this.mvc.perform(get("/api/projects").with(jwt())
-            .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.size()", Matchers.greaterThan(0)));
     }

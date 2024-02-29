@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserInfoController {
-    
+
     @GetMapping("/user/info")
     public Map<String, Object> getUserInfo(Authentication authentication) {
         Jwt jwt = (Jwt) authentication.getPrincipal();
