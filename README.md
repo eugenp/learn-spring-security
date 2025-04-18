@@ -1,2 +1,2 @@
 # Learn Spring Security Core - Password Storage
-This is the codebase for Module 'Password Storage' of [Learn Spring Security Core](https://bit.ly/github-lssc)
+This is the codebase for Module 'Password Storage' of [Learn Spring Security Core](https://www.baeldung.com/course-lssc-r7ujk)
