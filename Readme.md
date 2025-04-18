@@ -1,5 +1,5 @@
 # Learn Spring Security Core - Secure a ﻿﻿Simple﻿﻿ Spring MVC Application
-This is the codebase for Module 'Secure a Simple Spring MVC Application' of [Learn Spring Security Core](https://bit.ly/github-lssc)
+This is the codebase for Module 'Secure a Simple Spring MVC Application' of [Learn Spring Security Core](https://www.baeldung.com/course-lssc-r7ujk)
 
 ## Non-Standard Modules
 
