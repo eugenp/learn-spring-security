@@ -1,5 +1,5 @@
 # Learn Spring Security Core - Two-Factor Authentication
-This is the codebase for Module 'Two-Factor Authentication' of [Learn Spring Security Core](https://bit.ly/github-lssc)
+This is the codebase for Module 'Two-Factor Authentication' of [Learn Spring Security Core](https://www.baeldung.com/course-lssc-r7ujk)
 
 ## Non-Standard Modules
 
