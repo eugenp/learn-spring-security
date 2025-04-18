@@ -1,5 +1,5 @@
 # Learn Spring Security Core - Advanced Security Scenarios
-This is the codebase for Module 'ACL with Spring Security' of [Learn Spring Security Core](https://bit.ly/github-lssc)
+This is the codebase for Module 'ACL with Spring Security' of [Learn Spring Security Core](https://www.baeldung.com/course-lssc-r7ujk)
 
 ## Non-Standard Modules
 
