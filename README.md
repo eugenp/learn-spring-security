@@ -1,5 +1,5 @@
 # Learn Spring Security Core - A Full Registration Flow
-This is the codebase for Module 'A Full Registration Flow' of [Learn Spring Security Core](https://bit.ly/github-lssc)
+This is the codebase for Module 'A Full Registration Flow' of [Learn Spring Security Core](https://www.baeldung.com/course-lssc-r7ujk)
 
 ### Notes Regarding the SMTP/Email Configuration
 Note that even though the email sending logic is configured in the codebase, there is additional SMTP configuration required:
