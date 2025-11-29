@@ -11,10 +11,19 @@
 
 	<modules>
 		<module>m1-lesson1</module>
+		<module>intro-to-spring-security</module>
 		<module>m1-lesson2</module>
+		<module>a-basic-security-java-config-start</module>
+		<module>a-basic-security-java-config-end</module>
 		<module>m1-lesson3</module>
+		<module>url-authorization-start</module>
+		<module>url-authorization-end</module>
 		<module>m1-lesson4</module>
+		<module>building-a-login-form-start</module>
+		<module>building-a-login-form-end</module>
 		<module>m1-lesson5</module>
+		<module>implementing-logout-start</module>
+		<module>implementing-logout-end</module>
 		<module>m1-lesson6</module>
 		<module>m1-lesson6-noboot</module>
 		<module>m1-lesson7</module>
