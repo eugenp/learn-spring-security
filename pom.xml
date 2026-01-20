@@ -4,15 +4,22 @@
     <description>The &quot;Learn Spring Security Core&quot; Course: Spring Security Configuration</description>
     <name>learn-spring-security</name>
 
-    <groupId>com.baeldung.m7</groupId>
+    <groupId>com.baeldung</groupId>
     <artifactId>learn-spring-security-m7</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
+        <module>authentication-flow</module>
         <module>m7-lesson2</module>
+        <module>run-as-different-user-start</module>
+        <module>run-as-different-user-end</module>
         <module>m7-lesson3</module>
+        <module>the-security-context-start</module>
+        <module>the-security-context-end</module>
         <module>m7-lesson4</module>
+        <module>configure-filter-chain-start</module>
+        <module>configure-filter-chain-end</module>
         <module>m7-lesson5</module>
     </modules>
 
