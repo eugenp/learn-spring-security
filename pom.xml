@@ -25,6 +25,7 @@
 		<module>implementing-logout-start</module>
 		<module>implementing-logout-end</module>
 		<module>m1-lesson6</module>
+		<module>anonymous-authentication</module>
 		<module>m1-lesson6-noboot</module>
 		<module>m1-lesson7</module>
 	</modules>
