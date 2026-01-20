@@ -10,12 +10,24 @@
 
     <modules>
         <module>m2-lesson1</module>
+        <module>a-simple-registration-flow-start</module>
+        <module>a-simple-registration-flow-end</module>
         <module>m2-lesson2</module>
+        <module>authentication-using-real-users-start</module>
+        <module>authentication-using-real-users-end</module>
         <module>m2-lesson3</module>
+        <module>activate-new-account-via-email-start</module>
+        <module>activate-new-account-via-email-end</module>
         <module>m2-lesson4</module>
+        <module>forgot-password-start</module>
+        <module>forgot-password-end</module>
         <module>m2-lesson5</module>
+        <module>security-questions-start</module>
+        <module>security-questions-end</module>
         <module>m2-lesson6</module>
         <module>m2-lesson7</module>
+        <module>password-strength-start</module>
+        <module>password-strength-end</module>
     </modules>
 
 </project>

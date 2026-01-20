@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Registration Page</title>
+
+<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<script src="/js/jquery-1.7.2.js"></script>
+<script src="/js/pwstrength.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Registration page</h1>
+        <form id="userForm" th:action="@{/user/register}" th:object="${user}" action="#" method="post" class="form-horizontal">
+            <div th:if="${#fields.hasErrors('global')}" th:errors="*{global}" class="alert alert-danger">Incorrect password confirmation</div>
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error'">
+                <label class="control-label col-xs-2" for="email">Email</label>
+                <div class="col-xs-10">
+                    <input id="email" type="email" title="email" th:field="*{email}" /> <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="help-block">Email
+                        Error</span>
+                </div>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
+                <label class="control-label col-xs-2" for="password">Password</label>
+                <div class="col-xs-10">
+                    <input id="password" type="password" title="password" th:field="*{password}" /> <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                        class="help-block">Password Error</span>
+                </div>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('passwordConfirmation')} ? 'has-error'">
+                <label class="control-label col-xs-2" for="passwordConfirmation">Password Confirmation</label>
+                <div class="col-xs-10">
+                    <input id="passwordConfirmation" type="password" title="passwordConfirmation" th:field="*{passwordConfirmation}" /> <span
+                        th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}" class="help-block">Password Confirmation Error</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="question">Security Question:</label>
+                <div class="col-xs-10">
+                    <select id="question" name="questionId">
+                        <option th:each="question : ${questions}" th:value="${question.id}" th:text="${question.text}" th:selected="${question.id == questionId}">Question</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="answer">Answer</label>
+                <div class="col-xs-10">
+                    <input id="answer" type="text" name="answer" th:value="${answer}"/>
+                </div>
+            </div>
+            <div class="form-actions col-xs-offset-2 col-xs-10">
+                <input type="submit" class="btn btn-primary" value="Register" />
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+		    $(document)
+			    .ready(
+				    function() {
+					options = {
+					    common : {
+						minChar : 8
+					    },
+					    ui : {
+						showVerdictsInsideProgressBar : true,
+						showErrors : true,
+						errorMessages : {
+						    wordLength : 'Your password is too short',
+						    wordNotEmail : 'Do not use your email as your password',
+						    wordSequences : 'Your password contains sequences',
+						    wordLowercase : 'Use lower case characters',
+						    wordUppercase : 'Use upper case characters',
+						    wordOneNumber : 'Use numbers',
+						    wordOneSpecialChar : 'Use special characters: [~!@#$%^&amp;*,_?]'
+						}
+					    }
+					};
+					$('#password').pwstrength(options);
+				    });
+		</script>
+</body>
+</html>
