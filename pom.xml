@@ -11,6 +11,8 @@
 
     <modules>
         <module>m6-lesson2</module>
+        <module>hashing-passwords-start</module>
+        <module>hashing-passwords-end</module>
         <module>m6-lesson3</module>
         <module>m6-lesson5</module>
         <module>m6-lesson6</module>
