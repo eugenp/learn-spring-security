@@ -11,6 +11,7 @@
 
     <modules>
         <module>m5-lesson1</module>
+        <module>url-authorization-with-expressions</module>
         <module>m5-on-method-auth-expressions-start</module>
         <module>m5-on-method-auth-expressions-end</module>
         <module>m5-lesson4</module>
