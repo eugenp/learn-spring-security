@@ -11,10 +11,16 @@
 
     <modules>
         <module>m3-lesson1</module>
+        <module>simple-remember-me-start</module>
+        <module>simple-remember-me-end</module>
         <module>m3-lesson2-start</module>
         <module>m3-lesson2</module>
+        <module>remember-me-with-cookie-start</module>
+        <module>remember-me-with-cookie-end</module>
         <module>m3-lesson3-start</module>
         <module>m3-lesson3</module>
+        <module>remember-me-persistence-start</module>
+        <module>remember-me-persistence-end</module>
     </modules>
 
 </project>
