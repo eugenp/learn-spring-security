@@ -11,9 +11,17 @@
 
     <modules>
         <module>m4-lesson1</module>
+        <module>spring-security-jsp-start</module>
+        <module>spring-security-jsp-end</module>
         <module>m4-lesson2</module>
+        <module>authentication-tag-start</module>
+        <module>authentication-tag-end</module>
         <module>m4-lesson3</module>
+        <module>spring-security-with-thymeleaf-start</module>
+        <module>spring-security-with-thymeleaf-end</module>
         <module>m4-lesson4</module>
+        <module>authorize-tag-start</module>
+        <module>authorize-tag-end</module>
         <module>m4-lesson5</module>
     </modules>
 
