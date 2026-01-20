@@ -11,7 +11,11 @@
 
     <modules>
         <module>m8-lesson1</module>
+        <module>custom-authentication-provider-start</module>
+        <module>custom-authentication-provider-end</module>
         <module>m8-lesson2</module>
+        <module>multiple-providers-and-authentication-manager-start</module>
+        <module>multiple-providers-and-authentication-manager-end</module>
         <module>m8-lesson3</module>
         <module>m8-lesson4</module>
         <module>m8-lesson5</module>
