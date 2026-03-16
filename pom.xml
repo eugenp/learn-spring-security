@@ -12,9 +12,17 @@
     <modules>
         <module>m14-lesson1-start</module>
         <module>m14-lesson1</module>
+        <module>m14-lesson1-new-start</module>
+        <module>m14-lesson1-new-end</module>
         <module>m14-lesson2-start</module>
         <module>m14-lesson2</module>
         <module>m14-lesson3</module>
+        <module>reactive-method-security-start</module>
+        <module>reactive-method-security-end</module>
+        <module>webflux-form-login-start</module>
+        <module>webflux-form-login-end</module>
+        <module>reactive-security-basics-start</module>
+        <module>reactive-security-basics-end</module>
     </modules>
 
 </project>

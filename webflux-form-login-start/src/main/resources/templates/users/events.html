@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+<title>Notifications</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Notifications</h1>
+	<div layout:fragment="content" class="container">		
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>Notifications</td>					
+				</tr>
+			</thead>
+			<tbody>				
+				<tr th:each="notification : ${notifications}">									
+					<td th:text="${notification}"/>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
