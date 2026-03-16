@@ -12,6 +12,10 @@
     <modules>
         <module>m11-lesson3</module>
         <module>m11-lesson4</module>
+        <module>acl-spring-security-start</module>
+        <module>acl-spring-security-end</module>
+        <module>data-structure-of-acl-start</module>
+        <module>data-structure-of-acl-end</module>
     </modules>
 
 </project>
