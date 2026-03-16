@@ -15,6 +15,10 @@
         <module>m12-lesson3</module>
         <module>m12-lesson3-new</module>
         <module>reference-project</module>
+        <module>two-factor-soft-token-start</module>
+        <module>two-factor-soft-token-end</module>
+        <module>two-factor-sms-start</module>
+        <module>two-factor-sms-end</module>
     </modules>
 
 </project>

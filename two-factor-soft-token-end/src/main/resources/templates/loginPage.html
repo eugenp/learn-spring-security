@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Login Page</title>
+
+<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container">
+        <h1>Login page</h1>
+
+        <div th:if="${param.error}" class="alert alert-danger">Invalid username, password or verification code.</div>
+        <div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
+
+        <form th:action="@{/doLogin}" method="post" class="form-horizontal">
+        
+	            <div class="form-group">
+	                <label class="control-label col-xs-2" for="username"> Username:</label>
+	                <div class="col-xs-10">
+	                    <input id="username" type="text" name="username" />
+	                </div>
+	            </div>
+	            
+	            <div class="form-group">
+	                <label class="control-label col-xs-2" for="password"> Password: </label>
+	                <div class="col-xs-10">
+	                    <input id="password" type="password" name="password" />
+	                </div>
+	            </div>	            
+	                        
+	            <div class="form-group">
+	                    <label class="control-label col-xs-2" for="code"> Code:</label>
+	                    <div class="col-xs-10">
+	                        <input id="code" type="text" name="code" />
+	                    </div>
+	                    <br/>
+	                    <p class="text-muted col-xs-10">Use Google Authenticator app on your phone to obtain the verification Code</p>
+	            </div>
+                
+                <input type="submit" class="btn btn-primary" value="Sign In" />
+                <br/><br/>
+                <a class="btn btn-default" href="/signup">Sign Up</a>
+        </form>
+        
+        
+    </div>
+</body>
+</html>
