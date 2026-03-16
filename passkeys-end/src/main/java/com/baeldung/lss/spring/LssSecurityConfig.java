@@ -1,0 +1,65 @@
+package com.baeldung.lss.spring;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+import com.baeldung.lss.model.User;
+import com.baeldung.lss.persistence.UserRepository;
+
+import jakarta.annotation.PostConstruct;
+
+@EnableWebSecurity
+@Configuration
+public class LssSecurityConfig {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    private PasswordEncoder passwordEncoder;
+
+    public LssSecurityConfig(PasswordEncoder passwordEncoder) {
+        super();
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    //
+
+    @PostConstruct
+    private void saveTestUser() {
+        final User user = new User();
+        user.setEmail("test@email.com");
+        user.setPassword(passwordEncoder.encode("pass"));
+        userRepository.save(user);
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+          .authorizeHttpRequests(authz -> authz
+            .requestMatchers("/login", "/css/**", "/js/**", "/webjars/**").permitAll()
+            .anyRequest().authenticated())
+          .formLogin(form -> form.loginPage("/login").permitAll())
+          .webAuthn(webAuthn -> webAuthn
+            .rpName("Learn Spring Security")
+            .rpId("localhost")
+            .allowedOrigins("http://localhost:8081"));
+
+        return http.build();
+    }
+
+}

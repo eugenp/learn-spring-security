@@ -17,10 +17,16 @@
         <module>multiple-providers-and-authentication-manager-start</module>
         <module>multiple-providers-and-authentication-manager-end</module>
         <module>m8-lesson3</module>
+        <module>multiple-user-storage-persistence-start</module>
+        <module>multiple-user-storage-persistence-end</module>
         <module>m8-lesson4</module>
+        <module>tracking-logged-users-start</module>
+        <module>tracking-logged-users-end</module>
         <module>m8-lesson5</module>
         <module>setting-up-users-at-startup-start</module>
         <module>setting-up-users-at-startup-end</module>
+        <module>passkeys-start</module>
+        <module>passkeys-end</module>
     </modules>
 
 </project>

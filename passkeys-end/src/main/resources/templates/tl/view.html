@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+<title>Users : View</title>
+</head>
+<body>
+    <h1 layout:fragment="header">Users : Create</h1>
+    <div layout:fragment="content" class="container">
+        <div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">Some Success message</div>
+        <div class="pull-right">
+            <a th:href="@{/user}" href="list.html"> Users </a>
+        </div>
+        <dl>
+            <dt>ID</dt>
+            <dd id="id" th:text="${user.id}">123</dd>
+            <dt>Email</dt>
+            <dd id="email" th:text="${user.email}">Email</dd>
+        </dl>
+        <div class="pull-left">
+            <a href="users" th:href="@{'/user/delete/' + ${user.id}}"> delete </a> | <a href="form.html" th:href="@{'/user/modify/' + ${user.id}}"> modify </a>
+        </div>
+
+        <hr />
+
+        <button id="register-passkey" class="btn btn-primary">Register Passkey</button>
+
+        <script th:inline="javascript">
+        document.getElementById('register-passkey').addEventListener('click', async () => {
+            const response = await fetch('/webauthn/register/options', {
+              method: 'POST', headers: { 'X-CSRF-TOKEN': '[[${_csrf.token}]]' } });
+            const options = await response.json();
+
+            const credential = await navigator.credentials.create({ publicKey: options });
+
+            await fetch('/webauthn/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '[[${_csrf.token}]]'
+                },
+                body: JSON.stringify(credential)
+            });
+
+            alert("Passkey registered successfully!");
+        });
+        </script>
+    </div>
+</body>
+</html>
