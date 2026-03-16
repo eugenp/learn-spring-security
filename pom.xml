@@ -11,12 +11,19 @@
 
     <modules>
         <module>m9-lesson1</module>
+        <module>how-authorization-works</module>
         <module>m9-lesson2-start</module>
         <module>m9-lesson2</module>
+        <module>topology-of-roles-and-privileges-start</module>
+        <module>topology-of-roles-and-privileges-end</module>
         <module>m9-lesson3-start</module>
         <module>m9-lesson3</module>
+        <module>secure-method-invocations-aop-start</module>
+        <module>secure-method-invocations-aop-end</module>
         <module>m9-lesson4</module>
         <module>m9-lesson5</module>
+        <module>custom-access-control-logic-start</module>
+        <module>custom-access-control-logic-end</module>
     </modules>
 
 </project>
