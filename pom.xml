@@ -18,6 +18,14 @@
         <module>m13-lesson3</module>
         <module>m13-lesson4-start</module>
         <module>m13-lesson4</module>
+        <module>non-spring-app-security-start</module>
+        <module>non-spring-app-security-end</module>
+        <module>multitenancy-start</module>
+        <module>multitenancy-end</module>
+        <module>spring-session-management-start</module>
+        <module>spring-session-management-end</module>
+        <module>ldap-authentication-start</module>
+        <module>ldap-authentication-end</module>
     </modules>
 
 </project>

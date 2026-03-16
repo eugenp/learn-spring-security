@@ -11,7 +11,7 @@ public class LssWebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login")
-            .setViewName("loginPage");
+                .setViewName("loginPage");
 
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
