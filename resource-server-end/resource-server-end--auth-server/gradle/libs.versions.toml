@@ -1,0 +1,31 @@
+[versions]
+com-h2database-h2 = "1.4.200"
+io-rest-assured-rest-assured = "4.5.1"
+org-jboss-resteasy-resteasy-jackson2-provider = "4.7.4.Final"
+org-junit-platform-junit-platform-launcher = "1.8.2"
+org-keycloak-keycloak-admin-ui = "19.0.3"
+org-keycloak-keycloak-crypto-default = "19.0.3"
+org-keycloak-keycloak-dependencies-server-all = "19.0.3"
+org-keycloak-keycloak-services = "19.0.3"
+org-keycloak-keycloak-servlet-filter-adapter = "19.0.3"
+org-springframework-boot-spring-boot-configuration-processor = "2.7.5"
+org-springframework-boot-spring-boot-starter-actuator = "2.7.5"
+org-springframework-boot-spring-boot-starter-data-jpa = "2.7.5"
+org-springframework-boot-spring-boot-starter-test = "2.7.5"
+org-springframework-boot-spring-boot-starter-web = "2.7.5"
+
+[libraries]
+com-h2database-h2 = { module = "com.h2database:h2", version.ref = "com-h2database-h2" }
+io-rest-assured-rest-assured = { module = "io.rest-assured:rest-assured", version.ref = "io-rest-assured-rest-assured" }
+org-jboss-resteasy-resteasy-jackson2-provider = { module = "org.jboss.resteasy:resteasy-jackson2-provider", version.ref = "org-jboss-resteasy-resteasy-jackson2-provider" }
+org-junit-platform-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "org-junit-platform-junit-platform-launcher" }
+org-keycloak-keycloak-admin-ui = { module = "org.keycloak:keycloak-admin-ui", version.ref = "org-keycloak-keycloak-admin-ui" }
+org-keycloak-keycloak-crypto-default = { module = "org.keycloak:keycloak-crypto-default", version.ref = "org-keycloak-keycloak-crypto-default" }
+org-keycloak-keycloak-dependencies-server-all = { module = "org.keycloak:keycloak-dependencies-server-all", version.ref = "org-keycloak-keycloak-dependencies-server-all" }
+org-keycloak-keycloak-services = { module = "org.keycloak:keycloak-services", version.ref = "org-keycloak-keycloak-services" }
+org-keycloak-keycloak-servlet-filter-adapter = { module = "org.keycloak:keycloak-servlet-filter-adapter", version.ref = "org-keycloak-keycloak-servlet-filter-adapter" }
+org-springframework-boot-spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor", version.ref = "org-springframework-boot-spring-boot-configuration-processor" }
+org-springframework-boot-spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator", version.ref = "org-springframework-boot-spring-boot-starter-actuator" }
+org-springframework-boot-spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa", version.ref = "org-springframework-boot-spring-boot-starter-data-jpa" }
+org-springframework-boot-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "org-springframework-boot-spring-boot-starter-test" }
+org-springframework-boot-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "org-springframework-boot-spring-boot-starter-web" }

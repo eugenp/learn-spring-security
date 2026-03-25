@@ -1,0 +1,27 @@
+[versions]
+com-squareup-okhttp3-mockwebserver = "4.12.0"
+io-projectreactor-netty-reactor-netty = "1.1.20"
+io-rest-assured-rest-assured = "5.4.0"
+org-junit-platform-junit-platform-launcher = "1.11.0"
+org-springframework-boot-spring-boot-devtools = "3.3.1"
+org-springframework-boot-spring-boot-starter-oauth2-client = "3.3.1"
+org-springframework-boot-spring-boot-starter-test = "3.3.1"
+org-springframework-boot-spring-boot-starter-thymeleaf = "3.3.1"
+org-springframework-boot-spring-boot-starter-web = "3.3.1"
+org-springframework-security-spring-security-test = "6.3.1"
+org-springframework-spring-webflux = "6.1.10"
+org-thymeleaf-extras-thymeleaf-extras-springsecurity6 = "3.1.2.RELEASE"
+
+[libraries]
+com-squareup-okhttp3-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "com-squareup-okhttp3-mockwebserver" }
+io-projectreactor-netty-reactor-netty = { module = "io.projectreactor.netty:reactor-netty", version.ref = "io-projectreactor-netty-reactor-netty" }
+io-rest-assured-rest-assured = { module = "io.rest-assured:rest-assured", version.ref = "io-rest-assured-rest-assured" }
+org-junit-platform-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "org-junit-platform-junit-platform-launcher" }
+org-springframework-boot-spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "org-springframework-boot-spring-boot-devtools" }
+org-springframework-boot-spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client", version.ref = "org-springframework-boot-spring-boot-starter-oauth2-client" }
+org-springframework-boot-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "org-springframework-boot-spring-boot-starter-test" }
+org-springframework-boot-spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf", version.ref = "org-springframework-boot-spring-boot-starter-thymeleaf" }
+org-springframework-boot-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "org-springframework-boot-spring-boot-starter-web" }
+org-springframework-security-spring-security-test = { module = "org.springframework.security:spring-security-test", version.ref = "org-springframework-security-spring-security-test" }
+org-springframework-spring-webflux = { module = "org.springframework:spring-webflux", version.ref = "org-springframework-spring-webflux" }
+org-thymeleaf-extras-thymeleaf-extras-springsecurity6 = { module = "org.thymeleaf.extras:thymeleaf-extras-springsecurity6", version.ref = "org-thymeleaf-extras-thymeleaf-extras-springsecurity6" }

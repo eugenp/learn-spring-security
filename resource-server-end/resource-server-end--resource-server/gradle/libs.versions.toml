@@ -1,0 +1,21 @@
+[versions]
+com-h2database-h2 = "2.2.224"
+io-rest-assured-rest-assured = "5.4.0"
+org-junit-platform-junit-platform-launcher = "1.11.0"
+org-springframework-boot-spring-boot-devtools = "3.3.1"
+org-springframework-boot-spring-boot-starter-data-jpa = "3.3.1"
+org-springframework-boot-spring-boot-starter-oauth2-resource-server = "3.3.1"
+org-springframework-boot-spring-boot-starter-test = "3.3.1"
+org-springframework-boot-spring-boot-starter-web = "3.3.1"
+org-springframework-security-spring-security-test = "6.3.1"
+
+[libraries]
+com-h2database-h2 = { module = "com.h2database:h2", version.ref = "com-h2database-h2" }
+io-rest-assured-rest-assured = { module = "io.rest-assured:rest-assured", version.ref = "io-rest-assured-rest-assured" }
+org-junit-platform-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "org-junit-platform-junit-platform-launcher" }
+org-springframework-boot-spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "org-springframework-boot-spring-boot-devtools" }
+org-springframework-boot-spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa", version.ref = "org-springframework-boot-spring-boot-starter-data-jpa" }
+org-springframework-boot-spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server", version.ref = "org-springframework-boot-spring-boot-starter-oauth2-resource-server" }
+org-springframework-boot-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "org-springframework-boot-spring-boot-starter-test" }
+org-springframework-boot-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "org-springframework-boot-spring-boot-starter-web" }
+org-springframework-security-spring-security-test = { module = "org.springframework.security:spring-security-test", version.ref = "org-springframework-security-spring-security-test" }
