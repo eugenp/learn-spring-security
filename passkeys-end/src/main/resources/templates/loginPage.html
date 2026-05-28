@@ -17,7 +17,7 @@
         <div th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-danger">Error Message</div>
         <div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
 
-        <form th:action="@{/login}" method="post" class="form-horizontal">
+        <form th:action="@{/doLogin}" method="post" class="form-horizontal">
             <div class="form-group">
                 <label class="control-label col-xs-2" for="username"> Email:</label>
                 <div class="col-xs-10">
@@ -39,16 +39,22 @@
 
         <button id="passkey-login" type="button" class="btn btn-default">Sign in with Passkey</button>
 
-        <script>
+        <script type="module">
+        import { get } from "https://cdn.jsdelivr.net/npm/@github/webauthn-json/+esm";
+
         document.getElementById("passkey-login").addEventListener("click", async () => {
-            const response = await fetch('/login/webauthn/options', { method: 'POST' });
+            const response = await fetch('/webauthn/authenticate/options', {
+                method: 'POST', headers: { 'X-CSRF-TOKEN': '[[${_csrf.token}]]' } });
             const options = await response.json();
 
-            const assertion = await navigator.credentials.get({ publicKey: options });
+            const assertion = await get(options);
 
             await fetch('/login/webauthn', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '[[${_csrf.token}]]'
+                },
                 body: JSON.stringify(assertion)
             });
 

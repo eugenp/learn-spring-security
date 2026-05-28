@@ -152,9 +152,7 @@
 		<!-- password validation -->
         <passay.version>1.0</passay.version>
         
-        <!-- maven plugins -->
-		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-		
+        
     </properties>
 
     <developers>

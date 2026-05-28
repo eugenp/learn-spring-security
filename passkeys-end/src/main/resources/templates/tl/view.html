@@ -23,13 +23,15 @@
 
         <button id="register-passkey" class="btn btn-primary">Register Passkey</button>
 
-        <script th:inline="javascript">
+        <script type="module">
+        import { create } from "https://cdn.jsdelivr.net/npm/@github/webauthn-json/+esm";
+
         document.getElementById('register-passkey').addEventListener('click', async () => {
             const response = await fetch('/webauthn/register/options', {
               method: 'POST', headers: { 'X-CSRF-TOKEN': '[[${_csrf.token}]]' } });
             const options = await response.json();
 
-            const credential = await navigator.credentials.create({ publicKey: options });
+            const credential = await create(options);
 
             await fetch('/webauthn/register', {
                 method: 'POST',

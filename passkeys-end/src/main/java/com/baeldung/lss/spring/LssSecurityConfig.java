@@ -53,7 +53,11 @@ public class LssSecurityConfig {
           .authorizeHttpRequests(authz -> authz
             .requestMatchers("/login", "/css/**", "/js/**", "/webjars/**").permitAll()
             .anyRequest().authenticated())
-          .formLogin(form -> form.loginPage("/login").permitAll())
+          .formLogin(form -> form
+            .loginPage("/login").permitAll()
+            .loginProcessingUrl("/doLogin"))
+          .logout((logout) -> logout
+            .permitAll().logoutUrl("/logout"))
           .webAuthn(webAuthn -> webAuthn
             .rpName("Learn Spring Security")
             .rpId("localhost")

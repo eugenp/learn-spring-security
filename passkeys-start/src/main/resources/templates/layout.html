@@ -15,7 +15,11 @@
                     <li><a th:href="@{/user}" href="users.html"> Users </a></li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a th:href="@{/logout}" class="menu-right" > Logout </a></li>
+                    <li>
+                        <form th:action="@{/logout}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-link menu-right">Logout</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>

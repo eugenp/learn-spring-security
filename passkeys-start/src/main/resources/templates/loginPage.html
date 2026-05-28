@@ -34,6 +34,33 @@
                 <input type="submit" class="btn btn-primary" value="Sign In" />
             </div>
         </form>
+
+        <hr />
+
+        <button id="passkey-login" type="button" class="btn btn-default">Sign in with Passkey</button>
+
+        <script type="module">
+        import { get } from "https://cdn.jsdelivr.net/npm/@github/webauthn-json/+esm";
+
+        document.getElementById("passkey-login").addEventListener("click", async () => {
+            const response = await fetch('/webauthn/authenticate/options', {
+                method: 'POST', headers: { 'X-CSRF-TOKEN': '[[${_csrf.token}]]' } });
+            const options = await response.json();
+
+            const assertion = await get(options);
+
+            await fetch('/login/webauthn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '[[${_csrf.token}]]'
+                },
+                body: JSON.stringify(assertion)
+            });
+
+            window.location.href = "/";
+        });
+        </script>
     </div>
 
 </body>
