@@ -1,0 +1,39 @@
+[versions]
+com-google-guava-guava = "21.0"
+nz-net-ultraq-thymeleaf-thymeleaf-layout-dialect = "3.3.0"
+org-apache-tomcat-embed-tomcat-embed-jasper = "10.1.19"
+org-hsqldb-hsqldb = "2.7.2"
+org-junit-vintage-junit-vintage-engine = "5.10.2"
+org-junit-platform-junit-platform-launcher = "1.10.2"
+org-passay-passay = "1.0"
+org-springframework-boot-spring-boot-devtools = "3.2.3"
+org-springframework-boot-spring-boot-starter-data-jpa = "3.2.3"
+org-springframework-boot-spring-boot-starter-mail = "3.2.3"
+org-springframework-boot-spring-boot-starter-security = "3.2.3"
+org-springframework-boot-spring-boot-starter-test = "3.2.3"
+org-springframework-boot-spring-boot-starter-thymeleaf = "3.2.3"
+org-springframework-boot-spring-boot-starter-tomcat = "3.2.3"
+org-springframework-boot-spring-boot-starter-validation = "3.2.3"
+org-springframework-boot-spring-boot-starter-web = "3.2.3"
+org-springframework-security-spring-security-test = "6.2.2"
+org-springframework-spring-context-support = "6.1.4"
+
+[libraries]
+com-google-guava-guava = { module = "com.google.guava:guava", version.ref = "com-google-guava-guava" }
+nz-net-ultraq-thymeleaf-thymeleaf-layout-dialect = { module = "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect", version.ref = "nz-net-ultraq-thymeleaf-thymeleaf-layout-dialect" }
+org-apache-tomcat-embed-tomcat-embed-jasper = { module = "org.apache.tomcat.embed:tomcat-embed-jasper", version.ref = "org-apache-tomcat-embed-tomcat-embed-jasper" }
+org-hsqldb-hsqldb = { module = "org.hsqldb:hsqldb", version.ref = "org-hsqldb-hsqldb" }
+org-junit-vintage-junit-vintage-engine = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "org-junit-vintage-junit-vintage-engine" }
+org-junit-platform-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "org-junit-platform-junit-platform-launcher" }
+org-passay-passay = { module = "org.passay:passay", version.ref = "org-passay-passay" }
+org-springframework-boot-spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "org-springframework-boot-spring-boot-devtools" }
+org-springframework-boot-spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa", version.ref = "org-springframework-boot-spring-boot-starter-data-jpa" }
+org-springframework-boot-spring-boot-starter-mail = { module = "org.springframework.boot:spring-boot-starter-mail", version.ref = "org-springframework-boot-spring-boot-starter-mail" }
+org-springframework-boot-spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security", version.ref = "org-springframework-boot-spring-boot-starter-security" }
+org-springframework-boot-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "org-springframework-boot-spring-boot-starter-test" }
+org-springframework-boot-spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf", version.ref = "org-springframework-boot-spring-boot-starter-thymeleaf" }
+org-springframework-boot-spring-boot-starter-tomcat = { module = "org.springframework.boot:spring-boot-starter-tomcat", version.ref = "org-springframework-boot-spring-boot-starter-tomcat" }
+org-springframework-boot-spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation", version.ref = "org-springframework-boot-spring-boot-starter-validation" }
+org-springframework-boot-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "org-springframework-boot-spring-boot-starter-web" }
+org-springframework-security-spring-security-test = { module = "org.springframework.security:spring-security-test", version.ref = "org-springframework-security-spring-security-test" }
+org-springframework-spring-context-support = { module = "org.springframework:spring-context-support", version.ref = "org-springframework-spring-context-support" }
