@@ -47,9 +47,9 @@
                 method: 'POST', headers: { 'X-CSRF-TOKEN': '[[${_csrf.token}]]' } });
             const options = await response.json();
 
-            const assertion = await get(options);
+            const assertion = await get({ publicKey: options });
 
-            await fetch('/login/webauthn', {
+            const authResp = await fetch('/login/webauthn', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,7 +57,10 @@
                 },
                 body: JSON.stringify(assertion)
             });
-
+            if (!authResp.ok) {
+                alert('Sign-in failed: HTTP ' + authResp.status + '\n' + await authResp.text());
+                return;
+            }
             window.location.href = "/";
         });
         </script>

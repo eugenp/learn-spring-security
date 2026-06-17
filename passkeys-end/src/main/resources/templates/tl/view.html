@@ -27,22 +27,30 @@
         import { create } from "https://cdn.jsdelivr.net/npm/@github/webauthn-json/+esm";
 
         document.getElementById('register-passkey').addEventListener('click', async () => {
-            const response = await fetch('/webauthn/register/options', {
-              method: 'POST', headers: { 'X-CSRF-TOKEN': '[[${_csrf.token}]]' } });
-            const options = await response.json();
+            try {
+                const optionsResp = await fetch('/webauthn/register/options', {
+                    method: 'POST', headers: { 'X-CSRF-TOKEN': '[[${_csrf.token}]]' } });
+                if (!optionsResp.ok) throw new Error('register/options HTTP ' + optionsResp.status);
+                const options = await optionsResp.json();
 
-            const credential = await create(options);
+                const credential = await create({ publicKey: options });
 
-            await fetch('/webauthn/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '[[${_csrf.token}]]'
-                },
-                body: JSON.stringify(credential)
-            });
-
-            alert("Passkey registered successfully!");
+                const regResp = await fetch('/webauthn/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '[[${_csrf.token}]]'
+                    },
+                    body: JSON.stringify({ publicKey: { credential, label: 'Passkey' } })
+                });
+                if (!regResp.ok) {
+                    alert('Registration failed: HTTP ' + regResp.status + '\n' + await regResp.text());
+                    return;
+                }
+                alert('Passkey registered successfully!');
+            } catch (err) {
+                alert('Registration error: ' + err.message);
+            }
         });
         </script>
     </div>
